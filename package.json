@@ -1,0 +1,11 @@
+{
+  "name": "tux-bot",
+  "version": "1.0.0",
+  "description": "Discord chat bot",
+  "main": "build/bot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Phantom",
+  "license": "ISC"
+}
