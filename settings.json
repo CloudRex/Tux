@@ -2,6 +2,7 @@
     "General": {
         "Token": "",
         "Key": "",
-        "CommandTrigger": "."
+        "CommandTrigger": ".",
+        "Version": "1.0.0"
     }
 }

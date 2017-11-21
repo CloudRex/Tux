@@ -1,3 +1,5 @@
+import Bot from "../Bot";
+
 export default class CommandExecutionContext {
     // Members
     // TODO
@@ -12,9 +14,11 @@ export default class CommandExecutionContext {
 
     public Message: any;
     public Arguments: string[];
+    public Bot: Bot;
 
-    constructor(message: any, args: string[]) {
+    constructor(message: any, args: string[], bot: Bot) {
         this.Message = message;
         this.Arguments = args;
+        this.Bot = bot;
     }
 }

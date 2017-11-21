@@ -2,17 +2,17 @@ import CommandManager from "./CommandManager";
 import ICommand from "./ICommand";
 
 export default class CommandParser {
-    public static parse(command: string, commandTrigger: string): ICommand {
-        if (this.isValid(command, commandTrigger)) {
-            return CommandManager.getByBase(this.getCommandBase(command));
+    public static parse(command: string, commandManager: CommandManager, commandTrigger: string): ICommand {
+        if (this.isValid(command, commandManager, commandTrigger)) {
+            return commandManager.getByBase(this.getCommandBase(command));
         }
 
         return null;
     }
 
-    public static isValid(command: string, commandTrigger: string): boolean {
+    public static isValid(command: string, commandManager: CommandManager, commandTrigger: string): boolean {
         if (command.startsWith(commandTrigger))
-            return CommandManager.isRegistered(this.getCommandBase(command));
+            return commandManager.isRegistered(this.getCommandBase(command));
 
         return false;
     }
@@ -23,12 +23,13 @@ export default class CommandParser {
     }
 
     public static getArguments(command: string) {
-        let matches = / ([^ ]+|"[^"]+")/g.exec(command);
+        let expression = / ([^ ]+|"[^"]+")/g;
+        let match = expression.exec(command);
         let result: string[] = [];
 
-        for (var match in matches) {
-            console.log(matches[match]);
-            result.push(matches[match]);
+        while (match != null) {
+            result.push(match[1]);
+            match = expression.exec(command);
         }
 
         return result;
