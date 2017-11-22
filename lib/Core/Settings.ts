@@ -1,22 +1,22 @@
 // NOTE: No json library that I know of for TS (worth using) + no time to make one
 
-import Log from "./Log";
-import GeneralSettings from "./GeneralSettings";
+import Log from "./log";
+import GeneralSettings from "./generalSettings";
 
 var fs = require("fs");
 
 export default class Settings {
     // Members
-    public General: GeneralSettings;
-    public readonly Path: string;
+    public general: GeneralSettings;
+    public readonly path: string;
 
     constructor(filePath: string) {
         if (fs.existsSync(filePath)) {
-            this.Path = filePath;
+            this.path = filePath;
 
             let jsonObj = JSON.parse(fs.readFileSync(filePath));
 
-            this.General = new GeneralSettings(
+            this.general = new GeneralSettings(
                 jsonObj["General"]["Token"],
                 jsonObj["General"]["CommandTrigger"],
                 jsonObj["General"]["Version"]
@@ -28,8 +28,8 @@ export default class Settings {
 
     // Methods
     public save(): void {
-        fs.writeFileSync(this.Path, JSON.stringify({
-            General: this.General
+        fs.writeFileSync(this.path, JSON.stringify({
+            General: this.general
 		}, null, 2));
     }
 }

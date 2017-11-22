@@ -1,17 +1,17 @@
-import IFeature from "../../Features/IFeature";
+import Feature from "../../Features/Feature";
 import Bot from "../../Core/Bot";
 import Log from "../../Core/Log";
 
-export default class PreventUnintendedSpam implements IFeature {
+export default class PreventUnintendedSpam implements Feature {
     // Implemented Members
-    public readonly Name: string = "Prevent Unintentional Spam";
-    public readonly Key: string = "PreventUnintendedSpam";
-    public readonly Description: string = "Prevents unintentional spam.";
+    public readonly name: string = "Prevent Unintentional Spam";
+    public readonly key: string = "PreventUnintendedSpam";
+    public readonly description: string = "Prevents unintentional spam.";
 
     // Members
-    private Streak: number;
-    private LastMessage: string;
-    private Timer: any;
+    private streak: number;
+    private lastMessage: string;
+    private timer: any;
 
     // Implemented Methods
     public canEnable(context: Bot): boolean {
@@ -19,29 +19,29 @@ export default class PreventUnintendedSpam implements IFeature {
     }
 
     public enabled(context: Bot): void {
-        this.Streak = 0;
+        this.streak = 0;
 
-        context.Client.on("message", (message) => {
-            if (message.author.id == context.Client.user.id) {
-                if (context.Client.user.lastMessage) {
-                    if (this.LastMessage == message.content) {
-                        if (this.Streak >= 5) {
+        context.client.on("message", (message) => {
+            if (message.author.id == context.client.user.id) {
+                if (context.client.user.lastMessage) {
+                    if (this.lastMessage == message.content) {
+                        if (this.streak >= 5) {
                             Log.warn("Unintended spam detected");
                             context.restart();
                         }
 
-                        this.Streak++;
+                        this.streak++;
 
-                        if (this.Timer)
-                            clearTimeout(this.Timer);
+                        if (this.timer)
+                            clearTimeout(this.timer);
 
-                        this.Timer = setTimeout(function() {
+                        this.timer = setTimeout(function() {
                             this.Streak = 0;
                         }, 4000);
                     }
                     else {
-                        this.Streak = 0;
-                        this.LastMessage = message.content;
+                        this.streak = 0;
+                        this.lastMessage = message.content;
                     }
                 }
             }

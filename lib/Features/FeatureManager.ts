@@ -1,12 +1,12 @@
-import IFeature from "./IFeature";
+import Feature from "./Feature";
 import Bot from "../Core/Bot";
 
 export default class FeatureManager {
     // Members
-    public readonly Features: IFeature[] = [];
+    public readonly features: Feature[] = [];
 
     // Static Methods
-    public enable(feature: IFeature, context: Bot): boolean {
+    public enable(feature: Feature, context: Bot): boolean {
         if (feature.canEnable(context)) {
             feature.enabled(context);
 
@@ -16,7 +16,7 @@ export default class FeatureManager {
         return false;
     }
 
-    public enableMultiple(features: IFeature[], context: Bot): number {
+    public enableMultiple(features: Feature[], context: Bot): number {
         var totalEnabled: number = 0;
 
         for (var index in features) {
@@ -28,20 +28,20 @@ export default class FeatureManager {
     }
 
     public enableAll(context: Bot): number {
-        return this.enableMultiple(this.Features, context);
+        return this.enableMultiple(this.features, context);
     }
 
-    public disable(feature: IFeature): void {
+    public disable(feature: Feature): void {
         feature.disabled();
     }
 
-    public disableMultiple(features: IFeature[]): void {
+    public disableMultiple(features: Feature[]): void {
         for (var index in features)
             this.disable(features[index]);
     }
 
     public disableAll(): void {
-        this.disableMultiple(this.Features);
+        this.disableMultiple(this.features);
     }
 
     public reloadAll(context: Bot): number {
@@ -50,11 +50,11 @@ export default class FeatureManager {
         return this.enableAll(context);
     }
 
-    public register(feature: IFeature): void {
-        this.Features.push(feature);
+    public register(feature: Feature): void {
+        this.features.push(feature);
     }
 
-    public registerMultiple(features: IFeature[]): void {
+    public registerMultiple(features: Feature[]): void {
         for (var index in features)
             this.register(features[index]);
     }
@@ -63,13 +63,13 @@ export default class FeatureManager {
         return this.getByKey(key) != null;
     }
 
-    public getByKey(key: string): IFeature {
+    public getByKey(key: string): Feature {
         // TODO: Simplify this process into a function to prevent redundancy
-        for (var index in this.Features) {
-            if (this.Features[index].Key == key)
-                return this.Features[index];
+        for (var index in this.features) {
+            if (this.features[index].key == key)
+                return this.features[index];
         }
 
-        return null;
+        return undefined;
     }
 }

@@ -1,6 +1,6 @@
 export default class MessageBuilder {
     // Members
-    private Message: string = "";
+    private message: string = "";
 
     constructor(startingString?: string) {
         if (startingString)
@@ -8,7 +8,7 @@ export default class MessageBuilder {
     }
 
     public add(string: string): MessageBuilder {
-        this.Message += string;
+        this.message += string;
 
         return this;
     }
@@ -26,6 +26,6 @@ export default class MessageBuilder {
     }
 
     public build(): string {
-        return this.Message;
+        return this.message;
     }
 }

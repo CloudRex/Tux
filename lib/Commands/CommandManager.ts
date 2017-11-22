@@ -1,18 +1,18 @@
-import ICommand from "./ICommand";
-import CommandExecutionContext from "./CommandExecutionContext";
+import Command from "./command";
+import CommandExecutionContext from "./commandExecutionContext";
 
 var fs = require("fs");
 
 export default class CommandManager {
     // Members
-    public readonly Commands: ICommand[] = [];
+    public readonly commands: Command[] = [];
 
     // Static Methods
-    public register(command: ICommand): void {
-        this.Commands.push(command);
+    public register(command: Command): void {
+        this.commands.push(command);
     }
 
-    public registerMultiple(commands: ICommand[]): void {
+    public registerMultiple(commands: Command[]): void {
         for (var index in commands)
             this.register(commands[index]);
     }
@@ -21,13 +21,13 @@ export default class CommandManager {
         return this.getByBase(commandBase) != null;
     }
 
-    public getByBase(commandBase: string): ICommand {
-        for (var index in this.Commands) {
-            if (this.Commands[index].Base == commandBase || this.Commands[index].Aliases.includes(commandBase))
-                return this.Commands[index];
+    public getByBase(commandBase: string): Command {
+        for (var index in this.commands) {
+            if (this.commands[index].base == commandBase || this.commands[index].aliases.includes(commandBase))
+                return this.commands[index];
         }
 
-        return null;
+        return undefined;
     }
 
     // TOOD: Move to the corresponding file/class
@@ -44,20 +44,20 @@ export default class CommandManager {
         return true;
     }
 
-    public handle(context: CommandExecutionContext, command: ICommand): boolean {
-        if (command.RequiredRoles.length > 0 && !context.Message.member) {
-            context.Message.channel.send("You can't use that command here. Sorry!");
+    public handle(context: CommandExecutionContext, command: Command): boolean {
+        if (command.requiredRoles.length > 0 && !context.message.member) {
+            context.message.channel.send("You can't use that command here. Sorry!");
 
             return false;
         }
 
-        if (command.canExecute(context) && context.Arguments.length <= command.MaxArguments && this.hasRoles(context.Message, command.RequiredRoles)) {
+        if (command.canExecute(context) && context.arguments.length <= command.maxArguments && this.hasRoles(context.message, command.requiredRoles)) {
             command.executed(context);
 
             return true;
         }
         else
-            context.Message.channel.send("You can't do that. Sorry!");
+            context.message.channel.send("You can't do that. Sorry!");
 
 
         return false;

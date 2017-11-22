@@ -1,4 +1,4 @@
-import Bot from "../Core/Bot";
+import Bot from "../core/bot";
 
 export default class CommandExecutionContext {
     // Members
@@ -12,13 +12,13 @@ export default class CommandExecutionContext {
         this.Arguments = args;
     }*/
 
-    public Message: any;
-    public Arguments: string[];
-    public Bot: Bot;
+    public message: any;
+    public arguments: string[];
+    public bot: Bot;
 
     constructor(message: any, args: string[], bot: Bot) {
-        this.Message = message;
-        this.Arguments = args;
-        this.Bot = bot;
+        this.message = message;
+        this.arguments = args;
+        this.bot = bot;
     }
 }

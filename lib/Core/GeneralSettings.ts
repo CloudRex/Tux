@@ -1,12 +1,12 @@
 export default class GeneralSettings {
     // Members
-    public Token: string;
-    public CommandTrigger: string;
-    public Version: string;
+    public token: string;
+    public commandTrigger: string;
+    public version: string;
 
     constructor(token: string, commandTrigger: string, version: string) {
-        this.Token = token;
-        this.CommandTrigger = commandTrigger;
-        this.Version = version;
+        this.token = token;
+        this.commandTrigger = commandTrigger;
+        this.version = version;
     }
 }

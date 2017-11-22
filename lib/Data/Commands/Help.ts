@@ -1,37 +1,37 @@
-import ICommand from "../../Commands/ICommand";
-import CommandExecutionContext from "../../Commands/CommandExecutionContext";
-import MessageBuilder from "../../Core/MessageBuilder";
+import Command from "../../commands/command";
+import CommandExecutionContext from "../../commands/commandExecutionContext";
+import MessageBuilder from "../../core/messageBuilder";
 
-export default class Help implements ICommand {
-    public readonly Base: string = "help";
-    public readonly Description: string = "View all available commands";
-    public readonly Aliases: string[] = ["?"];
-    public readonly ExtendedDescription: string = "Nice try.";
-    public readonly MaxArguments: number = 1;
-    public readonly RequiredRoles: string[] = [];
+export default class Help implements Command {
+    public readonly base: string = "help";
+    public readonly description: string = "View all available commands";
+    public readonly aliases: string[] = ["?"];
+    public readonly extendedDescription: string = "Nice try.";
+    public readonly maxArguments: number = 1;
+    public readonly requiredRoles: string[] = [];
 
     public executed(context: CommandExecutionContext): void {
-        if (context.Arguments.length == 0) {
+        if (context.arguments.length == 0) {
             let messageBuilder = new MessageBuilder("Available commands:").addLine().addCodeBlock();
 
-            for (var index in context.Bot.Commands.Commands) {
-                let command = context.Bot.Commands.Commands[index];
+            for (var index in context.bot.commands.commands) {
+                let command = context.bot.commands.commands[index];
 
-                messageBuilder.add(`${command.Base} -> ${command.Description}`).addLine();
+                messageBuilder.add(`${command.base} -> ${command.description}`).addLine();
             }
 
             messageBuilder.addCodeBlock().addLine().add(":heavy_plus_sign: other secret stuff!");
-            context.Message.channel.send(messageBuilder.build());
+            context.message.channel.send(messageBuilder.build());
         }
         else {
-            if (context.Bot.Commands.isRegistered(context.Arguments[0])) {
-                let command = context.Bot.Commands.getByBase(context.Arguments[0]);
-                let message = new MessageBuilder().addCode().add(`${command.Base} -> ${command.ExtendedDescription}`).addCode().build();
+            if (context.bot.commands.isRegistered(context.arguments[0])) {
+                let command = context.bot.commands.getByBase(context.arguments[0]);
+                let message = new MessageBuilder().addCode().add(`${command.base} -> ${command.extendedDescription}`).addCode().build();
 
-                context.Message.channel.send(message);
+                context.message.channel.send(message);
             }
             else
-                context.Message.channel.send("Hey! Something smells :fish:! You sure that command exists?");
+                context.message.channel.send("Hey! Something smells :fish:! You sure that command exists?");
         }
     }
 

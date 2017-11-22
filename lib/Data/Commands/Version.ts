@@ -1,16 +1,16 @@
-import ICommand from "../../Commands/ICommand";
+import Command from "../../Commands/Command";
 import CommandExecutionContext from "../../Commands/CommandExecutionContext";
 
-export default class Version implements ICommand {
-    public readonly Base: string = "version";
-    public readonly Description: string = "View the bot's version";
-    public readonly Aliases: string[] = ["ver"];
-    public readonly ExtendedDescription: string = this.Description;
-    public readonly MaxArguments = 0;
-    public readonly RequiredRoles: string[] = [];
+export default class Version implements Command {
+    public readonly base: string = "version";
+    public readonly description: string = "View the bot's version";
+    public readonly aliases: string[] = ["ver"];
+    public readonly extendedDescription: string = this.description;
+    public readonly maxArguments = 0;
+    public readonly requiredRoles: string[] = [];
 
     public executed(context: CommandExecutionContext): void {
-        context.Message.channel.send(`\`Version: ${context.Bot.Settings.General.Version}\``);
+        context.message.channel.send(`\`Version: ${context.bot.settings.general.version}\``);
     }
 
     public canExecute(context: CommandExecutionContext): boolean {

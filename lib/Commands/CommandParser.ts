@@ -3,11 +3,10 @@ import ICommand from "./ICommand";
 
 export default class CommandParser {
     public static parse(command: string, commandManager: CommandManager, commandTrigger: string): ICommand {
-        if (this.isValid(command, commandManager, commandTrigger)) {
+        if (this.isValid(command, commandManager, commandTrigger))
             return commandManager.getByBase(this.getCommandBase(command));
-        }
 
-        return null;
+        return undefined;
     }
 
     public static isValid(command: string, commandManager: CommandManager, commandTrigger: string): boolean {
