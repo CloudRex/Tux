@@ -15,4 +15,7 @@ Tiny Discord bot
 2. Download this repository & extract it
 3. Open up a terminal on the folder containing the extracted files
 4. Configure `settings.json` inside the `lib` folder
-5. Type `npm start`
+5. Type `npm update` to download project dependencies
+6. Type `npm start` to start the bot
+
+From here on you want to invite the bot into your server.
