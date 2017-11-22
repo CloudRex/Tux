@@ -1,6 +1,6 @@
-import ICommand from "../core/commands/ICommand";
-import CommandExecutionContext from "../core/commands/CommandExecutionContext";
-import MessageBuilder from "../core/MessageBuilder";
+import ICommand from "../../Commands/ICommand";
+import CommandExecutionContext from "../../Commands/CommandExecutionContext";
+import MessageBuilder from "../../Core/MessageBuilder";
 
 export default class Help implements ICommand {
     public readonly Base: string = "help";

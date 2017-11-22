@@ -1,17 +1,17 @@
 import Bot from "./core/Bot";
 import Log from "./core/Log";
 import Settings from "./core/Settings";
-import CommandParser from "./core/Commands/CommandParser";
-import CommandManager from "./core/Commands/CommandManager";
-import CommandExecutionContext from "./core/Commands/CommandExecutionContext";
-import FeatureManager from "./core/Features/FeatureManager";
+import CommandParser from "./Commands/CommandParser";
+import CommandManager from "./Commands/CommandManager";
+import CommandExecutionContext from "./Commands/CommandExecutionContext";
+import FeatureManager from "./Features/FeatureManager";
 
 // Commands
-import Help from "./Commands/Help";
-import Version from "./Commands/Version";
+import Help from "./Data/Commands/Help";
+import Version from "./Data/Commands/Version";
 
 // features
-import PreventUnintendedSpam from "./Features/PreventUnintendedSpam";
+import PreventUnintendedSpam from "./Data/Features/PreventUnintendedSpam";
 
 const request = require("request");
 const riotBaseUrl = "https://na1.api.riotgames.com";

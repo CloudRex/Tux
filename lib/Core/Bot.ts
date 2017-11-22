@@ -1,7 +1,7 @@
 import Settings from "./Settings";
-import CommandManager from "./Commands/CommandManager";
-import CommandParser from "./Commands/CommandParser";
-import FeatureManager from "./Features/FeatureManager";
+import CommandManager from "../Commands/CommandManager";
+import CommandParser from "../Commands/CommandParser";
+import FeatureManager from "../Features/FeatureManager";
 import Log from "./Log";
 
 export default class Bot {

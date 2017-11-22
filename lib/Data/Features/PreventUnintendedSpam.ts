@@ -1,6 +1,6 @@
-import IFeature from "../core/Features/IFeature";
-import Bot from "../core/Bot";
-import Log from "../core/Log";
+import IFeature from "../../Features/IFeature";
+import Bot from "../../Core/Bot";
+import Log from "../../Core/Log";
 
 export default class PreventUnintendedSpam implements IFeature {
     // Implemented Members

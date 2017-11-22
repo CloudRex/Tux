@@ -1,5 +1,5 @@
-import ICommand from "../core/commands/ICommand";
-import CommandExecutionContext from "../core/commands/CommandExecutionContext";
+import ICommand from "../../Commands/ICommand";
+import CommandExecutionContext from "../../Commands/CommandExecutionContext";
 
 export default class Version implements ICommand {
     public readonly Base: string = "version";

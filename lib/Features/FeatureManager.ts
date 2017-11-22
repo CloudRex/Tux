@@ -1,5 +1,5 @@
 import IFeature from "./IFeature";
-import Bot from "../Bot";
+import Bot from "../Core/Bot";
 
 export default class FeatureManager {
     // Members

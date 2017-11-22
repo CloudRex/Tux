@@ -1,11 +1,25 @@
 {
-  "name": "tux-bot",
-  "version": "1.0.0",
-  "description": "Discord chat bot",
-  "main": "build/bot.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "Phantom",
-  "license": "ISC"
+    "name": "botty-discord",
+    "version": "1.0.0",
+    "description": "Discord chat bot",
+    "main": "dist/App.js",
+    "types": ["./lib/app.ts", "node"],
+    "scripts": {
+        "start": "node dist/App.js",
+        "prepublish": "npm run build",
+        "build": "C:/Users/Phantom/AppData/Roaming/npm/tsc",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "Phantom <private.phantom@outlook.com>",
+    "license": "ISC",
+    "files": [
+        "lib/"
+    ],
+    "dependencies": {
+        "colors": "latest",
+        "typescript": "next"
+    },
+    "devDependencies": {
+        "@types/node": "^8.0.53"
+    }
 }
