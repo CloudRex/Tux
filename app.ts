@@ -1,13 +1,17 @@
 import Bot from "./core/Bot";
 import Log from "./core/Log";
 import Settings from "./core/Settings";
-import CommandParser from "./core/commands/CommandParser";
-import CommandManager from "./core/commands/CommandManager";
-import CommandExecutionContext from "./core/commands/CommandExecutionContext";
+import CommandParser from "./core/Commands/CommandParser";
+import CommandManager from "./core/Commands/CommandManager";
+import CommandExecutionContext from "./core/Commands/CommandExecutionContext";
+import FeatureManager from "./core/Features/FeatureManager";
 
 // Commands
-import Help from "./commands/Help";
-import Version from "./commands/Version";
+import Help from "./Commands/Help";
+import Version from "./Commands/Version";
+
+// features
+import PreventUnintendedSpam from "./Features/PreventUnintendedSpam";
 
 const request = require("request");
 const riotBaseUrl = "https://na1.api.riotgames.com";
@@ -17,14 +21,22 @@ var bot = new Bot(
     // TODO: Debug only
     new Settings("E:/Projects/LeagueBot/new/_settings.json"),
     new Discord.Client(),
-    new CommandManager()
+    new CommandManager(),
+    new FeatureManager()
 );
 
-// Register Commands
-bot.CommandManager.registerMultiple([
+// Register Commands & Features
+bot.Commands.registerMultiple([
     new Help(),
     new Version()
 ]);
+
+// TODO: Features must be loaded from settings
+bot.Features.registerMultiple([
+    new PreventUnintendedSpam()
+]);
+
+bot.Features.enableAll(bot);
 
 // Discord client events
 bot.Client.on("ready", () => {
@@ -32,8 +44,8 @@ bot.Client.on("ready", () => {
 });
 
 bot.Client.on("message", (message) => {
-    if (CommandParser.isValid(message.content, bot.CommandManager, bot.Settings.General.CommandTrigger))
-        bot.CommandManager.handle(
+    if (CommandParser.isValid(message.content, bot.Commands, bot.Settings.General.CommandTrigger))
+        bot.Commands.handle(
             new CommandExecutionContext(
                 message,
                 CommandParser.getArguments(message.content),
@@ -42,7 +54,7 @@ bot.Client.on("message", (message) => {
 
             CommandParser.parse(
                 message.content,
-                bot.CommandManager,
+                bot.Commands,
                 bot.Settings.General.CommandTrigger
             )
         );
@@ -51,9 +63,4 @@ bot.Client.on("message", (message) => {
 });
 
 // Bot init
-bot.Client.login(bot.Settings.General.Token, (error, token) => {
-    if (error)
-        Log.error(error.message);
-    else
-        Log.success("Logged in");
-});
+bot.login();

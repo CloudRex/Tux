@@ -4,5 +4,9 @@
         "Key": "",
         "CommandTrigger": ".",
         "Version": "1.0.0"
+    },
+
+    "Features": {
+        "PreventUnintendedSpam": false
     }
 }

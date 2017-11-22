@@ -1,5 +1,6 @@
 import ICommand from "../core/commands/ICommand";
 import CommandExecutionContext from "../core/commands/CommandExecutionContext";
+import MessageBuilder from "../core/MessageBuilder";
 
 export default class Help implements ICommand {
     public readonly Base: string = "help";
@@ -11,21 +12,23 @@ export default class Help implements ICommand {
 
     public executed(context: CommandExecutionContext): void {
         if (context.Arguments.length == 0) {
-            context.Message.channel.send("Available commands:");
+            let messageBuilder = new MessageBuilder("Available commands:").addLine().addCodeBlock();
 
-            for (var index in context.Bot.CommandManager.Commands) {
-                let command = context.Bot.CommandManager.Commands[index];
+            for (var index in context.Bot.Commands.Commands) {
+                let command = context.Bot.Commands.Commands[index];
 
-                context.Message.channel.send(`\`${command.Base} -> ${command.Description}\``);
+                messageBuilder.add(`${command.Base} -> ${command.Description}`).addLine();
             }
 
-            context.Message.channel.send(":heavy_plus_sign: other secret stuff!");
+            messageBuilder.addCodeBlock().addLine().add(":heavy_plus_sign: other secret stuff!");
+            context.Message.channel.send(messageBuilder.build());
         }
         else {
-            if (context.Bot.CommandManager.isRegistered(context.Arguments[0])) {
-                let command = context.Bot.CommandManager.getByBase(context.Arguments[0]);
+            if (context.Bot.Commands.isRegistered(context.Arguments[0])) {
+                let command = context.Bot.Commands.getByBase(context.Arguments[0]);
+                let message = new MessageBuilder().addCode().add(`${command.Base} -> ${command.ExtendedDescription}`).addCode().build();
 
-                context.Message.channel.send(`\`${command.Base} -> ${command.ExtendedDescription}\``);
+                context.Message.channel.send(message);
             }
             else
                 context.Message.channel.send("Hey! Something smells :fish:! You sure that command exists?");
