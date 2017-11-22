@@ -1,7 +1,6 @@
 {
     "General": {
-        "Token": "",
-        "Key": "",
+        "Token": "<TOKEN HERE>",
         "CommandTrigger": ".",
         "Version": "1.0.0"
     },

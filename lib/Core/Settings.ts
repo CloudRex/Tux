@@ -18,7 +18,6 @@ export default class Settings {
 
             this.General = new GeneralSettings(
                 jsonObj["General"]["Token"],
-                jsonObj["General"]["Key"],
                 jsonObj["General"]["CommandTrigger"],
                 jsonObj["General"]["Version"]
             );

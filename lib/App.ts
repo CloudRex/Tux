@@ -19,7 +19,7 @@ const Discord = require("discord.js");
 
 var bot = new Bot(
     // TODO: Debug only
-    new Settings("E:/Projects/LeagueBot/new/_settings.json"),
+    new Settings("../settings.json"),
     new Discord.Client(),
     new CommandManager(),
     new FeatureManager()
