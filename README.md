@@ -1,10 +1,18 @@
 # Botty
 Tiny Discord bot
 
-# Progress
+## Progress
 * [ ] Database support
 * [ ] Actual custom command trigger support
 * [ ] Better command loader (not being hardcoded)
+* [ ] Publish to the NPM registry as an official public package
 
-# Known Issues
+## Known Issues
 * Bot crashes when issuing a message which includes the command trigger multiple times at the start. (Regex-related issue)
+
+## Installing & Running
+1. Install Node.js (https://nodejs.org/en/)
+2. Download this repository & extract it
+3. Open up a terminal on the folder containing the extracted files
+4. Configure `settings.json` inside the `lib` folder
+5. Type `npm start`
