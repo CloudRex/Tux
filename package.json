@@ -2,28 +2,23 @@
   "name": "botty-discord",
   "version": "1.0.0",
   "description": "Discord chat bot",
-  "main": "dist/App.js",
-  "types": [
-    "./lib/app.ts",
-    "node"
+  "presets": [
+    "env", "es2015"
   ],
   "scripts": {
-    "start": "node dist/App.js",
-    "prepublish": "npm run build",
-    "build": "C:/Users/Phantom/AppData/Roaming/npm/tsc",
+    "start": "node lib/app.js",
+    "build": "./node_modules/.bin/babel src --out-dir lib",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Phantom <private.phantom@outlook.com>",
   "license": "ISC",
-  "files": [
-    "lib/"
-  ],
   "dependencies": {
     "colors": "latest",
-    "discord.js": "^11.2.1",
-    "typescript": "next"
+    "discord.js": "^11.2.1"
   },
   "devDependencies": {
-    "@types/node": "^8.0.53"
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-es2015": "^6.24.1"
   }
 }

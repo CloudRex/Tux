@@ -1,21 +1,17 @@
 import Command from "../../commands/command";
-import CommandExecutionContext from "../../commands/commandExecutionContext";
 import MessageBuilder from "../../core/messageBuilder";
 
-export default class Help implements Command {
-    public readonly base: string = "help";
-    public readonly description: string = "View all available commands";
-    public readonly aliases: string[] = ["?"];
-    public readonly extendedDescription: string = "Nice try.";
-    public readonly maxArguments: number = 1;
-    public readonly requiredRoles: string[] = [];
+export default class Help extends Command {
+    constructor() {
+        super("help", "View all available commands", ["?"], "Nice try.", 1, []);
+    }
 
-    public executed(context: CommandExecutionContext): void {
-        if (context.arguments.length == 0) {
+    executed(context) {
+        if (context.arguments.length === 0) {
             let messageBuilder = new MessageBuilder("Available commands:").addLine().addCodeBlock();
 
-            for (var index in context.bot.commands.commands) {
-                let command = context.bot.commands.commands[index];
+            for (let i = 0; i < context.bot.commands.commands.length; i++) {
+                let command = context.bot.commands.commands[i];
 
                 messageBuilder.add(`${command.base} -> ${command.description}`).addLine();
             }
@@ -35,7 +31,7 @@ export default class Help implements Command {
         }
     }
 
-    public canExecute(context: CommandExecutionContext): boolean {
+    canExecute(context) {
         return true;
     }
 }

@@ -1,31 +1,28 @@
 export default class MessageBuilder {
-    // Members
-    private message: string = "";
-
-    constructor(startingString?: string) {
+    constructor(startingString) {
         if (startingString)
             this.add(startingString);
     }
 
-    public add(string: string): MessageBuilder {
+    add(string) {
         this.message += string;
 
         return this;
     }
 
-    public addCodeBlock(): MessageBuilder {
+    addCodeBlock() {
         return this.add("\`\`\`");
     }
 
-    public addCode(): MessageBuilder {
+    addCode() {
         return this.add("\`");
     }
 
-    public addLine(): MessageBuilder {
+    addLine() {
         return this.add("\n");
     }
 
-    public build(): string {
+    build() {
         return this.message;
     }
 }

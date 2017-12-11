@@ -1,30 +1,27 @@
-import CommandManager from "./CommandManager";
-import ICommand from "./ICommand";
-
 export default class CommandParser {
-    public static parse(command: string, commandManager: CommandManager, commandTrigger: string): ICommand {
+    static parse(command, commandManager, commandTrigger) {
         if (this.isValid(command, commandManager, commandTrigger))
             return commandManager.getByBase(this.getCommandBase(command));
 
         return undefined;
     }
 
-    public static isValid(command: string, commandManager: CommandManager, commandTrigger: string): boolean {
+    static isValid(command, commandManager, commandTrigger) {
         if (command.startsWith(commandTrigger))
             return commandManager.isRegistered(this.getCommandBase(command));
 
         return false;
     }
 
-    public static getCommandBase(command: string) {
-        // TODO: Include actual command trigger insteaod of placeholder dummy "."
+    static getCommandBase(command) {
+        // TODO: Include actual command trigger instead of placeholder dummy "."
         return /^\.([a-zA-Z]+)/g.exec(command)[1];
     }
 
-    public static getArguments(command: string) {
+    static getArguments(command) {
         let expression = / ([^ ]+|"[^"]+")/g;
         let match = expression.exec(command);
-        let result: string[] = [];
+        let result = [];
 
         while (match != null) {
             result.push(match[1]);

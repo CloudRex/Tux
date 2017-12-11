@@ -1,0 +1,7 @@
+{
+    "general": {
+        "token": null,
+        "commandTrigger": ".",
+        "version": "1.0.0"
+    }
+}
