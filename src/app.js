@@ -7,6 +7,7 @@ import Version from "./data/commands/version";
 import PreventUnintendedSpam from "./data/features/preventUnintendedSpam";
 import Thank from "./data/commands/thank";
 import Time from "./data/commands/time";
+import Google from "./data/commands/google";
 
 const Discord = require("discord.js");
 
@@ -23,7 +24,8 @@ bot.commands.registerMultiple([
     new Help(),
     new Version(),
     new Thank(),
-    new Time()
+    new Time(),
+    new Google()
 ]);
 
 // TODO: features should be loaded from settings
