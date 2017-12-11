@@ -15,8 +15,9 @@ Tiny Discord bot
 
 2. Clone the repository: `git clone https://github.com/CloudRex/Botty`
 3. Open up a terminal on the folder containing the downloaded files
-4. Configure `settings.json` inside the `lib` folder
+4. Configure `settings.json`
 5. Type `npm install` to download project dependencies
-6. Type `npm start` to start the bot
+6. Type `npm run build` to build the project
+7. Type `npm start` to start the application
 
 From here on you want to invite the bot into your server.
