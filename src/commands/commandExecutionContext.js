@@ -21,12 +21,18 @@ export default class CommandExecutionContext {
     }
 
     async respond(message, title = "", color = "RANDOM", thumbnailUrl = "") {
-        return new EditableMessage(await this.message.channel.send(new Discord.RichEmbed()
+        let embed = new Discord.RichEmbed()
             .setFooter(`Requested by ${this.message.author.username}`)
-            .setDescription(message)
             .setColor(color)
-            .setAuthor(title, thumbnailUrl)
-        ));
+            .setAuthor(title, thumbnailUrl);
+
+        if (typeof message !== "string")
+            for (let i = 0; i < Object.keys(message).length; i++)
+                embed.addField(Object.keys(message)[i], message[Object.keys(message)[i]]);
+        else
+            embed.setDescription(message);
+
+        return new EditableMessage(await this.message.channel.send(embed));
     }
 
     async reply(message) {
