@@ -14,8 +14,8 @@ Tiny Discord bot
 1. Install Node.js (https://nodejs.org/en/)
 
 2. Clone the repository: `git clone https://github.com/CloudRex/Botty`
-3. Open up a terminal on the folder containing the downloaded files
-4. Configure `settings.json`
+3. Configure `settings.json`
+4. Open up a terminal on the folder containing the downloaded files
 5. Type `npm install` to download project dependencies
 6. Type `npm run build` to build the project
 7. Type `npm start` to start the application
