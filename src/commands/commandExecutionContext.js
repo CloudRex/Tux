@@ -1,3 +1,5 @@
+import EditableMessage from "../core/editableMessage";
+
 const Discord = require("discord.js");
 
 export default class CommandExecutionContext {
@@ -18,12 +20,16 @@ export default class CommandExecutionContext {
         this.bot = bot;
     }
 
-    respond(message, title = "", color = "RANDOM") {
-        this.message.channel.send(new Discord.RichEmbed()
+    async respond(message, title = "", color = "RANDOM", thumbnailUrl = "") {
+        return new EditableMessage(await this.message.channel.send(new Discord.RichEmbed()
             .setFooter(`Requested by ${this.message.author.username}`)
-            .setTitle(title)
             .setDescription(message)
             .setColor(color)
-        );
+            .setAuthor(title, thumbnailUrl)
+        ));
+    }
+
+    async reply(message) {
+        return await this.message.reply(message);
     }
 }

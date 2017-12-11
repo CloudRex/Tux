@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "Discord chat bot",
   "presets": [
-    "env", "es2015"
+    "env",
+    "es2015"
   ],
   "scripts": {
     "start": "node lib/app.js",
@@ -13,8 +14,11 @@
   "author": "Phantom <private.phantom@outlook.com>",
   "license": "ISC",
   "dependencies": {
+    "cheerio": "^1.0.0-rc.2",
     "colors": "latest",
-    "discord.js": "^11.2.1"
+    "discord.js": "^11.2.1",
+    "querystring": "^0.2.0",
+    "snekfetch": "^3.6.1"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
