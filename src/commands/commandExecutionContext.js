@@ -1,3 +1,5 @@
+const Discord = require("discord.js");
+
 export default class CommandExecutionContext {
     // Members
     // TODO
@@ -14,5 +16,14 @@ export default class CommandExecutionContext {
         this.message = message;
         this.arguments = args;
         this.bot = bot;
+    }
+
+    respond(message, title = "", color = "RANDOM") {
+        this.message.channel.send(new Discord.RichEmbed()
+            .setFooter(`Requested by ${this.message.author.username}`)
+            .setTitle(title)
+            .setDescription(message)
+            .setColor(color)
+        );
     }
 }

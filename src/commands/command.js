@@ -3,7 +3,7 @@ export default class Command {
         this.base = base;
         this.description = description;
         this.aliases = aliases;
-        this.extendedDescription = extendedDescription;
+        this.extendedDescription = extendedDescription ? extendedDescription : description;
         this.maxArguments = maxArguments;
         this.requiredRoles = requiredRoles;
     }

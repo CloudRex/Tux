@@ -1,5 +1,7 @@
 export default class MessageBuilder {
     constructor(startingString) {
+        this.message = "";
+
         if (startingString)
             this.add(startingString);
     }

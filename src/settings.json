@@ -1,6 +1,6 @@
 {
     "general": {
-        "token": null,
+        "token": "",
         "commandTrigger": ".",
         "version": "1.0.0"
     }

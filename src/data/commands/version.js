@@ -7,7 +7,7 @@ export default class Version extends Command {
     }
 
     executed(context) {
-        context.message.channel.send(`\`Version: ${context.bot.settings.general.version}\``);
+        context.respond(`\`Version: ${context.bot.settings.general.version}\``);
     }
 
     canExecute(context) {

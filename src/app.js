@@ -5,6 +5,8 @@ import FeatureManager from "./features/featureManager";
 import Help from "./data/commands/help";
 import Version from "./data/commands/version";
 import PreventUnintendedSpam from "./data/features/preventUnintendedSpam";
+import Thank from "./data/commands/thank";
+import Time from "./data/commands/time";
 
 const Discord = require("discord.js");
 
@@ -19,7 +21,9 @@ const bot = new Bot(
 // Register commands & features
 bot.commands.registerMultiple([
     new Help(),
-    new Version()
+    new Version(),
+    new Thank(),
+    new Time()
 ]);
 
 // TODO: features should be loaded from settings

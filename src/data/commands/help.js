@@ -17,7 +17,7 @@ export default class Help extends Command {
             }
 
             messageBuilder.addCodeBlock().addLine().add(":heavy_plus_sign: other secret stuff!");
-            context.message.channel.send(messageBuilder.build());
+            context.respond(messageBuilder.build());
         }
         else {
             if (context.bot.commands.isRegistered(context.arguments[0])) {
