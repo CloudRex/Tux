@@ -2,10 +2,9 @@
 Tiny Discord bot
 
 ## Progress
-* [ ] Database support
+* [X] Database support
 * [ ] Actual custom command trigger support
 * [ ] Better command loader (not being hardcoded)
-* [ ] Publish to the NPM registry as an official public package
 
 ## Known Issues
 * Bot crashes when issuing a message which includes the command trigger multiple times at the start. (Regex-related issue)
