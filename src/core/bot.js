@@ -32,7 +32,7 @@ export default class Bot {
                     )
                 );
 
-            Log.info(`[${message.author.username}] ${message.content}`);
+            this.database.addMessage(message);
         });
     }
 

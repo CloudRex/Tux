@@ -10,6 +10,7 @@ import Time from "./data/commands/time";
 import Google from "./data/commands/google";
 import Github from "./data/commands/github";
 import Status from "./data/commands/status";
+import Chuck from "./data/commands/chuck";
 
 const Discord = require("discord.js");
 
@@ -29,7 +30,8 @@ bot.commands.registerMultiple([
     new Time(),
     new Google(),
     new Github(),
-    new Status()
+    new Status(),
+    new Chuck()
 ]);
 
 // TODO: features should be loaded from settings

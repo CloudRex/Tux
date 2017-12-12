@@ -20,6 +20,15 @@ export default class Database {
         });
     }
 
+    addMessage(message) {
+        this.db("messages").insert({
+            sender: message.author.id,
+            text: message.content,
+            channel: message.channel.name,
+            time: message.createdTimestamp
+        }).then();
+    }
+
     // TODO: remove callbacks, implement await somehow
     hasBeenThanked(userId, callback) {
         this.db.select().from("thanks").where("user", userId.toString()).then((result) => {
