@@ -16,8 +16,10 @@
     "cheerio": "^1.0.0-rc.2",
     "colors": "latest",
     "discord.js": "^11.2.1",
+    "knex": "^0.14.2",
     "querystring": "^0.2.0",
-    "snekfetch": "^3.6.1"
+    "snekfetch": "^3.6.1",
+    "sqlite3": "^3.1.13"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

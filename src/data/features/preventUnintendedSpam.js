@@ -24,8 +24,7 @@ export default class PreventUnintendedSpam extends Feature {
                         }
 
                         this.streak++;
-
-                            clearTimeout(this.timer);
+                        clearTimeout(this.timer);
 
                         this.timer = setTimeout(() => {
                             this.streak = 0;

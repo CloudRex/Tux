@@ -1,6 +1,7 @@
 import CommandParser from "../commands/commandParser";
 import Log from "./log";
 import CommandExecutionContext from "../commands/commandExecutionContext";
+import Database from "./database";
 
 export default class Bot {
     constructor(settings, client, commandManager, featureManager) {
@@ -8,6 +9,7 @@ export default class Bot {
         this.client = client;
         this.commands = commandManager;
         this.features = featureManager;
+        this.database = new Database(this.settings.general.databasePath);
 
         // Discord client events
         this.client.on("ready", () => {

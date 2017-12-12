@@ -11,15 +11,20 @@ export default class Thank extends Command {
             if (context.arguments.length === 1) {
                 let user = Utils.stripMention(context.arguments[0]);
 
-                if (context.message.channel.guild.members.has(user))
-                    // TODO
-                    context.respond(":thumbsup: Thanked " + context.arguments[0]);
+                if (context.message.author.id.toString() === user)
+                    context.respond("You can't thank yourself, silly!");
+                else if (context.message.channel.guild.members.has(user))
+                    context.bot.database.addThank(user, () => {
+                        context.bot.database.getThanks(user, (thanks) => {
+                            context.respond(`:thumbsup: Thanked ${context.arguments[0]} (${thanks} Thanks)`);
+                        });
+                    });
                 else
-                    context.message.channel.send("Are you sure that person exists?");
+                    context.respond("Are you sure that person exists?");
             }
         }
         else
-            context.message.channel.send("You can't do that here!");
+            context.respond("You can't do that here!");
     }
 
     canExecute(context) {
