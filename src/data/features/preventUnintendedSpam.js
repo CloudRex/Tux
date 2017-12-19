@@ -3,10 +3,9 @@ import Log from "../../core/log";
 
 export default class PreventUnintendedSpam extends Feature {
     constructor() {
-        super("Prevent Unintentional Spam", "PreventUnintendedSpam", "Prevents unintentional spam.");
+        super("Prevent Unintentional Spam", "prevent-unintended-spam", "Prevents unintentional spam.");
     }
 
-    // Implemented Methods
     canEnable(bot) {
         return true;
     }

@@ -40,7 +40,7 @@ export default class CommandManager {
         return true;
     }
 
-    handle(context, command) {
+    async handle(context, command) {
         if (command.requiredRoles.length > 0 && !context.message.member) {
             context.message.channel.send("You can't use that command here. Sorry!");
 
@@ -52,8 +52,11 @@ export default class CommandManager {
 
             return true;
         }
-        else
-            context.message.channel.send("You can't do that. Sorry!");
+        else {
+            let message = await context.respond("You can't do that. Sorry!");
+
+            message.message.delete(3000);
+        }
 
 
         return false;

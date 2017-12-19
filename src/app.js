@@ -11,6 +11,7 @@ import Google from "./data/commands/google";
 import Github from "./data/commands/github";
 import Status from "./data/commands/status";
 import Chuck from "./data/commands/chuck";
+import AntiSpam from "./data/features/antiSpam";
 
 const Discord = require("discord.js");
 
@@ -36,7 +37,8 @@ bot.commands.registerMultiple([
 
 // TODO: features should be loaded from settings
 bot.features.registerMultiple([
-    new PreventUnintendedSpam()
+    new PreventUnintendedSpam(),
+    new AntiSpam()
 ]);
 
 // Init
