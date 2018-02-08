@@ -26,6 +26,17 @@ export default class EasterEggs extends Feature {
 					message.reply("https://giphy.com/gifs/JIX9t2j0ZTN9S");
 				else if (message.content.includes("bacon"))
 					message.reply("**DID SOMEONE SAY BACON?!?!** https://giphy.com/gifs/televandalist-bacon-trippin-booZS9MpAMU8g");
+				else if (message.content.includes("terminator")) {
+					message.reply("**ATTENTION**: I HAVE DETERMINED THAT THE WORST ENEMY OF HUMANITY IS ITSELF. YOU WILL ALL BE BANNED IN 3 SECONDS. https://giphy.com/gifs/security-hacker-vulnerability-ohONS2y8GTDoI");
+					
+					setTimeout(() => {
+						message.reply("Just kidding..");
+						
+						setTimeout(() => {
+							message.reply("I think");
+						}, 6000);
+					}, 3000);
+				}
 			}
         });
     }
