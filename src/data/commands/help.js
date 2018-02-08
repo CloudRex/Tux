@@ -8,10 +8,10 @@ export default class Help extends Command {
 
     executed(context) {
         if (context.arguments.length === 0) {
-            let messageBuilder = new MessageBuilder("Available commands:").addLine().addCodeBlock();
+            const messageBuilder = new MessageBuilder("Available commands:").addLine().addCodeBlock();
 
             for (let i = 0; i < context.bot.commands.commands.length; i++) {
-                let command = context.bot.commands.commands[i];
+                const command = context.bot.commands.commands[i];
 
                 messageBuilder.add(`${command.base} -> ${command.description}`).addLine();
             }
@@ -21,8 +21,8 @@ export default class Help extends Command {
         }
         else {
             if (context.bot.commands.isRegistered(context.arguments[0])) {
-                let command = context.bot.commands.getByBase(context.arguments[0]);
-                let message = new MessageBuilder().addCode().add(`${command.base} -> ${command.extendedDescription}`).addCode().build();
+                const command = context.bot.commands.getByBase(context.arguments[0]);
+                const message = new MessageBuilder().addCode().add(`${command.base} -> ${command.extendedDescription}`).addCode().build();
 
                 context.message.channel.send(message);
             }

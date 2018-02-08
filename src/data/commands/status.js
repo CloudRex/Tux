@@ -6,7 +6,7 @@ export default class Status extends Command {
     }
 
     executed(context) {
-        let guild = context.message.guild;
+        const guild = context.message.guild;
 
         context.respond({
             "Name": guild.name,

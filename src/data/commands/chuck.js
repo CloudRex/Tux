@@ -9,7 +9,7 @@ export default class Chuck extends Command {
 
     executed(context) {
         request("https://api.chucknorris.io/jokes/random", (error, response, body) => {
-            let data = JSON.parse(body);
+            const data = JSON.parse(body);
 
             context.respond(data.value, "Chuck Norris Fact", "RED", data.icon_url);
         });

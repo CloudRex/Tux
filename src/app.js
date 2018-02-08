@@ -12,6 +12,7 @@ import Github from "./data/commands/github";
 import Status from "./data/commands/status";
 import Chuck from "./data/commands/chuck";
 import AntiSpam from "./data/features/antiSpam";
+import EasterEggs from "./data/features/easterEggs";
 
 const Discord = require("discord.js");
 
@@ -38,7 +39,8 @@ bot.commands.registerMultiple([
 // TODO: features should be loaded from settings
 bot.features.registerMultiple([
     new PreventUnintendedSpam(),
-    new AntiSpam()
+    new AntiSpam(),
+	new EasterEggs()
 ]);
 
 // Init

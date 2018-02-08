@@ -6,7 +6,7 @@ export default class Time extends Command {
     }
 
     executed(context) {
-        let date = new Date();
+        const date = new Date();
 
         context.respond({
             "Local time": `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`,
