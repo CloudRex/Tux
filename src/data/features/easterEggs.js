@@ -24,6 +24,8 @@ export default class EasterEggs extends Feature {
 					message.reply("https://giphy.com/gifs/DeJ2ifS2V2zlu");
 				else if (message.content === "lmao")
 					message.reply("https://giphy.com/gifs/JIX9t2j0ZTN9S");
+				else if (message.content.includes("bacon"))
+					message.reply("**DID SOMEONE SAY BACON?!?!** https://giphy.com/gifs/televandalist-bacon-trippin-booZS9MpAMU8g");
 			}
         });
     }
