@@ -3,7 +3,7 @@ Tiny Discord bot
 
 ## Progress
 * [X] Database support
-* [ ] Actual custom command trigger support
+* [ ] Custom command trigger support
 * [ ] Better command loader (not being hardcoded)
 
 ## Known Issues
