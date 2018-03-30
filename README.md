@@ -30,7 +30,7 @@ import Command from "../../commands/command";
 
 export default class MyCommand extends Command {
     constructor() {
-        super("chuck", "Display a random Chuck Norris fact", [], null, 0, []);
+        super("my-command", "Say hello!", [], null, 0, []);
     }
 
     executed(context) {
