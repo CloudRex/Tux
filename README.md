@@ -1,6 +1,18 @@
 # Botty
 Tiny Discord bot
 
+## Beginner?
+Welcome! You can help this project many ways, always remember no contribution is too small!
+
+Take a look around at the code (under the `src/` directory) and get familiar with the project.
+
+Example of some ways to contribute:
+
+* Try opening an issue with an idea to be implemented
+* Create a pull request
+* Suggest an update to the README file (this)
+* Find & report spelling errors within source code files or the README file (this)
+
 ## Progress
 * [X] Database support
 * [ ] Custom command trigger support
