@@ -37,6 +37,10 @@ export default class EasterEggs extends Feature {
 						}, 6000);
 					}, 3000);
 				}
+				else if (message.content === "hey tux")
+					message.reply("hi dood");
+				else if (message.content === "hi")
+					message.reply("hai <3");
 			}
         });
     }
