@@ -9,7 +9,7 @@
 	"scripts": {
 		"build": "./node_modules/.bin/babel src --out-dir dist",
 		"start": "npm run build && node dist/app.js",
-		"test": "echo \"Error: no test specified\" && exit 1",
+		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"author": "Phantom <private.phantom@outlook.com>",
 	"license": "ISC",
