@@ -28,7 +28,7 @@ Example of some ways to contribute:
 
 ## Installing & Running
 1. Clone the repository: `git clone https://github.com/CloudRex/Tux`
-2. Configure `settings.json`
+2. Configure the bot (click [here](https://github.com/CloudRex/Tux/wiki/Getting-started) for information on configuring)
 3. Open up a terminal on the folder containing the downloaded files
 4. Type `npm install` to download project dependencies
 5. Type `npm run build` to build the project
