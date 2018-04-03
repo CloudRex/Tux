@@ -13,10 +13,10 @@ Example of some ways to contribute:
 * Suggest an update to the README file (this)
 * Find & report spelling errors within source code files or the README file (this)
 
-## Progress
+## Development roadmap
 * [X] Database support
 * [ ] Custom command trigger support
-* [ ] Better command loader (not being hardcoded)
+* [X] Better command loader (not being hardcoded)
 
 ## Known Issues
 * Bot crashes when issuing a message which includes the command trigger multiple times at the start. (Regex-related issue)
