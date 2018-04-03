@@ -3,13 +3,16 @@ import Utils from "../../core/utils";
 
 const command = new Command("thank", "Thank an user.", [], null, 1, [], (context) => {
 	if (context.message.channel.type === "text" && Utils.isMention(context.arguments[0])) {
+		// TODO: Is argument length checking required?
 		if (context.arguments.length === 1) {
 			const user = Utils.stripMention(context.arguments[0]);
+
+			console.log(user);
 
 			if (context.message.author.id.toString() === user) {
 				context.respond("You can't thank yourself, silly!");
 			}
-			else if (context.message.channel.guild.members.has(user)) {
+			else if (context.message.guild.members.has(user)) {
 				context.bot.database.addThank(user, () => {
 					context.bot.database.getThanks(user, (thanks) => {
 						context.respond(`:thumbsup: Thanked ${context.arguments[0]} (${thanks} Thanks)`);
