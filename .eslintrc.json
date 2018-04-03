@@ -12,6 +12,7 @@
 		"brace-style": "off",
 		"comma-dangle": "off",
 		"no-console": "off",
-		"arrow-parens": "off"
+		"arrow-parens": "off",
+		"no-nested-ternary": "off"
 	}
 }

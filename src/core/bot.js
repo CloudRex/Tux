@@ -6,13 +6,15 @@ import Database from "./database";
 export default class Bot {
 	/**
 	 * @param {Settings} settings
+	 * @param {UserConfig} userConfig
 	 * @param {*} client
 	 * @param {CommandManager} commandManager
 	 * @param {FeatureManager} featureManager
 	 * @param {CommandLoader} commandLoader
 	 */
-	constructor(settings, client, commandManager, featureManager, commandLoader) {
+	constructor(settings, userConfig, client, commandManager, featureManager, commandLoader) {
 		this.settings = settings;
+		this.userConfig = userConfig;
 		this.client = client;
 		this.commands = commandManager;
 		this.features = featureManager;

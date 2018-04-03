@@ -31,39 +31,49 @@ export default class CommandExecutionContext {
 	 * @returns {(Promise<EditableMessage>|null)}
 	 */
 	async respond(message, title = "", color = "RANDOM", thumbnailUrl = "") {
-		const embed = new Discord.RichEmbed()
-			.setFooter(`Requested by ${this.message.author.username}`, this.message.author.avatarURL)
-			.setColor(color)
-			.setAuthor(title, thumbnailUrl);
+		if (!this.bot.userConfig.get("mute")) {
+			const embed = new Discord.RichEmbed()
+				.setFooter(`Requested by ${this.message.author.username}`, this.message.author.avatarURL)
+				.setColor(color)
+				.setAuthor(title, thumbnailUrl);
 
-		if (typeof message !== "string") {
-			for (let i = 0; i < Object.keys(message).length; i++) {
-				embed.addField(Object.keys(message)[i], message[Object.keys(message)[i]]);
+			if (typeof message !== "string") {
+				for (let i = 0; i < Object.keys(message).length; i++) {
+					embed.addField(Object.keys(message)[i], message[Object.keys(message)[i]]);
+				}
 			}
-		}
-		else {
-			embed.setDescription(message);
+			else {
+				embed.setDescription(message);
+			}
+
+			const messageResult = await this.message.channel.send(embed).catch((error) => {
+				this.privateReply(`Oh noes! For some reason, I was unable to reply to you in that channel. (${error.message})`);
+			});
+
+			return (messageResult !== undefined ? new EditableMessage(messageResult) : null);
 		}
 
-		const messageResult = await this.message.channel.send(embed).catch((error) => {
-			this.privateReply(`Oh noes! For some reason, I was unable to reply to you in that channel. (${error.message})`);
-		});
-
-		return (messageResult !== undefined ? new EditableMessage(messageResult) : null);
+		return null;
 	}
 
 	/**
 	 * @param {string} message
-	 * @returns {Promise<*>}
+	 * @returns {(Promise<*>|null)}
 	 */
 	async reply(message) {
-		return await this.message.reply(message);
+		if (!this.bot.userConfig.get("mute")) {
+			return await this.message.reply(message);
+		}
+
+		return null;
 	}
 
 	/**
 	 * @param {string} message
 	 */
 	privateReply(message) {
-		this.message.author.send(message);
+		if (!this.bot.userConfig.get("mute")) {
+			this.message.author.send(message);
+		}
 	}
 }

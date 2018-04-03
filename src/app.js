@@ -3,12 +3,14 @@ import Settings from "./core/settings";
 import CommandManager from "./commands/command-manager";
 import FeatureManager from "./features/feature-manager";
 import CommandLoader from "./commands/command-loader";
+import UserConfig from "./core/user-config";
 
 const Discord = require("discord.js");
 
 const bot = new Bot(
 	// TODO: Debug only
 	new Settings("src/settings.json"),
+	new UserConfig("src/user.config.json"),
 	new Discord.Client(),
 	new CommandManager("src/access-levels.json"),
 	new FeatureManager(),
