@@ -28,7 +28,7 @@ export default class CommandExecutionContext {
 	 * @param {string} title
 	 * @param {string} color
 	 * @param {string} thumbnailUrl
-	 * @returns {Promise<EditableMessage>}
+	 * @returns {(Promise<EditableMessage>|null)}
 	 */
 	async respond(message, title = "", color = "RANDOM", thumbnailUrl = "") {
 		const embed = new Discord.RichEmbed()
@@ -45,7 +45,11 @@ export default class CommandExecutionContext {
 			embed.setDescription(message);
 		}
 
-		return new EditableMessage(await this.message.channel.send(embed));
+		const messageResult = await this.message.channel.send(embed).catch((error) => {
+			this.privateReply(`Oh noes! For some reason, I was unable to reply to you in that channel. (${error.message})`);
+		});
+
+		return (messageResult !== undefined ? new EditableMessage(messageResult) : null);
 	}
 
 	/**
@@ -54,5 +58,12 @@ export default class CommandExecutionContext {
 	 */
 	async reply(message) {
 		return await this.message.reply(message);
+	}
+
+	/**
+	 * @param {string} message
+	 */
+	privateReply(message) {
+		this.message.author.send(message);
 	}
 }

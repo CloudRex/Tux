@@ -9,19 +9,22 @@ const googleThumbnailUrl = "https://images-ext-2.discordapp.net/external/EX2z2YZ
 
 const command = new Command("google", "Use the Google search engine", [], null, 1, AccessLevelType.Member, async (context) => {
 	const searchMessage = await context.respond("Searching...", "Google", "GRAY", googleThumbnailUrl);
-	const searchUrl = `https://www.google.com/search?q=${encodeURIComponent(context.message.content)}`;
 
-	return snekfetch.get(searchUrl).then((result) => {
-		const $ = cheerio.load(result.text);
+	if (searchMessage !== null) {
+		const searchUrl = `https://www.google.com/search?q=${encodeURIComponent(context.message.content)}`;
 
-		let googleData = $(".r").first().find("a").first()
-			.attr("href");
+		return snekfetch.get(searchUrl).then((result) => {
+			const $ = cheerio.load(result.text);
 
-		googleData = querystring.parse(googleData.replace("/url?", ""));
-		searchMessage.edit(`Results for ${context.arguments} \n${googleData.q}`, "Google", "GREEN", googleThumbnailUrl);
-	}).catch(() => {
-		searchMessage.edit("No results found.", "Google", "RED");
-	});
+			let googleData = $(".r").first().find("a").first()
+				.attr("href");
+
+			googleData = querystring.parse(googleData.replace("/url?", ""));
+			searchMessage.edit(`Results for ${context.arguments} \n${googleData.q}`, "Google", "GREEN", googleThumbnailUrl);
+		}).catch(() => {
+			searchMessage.edit("No results found.", "Google", "RED");
+		});
+	}
 }, () => true);
 
 export default command;
