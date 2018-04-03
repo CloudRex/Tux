@@ -82,7 +82,7 @@ export default class Database {
 			return 0;
 		}
 
-		return await this.db.select().from("thanks").where("user", userId.toString()).then();
+		return (await this.db.select().from("thanks").where("user", userId.toString()).then())[0].count;
 	}
 
 	/**

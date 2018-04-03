@@ -1,24 +1,34 @@
 import Command from "../../commands/command";
 import Utils from "../../core/utils";
 
-const command = new Command("thank", "Thank an user.", [], null, 1, [], (context) => {
-	if (context.message.channel.type === "text" && Utils.isMention(context.arguments[0])) {
+const command = new Command("thanks", "View how many times you or an use has been thanked.", [], null, 1, [], async (context) => {
+	if (context.message.channel.type === "text") {
 		// TODO: Is argument length checking required?
-		if (context.arguments.length === 1) {
-			const user = Utils.stripMention(context.arguments[0]);
+		if (context.arguments.length === 0) {
+			const thanks = await context.bot.database.getThanksAsync(context.message.author.id.toString());
 
-			if (context.message.author.id.toString() === user) {
-				context.respond("You can't thank yourself, silly!");
-			}
-			else if (context.message.guild.members.has(user)) {
-				context.bot.database.addThank(user, () => {
-					context.bot.database.getThanks(user, (thanks) => {
-						context.respond(`:thumbsup: Thanked ${context.arguments[0]} (${thanks} Thanks)`);
-					});
-				});
+			context.respond(`You have been thanked ${thanks} times`);
+		}
+		else if (context.arguments.length === 1) {
+			if (Utils.isMention(context.arguments[0])) {
+				const user = Utils.stripMention(context.arguments[0]);
+
+				if (context.message.author.id.toString() === user) {
+					const thanks = await context.bot.database.getThanksAsync(user);
+
+					context.respond(`You have been thanked ${thanks} times`);
+				}
+				else if (context.message.guild.members.has(user)) {
+					const thanks = await context.bot.database.getThanksAsync(user);
+
+					context.respond(`He/she has been thanked ${thanks} times`);
+				}
+				else {
+					context.respond("Are you sure that person exists?");
+				}
 			}
 			else {
-				context.respond("Are you sure that person exists?");
+				context.respond("Invalid format");
 			}
 		}
 	}
