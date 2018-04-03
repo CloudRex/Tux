@@ -8,8 +8,6 @@ export default class CommandManager {
 	 */
 	register(command) {
 		this.commands.push(command);
-
-		console.log("registered", command);
 	}
 
 	/**
