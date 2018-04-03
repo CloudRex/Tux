@@ -7,7 +7,7 @@ export default class CommandParser {
 	 */
 	static parse(command, manager, trigger) {
 		if (this.isValid(command, manager, trigger)) {
-			return manager.getByBase(this.getCommandBase(command));
+			return manager.getByBase(this.getCommandBase(command, trigger));
 		}
 
 		return null;
@@ -21,7 +21,7 @@ export default class CommandParser {
 	 */
 	static isValid(commandString, manager, trigger) {
 		if (commandString.startsWith(trigger)) {
-			return manager.isRegistered(this.getCommandBase(commandString));
+			return manager.isRegistered(this.getCommandBase(commandString, trigger));
 		}
 
 		return false;
@@ -29,11 +29,12 @@ export default class CommandParser {
 
 	/**
 	 * @param {string} commandString
+	 * @param {string} trigger
 	 * @returns {*}
 	 */
-	static getCommandBase(commandString) {
+	static getCommandBase(commandString, trigger) {
 		// TODO: Include actual command trigger instead of placeholder dummy "."
-		return /^\.([a-zA-Z]+)/g.exec(commandString)[1];
+		return new RegExp(`^${trigger}([a-zA-Z]+)`).exec(commandString)[1];
 	}
 
 	/**
