@@ -1,33 +1,57 @@
 export default class CommandParser {
-    static parse(command, commandManager, commandTrigger) {
-        if (this.isValid(command, commandManager, commandTrigger))
-            return commandManager.getByBase(this.getCommandBase(command));
+	/**
+	 * @param {Command} command
+	 * @param {CommandManager} manager
+	 * @param {string} trigger
+	 * @returns {*}
+	 */
+	static parse(command, manager, trigger) {
+		if (this.isValid(command, manager, trigger)) {
+			return manager.getByBase(this.getCommandBase(command));
+		}
 
-        return undefined;
-    }
+		return null;
+	}
 
-    static isValid(command, commandManager, commandTrigger) {
-        if (command.startsWith(commandTrigger))
-            return commandManager.isRegistered(this.getCommandBase(command));
+	/**
+	 * @param {string} commandString
+	 * @param {CommandManager} manager
+	 * @param {string} trigger
+	 * @returns {boolean}
+	 */
+	static isValid(commandString, manager, trigger) {
+		if (commandString.startsWith(trigger)) {
+			return manager.isRegistered(this.getCommandBase(commandString));
+		}
 
-        return false;
-    }
+		return false;
+	}
 
-    static getCommandBase(command) {
-        // TODO: Include actual command trigger instead of placeholder dummy "."
-        return /^\.([a-zA-Z]+)/g.exec(command)[1];
-    }
+	/**
+	 * @param {string} commandString
+	 * @returns {*}
+	 */
+	static getCommandBase(commandString) {
+		// TODO: Include actual command trigger instead of placeholder dummy "."
+		return /^\.([a-zA-Z]+)/g.exec(commandString)[1];
+	}
 
-    static getArguments(command) {
-        let expression = / ([^ ]+|"[^"]+")/g;
-        let match = expression.exec(command);
-        let result = [];
+	/**
+	 *
+	 * @param {string} commandString
+	 * @returns {array<string>}
+	 */
+	static getArguments(commandString) {
+		const expression = / ([^ ]+|"[^"]+")/g;
+		const result = [];
 
-        while (match != null) {
-            result.push(match[1]);
-            match = expression.exec(command);
-        }
+		let match = expression.exec(commandString);
 
-        return result;
-    }
+		while (match != null) {
+			result.push(match[1]);
+			match = expression.exec(commandString);
+		}
+
+		return result;
+	}
 }

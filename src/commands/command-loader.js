@@ -1,5 +1,8 @@
 export default class CommandLoader {
-	constructor() {
-		
+	/**
+	 * @param {string} path
+	 */
+	constructor(path) {
+		this.path = path;
 	}
 }
