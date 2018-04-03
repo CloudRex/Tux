@@ -1,6 +1,6 @@
 {
     "general": {
-        "token": "MzgxOTQ5NzIyMTU3NTE0NzUy.DaSIyg.IRmuC7wkQWztlIr8mBNgZTiAJ0M",
+        "token": "",
         "commandTrigger": ".",
         "version": "1.0.1",
         "databasePath": "botty.db"
