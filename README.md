@@ -17,6 +17,7 @@ Example of some ways to contribute:
 * [X] Database support
 * [ ] Custom command trigger support
 * [X] Better command loader (not being hardcoded)
+* [ ] Isolated/controlled environment for commands
 
 ## Known Issues
 * Bot crashes when issuing a message which includes the command trigger multiple times at the start. (Regex-related issue)
