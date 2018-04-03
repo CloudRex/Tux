@@ -31,7 +31,7 @@ Example of some ways to contribute:
 2. Configure the bot (click [here](https://github.com/CloudRex/Tux/wiki/Getting-started) for information on configuring)
 3. Open up a terminal on the folder containing the downloaded files
 4. Type `npm install` to download project dependencies
-5. Type `npm run build` to build the project
+5. Type `npm run build` to build the project (optional)
 6. Type `npm start` to start the application
 
 From here on you want to invite the bot into your server.
