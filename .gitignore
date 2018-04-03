@@ -2,3 +2,4 @@ node_modules
 dist
 .idea
 botty.db
+src/settings.json
