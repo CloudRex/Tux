@@ -11,6 +11,7 @@
 		"max-len": "off",
 		"brace-style": "off",
 		"comma-dangle": "off",
-		"no-console": "off"
+		"no-console": "off",
+		"arrow-parens": "off"
 	}
 }

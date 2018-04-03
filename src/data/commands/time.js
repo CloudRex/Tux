@@ -1,6 +1,7 @@
 import Command from "../../commands/command";
+import AccessLevelType from "../../core/access-level-type";
 
-const command = new Command("time", "View the bot's local time", [], null, 0, [], (context) => {
+const command = new Command("time", "View the bot's local time", [], null, 0, AccessLevelType.Member, (context) => {
 	const date = new Date();
 
 	context.respond({

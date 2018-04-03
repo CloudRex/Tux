@@ -1,6 +1,18 @@
+import AccessLevelType from "../core/access-level-type";
+
+const fs = require("fs");
+
 export default class CommandManager {
-	constructor() {
+	/**
+	 * @param {string} accessLevelsPath
+	 */
+	constructor(accessLevelsPath) {
 		this.commands = [];
+		this.accessLevels = [];
+
+		fs.readFile(accessLevelsPath, (error, data) => {
+			this.accessLevels = JSON.parse(data.toString());
+		});
 	}
 
 	/**
@@ -41,6 +53,24 @@ export default class CommandManager {
 		return null;
 	}
 
+	/**
+	 * @param {string} role
+	 * @returns {AccessLevelType}
+	 */
+	getAccessLevel(role) {
+		const keys = Object.keys(this.accessLevels);
+
+		for (let keyIndex = 0; keyIndex < keys.length; keyIndex++) {
+			for (let roleIndex = 0; roleIndex < this.accessLevels[keys[keyIndex]].length; roleIndex++) {
+				if (this.accessLevels[keys[keyIndex]][roleIndex] === role) {
+					return AccessLevelType.fromString(keys[keyIndex]);
+				}
+			}
+		}
+
+		return null;
+	}
+
 	// TODO: Move to the corresponding file/class
 	/**
 	 * @param {*} message
@@ -69,17 +99,44 @@ export default class CommandManager {
 	}
 
 	/**
+	 * @param {array<string>} roles
+	 * @returns {AccessLevelType}
+	 */
+	getHighestAccessLevel(roles) {
+		let highest = AccessLevelType.Guest;
+
+		for (let i = 0; i < roles.length; i++) {
+			const accessLevel = this.getAccessLevel(roles[i]);
+
+			if (accessLevel > highest) {
+				highest = accessLevel;
+			}
+		}
+
+		return highest;
+	}
+
+	/**
+	 * @param {*} message
+	 * @param {AccessLevelType} accessLevel
+	 * @returns {boolean}
+	 */
+	hasAuthority(message, accessLevel) {
+		return this.getHighestAccessLevel(message.member.roles.array().map((role) => role.name)) >= accessLevel;
+	}
+
+	/**
 	 * @param {CommandExecutionContext} context
 	 * @param {Command} command
 	 * @returns {Promise<boolean>}
 	 */
 	async handle(context, command) {
-		if (command.requiredRoles.length > 0 && !context.message.member) {
+		if (!context.message.member) {
 			context.message.channel.send("You can't use that command here. Sorry!");
 
 			return false;
 		}
-		else if (command.canExecute(context) && context.arguments.length <= command.maxArguments && this.hasRoles(context.message, command.requiredRoles)) {
+		else if (command.canExecute(context) && context.arguments.length <= command.maxArguments && this.hasAuthority(context.message, command.accessLevel)) {
 			command.executed(context);
 
 			return true;

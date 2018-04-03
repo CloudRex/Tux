@@ -1,6 +1,7 @@
 import Command from "../../commands/command";
+import AccessLevelType from "../../core/access-level-type";
 
-const command = new Command("status", "View information about the server", ["stat"], null, 0, [], (context) => {
+const command = new Command("status", "View information about the server", ["stat"], null, 0, AccessLevelType.Moderator, (context) => {
 	const { guild } = context.message;
 
 	context.respond({

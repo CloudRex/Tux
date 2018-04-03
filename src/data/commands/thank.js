@@ -1,7 +1,8 @@
 import Command from "../../commands/command";
 import Utils from "../../core/utils";
+import AccessLevelType from "../../core/access-level-type";
 
-const command = new Command("thank", "Thank an user.", [], null, 1, [], (context) => {
+const command = new Command("thank", "Thank an user", [], null, 1, AccessLevelType.Member, (context) => {
 	if (context.message.channel.type === "text" && Utils.isMention(context.arguments[0])) {
 		// TODO: Is argument length checking required?
 		if (context.arguments.length === 1) {

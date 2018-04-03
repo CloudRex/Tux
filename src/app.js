@@ -13,7 +13,7 @@ const bot = new Bot(
 	// TODO: Debug only
 	new Settings("src/settings.json"),
 	new Discord.Client(),
-	new CommandManager(),
+	new CommandManager("src/access-levels.json"),
 	new FeatureManager(),
 	new CommandLoader("src/data/commands")
 );

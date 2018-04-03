@@ -1,7 +1,8 @@
 import Command from "../../commands/command";
 import Utils from "../../core/utils";
+import AccessLevelType from "../../core/access-level-type";
 
-const command = new Command("thanks", "View how many times you or an use has been thanked.", [], null, 1, [], async (context) => {
+const command = new Command("thanks", "View how many times you or an use has been thanked", [], null, 1, AccessLevelType.Member, async (context) => {
 	if (context.message.channel.type === "text") {
 		// TODO: Is argument length checking required?
 		if (context.arguments.length === 0) {

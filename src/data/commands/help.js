@@ -1,7 +1,8 @@
 import Command from "../../commands/command";
 import MessageBuilder from "../../core/message-builder";
+import AccessLevelType from "../../core/access-level-type";
 
-const cmd = new Command("help", "View all available commands", ["?"], "Nice try.", 1, [], (context) => {
+const cmd = new Command("help", "View all available commands", ["?"], "Nice try.", 1, AccessLevelType.Member, (context) => {
 	if (context.arguments.length === 0) {
 		const messageBuilder = new MessageBuilder("Available commands:").addLine().addCodeBlock();
 

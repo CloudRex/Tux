@@ -1,0 +1,8 @@
+{
+	"Guest": [],
+	"Member": ["*"],
+	"Premium": [],
+	"Moderator": [],
+	"Admin": [],
+	"Owner": ["Emperor"]
+}
