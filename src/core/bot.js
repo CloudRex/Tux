@@ -42,7 +42,7 @@ export default class Bot {
 					);
 				}
 				else if (message.content === "?trigger") {
-					message.channel.send(`Command trigger: ${this.settings.general.commandTrigger}`);
+					message.channel.send(`Command trigger: **${this.settings.general.commandTrigger}**`);
 				}
 			}
 

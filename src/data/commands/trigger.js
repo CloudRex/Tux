@@ -1,7 +1,7 @@
 import Command from "../../commands/command";
 import AccessLevelType from "../../core/access-level-type";
 
-const command = new Command("settrigger", "Change the bot's command trigger", [], null, 1, AccessLevelType.Owner, (context) => {
+const command = new Command("trigger", "Change the bot's command trigger", [], null, 1, AccessLevelType.Owner, (context) => {
 	if (context.bot.settings.general.commandTrigger === context.arguments[0]) {
 		context.respond(`Cannot set the bot's trigger: Already set to **${context.arguments[0]}**`);
 
