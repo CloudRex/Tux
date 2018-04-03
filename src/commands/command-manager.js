@@ -48,6 +48,8 @@ export default class CommandManager {
 	 * @returns {*}
 	 */
 	hasRole(message, role) {
+		console.log(message.member.roles.array());
+
 		return message.member.roles.find("name", role);
 	}
 

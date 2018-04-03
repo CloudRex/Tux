@@ -40,6 +40,9 @@ export default class Bot {
 					)
 				);
 			}
+			else if (message.content === "?trigger") {
+				message.channel.send(`Command trigger: ${this.settings.general.commandTrigger}`);
+			}
 
 			this.database.addMessage(message);
 		});
