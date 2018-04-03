@@ -36,7 +36,71 @@ Example of some ways to contribute:
 
 From here on you want to invite the bot into your server.
 
-## Creating a Command
+## Access levels
+Access levels are a way to limit access to certain commands.
+For example, the `settrigger` command should only be available to the server owner, we don't want a member or guest changing our bot's trigger.
+
+We would then let the bot know who is the server owner by specifying their role in the `access-levels.json` file (under the `src` directory) as follows:
+
+```json
+{
+	"Guest": [],
+	"Member": ["@everyone"],
+	"Premium": [],
+	"Moderator": [],
+	"Admin": [],
+	"Owner": ["Emperor"]
+}
+```
+
+The bot now knows that any user with the `Emperor` role should be considered with an `Owner` access level (highest).
+
+## Default access level
+We can specify a default access level by using the role `@everyone` as we would normally do with any role.
+Assuming we want our default access level to be `Member`, the `access-levels.json` file would look like this:
+
+```json
+{
+	"Guest": [],
+	"Member": ["@everyone"],
+	"Premium": [],
+	"Moderator": [],
+	"Admin": [],
+	"Owner": []
+}
+```
+
+## Multiple access levels
+We can also link multiple roles with an access level or more.
+In this example, assume we want our server's roles `Knight` and `Esquire` have the `Member` access level.
+
+```json
+{
+	"Guest": [],
+	"Member": ["Knight", "Esquire"],
+	"Premium": [],
+	"Moderator": [],
+	"Admin": [],
+	"Owner": []
+}
+```
+
+We could also have the `Knight` role with an `Admin` access level:
+
+```json
+{
+	"Guest": [],
+	"Member": ["Knight", "Esquire"],
+	"Premium": [],
+	"Moderator": [],
+	"Admin": ["Knight"],
+	"Owner": []
+}
+```
+
+When we have multiple roles in multiple access levels, the bot will only take into account the highest access level (in this case `Admin`).
+
+## Creating a Command (obsolete)
 1. Create the file which will store your command under `src/data/commands`
 2. Code your command:
 
