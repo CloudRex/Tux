@@ -7,7 +7,7 @@
     "es2015"
   ],
   "scripts": {
-    "start": "./node_modules/.bin/babel src --out-dir lib && node lib/app.js",
+    "start": "./node_modules/.bin/babel src --out-dir dist && node dist/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Phantom <private.phantom@outlook.com>",

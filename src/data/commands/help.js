@@ -1,5 +1,5 @@
 import Command from "../../commands/command";
-import MessageBuilder from "../../core/messageBuilder";
+import MessageBuilder from "../../core/message-builder";
 
 export default class Help extends Command {
     constructor() {

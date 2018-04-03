@@ -1,4 +1,4 @@
-import EditableMessage from "../core/editableMessage";
+import EditableMessage from "../core/editable-message";
 
 const Discord = require("discord.js");
 
