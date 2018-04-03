@@ -15,7 +15,7 @@ Example of some ways to contribute:
 
 ## Development roadmap
 * [X] Database support
-* [ ] Custom command trigger support
+* [X] Custom command trigger support
 * [X] Better command loader (not being hardcoded)
 * [ ] Isolated/controlled environment for commands
 
