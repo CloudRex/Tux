@@ -13,37 +13,39 @@ import Status from "./data/commands/status";
 import Chuck from "./data/commands/chuck";
 import AntiSpam from "./data/features/anti-spam";
 import EasterEggs from "./data/features/easter-eggs";
+import CommandLoader from "./commands/command-loader";
 
 const Discord = require("discord.js");
 
 const bot = new Bot(
-    // TODO: Debug only
-    new Settings("src/settings.json"),
-    new Discord.Client(),
-    new CommandManager(),
-    new FeatureManager()
+	// TODO: Debug only
+	new Settings("src/settings.json"),
+	new Discord.Client(),
+	new CommandManager(),
+	new FeatureManager(),
+	new CommandLoader("src/data/commands")
 );
 
 // Register commands & features
-bot.commands.registerMultiple([
-    new Help(),
-    new Version(),
-    new Thank(),
-    new Time(),
-    new Google(),
-    new Github(),
-    new Status(),
-    new Chuck()
-]);
+/* bot.commands.registerMultiple([
+	new Help(),
+	new Version(),
+	new Thank(),
+	new Time(),
+	new Google(),
+	new Github(),
+	new Status()
+]); */
 
 // TODO: features should be loaded from settings
 bot.features.registerMultiple([
-    new PreventUnintendedSpam(),
-    new AntiSpam(),
+	new PreventUnintendedSpam(),
+	new AntiSpam(),
 	new EasterEggs()
 ]);
 
 // Init
 bot.settings.validate();
+bot.commandLoader.loadAll(bot.commands);
 bot.features.enableAll(bot);
 bot.login();

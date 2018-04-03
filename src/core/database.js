@@ -13,7 +13,7 @@ export default class Database {
 			Log.error("[Database] Invalid database file path");
 		}
 
-		this.db = global.require("knex")({
+		this.db = require("knex")({
 			client: "sqlite3",
 
 			connection: {

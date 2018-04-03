@@ -9,12 +9,14 @@ export default class Bot {
 	 * @param {*} client
 	 * @param {CommandManager} commandManager
 	 * @param {FeatureManager} featureManager
+	 * @param {CommandLoader} commandLoader
 	 */
-	constructor(settings, client, commandManager, featureManager) {
+	constructor(settings, client, commandManager, featureManager, commandLoader) {
 		this.settings = settings;
 		this.client = client;
 		this.commands = commandManager;
 		this.features = featureManager;
+		this.commandLoader = commandLoader;
 		this.database = new Database(this.settings.general.databasePath);
 
 		// Discord client events
