@@ -1,3 +1,16 @@
 {
-    "extends": "airbnb-base"
+	"extends": "airbnb-base",
+	"rules": {
+		"linebreak-style": "off",
+		"indent": "off",
+		"no-tabs": "off",
+		"quotes": "off",
+		"class-methods-use-this": "off",
+		"no-return-await": "off",
+		"no-plusplus": "off",
+		"max-len": "off",
+		"brace-style": "off",
+		"comma-dangle": "off",
+		"no-console": "off"
+	}
 }

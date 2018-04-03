@@ -1,24 +1,24 @@
 import Command from "../../commands/command";
 
 export default class Status extends Command {
-    constructor() {
-        super("status", "View information about the server", ["stat"], null, 0, []);
-    }
+	constructor() {
+		super("status", "View information about the server", ["stat"], null, 0, []);
+	}
 
-    executed(context) {
-        const guild = context.message.guild;
+	executed(context) {
+		const { guild } = context.message;
 
-        context.respond({
-            "Name": guild.name,
-            "Owner": guild.owner.displayName,
-            "Users": guild.memberCount,
-            "Region": guild.region,
-            "Default Channel": guild.defaultChannel,
-            "Created At": guild.createdAt
-        });
-    }
+		context.respond({
+			Name: guild.name,
+			Owner: guild.owner.displayName,
+			Users: guild.memberCount,
+			Region: guild.region,
+			"Default Channel": guild.defaultChannel,
+			"Created At": guild.createdAt
+		});
+	}
 
-    canExecute(context) {
-        return true;
-    }
+	canExecute(context) {
+		return true;
+	}
 }

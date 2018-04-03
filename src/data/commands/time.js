@@ -1,20 +1,20 @@
 import Command from "../../commands/command";
 
 export default class Time extends Command {
-    constructor() {
-        super("time", "View the bot's local time", [], null, 0, []);
-    }
+	constructor() {
+		super("time", "View the bot's local time", [], null, 0, []);
+	}
 
-    executed(context) {
-        const date = new Date();
+	executed(context) {
+		const date = new Date();
 
-        context.respond({
-            "Local time": `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`,
-            "Timestamp": date.getTime()
-        });
-    }
+		context.respond({
+			"Local time": `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`,
+			Timestamp: date.getTime()
+		});
+	}
 
-    canExecute(context) {
-        return true;
-    }
+	canExecute(context) {
+		return true;
+	}
 }

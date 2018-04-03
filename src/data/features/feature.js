@@ -1,7 +1,12 @@
 export default class Feature {
-    constructor(name, key, description) {
-        this.name = name;
-        this.key = key;
-        this.description = description;
-    }
+	/**
+	 * @param {string} name
+	 * @param {string} key
+	 * @param {string} description
+	 */
+	constructor(name, key, description) {
+		this.name = name;
+		this.key = key;
+		this.description = description;
+	}
 }

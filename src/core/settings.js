@@ -5,27 +5,28 @@ import Log from "./log";
 const fs = require("fs");
 
 export default class Settings {
-    constructor(filePath) {
-        if (fs.existsSync(filePath)) {
-            this.path = filePath;
+	constructor(filePath) {
+		if (fs.existsSync(filePath)) {
+			this.path = filePath;
 
-            let jsonObj = JSON.parse(fs.readFileSync(filePath).toString());
+			const jsonObj = JSON.parse(fs.readFileSync(filePath).toString());
 
-            this.general = jsonObj.general;
-        }
-        else
-            Log.error("Could not load settings: File does not exist");
-    }
+			this.general = jsonObj.general;
+		}
+		else {
+			Log.error("Could not load settings: File does not exist");
+		}
+	}
 
-    // Methods
-    save() {
-        fs.writeFileSync(this.path, JSON.stringify({
-            general: this.general
+	save() {
+		fs.writeFileSync(this.path, JSON.stringify({
+			general: this.general
 		}, null, 2));
-    }
+	}
 
-    validate() {
-        if (this.general.token === null)
-            Log.error("[Settings] Token cannot be null or empty");
-    }
+	validate() {
+		if (this.general.token === null) {
+			Log.error("[Settings] Token cannot be null or empty");
+		}
+	}
 }

@@ -4,14 +4,13 @@ const Discord = require("discord.js");
 
 export default class CommandExecutionContext {
 	// TODO
-	/*
-	public Sender: string;
+	/* public Sender: string;
 	public Arguments: CommandArgument[];
 
 	constructor(sender: string, args: CommandArgument[]) {
 		this.Sender = sender;
 		this.Arguments = args;
-	}*/
+	} */
 
 	/**
 	 * @param {string} message
@@ -32,7 +31,7 @@ export default class CommandExecutionContext {
 	 * @returns {Promise<EditableMessage>}
 	 */
 	async respond(message, title = "", color = "RANDOM", thumbnailUrl = "") {
-		let embed = new Discord.RichEmbed()
+		const embed = new Discord.RichEmbed()
 			.setFooter(`Requested by ${this.message.author.username}`)
 			.setColor(color)
 			.setAuthor(title, thumbnailUrl);

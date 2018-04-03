@@ -56,7 +56,7 @@ export default class Bot {
 
 	disconnect() {
 		// TODO: Actually logout the bot
-		//this.client.disconnect();
+		// this.client.disconnect();
 		Log.info("Disconnected");
 	}
 }

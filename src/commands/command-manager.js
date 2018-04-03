@@ -77,18 +77,15 @@ export default class CommandManager {
 
 			return false;
 		}
-
-		if (command.canExecute(context) && context.arguments.length <= command.maxArguments && this.hasRoles(context.message, command.requiredRoles)) {
+		else if (command.canExecute(context) && context.arguments.length <= command.maxArguments && this.hasRoles(context.message, command.requiredRoles)) {
 			command.executed(context);
 
 			return true;
 		}
-		else {
-			const message = await context.respond("You can't do that. Sorry!");
 
-			message.message.delete(3000);
-		}
+		const message = await context.respond("You can't do that. Sorry!");
 
+		message.message.delete(3000);
 
 		return false;
 	}

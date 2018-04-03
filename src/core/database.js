@@ -13,7 +13,7 @@ export default class Database {
 			Log.error("[Database] Invalid database file path");
 		}
 
-		this.db = require("knex")({
+		this.db = global.require("knex")({
 			client: "sqlite3",
 
 			connection: {
@@ -114,7 +114,9 @@ export default class Database {
 	 * @param {number} limit
 	 */
 	getMessages(userId, callback, limit = 100) {
-		this.db.select().from("messages").where("sender", userId.toString()).limit(limit).orderBy("time", "desc").then(callback);
+		this.db.select().from("messages").where("sender", userId.toString()).limit(limit)
+			.orderBy("time", "desc")
+			.then(callback);
 	}
 
 	/**
