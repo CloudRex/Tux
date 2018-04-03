@@ -32,7 +32,7 @@ export default class CommandExecutionContext {
 	 */
 	async respond(message, title = "", color = "RANDOM", thumbnailUrl = "") {
 		const embed = new Discord.RichEmbed()
-			.setFooter(`Requested by ${this.message.author.username}`)
+			.setFooter(`Requested by ${this.message.author.username}`, this.message.author.avatarURL)
 			.setColor(color)
 			.setAuthor(title, thumbnailUrl);
 

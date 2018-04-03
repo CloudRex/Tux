@@ -2,9 +2,6 @@ import Bot from "./core/bot";
 import Settings from "./core/settings";
 import CommandManager from "./commands/command-manager";
 import FeatureManager from "./features/feature-manager";
-import PreventUnintendedSpam from "./data/features/prevent-unintended-spam";
-import AntiSpam from "./data/features/anti-spam";
-import EasterEggs from "./data/features/easter-eggs";
 import CommandLoader from "./commands/command-loader";
 
 const Discord = require("discord.js");
