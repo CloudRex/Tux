@@ -23,6 +23,7 @@ Example of some ways to contribute:
 
 ## Prerequisites
 * Node.js v8.11.1 or higher (https://nodejs.org/en/)
+* Git (https://git-scm.com/)
 
 ## Installing & Running
 1. Clone the repository: `git clone https://github.com/CloudRex/Tux`
