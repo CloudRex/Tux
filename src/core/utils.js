@@ -12,6 +12,6 @@ export default class Utils {
 	 * @returns {string}
 	 */
 	static stripMention(string) {
-		return string.substr(2).slice(0, -1).substr(1);
+		return string.substr(2).slice(0, -1).replace("!", "");
 	}
 }

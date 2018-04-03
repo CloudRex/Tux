@@ -7,8 +7,6 @@ const command = new Command("thank", "Thank an user.", [], null, 1, [], (context
 		if (context.arguments.length === 1) {
 			const user = Utils.stripMention(context.arguments[0]);
 
-			console.log(user);
-
 			if (context.message.author.id.toString() === user) {
 				context.respond("You can't thank yourself, silly!");
 			}
