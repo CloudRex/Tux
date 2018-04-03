@@ -1,5 +1,5 @@
-# Botty
-Tiny Discord bot
+# Tux
+Tux is a tiny Discord bot created with flexibility in mind.
 
 ## Beginner?
 Welcome! You can help this project many ways, always remember no contribution is too small!
@@ -25,7 +25,7 @@ Example of some ways to contribute:
 * Node.js v8.11.1 or higher (https://nodejs.org/en/)
 
 ## Installing & Running
-1. Clone the repository: `git clone https://github.com/CloudRex/Botty`
+1. Clone the repository: `git clone https://github.com/CloudRex/Tux`
 2. Configure `settings.json`
 3. Open up a terminal on the folder containing the downloaded files
 4. Type `npm install` to download project dependencies
