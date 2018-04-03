@@ -25,23 +25,25 @@ export default class Bot {
 		});
 
 		this.client.on("message", (message) => {
-			if (CommandParser.isValid(message.content, this.commands, this.settings.general.commandTrigger)) {
-				this.commands.handle(
-					new CommandExecutionContext(
-						message,
-						CommandParser.getArguments(message.content),
-						this
-					),
+			if (!message.author.bot) {
+				if (CommandParser.isValid(message.content, this.commands, this.settings.general.commandTrigger)) {
+					this.commands.handle(
+						new CommandExecutionContext(
+							message,
+							CommandParser.getArguments(message.content),
+							this
+						),
 
-					CommandParser.parse(
-						message.content,
-						this.commands,
-						this.settings.general.commandTrigger
-					)
-				);
-			}
-			else if (message.content === "?trigger") {
-				message.channel.send(`Command trigger: ${this.settings.general.commandTrigger}`);
+						CommandParser.parse(
+							message.content,
+							this.commands,
+							this.settings.general.commandTrigger
+						)
+					);
+				}
+				else if (message.content === "?trigger") {
+					message.channel.send(`Command trigger: ${this.settings.general.commandTrigger}`);
+				}
 			}
 
 			this.database.addMessage(message);

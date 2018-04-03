@@ -19,11 +19,11 @@ const bot = new Bot(
 );
 
 // TODO: features should be loaded from settings
-bot.features.registerMultiple([
+/* bot.features.registerMultiple([
 	new PreventUnintendedSpam(),
 	new AntiSpam(),
 	new EasterEggs()
-]);
+]); */
 
 // Init
 bot.settings.validate();
