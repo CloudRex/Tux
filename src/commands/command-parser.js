@@ -35,7 +35,7 @@ export default class CommandParser {
 	static getCommandBase(commandString, trigger) {
 		const regexResult = new RegExp(`^${trigger}([a-zA-Z]+)`).exec(commandString);
 
-		if (regexResult.length > 0) {
+		if (regexResult) {
 			return regexResult[1];
 		}
 
