@@ -44,7 +44,7 @@ export default class CommandLoader {
 			aliases: "object",
 			maxArguments: "number"
 		}, module.meta);
-		
+
 		// TODO
 		return true;
 	}

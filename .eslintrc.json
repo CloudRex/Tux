@@ -14,6 +14,8 @@
 		"no-console": "off",
 		"arrow-parens": "off",
 		"no-nested-ternary": "off",
-		"radix": "off"
+		"radix": "off",
+		"global-require": "off",
+		"import/no-dynamic-require": "off"
 	}
 }
