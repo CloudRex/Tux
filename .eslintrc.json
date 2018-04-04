@@ -13,6 +13,7 @@
 		"comma-dangle": "off",
 		"no-console": "off",
 		"arrow-parens": "off",
-		"no-nested-ternary": "off"
+		"no-nested-ternary": "off",
+		"radix": "off"
 	}
 }

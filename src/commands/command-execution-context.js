@@ -28,16 +28,17 @@ export default class CommandExecutionContext {
 	 * @param {string} title
 	 * @param {string} color
 	 * @param {string} thumbnailUrl
+	 * @param {string} footerSuffix
 	 * @returns {(Promise<EditableMessage>|null)}
 	 */
-	async respond(message, title = "", color = "RANDOM", thumbnailUrl = "") {
+	async respond(message, title = "", color = "RANDOM", thumbnailUrl = "", footerSuffix = "") {
 		if (!this.bot.userConfig.get("mute")) {
 			const embed = new Discord.RichEmbed()
-				.setFooter(`Requested by ${this.message.author.username}`, this.message.author.avatarURL)
+				.setFooter(`Requested by ${this.message.author.username} ${footerSuffix}`, this.message.author.avatarURL)
 				.setColor(color)
 				.setAuthor(title, thumbnailUrl);
 
-			if (typeof message !== "string") {
+			if (typeof message === "object") {
 				for (let i = 0; i < Object.keys(message).length; i++) {
 					embed.addField(Object.keys(message)[i], message[Object.keys(message)[i]]);
 				}
