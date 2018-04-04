@@ -13,7 +13,11 @@ export default class MessageBuilder {
 		return this;
 	}
 
-	addCodeBlock() {
+	addCodeBlock(language = null) {
+		if (language !== null) {
+			return this.add(`\`\`\`${language}\n`);
+		}
+
 		return this.add("```");
 	}
 
