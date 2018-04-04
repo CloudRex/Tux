@@ -1,4 +1,7 @@
 export default class MessageBuilder {
+	/**
+	 * @param {string} startingString
+	 */
 	constructor(startingString) {
 		this.message = "";
 
@@ -7,28 +10,52 @@ export default class MessageBuilder {
 		}
 	}
 
+	/**
+	 * @param {string} string
+	 * @returns {MessageBuilder}
+	 */
 	add(string) {
 		this.message += string;
 
 		return this;
 	}
 
-	addCodeBlock(language = null) {
+	/**
+	 * @param {(string|null)} language
+	 * @param {(string|null)} code
+	 * @returns {MessageBuilder}
+	 */
+	addCodeBlock(language = null, code = null) {
+		let result = "```";
+
 		if (language !== null) {
-			return this.add(`\`\`\`${language}\n`);
+			result += `${language}\n`;
 		}
 
-		return this.add("```");
+		if (code !== null) {
+			result += "```";
+		}
+
+		return this.add(result);
 	}
 
+	/**
+	 * @returns {MessageBuilder}
+	 */
 	addCode() {
 		return this.add("`");
 	}
 
+	/**
+	 * @returns {MessageBuilder}
+	 */
 	addLine() {
 		return this.add("\n");
 	}
 
+	/**
+	 * @returns {string}
+	 */
 	build() {
 		return this.message;
 	}
