@@ -33,8 +33,13 @@ export default class CommandParser {
 	 * @returns {*}
 	 */
 	static getCommandBase(commandString, trigger) {
-		// TODO: Include actual command trigger instead of placeholder dummy "."
-		return new RegExp(`^${trigger}([a-zA-Z]+)`).exec(commandString)[1];
+		const regexResult = new RegExp(`^${trigger}([a-zA-Z]+)`).exec(commandString);
+
+		if (regexResult.length > 0) {
+			return regexResult[1];
+		}
+
+		return null;
 	}
 
 	/**
