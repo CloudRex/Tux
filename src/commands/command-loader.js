@@ -1,4 +1,5 @@
 const fs = require("fs");
+const Typer = require("../typer");
 
 export default class CommandLoader {
 	/**
@@ -30,8 +31,21 @@ export default class CommandLoader {
 	 * @returns {boolean}
 	 */
 	static validate(module) {
+		Typer.validate({
+			executed: "function",
+			canExecute: "function",
+			meta: "object"
+		}, module);
+		
+		Typer.validate({
+			name: "string",
+			description: "string",
+			accessLevel: "number",
+			aliases: "object",
+			maxArguments: "number"
+		}, module.meta);
+		
 		// TODO
-		// return module.meta !== null && typeof module.meta === "object";
 		return true;
 	}
 }
