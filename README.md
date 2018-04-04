@@ -20,7 +20,7 @@ Example of some ways to contribute:
 * [ ] Isolated/controlled environment for commands
 
 ## Known Issues
-* Bot crashes when issuing a message which includes the command trigger multiple times at the start. (Regex-related issue)
+* None
 
 ## Prerequisites
 * Node.js v8.11.1 or higher (https://nodejs.org/en/)
