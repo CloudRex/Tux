@@ -1,17 +1,28 @@
-import Command from "../../commands/command";
 import AccessLevelType from "../../core/access-level-type";
 
-const command = new Command("status", "View information about the server", ["stat"], null, 0, AccessLevelType.Moderator, (context) => {
-	const { guild } = context.message;
+export default {
+	executed(context) {
+		const { guild } = context.message;
 
-	context.respond({
-		Name: guild.name,
-		Owner: guild.owner.displayName,
-		Users: guild.memberCount,
-		Region: guild.region,
-		"Default Channel": guild.defaultChannel,
-		"Created At": guild.createdAt
-	});
-}, () => true);
+		context.respond({
+			Name: guild.name,
+			Owner: guild.owner.displayName,
+			Users: guild.memberCount,
+			Region: guild.region,
+			"Default Channel": guild.defaultChannel,
+			"Created At": guild.createdAt
+		});
+	},
 
-export default command;
+	canExecute(context) {
+		return true;
+	},
+
+	meta: {
+		name: "status",
+		description: "View information about the server",
+		accessLevel: AccessLevelType.Moderator,
+		aliases: [],
+		maxArguments: 0
+	}
+};

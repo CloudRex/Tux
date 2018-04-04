@@ -1,3 +1,5 @@
+import Command from "./command";
+
 const fs = require("fs");
 const Typer = require("@raxor1234/typer");
 
@@ -20,7 +22,7 @@ export default class CommandLoader {
 				const module = require(`../data/commands/${file}`).default;
 
 				if (CommandLoader.validate(module)) {
-					commandManager.register(module);
+					commandManager.register(Command.fromModule(module));
 				}
 			});
 		});

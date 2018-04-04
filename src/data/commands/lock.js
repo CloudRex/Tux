@@ -1,8 +1,19 @@
-import Command from "../../commands/command";
 import AccessLevelType from "../../core/access-level-type";
 
-const command = new Command("lock", "Toggle locking the bot's command scope to you", [], null, 0, AccessLevelType.Guest, (context) => {
-	context.respond("Command not yet fully implemented");
-}, () => true);
+export default {
+	executed(context) {
+		context.respond("Command not yet fully implemented");
+	},
 
-export default command;
+	canExecute(context) {
+		return true;
+	},
+
+	meta: {
+		name: "lock",
+		description: "Toggle locking the bot's command scope to you",
+		accessLevel: AccessLevelType.Guest,
+		aliases: [],
+		maxArguments: 0
+	}
+};

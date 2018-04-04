@@ -19,4 +19,21 @@ export default class Command {
 		this.executed = onExecuted;
 		this.canExecute = canExecute;
 	}
+
+	/**
+	 * @param {object} module
+	 * @returns {Command}
+	 */
+	static fromModule(module) {
+		return new Command(
+			module.meta.name,
+			module.meta.description,
+			module.meta.aliases,
+			null,
+			module.meta.maxArguments,
+			module.meta.accessLevel,
+			module.executed,
+			module.canExecute
+		);
+	}
 }

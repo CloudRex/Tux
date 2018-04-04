@@ -1,10 +1,21 @@
-import Command from "../../commands/command";
 import AccessLevelType from "../../core/access-level-type";
 
-const command = new Command("ban", "Bans a member from the server", [], null, 1, AccessLevelType.Admin, (context) => {
-	if (context.arguments.length === 1) {
-		context.respond("Command not yet fully implemented");
-	}
-}, () => true);
+export default {
+	executed(context) {
+		if (context.arguments.length === 1) {
+			context.respond("Command not yet fully implemented");
+		}
+	},
 
-export default command;
+	canExecute(context) {
+		return true;
+	},
+
+	meta: {
+		name: "ban",
+		description: "Bans a member from the server",
+		accessLevel: AccessLevelType.Admin,
+		aliases: [],
+		maxArguments: 1
+	}
+};

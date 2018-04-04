@@ -1,14 +1,25 @@
-import Command from "../../commands/command";
 import AccessLevelType from "../../core/access-level-type";
 
 const request = require("request");
 
-const command = new Command("chuck", "Display a random Chuck Norris fact", [], null, 0, AccessLevelType.Member, (context) => {
-	request("https://api.chucknorris.io/jokes/random", (error, response, body) => {
-		const data = JSON.parse(body);
+export default {
+	executed(context) {
+		request("https://api.chucknorris.io/jokes/random", (error, response, body) => {
+			const data = JSON.parse(body);
 
-		context.respond(data.value, "Chuck Norris Fact", "RED", data.icon_url);
-	});
-}, () => true);
+			context.respond(data.value, "Chuck Norris Fact", "RED", data.icon_url);
+		});
+	},
 
-export default command;
+	canExecute(context) {
+		return true;
+	},
+
+	meta: {
+		name: "chuck",
+		description: "Display a random Chuck Norris fact",
+		accessLevel: AccessLevelType.Member,
+		aliases: [],
+		maxArguments: 0
+	}
+};

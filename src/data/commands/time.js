@@ -1,13 +1,24 @@
-import Command from "../../commands/command";
 import AccessLevelType from "../../core/access-level-type";
 
-const command = new Command("time", "View the bot's local time", [], null, 0, AccessLevelType.Member, (context) => {
-	const date = new Date();
+export default {
+	executed(context) {
+		const date = new Date();
 
-	context.respond({
-		"Local time": `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`,
-		Timestamp: date.getTime()
-	});
-}, () => true);
+		context.respond({
+			"Local time": `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`,
+			Timestamp: date.getTime()
+		});
+	},
 
-export default command;
+	canExecute(context) {
+		return true;
+	},
+
+	meta: {
+		name: "time",
+		description: "View the bot's local time",
+		accessLevel: AccessLevelType.Member,
+		aliases: [],
+		maxArguments: 0
+	}
+};
