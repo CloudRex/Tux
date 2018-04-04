@@ -14,6 +14,7 @@
 	"author": "Phantom <private.phantom@outlook.com>",
 	"license": "ISC",
 	"dependencies": {
+		"@raxor1234/typer": "^1.0.0",
 		"cheerio": "^1.0.0-rc.2",
 		"colors": "latest",
 		"discord.js": "^11.2.1",

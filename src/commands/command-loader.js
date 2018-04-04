@@ -1,5 +1,5 @@
 const fs = require("fs");
-const Typer = require("../typer");
+const Typer = require("@raxor1234/typer");
 
 export default class CommandLoader {
 	/**
@@ -36,7 +36,7 @@ export default class CommandLoader {
 			canExecute: "function",
 			meta: "object"
 		}, module);
-		
+
 		Typer.validate({
 			name: "string",
 			description: "string",
