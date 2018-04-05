@@ -6,7 +6,7 @@ export default {
 	executed(context) {
 		snekfetch.get(`https://some-random-api.glitch.me/lyrics/api/?title=${encodeURIComponent(context.arguments[0])}`).then((response) => {
 			if (response.body.title) {
-				let trim = 100;
+				let trim = 500;
 
 				if (context.arguments.length === 2) {
 					trim = parseInt(context.arguments[1]);
