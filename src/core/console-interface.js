@@ -1,3 +1,5 @@
+import ConsoleCommand from "../console/console-command";
+
 const readline = require("readline");
 
 export default class ConsoleInterface {
@@ -10,6 +12,24 @@ export default class ConsoleInterface {
 		});
 
 		consoleInterface.on("line", (input) => {
+			switch (input) {
+				case "exit" || "stop": {
+					process.exit(0);
+
+					break;
+				}
+
+				case "help": {
+					console.log("CLI Commands: (exit/stop), help");
+
+					break;
+				}
+
+				default: {
+					console.log(`Invalid command: ${input}`);
+				}
+			}
+
 			process.stdout.write("> ");
 		});
 	}
