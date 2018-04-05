@@ -1,5 +1,5 @@
 # Tux
-Tux is a tiny Discord bot created with flexibility in mind.
+Tux is a tiny Discord bot designed with flexibility in mind.
 
 ## Beginner?
 Welcome! You can help this project many ways, always remember no contribution is too small!
