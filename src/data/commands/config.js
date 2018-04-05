@@ -6,12 +6,17 @@ export default {
 			context.respond(`**${context.arguments[0]}** = **${context.bot.userConfig.get(context.arguments[0])}**`);
 		}
 		else if (context.arguments.length === 2) {
-			let value = context.arguments[1];
+			if (context.bot.userConfig.config.hasOwnProperty(context.arguments[0])) {
+				let value = context.arguments[1];
 
-			value = (value === "true" ? true : (value === "false" ? false : value));
+				value = (value === "true" ? true : (value === "false" ? false : value));
 
-			context.bot.userConfig.set(context.arguments[0], value);
-			context.respond(`Set **${context.arguments[0]}** to **${context.arguments[1]}**`);
+				context.bot.userConfig.set(context.arguments[0], value);
+				context.respond(`Set **${context.arguments[0]}** to **${context.arguments[1]}**`, "", "GREEN");
+			}
+			else {
+				context.respond("Property is not predefined and therefore not configurable", "", "RED");
+			}
 		}
 	},
 
