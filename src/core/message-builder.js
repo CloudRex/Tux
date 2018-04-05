@@ -36,10 +36,31 @@ export default class MessageBuilder {
 	}
 
 	/**
+	 * @param {(string|null)} code
 	 * @returns {MessageBuilder}
 	 */
-	addCode() {
-		return this.add("`");
+	addCode(code = null) {
+		if (code === null) {
+			return this.add("`");
+		}
+
+		return this.add(`\`${code}\``);
+	}
+
+	/**
+	 * @param {string} text
+	 * @returns {MessageBuilder}
+	 */
+	addItalic(text) {
+		return this.add(`*${text}*`);
+	}
+
+	/**
+	 * @param {string} text
+	 * @returns {MessageBuilder}
+	 */
+	addBold(text) {
+		return this.add(`**${text}**`);
 	}
 
 	/**
