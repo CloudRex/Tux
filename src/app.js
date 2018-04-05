@@ -4,6 +4,7 @@ import CommandManager from "./commands/command-manager";
 import FeatureManager from "./features/feature-manager";
 import CommandLoader from "./commands/command-loader";
 import UserConfig from "./core/user-config";
+import AnswerMentions from "./data/features/answer-mentions";
 
 const Discord = require("discord.js");
 
@@ -18,11 +19,12 @@ const bot = new Bot(
 );
 
 // TODO: features should be automatically loaded
-/* bot.features.registerMultiple([
-	new PreventUnintendedSpam(),
+bot.features.registerMultiple([
+	/* new PreventUnintendedSpam(),
 	new AntiSpam(),
-	new EasterEggs()
-]); */
+	new EasterEggs() */
+	new AnswerMentions()
+]);
 
 // Init
 bot.settings.validate();

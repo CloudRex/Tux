@@ -13,7 +13,7 @@ export default class CommandExecutionContext {
 	} */
 
 	/**
-	 * @param {string} message
+	 * @param {Message} message
 	 * @param {array<string>} args
 	 * @param {Bot} bot
 	 */
