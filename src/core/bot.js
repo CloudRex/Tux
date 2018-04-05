@@ -2,6 +2,7 @@ import CommandParser from "../commands/command-parser";
 import Log from "./log";
 import CommandExecutionContext from "../commands/command-execution-context";
 import Database from "./database";
+import ConsoleInterface from "./console-interface";
 
 export default class Bot {
 	/**
@@ -20,6 +21,7 @@ export default class Bot {
 		this.features = featureManager;
 		this.commandLoader = commandLoader;
 		this.database = new Database(this.settings.general.databasePath);
+		this.console = new ConsoleInterface();
 
 		// Discord client events
 		this.client.on("ready", () => {
@@ -30,6 +32,8 @@ export default class Bot {
 					name: "?trigger"
 				}
 			});
+
+			this.console.init();
 		});
 
 		this.client.on("message", (message) => {

@@ -7,7 +7,7 @@ export default {
 		const message = await context.respond(`Searching for *${context.arguments[0]}*...`, "", "RANDOM");
 
 		if (message !== null) {
-            const gifUrl = `https://api.giphy.com/v1/gifs/random?api_thkey=${context.bot.settings.general.giphyApiKey}&tag=${encodeURIComponent(context.arguments[0])}&rating=PG-13`;
+            const gifUrl = `https://api.giphy.com/v1/gifs/random?api_key=${context.bot.settings.general.giphyApiKey}&tag=${encodeURIComponent(context.arguments[0])}&rating=PG-13`;
 
             return snekfetch.get(gifUrl).then((result) => {
                 const gifImage = result.body.data.images.original.url;

@@ -17,7 +17,7 @@ const bot = new Bot(
 	new CommandLoader("src/data/commands")
 );
 
-// TODO: features should be loaded from settings
+// TODO: features should be automatically loaded
 /* bot.features.registerMultiple([
 	new PreventUnintendedSpam(),
 	new AntiSpam(),

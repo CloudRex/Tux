@@ -19,6 +19,7 @@
 		"colors": "latest",
 		"discord.js": "^11.2.1",
 		"knex": "^0.14.2",
+		"minimist": "^1.2.0",
 		"querystring": "^0.2.0",
 		"request": "^2.83.0",
 		"snekfetch": "^3.6.1",
