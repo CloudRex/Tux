@@ -3,22 +3,34 @@ import AccessLevelType from "../../core/access-level-type";
 export default {
 	executed(context) {
 		if (context.arguments.length >= 2 && context.message.author.id.toString() === "285578743324606482") {
-			const time = parseInt(context.arguments[0]) * 1000;
+			let time = parseInt(context.arguments[0]);
+			const isInterval = context.arguments.length === 3 && context.arguments[2] === "true";
+
+			if (time < 3) {
+				context.respond("Minimum permitted time is **3** seconds");
+
+				return;
+			}
+			/* else if (context.arguments.length === && time < 5) {
+				context.respond("Minimum permitted time for repeated messages is **5** seconds");
+
+				return;
+			} */
 
 			const action = () => {
 				context.respond({
 					"Scheduled Message": context.arguments[1]
-				}, "", "RANDOM", "", `${time / 1000} seconds ago`);
+				}, "", "RANDOM", "", isInterval ? `every ${time} seconds` : `${time} seconds ago`);
 			};
 
-			if (context.arguments.length === 3 && context.arguments[2]) {
-				setInterval(action, time);
+			if (isInterval) {
+				setInterval(action, time * 1000);
 			}
 			else {
-				setTimeout(action, time);
+				setTimeout(action, time * 1000);
 			}
 
-			context.respond(`Successfully scheduled for **${time / 1000}** second(s)`);
+			context.respond(`Successfully scheduled ${isInterval ? "every" : "for"} **${time}** second(s)`);
 		}
 	},
 
