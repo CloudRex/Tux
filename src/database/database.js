@@ -57,12 +57,44 @@ export default class Database {
 
 	/**
 	 * @param {Snowflake} userId
+	 * @param {boolean} isScopeLocked
+	 */
+	setUserScopeLocked(userId, isScopeLocked) {
+		this.db("users").where("user_id", userId.toString()).update({
+			is_scope_locked: isScopeLocked
+		}).then();
+	}
+
+	/**
+	 * @param {Snowflake} userId
 	 * @returns {number}
 	 */
 	async getUserPoints(userId) {
 		return (await this.getUser(userId)).points;
 	}
 
+	/**
+	 * @param {Snowflake} userId
+	 * @param {number} amount
+	 * @returns {number}
+	 */
+	async addUserPoints(userId, amount) {
+		let points = (await this.getUserPoints(userId)) + amount;
+
+		if (points < 0) {
+			points = 0;
+		}
+
+		this.db("users").where("user_id", userId.toString()).update({
+			points: points
+		}).then();
+
+		return points;
+	}
+
+	/**
+	 * @param {DbUser} dbUser
+	 */
 	addUser(dbUser) {
 		this.db("users").insert({
 			user_id: dbUser.userId,

@@ -17,6 +17,7 @@ export default {
 		}
 		else if (context.bot.commands.isRegistered(context.arguments[0])) {
 			const command = context.bot.commands.getByBase(context.arguments[0]);
+
 			const message = new MessageBuilder().addCode().add(`${command.base} -> ${command.extendedDescription}`).addCode()
 				.build();
 

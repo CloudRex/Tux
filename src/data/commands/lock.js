@@ -2,7 +2,8 @@ import AccessLevelType from "../../core/access-level-type";
 
 export default {
 	executed(context) {
-		// context.respond("Command not yet fully implemented");
+		// TODO: Might consider not adding since: inefficient checking every message for scope locked
+		context.respond("Command not yet implemented");
 	},
 
 	canExecute(context) {
