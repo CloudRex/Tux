@@ -1,13 +1,13 @@
 export default class CommandParser {
 	/**
-	 * @param {Command} command
+	 * @param {string} commandString
 	 * @param {CommandManager} manager
 	 * @param {string} trigger
 	 * @returns {*}
 	 */
-	static parse(command, manager, trigger) {
-		if (this.isValid(command, manager, trigger)) {
-			return manager.getByBase(this.getCommandBase(command, trigger));
+	static parse(commandString, manager, trigger) {
+		if (this.isValid(commandString, manager, trigger)) {
+			return manager.getByBase(this.getCommandBase(commandString, trigger));
 		}
 
 		return null;
