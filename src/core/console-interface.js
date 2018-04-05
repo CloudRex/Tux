@@ -13,14 +13,14 @@ export default class ConsoleInterface {
 
 		consoleInterface.on("line", (input) => {
 			switch (input) {
-				case "exit" || "stop": {
+				case "stop": {
 					process.exit(0);
 
 					break;
 				}
 
 				case "help": {
-					console.log("CLI Commands: (exit/stop), help");
+					console.log("CLI Commands: stop, help");
 
 					break;
 				}
