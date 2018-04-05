@@ -11,10 +11,10 @@ export default class EditableMessage {
 		this.message = message;
 	}
 
-	edit(message, title = "", color = "RANDOM", thumbnailUrl = "") {
-		this.message.edit(new Discord.RichEmbed()
-			.setDescription(message)
+	edit(message, title = "", color = "RANDOM", thumbnailUrl = "", image = "") {
+		this.message.edit(message, new Discord.RichEmbed()
 			.setColor(color)
-			.setAuthor(title, thumbnailUrl));
+			.setAuthor(title, thumbnailUrl)
+			.setImage(image));
 	}
 }

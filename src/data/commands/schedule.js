@@ -2,7 +2,7 @@ import AccessLevelType from "../../core/access-level-type";
 
 export default {
 	executed(context) {
-		if (context.arguments.length >= 2) {
+		if (context.arguments.length >= 2 && context.message.author.id.toString() === "285578743324606482") {
 			const time = parseInt(context.arguments[0]) * 1000;
 
 			const action = () => {

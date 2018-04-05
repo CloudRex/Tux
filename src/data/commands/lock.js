@@ -2,7 +2,7 @@ import AccessLevelType from "../../core/access-level-type";
 
 export default {
 	executed(context) {
-		context.respond("Command not yet fully implemented");
+		// context.respond("Command not yet fully implemented");
 	},
 
 	canExecute(context) {

@@ -19,7 +19,7 @@ export default {
 	},
 
 	meta: {
-		name: "status",
+		name: "info",
 		description: "View information about the server",
 		accessLevel: AccessLevelType.Moderator,
 		aliases: [],

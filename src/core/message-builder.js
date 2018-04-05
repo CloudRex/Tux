@@ -2,12 +2,8 @@ export default class MessageBuilder {
 	/**
 	 * @param {string} startingString
 	 */
-	constructor(startingString) {
-		this.message = "";
-
-		if (startingString) {
-			this.add(startingString);
-		}
+	constructor(startingString = "") {
+		this.message = startingString;
 	}
 
 	/**
@@ -33,7 +29,7 @@ export default class MessageBuilder {
 		}
 
 		if (code !== null) {
-			result += "```";
+			result += `${code}\n\`\`\``;
 		}
 
 		return this.add(result);

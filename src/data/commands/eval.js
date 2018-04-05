@@ -3,9 +3,24 @@ import MessageBuilder from "../../core/message-builder";
 
 export default {
 	executed(context) {
-		if (context.arguments.length === 1) {
+		if (context.arguments.length === 1 && context.message.author.id.toString() === "285578743324606482") {
+			const action = () => {
+				try {
+					const result = eval(context.arguments[0]);
+
+					return (result === null || result === undefined ? "undefined" : result);
+				}
+				catch (error) {
+					return error.toString();
+				}
+			};
+
+			const result = action();
+
 			context.respond({
-				Evaluation: new MessageBuilder().addCodeBlock("javascript").addCodeBlock().build()
+				Evaluation: new MessageBuilder().addCodeBlock("javascript", context.arguments[0]).build(),
+				Result: new MessageBuilder().addCodeBlock("javascript", result).build(),
+				Type: new MessageBuilder().addCodeBlock("javascript", typeof result).build()
 			});
 		}
 	},
