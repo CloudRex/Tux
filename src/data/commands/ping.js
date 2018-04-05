@@ -2,7 +2,7 @@ import AccessLevelType from "../../core/access-level-type";
 
 export default {
 	async executed(context) {
-		context.respond(`Pong **${context.bot.client.ping}**ms`);
+		context.respond(`:ping_pong: Pong **${context.bot.client.ping}**ms`);
 	},
 
 	canExecute(context) {
