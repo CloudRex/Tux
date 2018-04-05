@@ -48,7 +48,9 @@ export default class Bot {
 				}
 			}
 
-			this.database.addMessage(message);
+			if (this.userConfig.get("log")) {
+				this.database.addMessage(message);
+			}
 		});
 	}
 

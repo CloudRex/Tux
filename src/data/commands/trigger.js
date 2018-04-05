@@ -13,7 +13,7 @@ export default {
 			return;
 		}
 
-		context.respond(`Successfully set the bot's trigger to **${context.arguments[0]}**`, "Change trigger");
+		context.respond(`Successfully set the bot's trigger to **${context.arguments[0]}**`, "Change trigger", "GREEN");
 		context.bot.settings.general.commandTrigger = context.arguments[0];
 		context.bot.settings.save();
 	},
