@@ -4,10 +4,10 @@ const snekfetch = require("snekfetch");
 
 export default {
 	async executed(context) {
-		const message = await context.respond(`Searching for ${context.arguments[0]}...`, "", "RANDOM");
+		const message = await context.respond(`Searching for *${context.arguments[0]}*...`, "", "RANDOM");
 
 		if (message !== null) {
-            const gifUrl = `https://api.giphy.com/v1/gifs/random?api_key=v7puuJ0IipzBACNXQ4DodnyV8hpjp0SE&tag=${encodeURIComponent(context.arguments[0])}&rating=PG-13`;
+            const gifUrl = `https://api.giphy.com/v1/gifs/random?api_thkey=v7puuJ0IipzBACNXQ4DodnyV8hpjp0SE&tag=${encodeURIComponent(context.arguments[0])}&rating=PG-13`;
 
             return snekfetch.get(gifUrl).then((result) => {
                 const gifImage = result.body.data.images.original.url;

@@ -12,8 +12,9 @@ export default class EditableMessage {
 	}
 
 	edit(message, title = "", color = "RANDOM", thumbnailUrl = "", image = "") {
-		this.message.edit(message, new Discord.RichEmbed()
+		this.message.edit("", new Discord.RichEmbed()
 			.setColor(color)
+			.setDescription(message)
 			.setAuthor(title, thumbnailUrl)
 			.setImage(image));
 	}
