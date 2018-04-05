@@ -7,8 +7,8 @@ export default {
 
 			return;
 		}
-		else if (context.arguments[0].length > 10) {
-			context.respond(`Cannot set the bot's trigger: Trigger exceeds maximum length of 10 characters`);
+		else if (context.arguments[0].length > 64) {
+			context.respond(`Cannot set the bot's trigger: Trigger exceeds maximum length of **64** characters`);
 
 			return;
 		}
