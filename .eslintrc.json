@@ -16,6 +16,7 @@
 		"no-nested-ternary": "off",
 		"radix": "off",
 		"global-require": "off",
-		"import/no-dynamic-require": "off"
+		"import/no-dynamic-require": "off",
+		"object-shorthand": "off"
 	}
 }

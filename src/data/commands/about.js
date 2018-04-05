@@ -17,7 +17,7 @@ export default {
 			Version: context.bot.settings.general.version,
 			Guilds: context.bot.client.guilds.size,
 			Users: users
-		});
+		}, "", "BLUE");
 	},
 
 	canExecute(context) {

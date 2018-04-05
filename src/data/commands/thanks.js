@@ -17,12 +17,12 @@ export default {
 					if (context.message.author.id.toString() === user) {
 						const thanks = await context.bot.database.getThanksAsync(user);
 
-						context.respond(`You have been thanked ${thanks} times`);
+						context.respond(`You have been thanked ${thanks} time(s)`);
 					}
 					else if (context.message.guild.members.has(user)) {
 						const thanks = await context.bot.database.getThanksAsync(user);
 
-						context.respond(`He/she has been thanked ${thanks} times`);
+						context.respond(`He/she has been thanked ${thanks} time(s)`);
 					}
 					else {
 						context.respond("Are you sure that person exists?");

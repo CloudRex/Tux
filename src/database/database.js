@@ -1,4 +1,5 @@
-import Log from "./log";
+import Log from "../core/log";
+import DbUser from "./db-user";
 
 const fs = require("fs");
 
@@ -22,6 +23,53 @@ export default class Database {
 
 			useNullAsDefault: true
 		});
+	}
+
+	/**
+	 * @param {Snowflake} userId
+	 * @returns {Promise<DbUser>}
+	 */
+	async getUser(userId) {
+		const result = (await this.db.select().from("users").where("user_id", userId.toString()).limit(1)
+			.then())[0];
+
+		if (result === null) {
+			// TODO: Row id should not be null
+			const newUser = new DbUser(null, userId, 0, 0, false);
+
+			this.addUser(newUser);
+
+			return newUser;
+		}
+
+		return DbUser.fromResult(result);
+	}
+
+	/**
+	 * @param {Snowflake} userId
+	 * @param {number} points
+	 */
+	setUserPoints(userId, points) {
+		this.db("users").where("user_id", userId.toString()).update({
+			points: points
+		}).then();
+	}
+
+	/**
+	 * @param {Snowflake} userId
+	 * @returns {number}
+	 */
+	async getUserPoints(userId) {
+		return (await this.getUser(userId)).points;
+	}
+
+	addUser(dbUser) {
+		this.db("users").insert({
+			user_id: dbUser.userId,
+			thanks: dbUser.thanks,
+			points: dbUser.points,
+			is_scope_locked: dbUser.isScopeLocked
+		}).then();
 	}
 
 	/**

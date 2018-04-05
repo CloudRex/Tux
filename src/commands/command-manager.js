@@ -132,23 +132,41 @@ export default class CommandManager {
 	 */
 	async handle(context, command) {
 		if (!context.message.member) {
-			context.message.channel.send("You can't use that command here. Sorry!");
+			context.message.channel.send("That command must be used in a text channel. Sorry!");
 
 			return false;
 		}
-		else if (command.canExecute(context) && context.arguments.length <= command.maxArguments && this.hasAuthority(context.message, command.accessLevel)) {
-			command.executed(context);
+		else if (!this.hasAuthority(context.message, command.accessLevel)) {
+			const minAuthority = AccessLevelType.toString(command.accessLevel);
+			const response = await context.respond(`You don't have the authority to use that command. You must be at least a(n) ${minAuthority}.`, "", "RED");
 
-			return true;
+			if (response !== null) {
+				response.message.delete(4000);
+			}
+
+			return false;
+		}
+		else if (context.arguments.length > command.maxArguments) {
+			const response = await context.respond(`That command only accepts up to **${command.maxArguments}** arguments.`, "", "RED");
+
+			if (response !== null) {
+				response.message.delete(4000);
+			}
+
+			return false;
+		}
+		else if (!command.canExecute(context)) {
+			const response = await context.respond("That command cannot be executed right now.", "", "RED");
+
+			if (response !== null) {
+				response.message.delete(4000);
+			}
+
+			return false;
 		}
 
-		const minAuthority = AccessLevelType.toString(command.accessLevel);
-		const message = await context.respond(`You don't have the authority to use that command. You must be at least a(n) ${minAuthority}.`);
+		command.executed(context);// .catch((error) => context.respond(`There was an error while executing that command. (${error.message})`, "", "RED"));
 
-		if (message !== null) {
-			message.message.delete(4000);
-		}
-
-		return false;
+		return true;
 	}
 }
