@@ -15,7 +15,7 @@ export default {
 				context.respond(`Set **${context.arguments[0]}** to **${context.arguments[1]}**`, "", "GREEN");
 			}
 			else {
-				context.respond("Property is not predefined and therefore not configurable", "", "RED");
+				context.respond("Property is not pre-defined and therefore not configurable", "", "RED");
 			}
 		}
 	},
