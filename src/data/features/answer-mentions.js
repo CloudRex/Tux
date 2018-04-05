@@ -19,10 +19,8 @@ export default class AnswerMentions extends Feature {
 				const mentionedUsers = message.mentions.users.array();
 
 				for (let i = 0; i < mentionedUsers.length; i++) {
-					if (mentionedUsers.length === 1 && mentionedUsers[0].id === bot.client.user.id) {
+					if (mentionedUsers.length === 1 && mentionedUsers[0].id === bot.client.user.id && message.content.startsWith(mentionedUsers[0].toString())) {
 						const actualCommand = message.content.replace(Discord.MessageMentions.USERS_PATTERN, "");
-
-						console.log(actualCommand, actualCommand.length);
 
 						if (CommandParser.isValid(actualCommand, bot.commands, "-")) {
 							bot.commands.handle(new CommandExecutionContext(message, CommandParser.getArguments(actualCommand), bot), CommandParser.parse(actualCommand, bot.commands, "-"));
