@@ -21,7 +21,7 @@ export default class Settings {
 	save() {
 		fs.writeFileSync(this.path, JSON.stringify({
 			general: this.general
-		}, null, 2));
+		}, null, 4));
 	}
 
 	validate() {

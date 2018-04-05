@@ -34,6 +34,6 @@ export default class UserConfig {
 	}
 
 	save() {
-		fs.writeFileSync(this.path, JSON.stringify(this.config, null, 2));
+		fs.writeFileSync(this.path, JSON.stringify(this.config, null, 4));
 	}
 }

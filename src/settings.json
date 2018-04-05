@@ -1,8 +1,9 @@
 {
-    "general": {
-        "token": "",
-        "commandTrigger": ".",
-        "version": "1.0.1",
-        "databasePath": "botty.db"
-    }
+	"general": {
+		"token": "",
+		"giphyApiKey": "",
+		"commandTrigger": ".",
+		"version": "1.0.1",
+		"databasePath": "botty.db"
+	}
 }
