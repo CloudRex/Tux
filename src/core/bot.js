@@ -24,6 +24,12 @@ export default class Bot {
 		// Discord client events
 		this.client.on("ready", () => {
 			Log.info("Ready");
+
+			this.client.user.setPresence({
+				game: {
+					name: "?trigger"
+				}
+			});
 		});
 
 		this.client.on("message", (message) => {
