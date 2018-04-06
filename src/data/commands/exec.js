@@ -5,7 +5,7 @@ const { exec } = require("child_process");
 
 export default {
 	executed(context) {
-		if (context.arguments.length === 1 && context.message.author.id.toString() === "285578743324606482") {
+		if (context.arguments.length === 1) {
 			exec(context.arguments[0], (error, output) => {
 				context.respond({
 					Input: new MessageBuilder().addCodeBlock("javascript", context.arguments[0]).build(),

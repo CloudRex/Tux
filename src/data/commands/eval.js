@@ -3,7 +3,7 @@ import MessageBuilder from "../../core/message-builder";
 
 export default {
 	executed(context) {
-		if (context.arguments.length === 1 && context.message.author.id.toString() === "285578743324606482") {
+		if (context.arguments.length === 1) {
 			const action = () => {
 				try {
 					const result = eval(context.arguments[0]);
