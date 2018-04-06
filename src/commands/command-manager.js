@@ -176,7 +176,7 @@ export default class CommandManager {
 		}
 		else if (!this.hasAuthority(context.message, command.accessLevel)) {
 			const minAuthority = AccessLevelType.toString(command.accessLevel);
-			const response = await context.respond(`You don't have the authority to use that command. You must be at least a(n) ${minAuthority}.`, "", "RED");
+			const response = await context.respond(`You don't have the authority to use that command. You must be at least a(n) **${minAuthority}**.`, "", "RED");
 
 			if (response !== null) {
 				response.message.delete(4000);
