@@ -13,7 +13,7 @@ export default {
 			console.log(userInfo);
 
 			if (userInfo) {
-				response.add(`#${i + 1} : __${userInfo.username}__ with ** ${topUsers[i].points}** points`).addLine();
+				response.add(`#${i + 1} : *${userInfo.username}* with ** ${topUsers[i].points}** points`).addLine();
 			}
 		}
 
