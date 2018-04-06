@@ -4,7 +4,7 @@ import AccessLevelType from "../../core/access-level-type";
 export default {
 	executed(context) {
 		if (context.arguments.length === 0) {
-			const messageBuilder = new MessageBuilder(`Displaying help for **${context.bot.commands.length}** commands:`).addLine().addCodeBlock();
+			const messageBuilder = new MessageBuilder(`Displaying help for **${context.bot.commands.commands.length}** commands:`).addLine().addCodeBlock();
 
 			for (let i = 0; i < context.bot.commands.commands.length; i++) {
 				const command = context.bot.commands.commands[i];
