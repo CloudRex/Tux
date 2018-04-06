@@ -5,6 +5,7 @@ import FeatureManager from "./features/feature-manager";
 import CommandLoader from "./commands/command-loader";
 import UserConfig from "./core/user-config";
 import AnswerMentions from "./data/features/answer-mentions";
+import TreasureFinder from "./data/features/treasure-finder";
 
 const Discord = require("discord.js");
 
@@ -23,7 +24,8 @@ bot.features.registerMultiple([
 	/* new PreventUnintendedSpam(),
 	new AntiSpam(),
 	new EasterEggs() */
-	new AnswerMentions()
+	new AnswerMentions(),
+	new TreasureFinder()
 ]);
 
 // Init
