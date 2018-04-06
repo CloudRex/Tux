@@ -3,6 +3,7 @@ import Log from "./log";
 import CommandExecutionContext from "../commands/command-execution-context";
 import Database from "../database/database";
 import ConsoleInterface from "../console/console-interface";
+import EmojiMenuManager from "../emoji-ui/emoji-menu-manager";
 
 export default class Bot {
 	/**
@@ -22,6 +23,7 @@ export default class Bot {
 		this.commandLoader = commandLoader;
 		this.database = new Database(this.settings.general.databasePath);
 		this.console = new ConsoleInterface();
+		this.emojis = new EmojiMenuManager(this.client);
 
 		// Discord client events
 		this.client.on("ready", () => {

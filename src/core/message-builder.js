@@ -64,6 +64,14 @@ export default class MessageBuilder {
 	}
 
 	/**
+	 * @param {string} text
+	 * @returns {MessageBuilder}
+	 */
+	addUnderlined(text) {
+		return this.add(`__${text}__`);
+	}
+
+	/**
 	 * @returns {MessageBuilder}
 	 */
 	addLine() {

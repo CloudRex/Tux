@@ -8,7 +8,13 @@ export default {
 		const topUsers = DbUser.fromResults(await context.bot.database.db("users").select().limit(10).orderBy("points", "desc").then());
 
 		for (let i = 0; i < topUsers.length; i++) {
-			response.add(`#${i + 1} : ${topUsers[i].points}`).addLine();
+			const userInfo = context.bot.client.users.find("id", topUsers[i].userId.toString());
+
+			console.log(userInfo);
+
+			if (userInfo) {
+				response.add(`#${i + 1} : __${userInfo.username}__ with ** ${topUsers[i].points}** points`).addLine();
+			}
 		}
 
 		context.respond(response.build());
