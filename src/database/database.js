@@ -49,7 +49,10 @@ export default class Database {
 	 * @param {Snowflake} userId
 	 * @param {number} points
 	 */
-	setUserPoints(userId, points) {
+	async setUserPoints(userId, points) {
+		// TODO: Only calling to create the user
+		await this.getUser(userId);
+
 		this.db("users").where("user_id", userId.toString()).update({
 			points: points
 		}).then();
@@ -85,9 +88,7 @@ export default class Database {
 			points = 0;
 		}
 
-		this.db("users").where("user_id", userId.toString()).update({
-			points: points
-		}).then();
+		this.setUserPoints(userId, points);
 
 		return points;
 	}

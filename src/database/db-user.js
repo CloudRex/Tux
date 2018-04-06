@@ -27,4 +27,12 @@ export default class DbUser {
 			queryResult.is_scope_locked
 		);
 	}
+
+	/**
+	 * @param {array<object>} queryResults
+	 * @returns {array<DbUser>}
+	 */
+	static fromResults(queryResults) {
+		return queryResults.map((queryResult) => DbUser.fromResult(queryResult));
+	}
 }
