@@ -71,6 +71,14 @@ export default class MessageBuilder {
 	}
 
 	/**
+	 * @param {string} emoji
+	 * @returns {MessageBuilder}
+	 */
+	addEmoji(emoji) {
+		return this.add(`:${emoji}:`);
+	}
+
+	/**
 	 * @returns {string}
 	 */
 	build() {

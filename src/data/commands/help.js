@@ -36,7 +36,7 @@ export default {
 		name: "help",
 		description: "View all available commands",
 		accessLevel: AccessLevelType.Member,
-		aliases: [],
+		aliases: ["commands", "cmds"],
 		maxArguments: 1
 	}
 };
