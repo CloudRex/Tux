@@ -143,7 +143,24 @@ export default class CommandManager {
 	 * @returns {boolean}
 	 */
 	hasAuthority(message, accessLevel) {
-		return (this.getHighestAccessLevelByRoles(message.member.roles.array().map((role) => role.name)) >= accessLevel) || (this.getAccessLevelById(message.author.id) >= accessLevel);
+		return this.getAuthority(message.member.roles, message.author.id) >= accessLevel;
+
+		// TODO: Replaced by getAuthority() method
+		// return (this.getHighestAccessLevelByRoles(message.member.roles.array().map((role) => role.name)) >= accessLevel) || (this.getAccessLevelById(message.author.id) >= accessLevel);
+	}
+
+	/**
+	 * @returns {AccessLevelType}
+	 */
+	getAuthority(roles, userId) {
+		const byRoles = this.getHighestAccessLevelByRoles(roles.array().map((role) => role.name));
+		const byId = this.getAccessLevelById(userId);
+
+		if (byRoles > byId) {
+			return byRoles;
+		}
+
+		return byId;
 	}
 
 	/**
