@@ -2,7 +2,7 @@ import CommandParser from "../commands/command-parser";
 import Log from "./log";
 import CommandExecutionContext from "../commands/command-execution-context";
 import Database from "../database/database";
-import ConsoleInterface from "./console-interface";
+import ConsoleInterface from "../console/console-interface";
 
 export default class Bot {
 	/**

@@ -1,4 +1,4 @@
-import ConsoleCommand from "../console/console-command";
+import ConsoleCommand from "./console-command";
 
 const readline = require("readline");
 
@@ -12,7 +12,11 @@ export default class ConsoleInterface {
 		});
 
 		consoleInterface.on("line", (input) => {
-			switch (input) {
+			switch (input.trim()) {
+				case "": {
+					break;
+				}
+
 				case "stop": {
 					process.exit(0);
 
