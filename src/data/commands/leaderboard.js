@@ -13,11 +13,17 @@ export default {
 			console.log(userInfo);
 
 			if (userInfo) {
-				response.add(`#${i + 1} : *${userInfo.username}* with ** ${topUsers[i].points}** points`).addLine();
+				let emoji = ":small_orange_diamond:";
+
+				if (i < 3) {
+					emoji = ":small_blue_diamond:";
+				}
+
+				response.add(`${emoji} #${i + 1} : *${userInfo.username}* with ** ${topUsers[i].points}** points`).addLine();
 			}
 		}
 
-		context.respond(response.build());
+		context.respond(response.build(), "Points leaderboard", "BLUE");
 	},
 
 	canExecute(context) {

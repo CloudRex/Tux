@@ -73,8 +73,11 @@ export default class Bot {
 	}
 
 	restart() {
-		Log.verbose("Restarting");
-		this.features.reloadAll(this);
+		Log.info("Restarting");
+
+		// TODO
+		// this.features.reloadAll(this);
+
 		this.disconnect();
 		this.login();
 	}
