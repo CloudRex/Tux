@@ -3,7 +3,7 @@ import ConsoleCommand from "./console-command";
 const readline = require("readline");
 
 export default class ConsoleInterface {
-	init() {
+	init(bot) {
 		process.stdout.write("> ");
 
 		const consoleInterface = readline.createInterface({
@@ -18,6 +18,7 @@ export default class ConsoleInterface {
 				}
 
 				case "stop": {
+					bot.disconnect();
 					process.exit(0);
 
 					break;

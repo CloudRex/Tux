@@ -35,7 +35,7 @@ export default class Bot {
 				}
 			});
 
-			this.console.init();
+			this.console.init(this);
 		});
 
 		this.client.on("message", (message) => {
@@ -75,13 +75,14 @@ export default class Bot {
 	restart() {
 		Log.verbose("Restarting");
 		this.features.reloadAll(this);
-
-		// TODO: Logout the bot and log him back in
+		this.disconnect();
+		this.login();
 	}
 
 	disconnect() {
 		// TODO: Actually logout the bot
 		// this.client.disconnect();
+		this.client.destroy();
 		Log.info("Disconnected");
 	}
 }
