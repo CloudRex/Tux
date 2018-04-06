@@ -25,8 +25,8 @@ export default class EmojiMenuManager {
 	async show(channel, menu) {
 		const sentMessage = await channel.send(menu.content);
 
-		for (let i = 0; i < menu.buttons; i++) {
-			sentMessage.react(menu.buttons[i]);
+		for (let i = 0; i < menu.buttons.length; i++) {
+			sentMessage.react(menu.buttons[i].emoji);
 		}
 
 		this.awaiting.push({

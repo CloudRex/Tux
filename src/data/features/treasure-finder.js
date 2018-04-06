@@ -79,7 +79,7 @@ export default class TreasureFinder extends Feature {
 					if (Utils.getRandomInt(0, treasure.value) === 0) {
 						console.log(`${message.author.username}@${message.guild.name}@${message.channel.name} found a ${treasure.name}`);
 
-						const msg = await message.channel.send(`You've found a :${treasure.key}: (**${treasure.value}** points, 1 in ${treasure.value} chances)\nHurry and catch it before it's gone!`).catch((error) => {
+						const msg = await message.channel.send(`You've found a :${treasure.key}: (**${treasure.value}** points, 1 in ${treasure.value} chances)\nHurry and catch it before it's gone!`).catch(() => {
 						});
 
 						if (msg) {

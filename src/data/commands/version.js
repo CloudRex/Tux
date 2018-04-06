@@ -6,9 +6,10 @@ export default {
 	executed(context) {
 		context.respond(`Version: \`${context.bot.settings.general.version}\``);
 
+		// TODO
 		context.bot.emojis.show(context.message.channel, new EmojiMenu([
 			new EmojiButton("🖐", (message, user) => {
-				message.channel.send(`${user.username} reacted!`);
+				// message.channel.send(`${user.username} reacted!`);
 			})
 		], "Hello"));
 	},
