@@ -57,12 +57,33 @@ export default class CommandManager {
 	 * @param {string} role
 	 * @returns {AccessLevelType}
 	 */
-	getAccessLevel(role) {
+	getAccessLevelByRole(role) {
 		const keys = Object.keys(this.accessLevels);
 
 		for (let keyIndex = 0; keyIndex < keys.length; keyIndex++) {
 			for (let roleIndex = 0; roleIndex < this.accessLevels[keys[keyIndex]].length; roleIndex++) {
 				if (this.accessLevels[keys[keyIndex]][roleIndex] === role) {
+					return AccessLevelType.fromString(keys[keyIndex]);
+				}
+			}
+		}
+
+		return null;
+	}
+
+	/**
+	 * @param {Snowflake} userId
+	 * @returns {AccessLevelType}
+	 */
+	getAccessLevelById(userId) {
+		const keys = Object.keys(this.accessLevels);
+
+		for (let keyIndex = 0; keyIndex < keys.length; keyIndex++) {
+			// TODO: Use index of instead of looping
+			for (let roleIndex = 0; roleIndex < this.accessLevels[keys[keyIndex]].length; roleIndex++) {
+				const value = this.accessLevels[keys[keyIndex]][roleIndex];
+
+				if (!Number.isNaN(value) && value === userId.toString()) {
 					return AccessLevelType.fromString(keys[keyIndex]);
 				}
 			}
@@ -102,11 +123,11 @@ export default class CommandManager {
 	 * @param {array<string>} roles
 	 * @returns {AccessLevelType}
 	 */
-	getHighestAccessLevel(roles) {
+	getHighestAccessLevelByRoles(roles) {
 		let highest = AccessLevelType.Guest;
 
 		for (let i = 0; i < roles.length; i++) {
-			const accessLevel = this.getAccessLevel(roles[i]);
+			const accessLevel = this.getAccessLevelByRole(roles[i]);
 
 			if (accessLevel > highest) {
 				highest = accessLevel;
@@ -122,7 +143,7 @@ export default class CommandManager {
 	 * @returns {boolean}
 	 */
 	hasAuthority(message, accessLevel) {
-		return this.getHighestAccessLevel(message.member.roles.array().map((role) => role.name)) >= accessLevel;
+		return (this.getHighestAccessLevelByRoles(message.member.roles.array().map((role) => role.name)) >= accessLevel) || (this.getAccessLevelById(message.author.id) >= accessLevel);
 	}
 
 	/**
