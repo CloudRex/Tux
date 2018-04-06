@@ -62,6 +62,8 @@ export default class Bot {
 				this.database.addMessage(message);
 			}
 		});
+
+		global.b = this;
 	}
 
 	login() {
