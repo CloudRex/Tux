@@ -2,7 +2,21 @@ import AccessLevelType from "../../core/access-level-type";
 
 export default {
 	executed(context) {
-		// TODO
+		const userInfo = context.bot.client.users.find("id", context.arguments[0]);
+
+		if (userInfo) {
+			context.respond({
+				Id: userInfo.id,
+				Username: userInfo.username,
+				"Created At": userInfo.createdAt,
+				"Last message": userInfo.lastMessage,
+				Verified: userInfo.verified,
+				Bot: userInfo.bot
+			}, "", "GREEN", "", "", userInfo.avatarURL);
+		}
+		else {
+			context.respond("User not found");
+		}
 	},
 
 	canExecute(context) {
@@ -12,8 +26,8 @@ export default {
 	meta: {
 		name: "userinfo",
 		description: "Displays information about a specific user",
-		accessLevel: AccessLevelType.Guest,
+		accessLevel: AccessLevelType.Member,
 		aliases: ["uinfo"],
-		maxArguments: 0
+		maxArguments: 1
 	}
 };
