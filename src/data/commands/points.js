@@ -5,8 +5,6 @@ export default {
 		const points = await context.bot.database.getUserPoints(context.message.author.id);
 
 		context.respond(`:small_orange_diamond: **${context.message.author.username}** has **${points}** points`, "", "GREEN");
-
-		throw new Error("testing");
 	},
 
 	canExecute(context) {

@@ -33,7 +33,7 @@ export default class Database {
 		const result = (await this.db.select().from("users").where("user_id", userId.toString()).limit(1)
 			.then())[0];
 
-		if (result === null) {
+		if (!result) {
 			// TODO: Row id should not be null
 			const newUser = new DbUser(null, userId, 0, 0, false);
 
@@ -97,6 +97,7 @@ export default class Database {
 	 */
 	addUser(dbUser) {
 		this.db("users").insert({
+			id: null,
 			user_id: dbUser.userId,
 			thanks: dbUser.thanks,
 			points: dbUser.points,
