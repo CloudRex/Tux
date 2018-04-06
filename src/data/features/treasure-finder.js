@@ -35,6 +35,21 @@ export default class TreasureFinder extends Feature {
 				name: "potato",
 				key: "potato",
 				value: 20
+			},
+			{
+				name: "cucumber",
+				key: "cucumber",
+				value: 25
+			},
+			{
+				name: "small diamond",
+				key: "small_blue_diamond",
+				value: 100
+			},
+			{
+				name: "Large Diamond",
+				key: "large_blue_diamond",
+				value: 250
 			}
 		];
 	}
@@ -59,12 +74,12 @@ export default class TreasureFinder extends Feature {
 		bot.client.on("message", async (message) => {
 			if (!message.author.bot) {
 				if (message.author.id !== bot.client.user.id) {
-					const treasure = this.treasures[0];
+					const treasure = this.treasures[Utils.getRandomInt(0, this.treasures.length - 1)];
 
 					if (Utils.getRandomInt(0, treasure.value) === 0) {
-						console.log(`${message.author.username}@${message.guild.name} found a ${treasure.name}`);
+						console.log(`${message.author.username}@${message.guild.name}@${message.channel.name} found a ${treasure.name}`);
 
-						const msg = await message.channel.send(`You've found a :${treasure.name}: (**${treasure.value}** points, 1 in ${treasure.value} chances)\nHurry and catch it before it's gone!`).catch((error) => {
+						const msg = await message.channel.send(`You've found a :${treasure.key}: (**${treasure.value}** points, 1 in ${treasure.value} chances)\nHurry and catch it before it's gone!`).catch((error) => {
 						});
 
 						if (msg) {
@@ -92,9 +107,9 @@ export default class TreasureFinder extends Feature {
 					this.waiting.splice(index, 1);
 					reaction.message.clearReactions();
 					reaction.message.edit(`You've obtained **${treasure.value}** points and now have a total of **${points}** points`);
-					reaction.message.delete(5000);
+					reaction.message.delete(6000);
 
-					console.log(`${user.username}@${reaction.message.guild.name} caught a ${treasure.name} (${treasure.value})`);
+					console.log(`${user.username}@${reaction.message.guild.name}@${reaction.message.channel.name} caught a ${treasure.name} (${treasure.value})`);
 				}
 			}
 		});
