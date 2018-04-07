@@ -1,5 +1,6 @@
 import Log from "../core/log";
 import DbUser from "./db-user";
+import DbItem from "./db-item";
 
 const fs = require("fs");
 
@@ -121,7 +122,7 @@ export default class Database {
 
 	/**
 	 * @deprecated Use hasBeenThankedAsync instead
-	 * @param {string} userId
+	 * @param {Snowflake} userId
 	 * @param {function} callback
 	 */
 	hasBeenThanked(userId, callback) {
@@ -131,7 +132,7 @@ export default class Database {
 	}
 
 	/**
-	 * @param {string} userId
+	 * @param {Snowflake} userId
 	 * @returns {Promise<boolean>}
 	 */
 	async hasBeenThankedAsync(userId) {
@@ -140,7 +141,7 @@ export default class Database {
 
 	/**
 	 * @deprecated Use getThanksAsync instead
-	 * @param {string} userId
+	 * @param {Snowflake} userId
 	 * @param {function} callback
 	 */
 	getThanks(userId, callback) {
@@ -156,7 +157,7 @@ export default class Database {
 	}
 
 	/**
-	 * @param {string} userId
+	 * @param {Snowflake} userId
 	 * @returns {Promise<void>}
 	 */
 	async getThanksAsync(userId) {
@@ -169,7 +170,7 @@ export default class Database {
 
 	/**
 	 * @deprecated Use addThankAsync instead
-	 * @param {string} userId
+	 * @param {Snowflake} userId
 	 * @param {function} callback
 	 */
 	addThank(userId, callback) {
@@ -191,7 +192,7 @@ export default class Database {
 
 	/**
 	 * @deprecated Use getMessagesAsync instead
-	 * @param {string} userId
+	 * @param {Snowflake} userId
 	 * @param {function} callback
 	 * @param {number} limit
 	 */
@@ -203,7 +204,7 @@ export default class Database {
 
 	/**
 	 * @deprecated Use getWarningCountAsync instead
-	 * @param {string} userId
+	 * @param {Snowflake} userId
 	 * @param {function} callback
 	 */
 	getWarningCount(userId, callback) {
@@ -218,7 +219,7 @@ export default class Database {
 
 	/**
 	 * @deprecated Use hasBeenWarnedAsync instead
-	 * @param {string} userId
+	 * @param {Snowflake} userId
 	 * @param {function} callback
 	 */
 	hasBeenWarned(userId, callback) {
@@ -227,6 +228,9 @@ export default class Database {
 		});
 	}
 
+	/**
+	 * @param {Snowflake} userId
+	 */
 	addWarning(userId) {
 		this.hasBeenWarned(userId, (hasBeenWarned) => {
 			if (hasBeenWarned) {
@@ -244,5 +248,25 @@ export default class Database {
 				}).then();
 			}
 		});
+	}
+
+	/**
+	 * @param {Snowflake} userId
+	 * @returns {Promise<array<DbItem>>}
+	 */
+	async getItems(userId) {
+		return DbItem.fromResults(await this.db.select().from("items").where("user_id", userId.toString()).then());
+	}
+
+	/**
+	 * @param {DbItem} dbItem
+	 */
+	addItem(dbItem) {
+		this.db("items").insert({
+			user_id: dbItem.userId.toString(),
+			name: dbItem.name,
+			key: dbItem.key,
+			value: dbItem.value
+		}).then();
 	}
 }
