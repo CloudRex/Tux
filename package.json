@@ -1,6 +1,6 @@
 {
 	"name": "tux-discord",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"description": "Discord chat bot",
 	"presets": [
 		"env",
