@@ -11,6 +11,7 @@ export default {
 		}
 
 		context.respond({
+			Website: "**__[Visit Tux's website]__**(https://cloudrex.github.io/tux-website/)",
 			"Adopt me": "To add Tux to your server, click **__[here](https://discordapp.com/oauth2/authorize?client_id=381949722157514752&scope=bot)__**",
 			"Support Server": "Click **__[here](https://discord.gg/Vu4jvKQ)__** to join Tux's support server",
 			Description: "Tux is a tiny Discord bot designed with flexibility in mind.",
