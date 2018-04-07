@@ -53,7 +53,8 @@ export default class CommandExecutionContext {
 			}
 
 			const messageResult = await this.message.channel.send(embed).catch((error) => {
-				this.privateReply(`Oh noes! For some reason, I was unable to reply to you in that channel. (${error.message})`);
+				// TODO: Temporarily disabled due to spamming on unwanted servers.
+				// this.privateReply(`Oh noes! For some reason, I was unable to reply to you in that channel. (${error.message})`);
 			});
 
 			return (messageResult !== undefined ? new EditableMessage(messageResult) : null);
