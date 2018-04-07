@@ -1,5 +1,6 @@
 import Feature from "./feature";
 import Utils from "../../core/utils";
+import DbItem from "../../database/db-item";
 
 export default class TreasureFinder extends Feature {
 	constructor() {
@@ -102,13 +103,14 @@ export default class TreasureFinder extends Feature {
 
 				if (index !== null && index !== undefined) {
 					const { treasure } = this.waiting[index];
-					const points = await bot.database.addUserPoints(user.id, treasure.value);
 
+					bot.database.addItem(new DbItem(null, user.id, treasure.name, treasure.key, treasure.value, 1));
 					this.waiting.splice(index, 1);
-					reaction.message.clearReactions();
-					reaction.message.edit(`You've obtained **${treasure.value}** points and now have a total of **${points}** points`);
+					// reaction.message.clearReactions();
+					reaction.message.edit(`**${user.username}** has captured a :${treasure.key}: worth **${treasure.value}**`);
 					reaction.message.delete(6000);
 
+					// TODO: Debug only
 					console.log(`${user.username}@${reaction.message.guild.name}@${reaction.message.channel.name} caught a ${treasure.name} (${treasure.value})`);
 				}
 			}

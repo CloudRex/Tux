@@ -259,14 +259,74 @@ export default class Database {
 	}
 
 	/**
-	 * @param {DbItem} dbItem
+	 * @param {Snowflake} userId
+	 * @param {string} key
+	 * @returns {Promise<DbItem>}
 	 */
-	addItem(dbItem) {
-		this.db("items").insert({
-			user_id: dbItem.userId.toString(),
-			name: dbItem.name,
-			key: dbItem.key,
-			value: dbItem.value
-		}).then();
+	async getItem(userId, key) {
+		return (await this.db.select().from("items").where({
+			user_id: userId,
+			key: key
+		}).limit(1)
+			.then())[0];
+	}
+
+	/**
+	 * @param {DbItem} dbItem
+	 * @param {number} amount
+	 */
+	async addItem(dbItem, amount = 1) {
+		const item = await this.getItem(dbItem.userId, dbItem.key);
+
+		console.log("added", item);
+
+		if (!item) {
+			this.db("items").insert({
+				user_id: dbItem.userId.toString(),
+				name: dbItem.name,
+				key: dbItem.key,
+				value: dbItem.value,
+				amount: dbItem.amount
+			}).then();
+		}
+		else {
+			this.db("items").where({
+				user_id: dbItem.userId,
+				key: dbItem.key
+			}).update({
+				amount: item.amount + amount
+			});
+		}
+	}
+
+	// TODO: Consider merging with addItem method
+	/**
+	 * @param {Snowflake} userId
+	 * @param {string} key
+	 * @param {number} amount
+	 * @returns {boolean}
+	 */
+	async removeItem(userId, key, amount = 1) {
+		const item = await this.getItem(userId, key);
+
+		if (item) {
+			if ((item.amount - amount) <= 0) {
+				this.db("items").where({
+					user_id: userId.toString(),
+					key: key
+				}).del().then();
+
+				return true;
+			}
+
+			this.db("items").where({
+				user_id: userId.toString(),
+				key: key
+			}).update({
+				amount: item.amount - amount
+			});
+		}
+
+		return false;
 	}
 }

@@ -5,13 +5,15 @@ export default class DbItem {
 	 * @param {string} name
 	 * @param {string} key
 	 * @param {number} value
+	 * @param {number} amount
 	 */
-	constructor(id, userId, name, key, value) {
+	constructor(id, userId, name, key, value, amount) {
 		this.id = id;
 		this.userId = userId;
 		this.name = name;
 		this.key = key;
 		this.value = value;
+		this.amount = amount;
 	}
 
 	/**
@@ -24,7 +26,8 @@ export default class DbItem {
 			queryResult.user_id,
 			queryResult.name,
 			queryResult.key,
-			queryResult.value
+			queryResult.value,
+			queryResult.amount
 		);
 	}
 
