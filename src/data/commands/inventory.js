@@ -19,7 +19,7 @@ export default {
 				totalWorth += items[i].value;
 			}
 
-			response.addLine().addLine().add(`Total worth: :small_orange_diamond:**${totalWorth}**`);
+			response.addLine().addLine().add(`Total worth::small_orange_diamond:**${totalWorth}**`);
 		}
 		else {
 			response.add("You don't have any items");
