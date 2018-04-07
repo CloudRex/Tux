@@ -14,7 +14,7 @@ export default {
 
 					const points = await context.bot.database.addUserPoints(context.message.author.id, item.value);
 
-					context.respond(`Sold :${item.key}:x1 for:small_orange_diamond:**${item.value}**. You now have:small_orange_diamond:${points}`, "", "GREEN");
+					context.respond(`Sold :${item.key}:x1 for:small_orange_diamond:**${item.value}**. You now have:small_orange_diamond:**${points}**`, "", "GREEN");
 				}
 				else {
 					context.respond("You don't own that item.", "", "RED");
