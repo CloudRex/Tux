@@ -84,7 +84,7 @@ export default class TreasureFinder extends Feature {
 						});
 
 						if (msg) {
-							msg.delete(5000);
+							msg.delete(4000);
 							msg.react("🖐");
 
 							this.waiting.push({
