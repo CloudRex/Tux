@@ -100,7 +100,7 @@ export default class TreasureFinder extends Feature {
 			if (reaction.emoji.name === "🖐") {
 				const index = this.getWaitingIndex(user.id);
 
-				if (index !== null) {
+				if (index !== null && index !== undefined) {
 					const { treasure } = this.waiting[index];
 					const points = await bot.database.addUserPoints(user.id, treasure.value);
 
