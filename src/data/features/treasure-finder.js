@@ -2,92 +2,14 @@ import Feature from "./feature";
 import Utils from "../../core/utils";
 import DbItem from "../../database/db-item";
 
+const fs = require("fs");
+
 export default class TreasureFinder extends Feature {
 	constructor() {
 		super("Treasure Finder", "treasure-finder", "Find treasures and sell them for points");
 
-		this.treasures = [
-			{
-				name: "penguin",
-				key: "penguin",
-				value: 40
-			},
-			{
-				name: "cat",
-				key: "cat",
-				value: 25
-			},
-			{
-				name: "dog",
-				key: "dog",
-				value: 25
-			},
-			{
-				name: "monkey",
-				key: "monkey",
-				value: 30
-			},
-			{
-				name: "carrot",
-				key: "carrot",
-				value: 20
-			},
-			{
-				name: "potato",
-				key: "potato",
-				value: 20
-			},
-			{
-				name: "cucumber",
-				key: "cucumber",
-				value: 25
-			},
-			{
-				name: "cookie",
-				key: "cookie",
-				value: 30
-			},
-			{
-				name: "fish",
-				key: "fish",
-				value: 40
-			},
-			{
-				name: "tophat",
-				key: "tophat",
-				value: 75
-			},
-			{
-				name: "crab",
-				key: "crab",
-				value: 50
-			},
-			{
-				name: "shark",
-				key: "shark",
-				value: 60
-			},
-			{
-				name: "small diamond",
-				key: "small_blue_diamond",
-				value: 100
-			},
-			{
-				name: "Large Diamond",
-				key: "large_blue_diamond",
-				value: 250
-			},
-			{
-				name: "gem",
-				key: "gem",
-				value: 500
-			},
-			{
-				name: "spy",
-				key: "spy",
-				value: 1000
-			}
-		];
+		// TODO: Better loading system (class) and path musn't be hard coded
+		this.treasures = JSON.parse(fs.readFileSync("src/items.json").toString());
 	}
 
 	canEnable(bot) {
