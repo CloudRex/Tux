@@ -4,17 +4,21 @@ export default class EmojiMenuManager {
 		this.awaiting = [];
 
 		this.client.on("messageReactionAdd", (reaction, user) => {
-			for (let i = 0; i < this.awaiting.length; i++) {
-				if (!user.bot) {
-					// if (this.awaiting[i].user.id === user.id) {
-					for (let buttonIndex = 0; buttonIndex < this.awaiting[i].menu.buttons.length; buttonIndex++) {
-						if (this.awaiting[i].menu.buttons[buttonIndex].emoji === reaction.emoji.name) {
-							this.awaiting[i].menu.buttons[buttonIndex].handle(reaction.message, user);
+			if (!user.bot) {
+				for (let i = 0; i < this.awaiting.length; i++) {
+					if (this.awaiting[i].messageId === reaction.message.id) {
+						for (let buttonIndex = 0; buttonIndex < this.awaiting[i].menu.buttons.length; buttonIndex++) {
+							if (this.awaiting[i].menu.buttons[buttonIndex].emoji === reaction.emoji.name) {
+								this.awaiting[i].menu.buttons[buttonIndex].handle(reaction.message, user);
+
+								break;
+							}
 						}
 					}
-					// }
 				}
 			}
+
+			console.log(this.awaiting);
 		});
 	}
 
@@ -31,7 +35,8 @@ export default class EmojiMenuManager {
 
 		this.awaiting.push({
 			menu: menu,
-			channel: channel
+			channel: channel,
+			messageId: sentMessage.id
 		});
 	}
 }

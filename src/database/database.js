@@ -1,6 +1,9 @@
 import Log from "../core/log";
 import DbUser from "./db-user";
 import DbItem from "./db-item";
+import TradeState from "../core/trade-state";
+import DbTrade from "./db-trade";
+import TradeItem from "../core/trade-item";
 
 const fs = require("fs");
 
@@ -297,6 +300,98 @@ export default class Database {
 				amount: item.amount + amount
 			}).then();
 		}
+	}
+
+	/**
+	 * @param {Snowflake} senderId
+	 * @returns {Promise<DbTrade>}
+	 */
+	async getActiveTradeBySender(senderId) {
+		return DbTrade.fromResult((await this.db.select().from("trades").where({
+			sender_id: senderId.toString(),
+			state: TradeState.Preparing
+		}).limit(1)
+			.then())[0]);
+	}
+
+	/**
+	 * @param {DbTrade} dbTrade
+	 */
+	addTrade(dbTrade) {
+		this.db("trades").insert({
+			message_id: dbTrade.messageId.toString(),
+			sender_id: dbTrade.senderId.toString(),
+			recipient_id: dbTrade.recipientId.toString(),
+			items_proposed: JSON.stringify(dbTrade.itemsProposed),
+			items_demanded: JSON.stringify(dbTrade.itemsDemanded),
+			state: dbTrade.state
+		}).then();
+	}
+
+	/**
+	 * @param {number} tradeId
+	 * @param {TradeState} state
+	 */
+	setTradeState(tradeId, state) {
+		this.db("trades").where("id", tradeId).update({
+			state: state
+		}).then();
+	}
+
+	/**
+	 * @param {number} itemId
+	 * @returns {Promise<DbItem>}
+	 */
+	async getItemById(itemId) {
+		return DbItem.fromResult((await this.db.select().from("items").where("id", itemId).limit(1)
+			.then())[0]);
+	}
+
+	/**
+	 * @param {number} tradeId
+	 * @returns {Promise<array<DbItem>>}
+	 */
+	async getTradePropositions(tradeId) {
+		// TODO: First check if it exists
+		const itemsObj = JSON.parse((await this.db.select("items_proposed").from("trades").where("id", tradeId).limit(1)
+			.then())[0].items_proposed);
+
+		const result = [];
+
+		console.log(itemsObj);
+
+		for (let i = 0; i < itemsObj.length; i++) {
+			const item = await this.getItemById(itemsObj[i].id);
+
+			console.log(item);
+
+			item.amount = itemsObj[i].amount;
+
+			result.push(item);
+		}
+
+		console.log(result);
+
+		return result;
+	}
+
+	/**
+	 * @param {Snowflake} userId
+	 * @param {DbItem} dbItem
+	 * @param {number} amount
+	 */
+	async addTradeProposition(userId, dbItem, amount = 1) {
+		// TODO: First check if it exists/if there is an active trade
+		const { itemsProposed } = (await this.getActiveTradeBySender(userId));
+
+		itemsProposed.push(new TradeItem(dbItem.id, amount));
+
+		this.db("trades").where({
+			sender_id: userId.toString(),
+			state: TradeState.Preparing
+		}).update({
+			items_proposed: JSON.stringify(itemsProposed)
+		}).then();
 	}
 
 	// TODO: Consider merging with addItem method
