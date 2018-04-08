@@ -1,5 +1,7 @@
 import AccessLevelType from "../core/access-level-type";
+import Log from "../core/log";
 
+const Discord = require("discord.js");
 const fs = require("fs");
 
 export default class CommandManager {
@@ -204,6 +206,12 @@ export default class CommandManager {
 		}
 
 		command.executed(context);// .catch((error) => context.respond(`There was an error while executing that command. (${error.message})`, "", "RED"));
+
+		Log.channel(new Discord.RichEmbed()
+			.setFooter(`Requested by ${context.message.author.username}`, this.message.author.avatarURL)
+			.setColor([50, 255, 0])
+			.setAuthor('Command Executed')
+			.addField('Command', command.base));
 
 		return true;
 	}

@@ -30,7 +30,8 @@ export default class Log {
 		const settings = global.b.settings.log;
 		const channel = global.b.client.guilds.get(settings.guild).channels.get(settings.channel);
 
-		if (channel !== null || channel !== undefined) {
+		if (channel !== null && channel !== undefined) {
+            console.log(content, options);
 			channel.send(content, options);
 		}
 	}
