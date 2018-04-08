@@ -3,7 +3,7 @@ import AccessLevelType from "../../core/access-level-type";
 export default {
 	executed(context) {
 		if (context.arguments.length === 1) {
-			context.respond(`**${context.arguments[0]}** = **${context.bot.userConfig.get(context.arguments[0])}**`);
+			context.respond(`**${context.arguments[0]}** = **${context.bot.userConfig.get(context.arguments[0])}**`, "", "GREEN");
 		}
 		else if (context.arguments.length === 2) {
 			if (context.bot.userConfig.contains(context.arguments[0])) {
