@@ -3,11 +3,7 @@ import AccessLevelType from "../../core/access-level-type";
 export default {
 	async executed(context) {
 		if (context.arguments.length === 1) {
-			let itemKey = context.arguments[0];
-
-			if (itemKey.includes(":")) {
-				itemKey = itemKey.replace(":", "").replace(":", "");
-			}
+			const itemKey = context.arguments[0];
 
 			if (itemKey === "*" || itemKey === "all") {
 				// TODO
