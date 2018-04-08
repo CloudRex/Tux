@@ -1,37 +1,41 @@
 const colors = require("colors");
 
 export default class Log {
-	// Static Methods
-	static info(message) {
-		console.log(colors.cyan(message));
-	}
+    // Static Methods
+    static info(message) {
+        console.log(colors.cyan(message));
+    }
 
-	static success(message) {
-		console.log(colors.green(message));
-	}
+    static success(message) {
+        console.log(colors.green(message));
+    }
 
-	static warn(message) {
-		console.log(colors.yellow(message));
-	}
+    static warn(message) {
+        console.log(colors.yellow(message));
+    }
 
-	static error(message) {
-		throw colors.red(message);
-	}
+    static error(message) {
+        throw colors.red(message);
+    }
 
-	static verbose(message) {
-		console.log(colors.grey(message));
-	}
+    static verbose(message) {
+        console.log(colors.grey(message));
+    }
 
-	static debug(message) {
-		console.log(colors.magenta(message));
-	}
+    static debug(message) {
+        console.log(colors.magenta(message));
+    }
 
-	static channel(content, options) {
-		const settings = global.b.settings.log;
-		const channel = global.b.client.guilds.get(settings.guild).channels.get(settings.channel);
+    static channel(content, options) {
+        const settings = global.b.settings.log;
+        const guild = global.b.client.guilds.get(settings.guild);
 
-		if (channel !== null && channel !== undefined) {
-			channel.send(content, options);
-		}
-	}
+        if (guild !== null && guild !== undefined) {
+            const channel = guild.channels.get(settings.channel);
+
+            if (channel !== null && channel !== undefined) {
+                channel.send(content, options);
+            }
+        }
+    }
 }
