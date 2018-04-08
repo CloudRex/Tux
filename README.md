@@ -3,6 +3,8 @@
 # Tux
 Tux is a tiny Discord bot designed with flexibility in mind.
 
+[Visit my website](https://cloudrex.github.io/tux-website/)
+
 ## Beginner?
 Welcome! You can help this project many ways, always remember no contribution is too small!
 
