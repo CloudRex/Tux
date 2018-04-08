@@ -25,4 +25,12 @@ export default class Log {
     static debug(message) {
         console.log(colors.magenta(message));
     }
+
+    static channel(content, options) {
+        const settings = global.b.settings.log;
+        const channel = global.b.guilds.get(settings.guild).channels.get(settings.channel);
+        if (channel !== null || channel !== undefined) {
+            channel.send(content, options);
+        }
+    }
 }
