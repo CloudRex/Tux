@@ -12,6 +12,7 @@ export default class Settings {
 			const jsonObj = JSON.parse(fs.readFileSync(filePath).toString());
 
 			this.general = jsonObj.general;
+			this.log = jsonObj.log;
 		}
 		else {
 			Log.error("Could not load settings: File does not exist");
