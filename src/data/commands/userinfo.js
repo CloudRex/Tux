@@ -9,6 +9,7 @@ export default {
 				Id: userInfo.id,
 				Username: userInfo.username,
 				"Created At": userInfo.createdAt,
+				"Joined At": userInfo.joinedAt,
 				"Last message": userInfo.lastMessage,
 				Verified: userInfo.verified,
 				Bot: userInfo.bot
