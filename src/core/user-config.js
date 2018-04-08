@@ -33,6 +33,13 @@ export default class UserConfig {
 		return this.config[key];
 	}
 
+	/**
+	 * @param {string} key
+	 */
+	contains(key) {
+		return this.config.hasOwnProperty(key);
+	}
+
 	save() {
 		fs.writeFileSync(this.path, JSON.stringify(this.config, null, 4));
 	}
