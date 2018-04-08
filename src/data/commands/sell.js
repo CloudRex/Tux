@@ -6,7 +6,23 @@ export default {
 			const itemKey = context.arguments[0];
 
 			if (itemKey === "*" || itemKey === "all") {
-				// TODO
+				const items = await context.bot.database.getItems(context.message.author.id);
+
+				let totalWorth = 0;
+
+				if (items.length > 0) {
+					for (let i = 0; i < items.length; i++) {
+						totalWorth += items[i].value * items[i].amount;
+					}
+					const points = await context.bot.database.addUserPoints(context.message.author.id, totalWorth);
+
+					await context.bot.database.removeAllItems(context.message.author.id);
+
+					context.respond(`Sold ${items.length} item(s) for:small_orange_diamond:**${totalWorth}**. You now have:small_orange_diamond:**${points}**`, "", "GREEN");
+				}
+				else {
+					context.respond(":sob: Oh noes! You don't have any items to sell.");
+				}
 			}
 			else {
 				const item = await context.bot.database.getItem(context.message.author.id, itemKey);

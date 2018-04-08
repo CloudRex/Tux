@@ -329,4 +329,14 @@ export default class Database {
 
 		return false;
 	}
+
+	/**
+	 * @param {Snowflake} userId
+	 * @returns {boolean}
+	 */
+	async removeAllItems(userId) {
+		this.db("items").where({
+			user_id: userId.toString()
+		}).del().then();
+	}
 }
