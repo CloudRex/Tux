@@ -43,6 +43,31 @@ export default class TreasureFinder extends Feature {
 				value: 25
 			},
 			{
+				name: "cookie",
+				key: "cookie",
+				value: 30
+			},
+			{
+				name: "fish",
+				key: "fish",
+				value: 40
+			},
+			{
+				name: "tophat",
+				key: "tophat",
+				value: 75
+			},
+			{
+				name: "crab",
+				key: "crab",
+				value: 50
+			},
+			{
+				name: "shark",
+				key: "shark",
+				value: 60
+			},
+			{
 				name: "small diamond",
 				key: "small_blue_diamond",
 				value: 100
@@ -51,6 +76,16 @@ export default class TreasureFinder extends Feature {
 				name: "Large Diamond",
 				key: "large_blue_diamond",
 				value: 250
+			},
+			{
+				name: "gem",
+				key: "gem",
+				value: 500
+			},
+			{
+				name: "spy",
+				key: "spy",
+				value: 1000
 			}
 		];
 	}
