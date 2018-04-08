@@ -295,7 +295,7 @@ export default class Database {
 				key: dbItem.key
 			}).update({
 				amount: item.amount + amount
-			});
+			}).then();
 		}
 	}
 
@@ -324,7 +324,7 @@ export default class Database {
 				key: key
 			}).update({
 				amount: item.amount - amount
-			});
+			}).then();
 		}
 
 		return false;
