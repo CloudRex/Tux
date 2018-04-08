@@ -2,81 +2,97 @@
 	{
 		"name": "penguin",
 		"key": "penguin",
-		"value": 40
+		"value": 40,
+		"aliases": ["🐧", "tux"]
 	},
 	{
 		"name": "cat",
 		"key": "cat",
-		"value": 25
+		"value": 25,
+		"aliases": ["🐱", "meow"]
 	},
 	{
 		"name": "dog",
 		"key": "dog",
-		"value": 25
+		"value": 25,
+		"aliases": ["🐶", "woff", "bark", "doggo", "pupper"]
 	},
 	{
 		"name": "monkey",
 		"key": "monkey",
-		"value": 30
+		"value": 30,
+		"aliases": ["🐒", "ape", "gorilla"]
 	},
 	{
 		"name": "carrot",
 		"key": "carrot",
-		"value": 20
+		"value": 20,
+		"aliases": ["🥕"]
 	},
 	{
 		"name": "potato",
 		"key": "potato",
-		"value": 20
+		"value": 20,
+		"aliases": ["🥔", "patato"]
 	},
 	{
 		"name": "cucumber",
 		"key": "cucumber",
-		"value": 25
+		"value": 25,
+		"aliases": ["🥒", "pickle"]
 	},
 	{
 		"name": "cookie",
 		"key": "cookie",
-		"value": 30
+		"value": 30,
+		"aliases": ["🍪", "biscuit"]
 	},
 	{
 		"name": "fish",
 		"key": "fish",
-		"value": 40
+		"value": 40,
+		"aliases": ["🐟"]
 	},
 	{
 		"name": "tophat",
 		"key": "tophat",
-		"value": 75
+		"value": 75,
+		"aliases": ["🎩", "hat", "top_hat", "top-hat"]
 	},
 	{
 		"name": "crab",
 		"key": "crab",
-		"value": 50
+		"value": 50,
+		"aliases": ["🦀", "lobster"]
 	},
 	{
 		"name": "shark",
 		"key": "shark",
-		"value": 60
+		"value": 60,
+		"aliases": ["🦈"]
 	},
 	{
 		"name": "small diamond",
 		"key": "small_blue_diamond",
-		"value": 100
+		"value": 100,
+		"aliases": ["🔹"]
 	},
 	{
 		"name": "Large Diamond",
 		"key": "large_blue_diamond",
-		"value": 250
+		"value": 250,
+		"aliases": ["🔷"]
 	},
 	{
 		"name": "gem",
 		"key": "gem",
-		"value": 500
+		"value": 500,
+		"aliases": ["💎"]
 	},
 	{
 		"name": "spy",
 		"key": "spy",
-		"value": 1000
+		"value": 1000,
+		"aliases": ["🕵"]
 	}
 ]
