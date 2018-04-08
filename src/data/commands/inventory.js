@@ -22,7 +22,7 @@ export default {
 			response.addLine().addLine().add(`Total worth::small_orange_diamond:**${totalWorth}**`);
 		}
 		else {
-			response.add("You don't have any items");
+			response.add(":sob: Oh noes! You don't have any items.");
 		}
 
 		context.respond(response.build(), `${context.message.author.username}'s Inventory`, "WHITE");
