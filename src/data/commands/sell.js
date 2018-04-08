@@ -1,9 +1,24 @@
 import AccessLevelType from "../../core/access-level-type";
 
+const fs = require("fs");
+// TODO: Better loading system (class) and path musn't be hard coded
+const treasures = JSON.parse(fs.readFileSync("src/items.json").toString());
+
 export default {
+	treasures: null,
+
 	async executed(context) {
 		if (context.arguments.length === 1) {
-			const itemKey = context.arguments[0];
+			let itemKey = context.arguments[0];
+
+			for (let i = 0; i < treasures.length; i++) {
+				const treasure = treasures[i];
+
+				if (treasure.key === itemKey || treasure.name === itemKey || treasure.aliases.includes(itemKey)) {
+					itemKey = treasure.key;
+					break;
+				}
+			}
 
 			if (itemKey === "*" || itemKey === "all") {
 				const items = await context.bot.database.getItems(context.message.author.id);
