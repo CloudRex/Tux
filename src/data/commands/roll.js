@@ -3,7 +3,7 @@ import Utils from "../../core/utils";
 
 export default {
 	executed(context) {
-		context.send(`**${context.message.author.username}** rolled a **${Utils.getRandomInt(1, 12)}**`);
+		context.respond(`**${context.message.author.username}** rolled a **${Utils.getRandomInt(1, 12)}**`);
 	},
 
 	canExecute(context) {
