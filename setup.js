@@ -51,6 +51,7 @@ function save() {
 	}
 
 	err("You have successfully setup the bot and you may now run it using npm start");
+	err("Any additional settings can be set in src/settings.json and src/access-levels.json");
 }
 
 function finish() {
