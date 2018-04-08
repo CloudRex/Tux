@@ -1,8 +1,3 @@
 node_modules
 dist
 .idea
-*.db
-package-lock.json
-settings.json
-access-levels.json
-user.config.json
