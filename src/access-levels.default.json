@@ -1,6 +1,8 @@
 {
 	"Guest": [],
-	"Member": ["@everyone"],
+	"Member": [
+		"@everyone"
+	],
 	"Premium": [],
 	"Moderator": [],
 	"Admin": [],
