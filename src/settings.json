@@ -1,9 +1,13 @@
 {
 	"general": {
-		"token": "NDMyNDY2Mzk0Mzk1OTY3NDg4.DattTw.6j-0QRfMw7pUvrX90OnJT24CZpA",
-		"giphyApiKey": "v7puuJ0IipzBACNXQ4DodnyV8hpjp0SE",
-		"commandTrigger": "t.",
+		"token": "",
+		"giphyApiKey": "",
+		"commandTrigger": ".",
 		"version": "1.0.1",
 		"databasePath": "botty.db"
-	}
+	},
+    "log": {
+        "guild": "",
+        "channel": ""
+    }
 }
