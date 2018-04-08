@@ -11,6 +11,7 @@ export default {
 		}
 
 		context.respond({
+			Vote: "If you'd like to help out tux, please consider [voting](https://discordbots.org/bot/381949722157514752/vote) for him",
 			Website: "**__[Visit Tux's website](https://cloudrex.github.io/tux-website/)__**",
 			"Adopt me": "To add Tux to your server, click **__[here](https://discordapp.com/oauth2/authorize?client_id=381949722157514752&scope=bot)__**",
 			"Support Server": "Click **__[here](https://discord.gg/Vu4jvKQ)__** to join Tux's support server",
