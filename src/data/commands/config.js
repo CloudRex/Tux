@@ -6,10 +6,10 @@ export default {
 			context.respond(`**${context.arguments[0]}** = **${context.bot.userConfig.get(context.arguments[0])}**`);
 		}
 		else if (context.arguments.length === 2) {
-			if (context.bot.userConfig.config.hasOwnProperty(context.arguments[0])) {
+			if (context.bot.userConfig.contains(context.arguments[0])) {
 				let value = context.arguments[1];
 
-				value = (value === "true" ? true : (value === "false" ? false : value));
+				value = (value === "true" ? true : (value === "false" ? false : (Number.isNaN(value) ? value : parseInt(value))));
 
 				context.bot.userConfig.set(context.arguments[0], value);
 				context.respond(`Set **${context.arguments[0]}** to **${context.arguments[1]}**`, "", "GREEN");
