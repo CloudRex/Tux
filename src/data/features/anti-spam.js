@@ -1,7 +1,5 @@
 import Feature from "./feature";
 
-const spamTrigger = 4;
-
 export default class AntiSpam extends Feature {
 	constructor() {
 		super("Anti-Spam", "anti-spam", "Anti-spamming system.");
@@ -14,6 +12,8 @@ export default class AntiSpam extends Feature {
 	enabled(bot) {
 		bot.client.on("message", (message) => {
 			if (message.author.id !== bot.client.user.id) {
+				const { spamTrigger } = bot.userConfig;
+
 				bot.database.getMessages(message.author.id, (messages) => {
 					let streak = 0;
 

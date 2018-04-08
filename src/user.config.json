@@ -1,4 +1,5 @@
 {
-	"mute": false,
-	"log": true
+    "mute": false,
+    "log": true,
+    "spamTrigger": 4
 }
