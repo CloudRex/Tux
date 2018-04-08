@@ -16,7 +16,7 @@ export default {
 					response.add(", ");
 				}
 
-				totalWorth += items[i].value;
+				totalWorth += items[i].value * items[i].amount;
 			}
 
 			response.addLine().addLine().add(`Total worth::small_orange_diamond:**${totalWorth}**`);
