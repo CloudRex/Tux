@@ -3,10 +3,10 @@ import AccessLevelType from "../../core/access-level-type";
 export default {
 	executed(context) {
 		if (context.arguments.length === 2) {
-			const member = context.message.guild.members.find("id", context.arguments[0]);
+			const member = context.message.guild.member(context.arguments[0]);
 
-			context.message.guild.setNick(context.arguments[0])
-				.then(() => context.respond(`:zap: **${member.user.username}** is now known as **${context.arguments[0]}**`, "", "GREEN"))
+			member.setNickname(context.arguments[1])
+				.then(() => context.respond(`:zap: **${member.user.username}** is now known as **${context.arguments[1]}**`, "", "GREEN"))
 				.catch((error) => {
 				context.respond(`Operation failed to complete. (${error.message})`, "", "RED");
 			});
