@@ -2,18 +2,18 @@ import AccessLevelType from "../../core/access-level-type";
 
 export default {
 	executed(context) {
-		const userInfo = context.bot.client.users.find("id", context.arguments[0]);
+		const member = context.message.guild.member(context.arguments[0]);
 
-		if (userInfo) {
+		if (member) {
 			context.respond({
-				Id: userInfo.id,
-				Username: userInfo.username,
-				"Created At": userInfo.createdAt,
-				"Joined At": userInfo.joinedAt,
-				"Last message": userInfo.lastMessage,
-				Verified: userInfo.verified,
-				Bot: userInfo.bot
-			}, "", "GREEN", "", "", userInfo.avatarURL);
+				Id: member.id,
+				Username: member.user.username,
+				"Created At": member.user.createdAt,
+				"Joined At": member.joinedAt,
+				"Last message": member.user.lastMessage,
+				Verified: member.user.verified,
+				Bot: member.user.bot
+			}, "", "GREEN", "", "", member.avatarURL);
 		}
 		else {
 			context.respond("User not found.");

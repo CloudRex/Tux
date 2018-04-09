@@ -3,7 +3,7 @@ import AccessLevelType from "../../core/access-level-type";
 export default {
 	executed(context) {
 		if (context.arguments.length === 2) {
-			const { username } = context.bot.client.users.find("id", context.arguments[0]);
+			const { username } = context.message.guild.member(context.arguments[0]).user;
 
 			context.message.guild.ban(context.arguments[0], {
 				reason: context.arguments[1]
