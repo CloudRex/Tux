@@ -2,7 +2,13 @@ import AccessLevelType from "../../core/access-level-type";
 
 export default {
 	executed(context) {
-		const member = context.message.guild.member(context.arguments[0]);
+		let id = context.arguments[0];
+
+		if (context.arguments.length === 0) {
+			id = context.message.author.id;
+		}
+
+		const member = context.message.guild.member(id);
 
 		if (member) {
 			context.respond({
@@ -13,7 +19,7 @@ export default {
 				"Last message": member.user.lastMessage,
 				Verified: member.user.verified,
 				Bot: member.user.bot
-			}, "", "GREEN", "", "", member.avatarURL);
+			}, "", "GREEN", "", "", member.user.avatarURL);
 		}
 		else {
 			context.respond("User not found.");
