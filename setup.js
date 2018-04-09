@@ -50,8 +50,7 @@ function save() {
 		fs.copyFileSync(defaultDbPath, dbPath);
 	}
 
-	err("You have successfully setup the bot and you may now run it using npm start");
-	err("Any additional settings can be set in src/settings.json and src/access-levels.json");
+	err("You have successfully setup the bot and you may now run it using npm start\nYou may configure any additional settings in src/settings.json and src/access-levels.json");
 }
 
 function finish() {
