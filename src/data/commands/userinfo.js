@@ -1,7 +1,7 @@
 import AccessLevelType from "../../core/access-level-type";
 
 export default {
-	executed(context) {
+	async executed(context) {
 		let id = context.arguments[0];
 
 		if (context.arguments.length === 0) {
@@ -9,6 +9,7 @@ export default {
 		}
 
 		const member = context.message.guild.member(id);
+		const points = await context.bot.database.getUserPoints(id);
 
 		if (member) {
 			context.respond({
@@ -18,7 +19,8 @@ export default {
 				"Joined At": member.joinedAt,
 				"Last message": member.user.lastMessage,
 				Verified: member.user.verified,
-				Bot: member.user.bot
+				Bot: member.user.bot,
+				Points: `:small_orange_diamond:${points}`
 			}, "", "GREEN", "", "", member.user.avatarURL);
 		}
 		else {
