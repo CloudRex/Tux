@@ -17,8 +17,6 @@ export default class EmojiMenuManager {
 					}
 				}
 			}
-
-			console.log(this.awaiting);
 		});
 	}
 
@@ -30,7 +28,7 @@ export default class EmojiMenuManager {
 		const sentMessage = await channel.send(menu.content);
 
 		for (let i = 0; i < menu.buttons.length; i++) {
-			sentMessage.react(menu.buttons[i].emoji);
+			await sentMessage.react(menu.buttons[i].emoji);
 		}
 
 		this.awaiting.push({
@@ -38,5 +36,7 @@ export default class EmojiMenuManager {
 			channel: channel,
 			messageId: sentMessage.id
 		});
+
+		return sentMessage;
 	}
 }
