@@ -16,7 +16,7 @@ export default {
 			}, "", "GREEN", "", "", userInfo.avatarURL);
 		}
 		else {
-			context.respond("User not found");
+			context.respond("User not found.");
 		}
 	},
 
