@@ -9,7 +9,7 @@ export default {
 		}
 
 		const member = context.message.guild.member(id);
-		const points = await context.bot.database.getUserPoints(id);
+		const points = await context.bot.database.getUserPoints(id.replace('<@', '').replace('>', ''));
 
 		if (member) {
 			context.respond({

@@ -3,7 +3,20 @@ import MessageBuilder from "../../core/message-builder";
 
 export default {
 	async executed(context) {
-		const items = await context.bot.database.getItems(context.message.author.id);
+		let id = context.arguments[0];
+
+		if (context.arguments.length === 0) {
+			id = context.message.author.id;
+		}
+
+		const member = context.message.guild.member(id.replace('<@', '').replace('>', ''));
+
+		if (member.bot) {
+			context.respond(`Bots can't have items`);
+			return;
+		}
+
+		const items = await context.bot.database.getItems(member.id);
 		const response = new MessageBuilder();
 
 		let totalWorth = 0;
@@ -25,7 +38,7 @@ export default {
 			response.add(":sob: Oh noes! You don't have any items.");
 		}
 
-		context.respond(response.build(), `${context.message.author.username}'s Inventory`, "WHITE");
+		context.respond(response.build(), `${member.displayName}'s Inventory`, "WHITE");
 	},
 
 	canExecute(context) {
@@ -37,7 +50,7 @@ export default {
 		description: "View your inventory",
 		accessLevel: AccessLevelType.Member,
 		aliases: ["inv"],
-		maxArguments: 0,
+		maxArguments: 1,
 		args: {}
 	}
 };
