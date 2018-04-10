@@ -17,6 +17,6 @@ export default {
 		accessLevel: AccessLevelType.Guest,
 		aliases: ["auth"],
 		maxArguments: 0,
-		args: []
+		args: {}
 	}
 };

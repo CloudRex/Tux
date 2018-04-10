@@ -21,6 +21,6 @@ export default {
 		accessLevel: AccessLevelType.Member,
 		aliases: [],
 		maxArguments: 0,
-		args: []
+		args: {}
 	}
 };

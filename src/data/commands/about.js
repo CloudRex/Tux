@@ -33,6 +33,6 @@ export default {
 		accessLevel: AccessLevelType.Guest,
 		aliases: ["invite"],
 		maxArguments: 0,
-		args: []
+		args: {}
 	}
 };
