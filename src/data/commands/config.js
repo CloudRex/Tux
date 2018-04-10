@@ -29,6 +29,11 @@ export default {
 		description: "Change the bot's configuration",
 		accessLevel: AccessLevelType.Admin,
 		aliases: ["cfg"],
-		maxArguments: 2
+		maxArguments: 2,
+
+		args: {
+			key: "!string",
+			value: "any"
+		}
 	}
 };

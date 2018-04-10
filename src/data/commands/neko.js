@@ -32,6 +32,7 @@ export default {
 		description: "Random lewd neko images",
 		accessLevel: AccessLevelType.Member,
 		aliases: [],
-		maxArguments: 1
+		maxArguments: 1,
+		args: {}
 	}
 };

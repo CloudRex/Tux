@@ -12,6 +12,8 @@ export default {
 				// message.channel.send(`${user.username} reacted!`);
 			})
 		], "Hello"));
+
+		throw new Error("testing");
 	},
 
 	canExecute(context) {
@@ -23,6 +25,7 @@ export default {
 		description: "View the bot's version",
 		accessLevel: AccessLevelType.Guest,
 		aliases: ["ver"],
-		maxArguments: 0
+		maxArguments: 0,
+		args: {}
 	}
 };

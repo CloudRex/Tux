@@ -37,6 +37,10 @@ export default {
 		description: "View all available commands",
 		accessLevel: AccessLevelType.Member,
 		aliases: ["commands", "cmds"],
-		maxArguments: 1
+		maxArguments: 1,
+
+		args: {
+			command: "string"
+		}
 	}
 };

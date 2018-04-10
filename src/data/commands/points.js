@@ -16,6 +16,7 @@ export default {
 		description: "View how many points you have",
 		accessLevel: AccessLevelType.Member,
 		aliases: [],
-		maxArguments: 0
+		maxArguments: 0,
+		args: {}
 	}
 };

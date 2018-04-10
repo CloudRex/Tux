@@ -22,6 +22,11 @@ export default {
 		description: "Give points to an user",
 		accessLevel: AccessLevelType.Owner,
 		aliases: [],
-		maxArguments: 2
+		maxArguments: 2,
+
+		args: {
+			user: "!:user-mention",
+			amount: "!number"
+		}
 	}
 };

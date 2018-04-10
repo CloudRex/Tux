@@ -37,6 +37,7 @@ export default {
 		description: "View your inventory",
 		accessLevel: AccessLevelType.Member,
 		aliases: ["inv"],
-		maxArguments: 0
+		maxArguments: 0,
+		args: {}
 	}
 };

@@ -37,6 +37,10 @@ export default {
 		description: "Displays information about a specific user",
 		accessLevel: AccessLevelType.Member,
 		aliases: ["uinfo"],
-		maxArguments: 1
+		maxArguments: 1,
+
+		args: {
+			user: ":user-mention"
+		}
 	}
 };

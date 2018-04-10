@@ -37,6 +37,10 @@ export default {
 		description: "Control the bot's client",
 		accessLevel: AccessLevelType.Owner,
 		aliases: ["cli"],
-		maxArguments: 1
+		maxArguments: 1,
+
+		args: {
+			command: "!string"
+		}
 	}
 };

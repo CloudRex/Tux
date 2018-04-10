@@ -20,6 +20,7 @@ export default {
 		description: "Display a random Chuck Norris fact",
 		accessLevel: AccessLevelType.Member,
 		aliases: [],
-		maxArguments: 0
+		maxArguments: 0,
+		args: []
 	}
 };

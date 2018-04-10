@@ -27,6 +27,11 @@ export default {
 		description: "Bans a member from the server",
 		accessLevel: AccessLevelType.Admin,
 		aliases: [],
-		maxArguments: 2
+		maxArguments: 2,
+
+		args: {
+			user: "!user-mention",
+			reason: "!string"
+		}
 	}
 };

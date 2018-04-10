@@ -34,6 +34,10 @@ export default {
 		description: "Evaluate JavaScript code",
 		accessLevel: AccessLevelType.Owner,
 		aliases: [],
-		maxArguments: 1
+		maxArguments: 1,
+
+		args: {
+			expression: "!string"
+		}
 	}
 };

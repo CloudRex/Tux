@@ -14,6 +14,7 @@ export default {
 		description: "View the project's Github link",
 		accessLevel: AccessLevelType.Guest,
 		aliases: ["git"],
-		maxArguments: 0
+		maxArguments: 0,
+		args: {}
 	}
 };

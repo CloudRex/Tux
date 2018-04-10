@@ -32,6 +32,7 @@ export default {
 		description: "Displays information about the bot",
 		accessLevel: AccessLevelType.Guest,
 		aliases: ["invite"],
-		maxArguments: 0
+		maxArguments: 0,
+		args: []
 	}
 };

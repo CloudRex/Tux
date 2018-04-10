@@ -41,6 +41,11 @@ export default {
 		description: "Search a song's lyrics",
 		accessLevel: AccessLevelType.Member,
 		aliases: [],
-		maxArguments: 2
+		maxArguments: 2,
+
+		args: {
+			song: "!string",
+			characters: "number"
+		}
 	}
 };

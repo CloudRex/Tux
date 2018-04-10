@@ -15,6 +15,7 @@ export default {
 		description: "Roll a 12-sided dice",
 		accessLevel: AccessLevelType.Member,
 		aliases: ["dice"],
-		maxArguments: 0
+		maxArguments: 0,
+		args: {}
 	}
 };

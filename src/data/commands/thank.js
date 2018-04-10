@@ -37,6 +37,10 @@ export default {
 		description: "Thank an user",
 		accessLevel: AccessLevelType.Member,
 		aliases: ["thx"],
-		maxArguments: 1
+		maxArguments: 1,
+
+		args: {
+			user: "!:user-mention"
+		}
 	}
 };

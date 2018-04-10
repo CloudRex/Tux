@@ -36,6 +36,10 @@ export default {
 		description: "Use the Google search engine",
 		accessLevel: AccessLevelType.Member,
 		aliases: [],
-		maxArguments: 1
+		maxArguments: 1,
+
+		args: {
+			query: "!string"
+		}
 	}
 };

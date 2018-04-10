@@ -118,6 +118,13 @@ export default {
 		description: "Trade with another user",
 		accessLevel: AccessLevelType.Member,
 		aliases: [],
-		maxArguments: 3
+		maxArguments: 3,
+
+		args: {
+			command: "!string",
+
+			// TODO: Does not stack up with other design pattern (multiple posibilities)
+			query: ""
+		}
 	}
 };

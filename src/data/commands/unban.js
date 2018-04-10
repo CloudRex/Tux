@@ -25,6 +25,10 @@ export default {
 		description: "Unbans a member from the server",
 		accessLevel: AccessLevelType.Admin,
 		aliases: ["uban"],
-		maxArguments: 2
+		maxArguments: 2,
+
+		args: {
+			user: "!:snowflake"
+		}
 	}
 };

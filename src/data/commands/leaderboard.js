@@ -35,6 +35,7 @@ export default {
 		description: "View the points leaderboard",
 		accessLevel: AccessLevelType.Member,
 		aliases: ["lb"],
-		maxArguments: 0
+		maxArguments: 0,
+		args: {}
 	}
 };

@@ -47,6 +47,10 @@ export default {
 		description: "View how many times you or an user has been thanked",
 		accessLevel: AccessLevelType.Member,
 		aliases: ["thxs"],
-		maxArguments: 1
+		maxArguments: 1,
+
+		args: {
+			user: ":user-mention"
+		}
 	}
 };

@@ -25,6 +25,11 @@ export default {
 		description: "Change a guild member's nickname",
 		accessLevel: AccessLevelType.Admin,
 		aliases: ["nick"],
-		maxArguments: 2
+		maxArguments: 2,
+
+		args: {
+			user: "!:user-mention",
+			nickname: "!string"
+		}
 	}
 };

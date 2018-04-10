@@ -68,6 +68,10 @@ export default {
 		description: "Sell an item from your inventory",
 		accessLevel: AccessLevelType.Member,
 		aliases: [],
-		maxArguments: 1
+		maxArguments: 1,
+
+		args: {
+			item: "!string"
+		}
 	}
 };

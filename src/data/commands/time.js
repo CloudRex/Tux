@@ -19,6 +19,7 @@ export default {
 		description: "View the bot's local time",
 		accessLevel: AccessLevelType.Member,
 		aliases: [],
-		maxArguments: 0
+		maxArguments: 0,
+		args: {}
 	}
 };

@@ -4,7 +4,7 @@ export default {
 	executed(context) {
 		const authLevel = context.bot.commands.getAuthority(context.message.member.roles, context.message.author.id);
 
-		context.respond(`Your authorization level is **${AccessLevelType.toString(authLevel)}**`, "", "GREEN");
+		context.respond(`:zap: Your authorization level is **${AccessLevelType.toString(authLevel)}**`, "", "GREEN");
 	},
 
 	canExecute(context) {
@@ -16,6 +16,7 @@ export default {
 		description: "View your authority level",
 		accessLevel: AccessLevelType.Guest,
 		aliases: ["auth"],
-		maxArguments: 0
+		maxArguments: 0,
+		args: []
 	}
 };

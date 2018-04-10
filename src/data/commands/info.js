@@ -23,6 +23,7 @@ export default {
 		description: "View information about the server",
 		accessLevel: AccessLevelType.Moderator,
 		aliases: [],
-		maxArguments: 0
+		maxArguments: 0,
+		args: {}
 	}
 };

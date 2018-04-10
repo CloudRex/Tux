@@ -56,6 +56,8 @@ export default {
 		description: "View all available commands",
 		accessLevel: AccessLevelType.Member,
 		aliases: [],
-		maxArguments: 0
+		maxArguments: 0,
+
+		args: {}
 	}
 };

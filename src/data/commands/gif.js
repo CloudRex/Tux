@@ -28,6 +28,10 @@ export default {
 		description: "Search for GIFs",
 		accessLevel: AccessLevelType.Member,
 		aliases: [],
-		maxArguments: 1
+		maxArguments: 1,
+
+		args: {
+			query: "!string"
+		}
 	}
 };

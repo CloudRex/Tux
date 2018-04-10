@@ -43,6 +43,12 @@ export default {
 		description: "Message/command automation and scheduling",
 		accessLevel: AccessLevelType.Moderator,
 		aliases: [],
-		maxArguments: 3
+		maxArguments: 3,
+
+		args: {
+			time: "!number",
+			message: "!message",
+			repeat: "boolean"
+		}
 	}
 };

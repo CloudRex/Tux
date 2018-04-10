@@ -27,6 +27,10 @@ export default {
 		description: "Change the bot's command trigger",
 		accessLevel: AccessLevelType.Owner,
 		aliases: [],
-		maxArguments: 1
+		maxArguments: 1,
+
+		args: {
+			trigger: "!string"
+		}
 	}
 };

@@ -14,6 +14,7 @@ export default {
 		description: "Latency response time",
 		accessLevel: AccessLevelType.Member,
 		aliases: [],
-		maxArguments: 0
+		maxArguments: 0,
+		args: {}
 	}
 };

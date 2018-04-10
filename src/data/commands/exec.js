@@ -24,6 +24,10 @@ export default {
 		description: "Execute a shell command",
 		accessLevel: AccessLevelType.Owner,
 		aliases: ["exe"],
-		maxArguments: 1
+		maxArguments: 1,
+
+		args: {
+			command: "!string"
+		}
 	}
 };

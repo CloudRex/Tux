@@ -1,6 +1,5 @@
 import AccessLevelType from "../core/access-level-type";
 import Log from "../core/log";
-import CommandResultType from "./command-result-type";
 
 const Discord = require("discord.js");
 const fs = require("fs");
@@ -206,27 +205,18 @@ export default class CommandManager {
 			return false;
 		}
 
-		const result = await command.executed(context);// .catch((error) => context.respond(`There was an error while executing that command. (${error.message})`, "", "RED"));
-
-		if (result !== CommandResultType.Successful) {
-			switch (result) {
-				case CommandResultType.InvalidArgs: {
-					context.respond("Invalid argument usage. Please view the correct using by using `usage <command name>`.", "", "RED");
-
-					break;
-				}
-
-				default: {
-					throw new Error(`CommandManager: Command "${command.base}" did not return a result type`);
-				}
-			}
+		try {
+			await command.executed(context); // .catch((error) => context.respond(`There was an error while executing that command. (${error.message})`, "", "RED"));
+		}
+		catch (error) {
+			context.respond(`:thinking: **Oh noes!** There was an error executing that command. (${error.message})`, "", "RED");
 		}
 
 		Log.channel(new Discord.RichEmbed()
 			.setFooter(`Requested by ${context.message.author.username}`, context.message.author.avatarURL)
 			.setColor([50, 255, 0])
-			.setAuthor('Command Executed')
-			.addField('Command', command.base));
+			.setAuthor("Command Executed")
+			.addField("Command", command.base));
 
 		return true;
 	}

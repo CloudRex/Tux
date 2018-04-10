@@ -15,6 +15,7 @@ export default {
 		description: "Toggle locking the bot's command scope to you",
 		accessLevel: AccessLevelType.Guest,
 		aliases: [],
-		maxArguments: 0
+		maxArguments: 0,
+		args: {}
 	}
 };
