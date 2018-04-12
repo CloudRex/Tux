@@ -144,7 +144,7 @@ export default {
 						const recipientChannel = (recipient.dmChannel ? recipient.dmChannel : await recipient.createDM());
 						const senderChannel = (sender.dmChannel ? sender.dmChannel : await sender.createDM());
 
-						context.respond(`Successfully send trade offer to **${recipient.username}**. (Trade#${activeTrade.id})`);
+						context.respond(`Successfully send trade offer to **${recipient.username}**. (Trade#${activeTrade.id})`, "", "GREEN");
 						context.bot.database.setTradeState(activeTrade.id, TradeState.Pending);
 
 						const items = new MessageBuilder();
@@ -186,7 +186,7 @@ export default {
 
 										return;
 									}
-								}hj
+								}
 
 								for (let propositionIndex = 0; propositionIndex < tradePropositions.length; propositionIndex++) {
 									let found = false;
