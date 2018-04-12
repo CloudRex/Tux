@@ -35,9 +35,7 @@ export default class TreasureFinder extends Feature {
 					const treasure = this.treasures[Utils.getRandomInt(0, this.treasures.length - 1)];
 
 					if (Utils.getRandomInt(0, treasure.value) === 0) {
-						console.log(`${message.author.username}@${message.guild.name}@${message.channel.name} found a ${treasure.name}`);
-
-						const msg = await message.channel.send(`You've found a :${treasure.key}: (**${treasure.value}** points, 1 in ${treasure.value} chances)\nHurry and catch it before it's gone!`).catch(() => {
+						const msg = await message.channel.send(`**${message.author.username}** found a :${treasure.key}: (**${treasure.value}** coins, 1 in ${treasure.value} chances)\nHurry and catch it before it's gone!`).catch(() => {
 						});
 
 						if (msg) {
@@ -64,7 +62,7 @@ export default class TreasureFinder extends Feature {
 					bot.database.addItem(new DbItem(null, user.id, treasure.name, treasure.key, treasure.value, 1));
 					this.waiting.splice(index, 1);
 					// reaction.message.clearReactions();
-					reaction.message.edit(`**${user.username}** has captured a :${treasure.key}: worth **${treasure.value}**`);
+					reaction.message.edit(`**${user.username}** has captured a :${treasure.key}: worth **${treasure.value}**! Use \`inv\``);
 					reaction.message.delete(6000);
 
 					// TODO: Debug only

@@ -57,7 +57,7 @@ export default {
 					if (target.bot) {
 						context.respond(":thinking: You cannot trade with a bot.", "", "RED");
 					}
-					else if (target.id === context.message.author.id) {
+					else if (target.id !== context.message.author.id) {
 						const pendingTrade = await context.bot.database.getPendingTradeByRecipient(target.id);
 						const activeTrade = await context.bot.database.getActiveTradeBySender(context.message.author.id);
 
