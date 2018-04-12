@@ -13,7 +13,7 @@ export default {
 			}
 
 			messageBuilder.addCodeBlock().addLine().add(":heavy_plus_sign: other secret stuff!");
-			context.respond(messageBuilder.build());
+			context.respond(messageBuilder.build(), "", "GREEN");
 		}
 		else if (context.bot.commands.isRegistered(context.arguments[0])) {
 			const command = context.bot.commands.getByBase(context.arguments[0]);
@@ -24,7 +24,7 @@ export default {
 			context.message.channel.send(message);
 		}
 		else {
-			context.message.channel.send("Hey! Something smells :fish:! You sure that command exists?");
+			context.message.channel.send(":thinking: Hey! Something smells :fish:! You sure that command exists?", "", "RED");
 		}
 	},
 
