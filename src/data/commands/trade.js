@@ -89,14 +89,41 @@ export default {
 					if (activeTrade) {
 						const { username } = context.bot.client.users.find("id", activeTrade.recipientId);
 
-						if (item !== null && item.amount >= amount) {
+						if (item && item.amount >= amount) {
 							await context.bot.database.addTradeProposition(context.message.author.id, item, amount);
 
 							// TODO: User username instead of id
 							context.respond(`Added :${item.key}:x${item.amount} to the active trade with **${username}**`, "", "BLUE");
 						}
 						else {
-							context.respond("Operation failed: You either don't own that item or don't have that amount", "", "RED");
+							context.respond("Operation failed: You either don't own that item or don't have that amount.", "", "RED");
+						}
+					}
+					else {
+						context.respond(":thinking: You don't currently have any active trade.", "", "RED");
+					}
+
+					break;
+				}
+
+				case "demand": {
+					const amount = ((context.arguments[2] !== undefined) ? parseInt(context.arguments[2]) : 1);
+					const activeTrade = await context.bot.database.getActiveTradeBySender(context.message.author.id);
+					const item = await context.bot.database.getItem(activeTrade.recipientId, context.arguments[1]);
+
+					if (activeTrade) {
+						const { username } = context.bot.client.users.find("id", activeTrade.recipientId);
+
+						console.log(item);
+
+						if (item && item.amount >= amount) {
+							await context.bot.database.addTradeDemand(context.message.author.id, item, amount);
+
+							// TODO: User username instead of id
+							context.respond(`Demanded :${item.key}:x${item.amount} from the active trade with **${username}**`, "", "GOLD");
+						}
+						else {
+							context.respond(`Operation failed: **${username}** either doesn't own that item or doesn't have that amount.`, "", "RED");
 						}
 					}
 					else {
@@ -159,9 +186,7 @@ export default {
 
 										return;
 									}
-								}
-
-								console.log("pass 1");
+								}hj
 
 								for (let propositionIndex = 0; propositionIndex < tradePropositions.length; propositionIndex++) {
 									let found = false;
