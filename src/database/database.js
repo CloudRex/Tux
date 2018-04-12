@@ -322,7 +322,7 @@ export default class Database {
 			message_id: dbTrade.messageId.toString(),
 			sender_id: dbTrade.senderId.toString(),
 			recipient_id: dbTrade.recipientId.toString(),
-			items_proposed: JSON.stringify(dbTrade.itemsProposed),
+			items_proposed: JSON.stringify(dbTrade.itemsDemanded),
 			items_demanded: JSON.stringify(dbTrade.itemsDemanded),
 			state: dbTrade.state
 		}).then();
@@ -363,16 +363,46 @@ export default class Database {
 		for (let i = 0; i < itemsObj.length; i++) {
 			const item = await this.getItemById(itemsObj[i].id);
 
-			console.log(item);
+			item.amount = itemsObj[i].amount;
+
+			result.push(item);
+		}
+
+		return result;
+	}
+
+	/**
+	 * @param {Snowflake} tradeId
+	 * @returns {Promise<array<DbItem>>}
+	 */
+	async getTradeDemands(tradeId) {
+		// TODO: First check if it exists
+		const itemsObj = JSON.parse((await this.db.select("items_demanded").from("trades").where("id", tradeId).limit(1)
+			.then())[0].items_demanded);
+
+		const result = [];
+
+		for (let i = 0; i < itemsObj.length; i++) {
+			const item = await this.getItemById(itemsObj[i].id);
 
 			item.amount = itemsObj[i].amount;
 
 			result.push(item);
 		}
 
-		console.log(result);
-
 		return result;
+	}
+
+	/**
+	 * @param {Snowflake} recipientId
+	 * @returns {Promise<DbTrade>}
+	 */
+	async getPendingTradeByRecipient(recipientId) {
+		return DbTrade.fromResult((await this.db.select().from("trades").where({
+			recipient_id: recipientId.toString(),
+			state: TradeState.Pending
+		}).limit(1)
+			.then())[0]);
 	}
 
 	/**
@@ -382,15 +412,34 @@ export default class Database {
 	 */
 	async addTradeProposition(userId, dbItem, amount = 1) {
 		// TODO: First check if it exists/if there is an active trade
-		const { itemsProposed } = (await this.getActiveTradeBySender(userId));
+		const { itemsDemanded } = (await this.getActiveTradeBySender(userId));
 
-		itemsProposed.push(new TradeItem(dbItem.id, amount));
+		itemsDemanded.push(new TradeItem(dbItem.id, amount));
 
 		this.db("trades").where({
 			sender_id: userId.toString(),
 			state: TradeState.Preparing
 		}).update({
-			items_proposed: JSON.stringify(itemsProposed)
+			items_proposed: JSON.stringify(itemsDemanded)
+		}).then();
+	}
+
+	/**
+	 * @param {Snowflake} userId
+	 * @param {DbItem} dbItem
+	 * @param {number} amount
+	 */
+	async addTradeDemand(userId, dbItem, amount = 1) {
+		// TODO: First check if it exists/if there is an active trade
+		const { itemsDemanded } = (await this.getActiveTradeBySender(userId));
+
+		itemsDemanded.push(new TradeItem(dbItem.id, amount));
+
+		this.db("trades").where({
+			sender_id: userId.toString(),
+			state: TradeState.Preparing
+		}).update({
+			items_demanded: JSON.stringify(itemsDemanded)
 		}).then();
 	}
 

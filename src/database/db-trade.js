@@ -13,7 +13,7 @@ export default class DbTrade {
 		this.messageId = messageId;
 		this.senderId = senderId;
 		this.recipientId = recipientId;
-		this.itemsProposed = itemsProposed;
+		this.itemsDemanded = itemsProposed;
 		this.itemsDemanded = itemsDemanded;
 		this.state = state;
 	}
