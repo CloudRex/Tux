@@ -57,7 +57,7 @@ export default {
 					if (target.bot) {
 						context.respond(":thinking: You cannot trade with a bot.", "", "RED");
 					}
-					else if (target.id !== context.message.author.id) {
+					else if (target.id === context.message.author.id) {
 						const pendingTrade = await context.bot.database.getPendingTradeByRecipient(target.id);
 						const activeTrade = await context.bot.database.getActiveTradeBySender(context.message.author.id);
 
@@ -169,11 +169,11 @@ export default {
 								const tradePropositions = await context.bot.database.getTradePropositions(pendingTrade.id);
 								const tradeDemands = await context.bot.database.getTradeDemands(pendingTrade.id);
 
-								for (let demandIndex = 0; demandIndex < tradeDemands.length; demandIndex++) {
+								for (let inventoryIndex = 0; inventoryIndex < recipientInventory.length; inventoryIndex++) {
 									let found = false;
 
-									for (let inventoryIndex = 0; inventoryIndex < senderInventory.length; inventoryIndex++) {
-										if (tradeDemands[demandIndex].id === senderInventory[inventoryIndex].id && tradeDemands[demandIndex].amount >= senderInventory[inventoryIndex].amount) {
+									for (let demandIndex = 0; demandIndex < tradeDemands.length; demandIndex++) {
+										if (tradeDemands[demandIndex].id === recipientInventory[inventoryIndex].id && tradeDemands[demandIndex].amount >= recipientInventory[inventoryIndex].amount) {
 											found = true;
 
 											break;
@@ -188,13 +188,13 @@ export default {
 									}
 								}
 
-								for (let propositionIndex = 0; propositionIndex < tradePropositions.length; propositionIndex++) {
+								for (let inventoryIndex = 0; inventoryIndex < senderInventory.length; inventoryIndex++) {
 									let found = false;
 
-									for (let inventoryIndex = 0; inventoryIndex < recipientInventory.length; inventoryIndex++) {
-										console.log(recipientInventory[inventoryIndex]);
+									for (let propositionIndex = 0; propositionIndex < tradePropositions.length; propositionIndex++) {
+										console.log(senderInventory[inventoryIndex]);
 
-										if (tradePropositions[propositionIndex].id === recipientInventory[inventoryIndex].id && tradePropositions[propositionIndex].amount >= senderInventory[inventoryIndex].amount) {
+										if (tradePropositions[propositionIndex].id === senderInventory[inventoryIndex].id && tradePropositions[propositionIndex].amount >= senderInventory[inventoryIndex].amount) {
 											found = true;
 
 											break;
@@ -202,7 +202,7 @@ export default {
 									}
 
 									if (!found) {
-										recipientChannel.send("You no longer own that items. The trade has been canceled.");
+										recipientChannel.send("You no longer own those items. The trade has been canceled.");
 										context.bot.database.setTradeState(pendingTrade.id, TradeState.Canceled);
 
 										return;
