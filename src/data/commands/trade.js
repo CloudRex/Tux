@@ -57,7 +57,7 @@ export default {
 					if (target.bot) {
 						context.respond(":thinking: You cannot trade with a bot.", "", "RED");
 					}
-					else if (target.id === context.message.author.id) {
+					else if (target.id !== context.message.author.id) {
 						const pendingTrade = await context.bot.database.getPendingTradeByRecipient(target.id);
 						const activeTrade = await context.bot.database.getActiveTradeBySender(context.message.author.id);
 
@@ -169,18 +169,10 @@ export default {
 								const tradePropositions = await context.bot.database.getTradePropositions(pendingTrade.id);
 								const tradeDemands = await context.bot.database.getTradeDemands(pendingTrade.id);
 
-								for (let inventoryIndex = 0; inventoryIndex < recipientInventory.length; inventoryIndex++) {
-									let found = false;
+								for (let dIndex = 0; dIndex < tradeDemands.length; dIndex++) {
+									const item = recipientInventory.find((itm) => itm.id === tradeDemands[dIndex].id);
 
-									for (let demandIndex = 0; demandIndex < tradeDemands.length; demandIndex++) {
-										if (tradeDemands[demandIndex].id === recipientInventory[inventoryIndex].id && tradeDemands[demandIndex].amount >= recipientInventory[inventoryIndex].amount) {
-											found = true;
-
-											break;
-										}
-									}
-
-									if (!found) {
+									if (!item || item.amount < tradeDemands[dIndex].amount) {
 										recipientChannel.send("The trade sender no longer owns the proposed items. The trade has been canceled.");
 										context.bot.database.setTradeState(pendingTrade.id, TradeState.Canceled);
 
@@ -188,21 +180,11 @@ export default {
 									}
 								}
 
-								for (let inventoryIndex = 0; inventoryIndex < senderInventory.length; inventoryIndex++) {
-									let found = false;
+								for (let pIndex = 0; pIndex < tradePropositions.length; pIndex++) {
+									const item = senderInventory.find((itm) => itm.id === tradePropositions[pIndex].id);
 
-									for (let propositionIndex = 0; propositionIndex < tradePropositions.length; propositionIndex++) {
-										console.log(senderInventory[inventoryIndex]);
-
-										if (tradePropositions[propositionIndex].id === senderInventory[inventoryIndex].id && tradePropositions[propositionIndex].amount >= senderInventory[inventoryIndex].amount) {
-											found = true;
-
-											break;
-										}
-									}
-
-									if (!found) {
-										recipientChannel.send("You no longer own those items. The trade has been canceled.");
+									if (!item || item.amount < tradePropositions[pIndex].amount) {
+										recipientChannel.send("The trade sender no longer owns the proposed items. The trade has been canceled.");
 										context.bot.database.setTradeState(pendingTrade.id, TradeState.Canceled);
 
 										return;
@@ -213,16 +195,16 @@ export default {
 								recipientChannel.send(`You **accepted** the trade with **${sender.username}**. (Trade#${activeTrade.id})`);
 								senderChannel.send(`${recipient.username} **accepted** your trade offer. (Trade#${activeTrade.id})`);
 
-								for (let propositionIndex = 0; propositionIndex < tradePropositions.length; propositionIndex++) {
-									context.bot.database.removeItem(pendingTrade.senderId, tradePropositions[propositionIndex].key, tradePropositions[propositionIndex].amount);
-									tradePropositions[propositionIndex].userId = pendingTrade.recipientId;
-									context.bot.database.addItem(tradePropositions[propositionIndex], tradePropositions[propositionIndex].amount);
+								for (let pIndex = 0; pIndex < tradePropositions.length; pIndex++) {
+									await context.bot.database.removeItem(pendingTrade.senderId, tradePropositions[pIndex].key, tradePropositions[pIndex].amount);
+									tradePropositions[pIndex].userId = pendingTrade.recipientId;
+									await context.bot.database.addItem(tradePropositions[pIndex], tradePropositions[pIndex].amount);
 								}
 
-								for (let demandIndex = 0; demandIndex < tradeDemands.length; demandIndex++) {
-									context.bot.database.removeItem(pendingTrade.recipientId, tradeDemands[demandIndex].key, tradeDemands[demandIndex].amount);
-									tradeDemands[demandIndex].userId = pendingTrade.senderId;
-									context.bot.database.addItem(tradeDemands[demandIndex], tradeDemands[demandIndex].amount);
+								for (let dIndex = 0; dIndex < tradeDemands.length; dIndex++) {
+									await context.bot.database.removeItem(pendingTrade.recipientId, tradeDemands[dIndex].key, tradeDemands[dIndex].amount);
+									tradeDemands[dIndex].userId = pendingTrade.senderId;
+									await context.bot.database.addItem(tradeDemands[dIndex], tradeDemands[dIndex].amount);
 								}
 							}),
 

@@ -30,7 +30,8 @@ export default class TreasureFinder extends Feature {
 		this.waiting = [];
 
 		bot.client.on("message", async (message) => {
-			if (!message.author.bot) {
+			// TODO: Hard coded discord bot lists guilds
+			if (!message.author.bot && message.guild.id !== "264445053596991498" && message.guild.id !== "110373943822540800") {
 				if (message.author.id !== bot.client.user.id) {
 					const treasure = this.treasures[Utils.getRandomInt(0, this.treasures.length - 1)];
 
