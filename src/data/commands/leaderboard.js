@@ -5,7 +5,9 @@ import DbUser from "../../database/db-user";
 export default {
 	async executed(context) {
 		const response = new MessageBuilder();
-		const topUsers = DbUser.fromResults(await context.bot.database.db("users").select().limit(10).orderBy("points", "desc").then());
+		
+		const topUsers = DbUser.fromResults(await context.bot.database.db("users").select().limit(10).orderBy("points", "desc")
+			.then());
 
 		for (let i = 0; i < topUsers.length; i++) {
 			const userInfo = context.bot.client.users.find("id", topUsers[i].userId.toString());
@@ -19,11 +21,11 @@ export default {
 					emoji = ":small_blue_diamond:";
 				}
 
-				response.add(`${emoji} #${i + 1} : *${userInfo.username}* with ** ${topUsers[i].points}** points`).addLine();
+				response.add(`${emoji} #${i + 1} : *${userInfo.username}* with ** ${topUsers[i].points}** coins`).addLine();
 			}
 		}
 
-		context.respond(response.build(), "Points leaderboard", "BLUE");
+		context.respond(response.build(), "Coins leaderboard", "BLUE");
 	},
 
 	canExecute(context) {

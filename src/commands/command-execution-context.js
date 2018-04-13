@@ -45,7 +45,7 @@ export default class CommandExecutionContext {
 
 			if (typeof message === "object") {
 				for (let i = 0; i < Object.keys(message).length; i++) {
-					embed.addField(Object.keys(message)[i], message[Object.keys(message)[i]]);
+					embed.addField(Object.keys(message)[i], message[Object.keys(message)[i]], true);
 				}
 			}
 			else {

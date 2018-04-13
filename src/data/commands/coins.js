@@ -15,9 +15,9 @@ export default {
 			return;
 		}
 
-		const points = await context.bot.database.getUserPoints(id);
+		const coins = await context.bot.database.getUserPoints(id);
 
-		context.respond(`:small_orange_diamond:**${member.displayName}** has **${points}** points`, "", "GREEN");
+		context.respond(`:small_orange_diamond:**${member.displayName}** has **${coins}** coins`, "", "GREEN");
 	},
 
 	canExecute(context) {
@@ -25,8 +25,8 @@ export default {
 	},
 
 	meta: {
-		name: "points",
-		description: "View how many points you have",
+		name: "coins",
+		description: "View how many coins you have",
 		accessLevel: AccessLevelType.Member,
 		aliases: [],
 		maxArguments: 1,

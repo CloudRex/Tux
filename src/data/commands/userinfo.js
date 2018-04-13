@@ -20,7 +20,7 @@ export default {
 				"Last message": member.user.lastMessage,
 				Verified: member.user.verified,
 				Bot: member.user.bot,
-				Points: `:small_orange_diamond:${points}`
+				Coins: `:small_orange_diamond:${points}`
 			}, "", "GREEN", "", "", member.user.avatarURL);
 		}
 		else {

@@ -12,7 +12,8 @@ export default {
 		const member = context.message.guild.member(id.replace('<@', '').replace('>', ''));
 
 		if (member.bot) {
-			context.respond(`Bots can't have items`);
+			context.respond(`Bots can't have items.`, "", "RED");
+
 			return;
 		}
 

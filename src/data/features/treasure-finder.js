@@ -53,7 +53,8 @@ export default class TreasureFinder extends Feature {
 			}
 		});
 
-		bot.client.on("messageReactionAdd", async (reaction, user) => {
+
+		const handleReaction = async (reaction, user) => {
 			if (reaction.emoji.name === "🖐") {
 				const index = this.getWaitingIndex(user.id);
 
@@ -70,6 +71,9 @@ export default class TreasureFinder extends Feature {
 					console.log(`${user.username}@${reaction.message.guild.name}@${reaction.message.channel.name} caught a ${treasure.name} (${treasure.value})`);
 				}
 			}
-		});
+		};
+
+		bot.client.on("messageReactionAdd", handleReaction);
+		bot.client.on("messageReactionRemove", handleReaction);
 	}
 }
