@@ -1,5 +1,6 @@
 import AccessLevelType from "../../core/access-level-type";
 import MessageBuilder from "../../core/message-builder";
+import CommandCategoryType from "../../commands/command-category-type";
 
 export default {
 	async executed(context) {
@@ -52,6 +53,7 @@ export default {
 		accessLevel: AccessLevelType.Member,
 		aliases: ["inv"],
 		maxArguments: 1,
-		args: {}
+		args: {},
+		category: CommandCategoryType.Economy
 	}
 };

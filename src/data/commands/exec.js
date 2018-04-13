@@ -1,5 +1,6 @@
 import AccessLevelType from "../../core/access-level-type";
 import MessageBuilder from "../../core/message-builder";
+import CommandCategoryType from "../../commands/command-category-type";
 
 const { exec } = require("child_process");
 
@@ -28,6 +29,8 @@ export default {
 
 		args: {
 			command: "!string"
-		}
+		},
+
+		category: CommandCategoryType.Developer
 	}
 };

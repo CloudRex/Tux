@@ -1,5 +1,6 @@
 import AccessLevelType from "../../core/access-level-type";
 import MessageBuilder from "../../core/message-builder";
+import CommandCategoryType from "../../commands/command-category-type";
 
 export default {
 	executed(context) {
@@ -38,6 +39,8 @@ export default {
 
 		args: {
 			expression: "!string"
-		}
+		},
+
+		category: CommandCategoryType.Developer
 	}
 };

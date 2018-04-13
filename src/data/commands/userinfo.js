@@ -1,4 +1,5 @@
 import AccessLevelType from "../../core/access-level-type";
+import CommandCategoryType from "../../commands/command-category-type";
 
 export default {
 	async executed(context) {
@@ -41,6 +42,8 @@ export default {
 
 		args: {
 			user: ":user-mention"
-		}
+		},
+
+		category: CommandCategoryType.Utility
 	}
 };

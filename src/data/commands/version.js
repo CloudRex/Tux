@@ -1,6 +1,7 @@
 import AccessLevelType from "../../core/access-level-type";
 import EmojiMenu from "../../emoji-ui/emoji-menu";
 import EmojiButton from "../../emoji-ui/emoji-button";
+import CommandCategoryType from "../../commands/command-category-type";
 
 export default {
 	executed(context) {
@@ -26,6 +27,7 @@ export default {
 		accessLevel: AccessLevelType.Guest,
 		aliases: ["ver"],
 		maxArguments: 0,
-		args: {}
+		args: {},
+		category: CommandCategoryType.General
 	}
 };

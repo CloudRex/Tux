@@ -1,6 +1,7 @@
 import AccessLevelType from "../../core/access-level-type";
 import MessageBuilder from "../../core/message-builder";
 import DbUser from "../../database/db-user";
+import CommandCategoryType from "../../commands/command-category-type";
 
 export default {
 	async executed(context) {
@@ -38,6 +39,7 @@ export default {
 		accessLevel: AccessLevelType.Member,
 		aliases: ["lb"],
 		maxArguments: 0,
-		args: {}
+		args: {},
+		category: CommandCategoryType.Economy
 	}
 };

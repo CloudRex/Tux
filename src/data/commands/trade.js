@@ -4,6 +4,7 @@ import TradeState from "../../core/trade-state";
 import EmojiMenu from "../../emoji-ui/emoji-menu";
 import EmojiButton from "../../emoji-ui/emoji-button";
 import MessageBuilder from "../../core/message-builder";
+import CommandCategoryType from "../../commands/command-category-type";
 
 const Discord = require("discord.js");
 
@@ -249,6 +250,8 @@ export default {
 
 			// TODO: Does not stack up with other design pattern (multiple posibilities)
 			query: ""
-		}
+		},
+
+		category: CommandCategoryType.Economy
 	}
 };

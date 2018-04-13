@@ -1,4 +1,5 @@
 import AccessLevelType from "../../core/access-level-type";
+import CommandCategoryType from "../../commands/command-category-type";
 
 export default {
 	executed(context) {
@@ -49,6 +50,8 @@ export default {
 			time: "!number",
 			message: "!message",
 			repeat: "boolean"
-		}
+		},
+
+		category: CommandCategoryType.Developer
 	}
 };

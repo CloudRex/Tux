@@ -1,4 +1,5 @@
 import AccessLevelType from "../../core/access-level-type";
+import CommandCategoryType from "../../commands/command-category-type";
 
 const snekfetch = require("snekfetch");
 
@@ -32,6 +33,8 @@ export default {
 
 		args: {
 			query: "!string"
-		}
+		},
+
+		category: CommandCategoryType.Utility
 	}
 };

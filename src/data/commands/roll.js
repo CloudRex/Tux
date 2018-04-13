@@ -1,5 +1,6 @@
 import AccessLevelType from "../../core/access-level-type";
 import Utils from "../../core/utils";
+import CommandCategoryType from "../../commands/command-category-type";
 
 export default {
 	executed(context) {
@@ -16,6 +17,7 @@ export default {
 		accessLevel: AccessLevelType.Member,
 		aliases: ["dice"],
 		maxArguments: 0,
-		args: {}
+		args: {},
+		category: CommandCategoryType.Fun
 	}
 };

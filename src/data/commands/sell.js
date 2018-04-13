@@ -1,4 +1,5 @@
 import AccessLevelType from "../../core/access-level-type";
+import CommandCategoryType from "../../commands/command-category-type";
 
 const fs = require("fs");
 // TODO: Better loading system (class) and path musn't be hard coded
@@ -72,6 +73,8 @@ export default {
 
 		args: {
 			item: "!string"
-		}
+		},
+
+		category: CommandCategoryType.Economy
 	}
 };

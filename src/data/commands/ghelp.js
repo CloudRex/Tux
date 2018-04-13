@@ -2,6 +2,7 @@ import AccessLevelType from "../../core/access-level-type";
 import MessageBuilder from "../../core/message-builder";
 import EmojiMenu from "../../emoji-ui/emoji-menu";
 import EmojiButton from "../../emoji-ui/emoji-button";
+import CommandCategoryType from "../../commands/command-category-type";
 
 export default {
 	async executed(context) {
@@ -57,7 +58,7 @@ export default {
 		accessLevel: AccessLevelType.Member,
 		aliases: [],
 		maxArguments: 0,
-
-		args: {}
+		args: {},
+		category: CommandCategoryType.General
 	}
 };
