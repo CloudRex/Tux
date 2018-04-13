@@ -5,7 +5,7 @@ import DbUser from "../../database/db-user";
 export default {
 	async executed(context) {
 		const response = new MessageBuilder();
-		
+
 		const topUsers = DbUser.fromResults(await context.bot.database.db("users").select().limit(10).orderBy("points", "desc")
 			.then());
 

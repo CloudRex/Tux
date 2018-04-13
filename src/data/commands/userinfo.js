@@ -21,7 +21,7 @@ export default {
 				Verified: member.user.verified,
 				Bot: member.user.bot,
 				Coins: `:small_orange_diamond:${points}`
-			}, "", "GREEN", "", "", member.user.avatarURL);
+			}, "", "GREEN", member.user.avatarURL);
 		}
 		else {
 			context.respond("User not found.");
