@@ -8,8 +8,9 @@ export default class Command {
 	 * @param {AccessLevelType} accessLevel
 	 * @param {function} onExecuted
 	 * @param {function} canExecute
+	 * @param {CommandCategoryType} category
 	 */
-	constructor(base, description, aliases, extendedDescription, maxArguments, accessLevel, onExecuted, canExecute) {
+	constructor(base, description, aliases, extendedDescription, maxArguments, accessLevel, onExecuted, canExecute, category) {
 		this.base = base;
 		this.description = description;
 		this.aliases = aliases;
@@ -18,6 +19,7 @@ export default class Command {
 		this.accessLevel = accessLevel;
 		this.executed = onExecuted;
 		this.canExecute = canExecute;
+		this.category = category;
 	}
 
 	/**
@@ -33,7 +35,8 @@ export default class Command {
 			module.meta.maxArguments,
 			module.meta.accessLevel,
 			module.executed,
-			module.canExecute
+			module.canExecute,
+			module.meta.category
 		);
 	}
 }
