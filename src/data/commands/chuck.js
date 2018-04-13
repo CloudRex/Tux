@@ -7,7 +7,7 @@ export default {
 		request("https://api.chucknorris.io/jokes/random", (error, response, body) => {
 			const data = JSON.parse(body);
 
-			context.respond(data.value, "Chuck Norris Fact", "RED", data.icon_url);
+			context.respond(data.value, "Chuck Norris Fact", "RED", "", "", "", data.icon_url);
 		});
 	},
 
