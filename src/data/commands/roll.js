@@ -6,7 +6,10 @@ export default {
 	executed(context) {
 		let max = (context.arguments[0] ? parseInt(context.arguments[0]) : 12);
 
-		if (max > 5000) {
+		if (Number.isNaN(max)) {
+			max = 12;
+		}
+		else if (max > 5000) {
 			max = 5000;
 		}
 		else if (max < 2) {
