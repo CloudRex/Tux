@@ -7,6 +7,7 @@ export default {
 		let id = context.arguments[0];
 
 		if (context.arguments.length === 0) {
+			// eslint-disable-next-line prefer-destructuring
 			id = context.message.author.id;
 		}
 
@@ -20,7 +21,6 @@ export default {
 
 		const items = await context.bot.database.getItems(member.id);
 		const response = new MessageBuilder();
-		const chanceMultiplier = context.bot.userConfig.get("chanceMultiplier");
 
 		let totalWorth = 0;
 
@@ -35,7 +35,7 @@ export default {
 				totalWorth += items[i].value * items[i].amount;
 			}
 
-			response.addLine().addLine().add(`Total worth::small_orange_diamond:**${totalWorth * chanceMultiplier}**`);
+			response.addLine().addLine().add(`Total worth::small_orange_diamond:**${totalWorth}**`);
 		}
 		else {
 			response.add(":sob: Oh noes! You don't have any items.");
