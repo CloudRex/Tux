@@ -20,6 +20,7 @@ export default {
 
 		const items = await context.bot.database.getItems(member.id);
 		const response = new MessageBuilder();
+		const chanceMultiplier = context.bot.userConfig.get("chanceMultiplier");
 
 		let totalWorth = 0;
 
@@ -34,7 +35,7 @@ export default {
 				totalWorth += items[i].value * items[i].amount;
 			}
 
-			response.addLine().addLine().add(`Total worth::small_orange_diamond:**${totalWorth}**`);
+			response.addLine().addLine().add(`Total worth::small_orange_diamond:**${totalWorth * chanceMultiplier}**`);
 		}
 		else {
 			response.add(":sob: Oh noes! You don't have any items.");
