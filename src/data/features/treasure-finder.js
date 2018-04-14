@@ -32,7 +32,7 @@ export default class TreasureFinder extends Feature {
 
 		bot.client.on("message", async (message) => {
 			// TODO: Hard coded discord bot lists guilds
-			if (!message.author.bot && message.guild.id !== "264445053596991498" && message.guild.id !== "110373943822540800") {
+			if (!message.author.bot && message.guild.id.toString() !== "264445053596991498" && message.guild.id.toString() !== "110373943822540800") {
 				if (message.author.id !== bot.client.user.id) {
 					const treasure = this.treasures[Utils.getRandomInt(0, this.treasures.length - 1)];
 					const chanceMultiplier = bot.userConfig.get("chanceMultiplier");
@@ -70,6 +70,8 @@ export default class TreasureFinder extends Feature {
 					bot.database.addItem(new DbItem(null, user.id, treasure.name, treasure.key, treasure.value, 1));
 					this.waiting.splice(index, 1);
 					// reaction.message.clearReactions();
+
+					// TODO: Probably giving out error, make sure it awaits then saves then delete below using var
 					reaction.message.edit(`**${user.username}** has captured a :${treasure.key}: worth **${treasure.value}**! Use \`inv\``);
 
 					if (reaction.message) {
