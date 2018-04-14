@@ -1,34 +1,35 @@
 import AccessLevelType from "../../core/access-level-type";
 import CommandCategoryType from "../../commands/command-category-type";
 
-const exec = require("child_process").exec;
+const { exec } = require("child_process");
 
 export default {
-	executed(context) {
+	async executed(context) {
 		if (context.arguments.length === 1) {
 			switch (context.arguments[0]) {
 				case "stop": {
-					context.respond("Stopping the bot", "", "GREEN");
+					await context.respond("Stopping the bot", "", "GREEN");
 					context.bot.disconnect();
 
 					break;
 				}
 
 				case "restart": {
-					context.respond("Restarting the bot", "", "GREEN");
+					await context.respond("Restarting the bot", "", "GREEN");
 					context.bot.restart();
 
 					break;
 				}
 
 				case "srestart": {
+					await context.respond("Restarting the bot and pulling latest changes", "", "GREEN");
 					exec("sudo systemctl restart tux");
 
 					break;
 				}
 
 				default: {
-					context.respond("Invalid command issued. First argument should be: stop or restart");
+					context.respond("Invalid command issued. First argument should be: stop, restart, srestart");
 				}
 			}
 		}
