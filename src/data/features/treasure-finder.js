@@ -56,7 +56,6 @@ export default class TreasureFinder extends Feature {
 			}
 		});
 
-
 		const handleReaction = async (reaction, user) => {
 			if (reaction.emoji.name === "🖐") {
 				const index = this.getWaitingIndex(user.id);
@@ -71,7 +70,7 @@ export default class TreasureFinder extends Feature {
 					bot.database.addItem(new DbItem(null, user.id, treasure.name, treasure.key, treasure.value, 1));
 					this.waiting.splice(index, 1);
 					// reaction.message.clearReactions();
-					reaction.message.edit(`**${user.username}** has captured a :${treasure.key}: worth **${treasure.value * chanceMultiplier}**! Use \`inv\``);
+					reaction.message.edit(`**${user.username}** has captured a :${treasure.key}: worth **${treasure.value}**! Use \`inv\``);
 
 					if (reaction.message) {
 						reaction.message.delete(6000);
