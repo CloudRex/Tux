@@ -7,12 +7,12 @@ export default {
 
 		context.respond({
 			Name: guild.name,
-			Owner: guild.owner.displayName,
+			Owner: guild.owner ? guild.owner.displayName : "Unknown",
 			Users: guild.members.array().filter((member) => !member.bot).length,
 			Bots: guild.members.array().filter((member) => member.bot).length,
 			"Total Members": guild.memberCount,
 			Region: guild.region,
-			"Default Channel": guild.defaultChannel,
+			"Default Channel": guild.defaultChannel ? guild.defaultChannel : "None",
 			"Created At": guild.createdAt
 		}, "", "", guild.iconURL);
 	},
