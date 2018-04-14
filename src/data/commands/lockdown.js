@@ -3,7 +3,7 @@ import CommandCategoryType from "../../commands/command-category-type";
 
 export default {
 	executed(context) {
-		context.respond("Initiated server lockdown mode.");
+		context.respond("**Initiated server lockdown mode.**", "Lockdown", "RED");
 
 		// TODO
 	},
