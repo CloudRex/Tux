@@ -8,11 +8,13 @@ export default {
 		context.respond({
 			Name: guild.name,
 			Owner: guild.owner.displayName,
-			Users: guild.memberCount,
+			Users: guild.members.array().filter((member) => !member.bot).length,
+			Bots: guild.members.array().filter((member) => member.bot).length,
+			"Total Members": guild.memberCount,
 			Region: guild.region,
 			"Default Channel": guild.defaultChannel,
 			"Created At": guild.createdAt
-		});
+		}, "", "", guild.iconURL);
 	},
 
 	canExecute(context) {
@@ -22,7 +24,7 @@ export default {
 	meta: {
 		name: "info",
 		description: "View information about the server",
-		accessLevel: AccessLevelType.Moderator,
+		accessLevel: AccessLevelType.Member,
 		aliases: [],
 		maxArguments: 0,
 		args: {},
