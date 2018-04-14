@@ -32,7 +32,7 @@ export default {
 		name: "about",
 		description: "Displays information about the bot",
 		accessLevel: AccessLevelType.Guest,
-		aliases: ["invite"],
+		aliases: ["invite", "vote"],
 		maxArguments: 0,
 		args: {},
 		category: CommandCategoryType.General,
