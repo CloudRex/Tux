@@ -22,6 +22,7 @@ export default {
 		aliases: [],
 		maxArguments: 0,
 		args: {},
-		category: CommandCategoryType.General
+		category: CommandCategoryType.General,
+		enabled: true
 	}
 };

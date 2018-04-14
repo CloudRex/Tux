@@ -52,6 +52,7 @@ export default {
 			repeat: "boolean"
 		},
 
-		category: CommandCategoryType.Developer
+		category: CommandCategoryType.Developer,
+		enabled: true
 	}
 };

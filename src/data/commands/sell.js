@@ -75,6 +75,7 @@ export default {
 			item: "!string"
 		},
 
-		category: CommandCategoryType.Economy
+		category: CommandCategoryType.Economy,
+		enabled: true
 	}
 };

@@ -35,6 +35,7 @@ export default {
 		aliases: [],
 		maxArguments: 1,
 		args: {},
-		category: CommandCategoryType.NSFW
+		category: CommandCategoryType.NSFW,
+		enabled: true
 	}
 };

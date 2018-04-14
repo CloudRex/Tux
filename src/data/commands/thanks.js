@@ -54,6 +54,7 @@ export default {
 			user: ":user-mention"
 		},
 
-		category: CommandCategoryType.Fun
+		category: CommandCategoryType.Fun,
+		enabled: true
 	}
 };

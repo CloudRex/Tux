@@ -17,6 +17,7 @@ export default {
 		aliases: ["usg"],
 		maxArguments: 1,
 		args: {},
-		category: CommandCategoryType.General
+		category: CommandCategoryType.General,
+		enabled: true
 	}
 };

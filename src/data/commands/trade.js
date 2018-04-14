@@ -251,6 +251,7 @@ export default {
 			query: ""
 		},
 
-		category: CommandCategoryType.Economy
+		category: CommandCategoryType.Economy,
+		enabled: true
 	}
 };

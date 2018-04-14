@@ -18,6 +18,7 @@ export default {
 		aliases: [],
 		maxArguments: 0,
 		args: {},
-		category: CommandCategoryType.Utility
+		category: CommandCategoryType.Utility,
+		enabled: true
 	}
 };

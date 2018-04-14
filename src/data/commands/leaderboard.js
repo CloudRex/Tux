@@ -40,6 +40,7 @@ export default {
 		aliases: ["lb"],
 		maxArguments: 0,
 		args: {},
-		category: CommandCategoryType.Economy
+		category: CommandCategoryType.Economy,
+		enabled: true
 	}
 };

@@ -34,6 +34,7 @@ export default {
 			trigger: "!string"
 		},
 
-		category: CommandCategoryType.Developer
+		category: CommandCategoryType.Developer,
+		enabled: true
 	}
 };

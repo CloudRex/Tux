@@ -32,6 +32,7 @@ export default {
 		aliases: [],
 		maxArguments: 1,
 		args: {},
-		category: CommandCategoryType.Economy
+		category: CommandCategoryType.Economy,
+		enabled: true
 	}
 };

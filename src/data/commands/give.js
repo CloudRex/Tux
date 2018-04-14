@@ -30,6 +30,7 @@ export default {
 			amount: "!number"
 		},
 
-		category: CommandCategoryType.Developer
+		category: CommandCategoryType.Developer,
+		enabled: true
 	}
 };

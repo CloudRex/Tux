@@ -99,6 +99,7 @@ export default {
 			command: "string"
 		},
 
-		category: CommandCategoryType.General
+		category: CommandCategoryType.General,
+		enabled: true
 	}
 };

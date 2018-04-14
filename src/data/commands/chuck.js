@@ -23,6 +23,7 @@ export default {
 		aliases: [],
 		maxArguments: 0,
 		args: {},
-		category: CommandCategoryType.Fun
+		category: CommandCategoryType.Fun,
+		enabled: true
 	}
 };

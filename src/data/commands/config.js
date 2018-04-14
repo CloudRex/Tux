@@ -37,6 +37,7 @@ export default {
 			value: "any"
 		},
 
-		category: CommandCategoryType.Developer
+		category: CommandCategoryType.Developer,
+		enabled: true
 	}
 };

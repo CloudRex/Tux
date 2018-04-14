@@ -26,6 +26,7 @@ export default {
 		aliases: ["ver"],
 		maxArguments: 0,
 		args: {},
-		category: CommandCategoryType.General
+		category: CommandCategoryType.General,
+		enabled: true
 	}
 };

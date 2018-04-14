@@ -49,6 +49,7 @@ export default {
 			characters: "number"
 		},
 
-		category: CommandCategoryType.Utility
+		category: CommandCategoryType.Utility,
+		enabled: true
 	}
 };

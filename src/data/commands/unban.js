@@ -32,6 +32,7 @@ export default {
 			user: "!:snowflake"
 		},
 
-		category: CommandCategoryType.Moderation
+		category: CommandCategoryType.Moderation,
+		enabled: true
 	}
 };

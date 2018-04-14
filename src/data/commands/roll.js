@@ -18,6 +18,7 @@ export default {
 		aliases: ["dice"],
 		maxArguments: 0,
 		args: {},
-		category: CommandCategoryType.Fun
+		category: CommandCategoryType.Fun,
+		enabled: true
 	}
 };

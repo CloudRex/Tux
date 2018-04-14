@@ -43,6 +43,7 @@ export default {
 			query: "!string"
 		},
 
-		category: CommandCategoryType.Utility
+		category: CommandCategoryType.Utility,
+		enabled: true
 	}
 };

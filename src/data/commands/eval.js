@@ -46,6 +46,7 @@ export default {
 			expression: "!string"
 		},
 
-		category: CommandCategoryType.Developer
+		category: CommandCategoryType.Developer,
+		enabled: true
 	}
 };

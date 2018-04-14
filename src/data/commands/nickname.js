@@ -33,6 +33,7 @@ export default {
 			nickname: "!string"
 		},
 
-		category: CommandCategoryType.Moderation
+		category: CommandCategoryType.Moderation,
+		enabled: true
 	}
 };

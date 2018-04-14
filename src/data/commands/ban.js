@@ -35,6 +35,8 @@ export default {
 			reason: "!string"
 		},
 
-		category: CommandCategoryType.Moderation
+		category: CommandCategoryType.Moderation,
+
+		enabled: true
 	}
 };
