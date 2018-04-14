@@ -21,7 +21,8 @@ export default class Settings {
 
 	save() {
 		fs.writeFileSync(this.path, JSON.stringify({
-			general: this.general
+			general: this.general,
+			log: this.log
 		}, null, 4));
 	}
 

@@ -5,6 +5,8 @@ import Database from "../database/database";
 import ConsoleInterface from "../console/console-interface";
 import EmojiMenuManager from "../emoji-ui/emoji-menu-manager";
 
+const DBL = require("dblapi.js");
+
 export default class Bot {
 	/**
 	 * @param {Settings} settings
@@ -24,6 +26,7 @@ export default class Bot {
 		this.database = new Database(this.settings.general.databasePath);
 		this.console = new ConsoleInterface();
 		this.emojis = new EmojiMenuManager(this.client);
+		this.dbl = new DBL(settings.general.dblToken);
 
 		// Discord client events
 		this.client.on("ready", () => {
@@ -34,6 +37,11 @@ export default class Bot {
 					name: "?trigger"
 				}
 			});
+
+			// Post stats to DBL
+			setInterval(() => {
+				this.dbl.postStats(this.client.guilds.size);
+			}, 1800000);
 
 			this.console.init(this);
 		});
