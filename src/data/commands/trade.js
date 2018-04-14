@@ -115,8 +115,6 @@ export default {
 					if (activeTrade) {
 						const { username } = context.bot.client.users.find("id", activeTrade.recipientId);
 
-						console.log(item);
-
 						if (item && item.amount >= amount) {
 							await context.bot.database.addTradeDemand(context.message.author.id, item, amount);
 
@@ -145,9 +143,6 @@ export default {
 						const recipientChannel = (recipient.dmChannel ? recipient.dmChannel : await recipient.createDM());
 						const senderChannel = (sender.dmChannel ? sender.dmChannel : await sender.createDM());
 
-						context.respond(`Successfully send trade offer to **${recipient.username}**. (Trade#${activeTrade.id})`, "", "GREEN");
-						context.bot.database.setTradeState(activeTrade.id, TradeState.Pending);
-
 						const items = new MessageBuilder();
 						const dbItems = await context.bot.database.getTradePropositions(activeTrade.id);
 
@@ -159,6 +154,7 @@ export default {
 							}
 						}
 
+						// TODO: make sure user has received the pm by doing msg.catch() (but its on the emoji class :( )
 						context.bot.emojis.show(recipientChannel, new EmojiMenu([
 							new EmojiButton("✅", async (message, user) => {
 								message.delete();
@@ -216,6 +212,9 @@ export default {
 								senderChannel.send(`${recipient.username} **declined** your trade offer. (Trade#${activeTrade.id})`);
 							})
 						], new Discord.RichEmbed().setDescription(`${sender.username} wants to trade`).setColor("GOLD").addField("Propositions", items.build())));
+
+						context.respond(`Successfully send trade offer to **${recipient.username}**. (Trade#${activeTrade.id})`, "", "GREEN");
+						context.bot.database.setTradeState(activeTrade.id, TradeState.Pending);
 					}
 					else {
 						context.respond("You don't have any active trades.", "", "RED");

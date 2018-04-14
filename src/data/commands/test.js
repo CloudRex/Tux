@@ -2,8 +2,10 @@ import AccessLevelType from "../../core/access-level-type";
 import CommandCategoryType from "../../commands/command-category-type";
 
 export default {
-	executed(context) {
-		context.message.author.dmChannel.send("test").catch((error) => {
+	async executed(context) {
+		const channel = (context.message.author.dmChannel ? context.message.author.dmChannel : await context.message.author.createDM());
+
+		channel.send("test").catch((error) => {
 			context.message.channel.send("catched: " + error.message.toString());
 		});
 	},
@@ -13,7 +15,7 @@ export default {
 	},
 
 	meta: {
-		name: "version",
+		name: "test",
 		description: "Test something",
 		accessLevel: AccessLevelType.Owner,
 		aliases: [],
