@@ -40,6 +40,8 @@ export default class Bot {
 
 		this.client.on("message", (message) => {
 			if (!message.author.bot) {
+				this.database.addUserPoints(message.author.id, 1);
+
 				if (CommandParser.isValid(message.content, this.commands, this.settings.general.commandTrigger)) {
 					this.commands.handle(
 						new CommandExecutionContext(
