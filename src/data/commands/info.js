@@ -8,11 +8,12 @@ export default {
 		context.respond({
 			Name: guild.name,
 			Owner: guild.owner ? guild.owner.displayName : "Unknown",
-			Users: guild.members.array().filter((member) => !member.bot).length,
-			Bots: guild.members.array().filter((member) => member.bot).length,
+			Users: guild.members.array().filter((member) => !member.user.bot).length,
+			Bots: guild.members.array().filter((member) => member.user.bot).length,
 			"Total Members": guild.memberCount,
 			Region: guild.region,
 			"Default Channel": guild.defaultChannel ? guild.defaultChannel : "None",
+			"Custom Emojis": guild.emojis.array().length,
 			"Created At": guild.createdAt
 		}, "", "", guild.iconURL);
 	},
