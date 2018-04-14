@@ -1,6 +1,8 @@
 import AccessLevelType from "../../core/access-level-type";
 import CommandCategoryType from "../../commands/command-category-type";
 
+const exec = require("child_process").exec;
+
 export default {
 	executed(context) {
 		if (context.arguments.length === 1) {
@@ -15,6 +17,12 @@ export default {
 				case "restart": {
 					context.respond("Restarting the bot", "", "GREEN");
 					context.bot.restart();
+
+					break;
+				}
+
+				case "srestart": {
+					exec("sudo systemctl restart tux");
 
 					break;
 				}
