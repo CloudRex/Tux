@@ -8,21 +8,21 @@ export default {
 		if (context.arguments.length === 1) {
 			switch (context.arguments[0]) {
 				case "stop": {
-					await context.respond("Stopping the bot", "", "GREEN");
+					await context.respond("Stopping the bot.", "", "GREEN");
 					context.bot.disconnect();
 
 					break;
 				}
 
 				case "restart": {
-					await context.respond("Restarting the bot", "", "GREEN");
+					await context.respond("Restarting the bot.", "", "GREEN");
 					context.bot.restart();
 
 					break;
 				}
 
 				case "srestart": {
-					await context.respond("Restarting the bot and pulling latest changes", "", "GREEN");
+					await context.respond("Restarting the bot and pulling latest changes.", "", "GREEN");
 					exec("sudo systemctl restart tux");
 
 					break;

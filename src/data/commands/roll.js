@@ -6,7 +6,14 @@ export default {
 	executed(context) {
 		let max = (context.arguments[0] ? parseInt(context.arguments[0]) : 12);
 
-		context.respond(`:game_die: **${context.message.author.username}** rolled a **${Utils.getRandomInt(1, max)}**`);
+		if (max > 5000) {
+			max = 5000;
+		}
+		else if (max < 2) {
+			max = 2;
+		}
+
+		context.respond(`:game_die: **${context.message.author.username}** rolled a **${Utils.getRandomInt(1, max)}**`, "", "AQUA");
 	},
 
 	canExecute(context) {
