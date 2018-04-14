@@ -50,6 +50,7 @@ export default {
 		},
 
 		category: CommandCategoryType.Utility,
-		enabled: true
+		enabled: true,
+		price: 700
 	}
 };

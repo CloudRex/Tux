@@ -20,6 +20,7 @@ export default {
 		maxArguments: 1,
 		args: {},
 		category: CommandCategoryType.Moderation,
-		enabled: true
+		enabled: true,
+		price: 0
 	}
 };

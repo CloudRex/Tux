@@ -34,6 +34,7 @@ export default {
 		},
 
 		category: CommandCategoryType.Moderation,
-		enabled: true
+		enabled: true,
+		price: 400
 	}
 };

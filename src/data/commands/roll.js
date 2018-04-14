@@ -19,6 +19,7 @@ export default {
 		maxArguments: 0,
 		args: {},
 		category: CommandCategoryType.Fun,
-		enabled: true
+		enabled: true,
+		price: 150
 	}
 };

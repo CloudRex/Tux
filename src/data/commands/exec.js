@@ -32,6 +32,7 @@ export default {
 		},
 
 		category: CommandCategoryType.Developer,
-		enabled: true
+		enabled: true,
+		price: 0
 	}
 };
