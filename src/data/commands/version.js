@@ -13,8 +13,6 @@ export default {
 				// message.channel.send(`${user.username} reacted!`);
 			})
 		], "Hello"));
-
-		throw new Error("testing");
 	},
 
 	canExecute(context) {

@@ -16,7 +16,12 @@ export default {
 				}
 			};
 
-			const result = action();
+			let result = action();
+
+			// TODO
+			if (result.length > 1000) {
+				result = result.substr(0, 1000);
+			}
 
 			context.respond({
 				Evaluation: new MessageBuilder().addCodeBlock("javascript", context.arguments[0]).build(),
