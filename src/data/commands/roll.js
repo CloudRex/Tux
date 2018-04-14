@@ -4,7 +4,9 @@ import CommandCategoryType from "../../commands/command-category-type";
 
 export default {
 	executed(context) {
-		context.respond(`:game_die: **${context.message.author.username}** rolled a **${Utils.getRandomInt(1, 12)}**`);
+		let max = (context.arguments[0] ? parseInt(context.arguments[0]) : 12);
+
+		context.respond(`:game_die: **${context.message.author.username}** rolled a **${Utils.getRandomInt(1, max)}**`);
 	},
 
 	canExecute(context) {
@@ -16,7 +18,7 @@ export default {
 		description: "Roll a 12-sided dice",
 		accessLevel: AccessLevelType.Member,
 		aliases: ["dice"],
-		maxArguments: 0,
+		maxArguments: 1,
 		args: {},
 		category: CommandCategoryType.Fun,
 		enabled: true,
