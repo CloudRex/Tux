@@ -3,7 +3,9 @@ import CommandCategoryType from "../../commands/command-category-type";
 import Utils from "../../core/utils";
 
 export default {
-	executed(context) {
+	async executed(context) {
+		const message = await context.respond(":sparkles: Stay back! Dabbing in progress..", "", "BLUE");
+
 		const dabs = [
 			"https://78.media.tumblr.com/1680bb2708eab6929139c4e775b45d49/tumblr_odkckeMiw31smq206o1_500.jpg",
 			"https://res.cloudinary.com/teepublic/image/private/s--gfsWHvaH--/t_Preview/b_rgb:262c3a,c_limit,f_jpg,h_630,q_90,w_630/v1493209189/production/designs/1524888_1.jpg",
@@ -16,7 +18,7 @@ export default {
 			"http://image-cdn.neatoshop.com/styleimg/64165/none/gray/default/364943-19;1506817718i.jpg"
 		];
 
-		context.respond("", "", "", "", "", dabs[Utils.getRandomInt(0, dabs.length - 1)]);
+		message.edit("", "", "", "", dabs[Utils.getRandomInt(0, dabs.length - 1)]);
 	},
 
 	canExecute(context) {
