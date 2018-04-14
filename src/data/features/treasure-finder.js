@@ -45,6 +45,7 @@ export default class TreasureFinder extends Feature {
 
 							this.waiting.push({
 								id: message.author.id.toString(),
+								messageId: message.id,
 								treasure: treasure
 							});
 						}
@@ -58,7 +59,7 @@ export default class TreasureFinder extends Feature {
 			if (reaction.emoji.name === "🖐") {
 				const index = this.getWaitingIndex(user.id);
 
-				if (index !== null && index !== undefined) {
+				if (index !== null && index !== undefined && this.waiting[index].messageId === reaction.message.id) {
 					const { treasure } = this.waiting[index];
 
 					bot.database.addItem(new DbItem(null, user.id, treasure.name, treasure.key, treasure.value, 1));
