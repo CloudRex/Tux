@@ -2,10 +2,11 @@ import AccessLevelType from "../../core/access-level-type";
 import CommandCategoryType from "../../commands/command-category-type";
 
 export default {
-	executed(context) {
-		const voted = context.bot.dbl.hasVoted(context.message.author.id);
+	async executed(context) {
+		const voted = await context.bot.dbl.hasVoted(context.message.author.id);
 
-		context.respond("Voted : " + voted);
+		// TODO: Save that the user voted in the database and reset in 24 hours. (UK midnight time)
+		context.respond("Voted ->: " + voted, "", "GREEN");
 	},
 
 	canExecute(context) {
