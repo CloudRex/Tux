@@ -14,7 +14,7 @@ export default {
 
 	meta: {
 		name: "lockdown",
-		description: "Craft an item using other items",
+		description: "Lockdown the server",
 		accessLevel: AccessLevelType.Admin,
 		aliases: [],
 		maxArguments: 1,
