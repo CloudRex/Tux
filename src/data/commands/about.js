@@ -1,9 +1,14 @@
+import TimeAgo from "javascript-time-ago";
+import en from "javascript-time-ago/locale/en";
 import AccessLevelType from "../../core/access-level-type";
 import CommandCategoryType from "../../commands/command-category-type";
 
 export default {
 	executed(context) {
+		TimeAgo.locale(en);
+
 		const guilds = context.bot.client.guilds.array();
+		const timeAgo = new TimeAgo("en-US");
 
 		let users = 0;
 
@@ -20,7 +25,8 @@ export default {
 			"Command Trigger": context.bot.settings.general.commandTrigger,
 			Version: context.bot.settings.general.version,
 			Guilds: context.bot.client.guilds.size,
-			Users: users
+			Users: users,
+			Uptime: timeAgo.format(Date.now() - context.bot.client.uptime, "time")
 		}, "", "BLUE");
 	},
 
@@ -32,7 +38,7 @@ export default {
 		name: "about",
 		description: "Displays information about the bot",
 		accessLevel: AccessLevelType.Guest,
-		aliases: ["invite", "vote"],
+		aliases: ["invite", "vote", "uptime"],
 		maxArguments: 0,
 		args: {},
 		category: CommandCategoryType.General,
