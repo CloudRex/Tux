@@ -94,7 +94,7 @@ export default {
 							await context.bot.database.addTradeProposition(context.message.author.id, item, amount);
 
 							// TODO: User username instead of id
-							context.respond(`Added :${item.key}:x${item.amount} to the active trade with **${username}**`, "", "BLUE");
+							context.respond(`Added :${item.key}:x${amount} to the active trade with **${username}**`, "", "BLUE");
 						}
 						else {
 							context.respond("Operation failed: You either don't own that item or don't have that amount.", "", "RED");
@@ -119,7 +119,7 @@ export default {
 							await context.bot.database.addTradeDemand(context.message.author.id, item, amount);
 
 							// TODO: User username instead of id
-							context.respond(`Demanded :${item.key}:x${item.amount} from the active trade with **${username}**`, "", "GOLD");
+							context.respond(`Demanded :${item.key}:x${amount} from the active trade with **${username}**`, "", "GOLD");
 						}
 						else {
 							context.respond(`Operation failed: **${username}** either doesn't own that item or doesn't have that amount.`, "", "RED");
