@@ -11,8 +11,8 @@ export default class EditableMessage {
 		this.message = message;
 	}
 
-	edit(message, title = "", color = "RANDOM", thumbnailUrl = "", image = "") {
-		this.message.edit("", new Discord.RichEmbed()
+	async edit(message, title = "", color = "RANDOM", thumbnailUrl = "", image = "") {
+		return await this.message.edit("", new Discord.RichEmbed()
 			.setColor(color)
 			.setDescription(message)
 			.setAuthor(title, thumbnailUrl)

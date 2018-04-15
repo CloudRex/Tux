@@ -239,7 +239,7 @@ export default {
 				}
 
 				default: {
-					context.respond("Invalid trade action.", "", "RED");
+					context.respond("Invalid trade action. (create/status/cancel/send/add/demand)", "", "RED");
 				}
 			}
 		/* }

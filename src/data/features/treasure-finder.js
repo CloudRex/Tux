@@ -42,13 +42,17 @@ export default class TreasureFinder extends Feature {
 						});
 
 						if (msg) {
-							msg.delete(4000);
 							msg.react("🖐");
+
+							const deleteTimeout = bot.client.setTimeout(() => {
+								msg.delete();
+							}, 4000);
 
 							this.waiting.push({
 								id: message.author.id.toString(),
 								messageId: msg.id,
-								treasure: treasure
+								treasure: treasure,
+								deleteTimeout: deleteTimeout
 							});
 						}
 					}
@@ -57,29 +61,26 @@ export default class TreasureFinder extends Feature {
 		});
 
 		const handleReaction = async (reaction, user) => {
-			if (reaction.emoji.name === "🖐") {
-				const index = this.getWaitingIndex(user.id);
-				const chanceMultiplier = bot.userConfig.get("chanceMultiplier");
+			if (!user.bot) {
+				if (reaction.emoji.name === "🖐") {
+					const index = this.getWaitingIndex(user.id);
+					const chanceMultiplier = bot.userConfig.get("chanceMultiplier");
 
-				if (index !== null && index !== undefined && this.waiting[index].messageId === reaction.message.id) {
-					const { treasure } = this.waiting[index];
+					if (index !== null && index !== undefined && this.waiting[index].messageId === reaction.message.id) {
+						const { treasure } = this.waiting[index];
 
-					console.log(`message: ${reaction.message.id}`);
-					console.log(`waiting: ${this.waiting[index].messageId}`);
+						bot.database.addItem(new DbItem(null, user.id, treasure.name, treasure.key, treasure.value, 1));
+						bot.client.clearTimeout(this.waiting[index].deleteTimeout);
+						this.waiting.splice(index, 1);
+						// reaction.message.clearReactions();
 
-					bot.database.addItem(new DbItem(null, user.id, treasure.name, treasure.key, treasure.value, 1));
-					this.waiting.splice(index, 1);
-					// reaction.message.clearReactions();
+						// TODO: Probably giving out error, make sure it awaits then saves then delete below using var
+						const sentMsg = await reaction.message.edit(`**${user.username}** has captured a :${treasure.key}: worth **${treasure.value * chanceMultiplier}**! Use \`inv\``);
 
-					// TODO: Probably giving out error, make sure it awaits then saves then delete below using var
-					reaction.message.edit(`**${user.username}** has captured a :${treasure.key}: worth **${treasure.value}**! Use \`inv\``);
-
-					if (reaction.message) {
-						reaction.message.delete(6000);
+						if (sentMsg.deletable) {
+							sentMsg.delete(4000);
+						}
 					}
-
-					// TODO: Debug only
-					console.log(`${user.username}@${reaction.message.guild.name}@${reaction.message.channel.name} caught a ${treasure.name} (${treasure.value * chanceMultiplier})`);
 				}
 			}
 		};
