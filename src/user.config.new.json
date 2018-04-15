@@ -1,0 +1,11 @@
+{
+	"default": {
+		"spamTrigger": 4,
+		"mute": false
+	},
+
+	"global": {
+		"log": true,
+		"chanceMultiplier": 20
+	}
+}

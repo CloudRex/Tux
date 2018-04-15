@@ -1,4 +1,5 @@
 import Log from "./log";
+import Utils from "./utils";
 
 const fs = require("fs");
 
@@ -38,6 +39,31 @@ export default class UserConfig {
 	 */
 	contains(key) {
 		return this.config.hasOwnProperty(key);
+	}
+
+	/**
+	 * @param {string} stack
+	 * @returns {*}
+	 */
+	getByStack(stack) {
+		return Utils.accessArrayByStack(stack, this.config);
+	}
+
+	/**
+	 * @param {Snowflake} id
+	 * @param {string} template
+	 */
+	createGuild(id, template = "default") {
+		this.set(id, this.get(template));
+		this.save();
+	}
+
+	/**
+	 * @param {Snowflake} id
+	 */
+	removeGuild(id) {
+		delete this.config[id];
+		this.save();
 	}
 
 	save() {

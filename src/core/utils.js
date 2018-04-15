@@ -23,4 +23,22 @@ export default class Utils {
 	static getRandomInt(min, max) {
 		return Math.floor(Math.random() * max) + min;
 	}
+
+	/**
+	 * @param {string} stack
+	 * @param {array} array
+	 * @param {string} delimiter
+	 * @returns {(*|null)}
+	 */
+	static accessArrayByStack(stack, array, delimiter = ".") {
+		const keys = stack.split(delimiter);
+
+		let resultLoop = null;
+
+		for (let i = 0; i < keys.length; i++) {
+			resultLoop = array[keys[i]];
+		}
+
+		return resultLoop;
+	}
 }
