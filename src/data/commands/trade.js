@@ -143,14 +143,26 @@ export default {
 						const recipientChannel = (recipient.dmChannel ? recipient.dmChannel : await recipient.createDM());
 						const senderChannel = (sender.dmChannel ? sender.dmChannel : await sender.createDM());
 
-						const items = new MessageBuilder();
-						const dbItems = await context.bot.database.getTradePropositions(activeTrade.id);
+						const propositions = new MessageBuilder();
+						const demands = new MessageBuilder();
+						const dbPropositions = await context.bot.database.getTradePropositions(activeTrade.id);
+						const dbDemands = await context.bot.database.getTradeDemands(activeTrade.id);
 
-						for (let i = 0; i < dbItems.length; i++) {
-							items.add(`:${dbItems[i].key}:x${dbItems[i].amount} (:small_orange_diamond:${dbItems[i].value})`);
+						// Propositions
+						for (let i = 0; i < dbPropositions.length; i++) {
+							propositions.add(`:${dbPropositions[i].key}:x${dbPropositions[i].amount} (:small_orange_diamond:${dbPropositions[i].value})`);
 
-							if (i !== dbItems.length - 1) {
-								items.add(", ");
+							if (i !== dbPropositions.length - 1) {
+								propositions.add(", ");
+							}
+						}
+
+						// Demands
+						for (let i = 0; i < dbDemands.length; i++) {
+							demands.add(`:${dbDemands[i].key}:x${dbDemands[i].amount} (:small_orange_diamond:${dbDemands[i].value})`);
+
+							if (i !== dbDemands.length - 1) {
+								demands.add(", ");
 							}
 						}
 
@@ -211,7 +223,8 @@ export default {
 								recipientChannel.send(`You **declined** the trade with **${sender.username}** (Trade#${activeTrade.id})`);
 								senderChannel.send(`${recipient.username} **declined** your trade offer. (Trade#${activeTrade.id})`);
 							})
-						], new Discord.RichEmbed().setDescription(`${sender.username} wants to trade`).setColor("GOLD").addField("Propositions", items.build())));
+						], new Discord.RichEmbed().setDescription(`${sender.username} wants to trade`).setColor("GOLD").addField("Propositions", propositions.build())
+							.addField("Demands", demands.build())));
 
 						context.respond(`Successfully send trade offer to **${recipient.username}**. (Trade#${activeTrade.id})`, "", "GREEN");
 						context.bot.database.setTradeState(activeTrade.id, TradeState.Pending);
