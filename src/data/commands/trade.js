@@ -166,6 +166,9 @@ export default {
 							}
 						}
 
+						const embed = new Discord.RichEmbed().setDescription(`${sender.username} wants to trade`).setColor("GOLD").addField("Propositions", propositions.build() === "" ? "No propositions." : propositions.build())
+							.addField("Demands", demands.build() === "" ? "No demands." : demands.build());
+
 						// TODO: make sure user has received the pm by doing msg.catch() (but its on the emoji class :( )
 						context.bot.emojis.show(recipientChannel, new EmojiMenu([
 							new EmojiButton("✅", async (message, user) => {
@@ -223,8 +226,7 @@ export default {
 								recipientChannel.send(`You **declined** the trade with **${sender.username}** (Trade#${activeTrade.id})`);
 								senderChannel.send(`${recipient.username} **declined** your trade offer. (Trade#${activeTrade.id})`);
 							})
-						], new Discord.RichEmbed().setDescription(`${sender.username} wants to trade`).setColor("GOLD").addField("Propositions", propositions.build())
-							.addField("Demands", demands.build())));
+						], embed));
 
 						context.respond(`Successfully send trade offer to **${recipient.username}**. (Trade#${activeTrade.id})`, "", "GREEN");
 						context.bot.database.setTradeState(activeTrade.id, TradeState.Pending);
