@@ -29,7 +29,7 @@ export default {
 	},
 
 	canExecute(context) {
-		return true;
+		return false;
 	},
 
 	meta: {
