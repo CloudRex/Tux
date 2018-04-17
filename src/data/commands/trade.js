@@ -267,7 +267,7 @@ export default {
 		},
 
 		category: CommandCategoryType.Economy,
-		enabled: true,
+		enabled: false,
 		price: 250
 	}
 };

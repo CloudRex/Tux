@@ -23,7 +23,7 @@ export default {
 		console.log(CommandArgumentParser.validate({
 			name: "string|number",
 			age: "!number",
-			addr: "!number|:mah_check"
+			addr: "number|string|:mah_check"
 		}, tov, {
 			mah_check: mahCheck
 		}));
