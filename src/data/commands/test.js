@@ -5,21 +5,25 @@ import CommandArgumentParser from "../../commands/command-argument-parser";
 export default {
 	async executed(context) {
 		const tov = {
-			name: 6
+			name: null,
+			age: 5,
+			addr: "test"
 		};
 
 		const mahCheck = (arg) => {
 			console.log(arg);
 
 			if (typeof arg === "string") {
-				return arg.toLowerCase() === "john doee";
+				return arg.toLowerCase() === "john doe";
 			}
 
 			return false;
 		};
 
 		console.log(CommandArgumentParser.validate({
-			name: "number|:mah_check|string"
+			name: "string|number",
+			age: "!number",
+			addr: "!number|:mah_check"
 		}, tov, {
 			mah_check: mahCheck
 		}));

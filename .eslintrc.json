@@ -1,5 +1,6 @@
 {
 	"extends": "airbnb-base",
+
 	"rules": {
 		"linebreak-style": "off",
 		"indent": "off",
@@ -18,6 +19,7 @@
 		"global-require": "off",
 		"import/no-dynamic-require": "off",
 		"object-shorthand": "off",
-		"no-await-in-loop": "off"
+		"no-await-in-loop": "off",
+		"no-eval": "off"
 	}
 }
