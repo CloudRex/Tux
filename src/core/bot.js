@@ -75,6 +75,22 @@ export default class Bot {
 			}
 		});
 
+		this.client.on("guildCreate", (guild) => {
+			const guildLog = this.userConfig.getByStack("global.guild-log");
+
+			if (guildLog) {
+				this.client.guilds[guildLog.guild].channels[guildLog.channel].send(`Joined guild: ${guild.name} (${guild.memberCount} members)`);
+			}
+		});
+
+		/* this.client.on("guildDelete?", (guild) => {
+			const guildLog = this.userConfig.getByStack("global.guild-log");
+
+			if (guildLog) {
+				this.client.guilds[guildLog.guild].channels[guildLog.channel].send(`Joined guild: ${guild.name} (${guild.memberCount} members)`);
+			}
+		}); */
+
 		global.b = this;
 	}
 

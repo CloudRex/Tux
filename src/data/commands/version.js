@@ -1,6 +1,4 @@
 import AccessLevelType from "../../core/access-level-type";
-import EmojiMenu from "../../emoji-ui/emoji-menu";
-import EmojiButton from "../../emoji-ui/emoji-button";
 import CommandCategoryType from "../../commands/command-category-type";
 
 export default {
@@ -8,11 +6,11 @@ export default {
 		context.respond(`Version: \`${context.bot.settings.general.version}\``);
 
 		// TODO
-		context.bot.emojis.show(context.message.channel, new EmojiMenu([
+		/* context.bot.emojis.show(context.message.channel, new EmojiMenu([
 			new EmojiButton("🖐", (message, user) => {
 				// message.channel.send(`${user.username} reacted!`);
 			})
-		], "Hello"));
+		], "Hello")); */
 	},
 
 	canExecute(context) {

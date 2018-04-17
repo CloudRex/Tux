@@ -1,13 +1,28 @@
 import AccessLevelType from "../../core/access-level-type";
 import CommandCategoryType from "../../commands/command-category-type";
+import CommandArgumentParser from "../../commands/command-argument-parser";
 
 export default {
 	async executed(context) {
-		const channel = (context.message.author.dmChannel ? context.message.author.dmChannel : await context.message.author.createDM());
+		const tov = {
+			name: 6
+		};
 
-		channel.send("test").catch((error) => {
-			context.message.channel.send("catched: " + error.message.toString());
-		});
+		const mahCheck = (arg) => {
+			console.log(arg);
+
+			if (typeof arg === "string") {
+				return arg.toLowerCase() === "john doee";
+			}
+
+			return false;
+		};
+
+		console.log(CommandArgumentParser.validate({
+			name: "number|:mah_check|string"
+		}, tov, {
+			mah_check: mahCheck
+		}));
 	},
 
 	canExecute(context) {

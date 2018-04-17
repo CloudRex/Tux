@@ -3,7 +3,7 @@ import CommandCategoryType from "../../commands/command-category-type";
 
 export default {
 	async executed(context) {
-		context.respond(`:ping_pong: Pong **${context.bot.client.ping}**ms`, "", "GREEN");
+		context.respond(`:ping_pong: Pong **${Math.round(context.bot.client.ping)}**ms`, "", "GREEN");
 	},
 
 	canExecute(context) {

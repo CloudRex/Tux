@@ -6,6 +6,11 @@
 
 	"global": {
 		"log": true,
-		"chanceMultiplier": 20
+		"chance-multiplier": 20,
+
+		"guild-log": {
+			"guild": "366785187029188609",
+			"channel": "432268583133904937"
+		}
 	}
 }
