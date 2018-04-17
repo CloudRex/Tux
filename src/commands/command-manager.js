@@ -176,6 +176,16 @@ export default class CommandManager {
 
 			return false;
 		}
+		// TODO: simplify the deletion of the messages
+		else if (!command.isEnabled) {
+			const response = await context.respond("That command is disabled.", "", "RED");
+
+			if (response !== null) {
+				response.message.delete(4000);
+			}
+
+			return false;
+		}
 		else if (!this.hasAuthority(context.message, command.accessLevel)) {
 			const minAuthority = AccessLevelType.toString(command.accessLevel);
 			const response = await context.respond(`You don't have the authority to use that command. You must be at least a(n) **${minAuthority}**.`, "", "RED");
