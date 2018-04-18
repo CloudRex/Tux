@@ -16,7 +16,11 @@ export default {
 		accessLevel: AccessLevelType.Guest,
 		aliases: ["usg"],
 		maxArguments: 1,
-		args: {},
+
+		args: {
+			commandName: "!string"
+		},
+
 		category: CommandCategoryType.General,
 		enabled: true,
 		price: 0

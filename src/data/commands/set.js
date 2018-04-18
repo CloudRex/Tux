@@ -13,11 +13,11 @@ export default {
 	meta: {
 		name: "set",
 		description: "Configure the bot",
-		accessLevel: AccessLevelType.Member,
+		accessLevel: AccessLevelType.Developer,
 		aliases: [],
 		maxArguments: 1,
 		args: {},
-		category: CommandCategoryType.General,
+		category: CommandCategoryType.Developer,
 		enabled: true,
 		price: 0
 	}

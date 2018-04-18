@@ -21,12 +21,12 @@ export default {
 	meta: {
 		name: "give",
 		description: "Give points to an user",
-		accessLevel: AccessLevelType.Owner,
+		accessLevel: AccessLevelType.Developer,
 		aliases: [],
 		maxArguments: 2,
 
 		args: {
-			user: "!:user-mention",
+			user: "!:user",
 			amount: "!number"
 		},
 

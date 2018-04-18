@@ -1,8 +1,8 @@
 export default class CommandArgumentParser {
 	// TODO: Fully review, might contain bugs or be incomplete.
 	/**
-	 * @param {array<string>} rules
-	 * @param {array<string>} args
+	 * @param {object} rules
+	 * @param {object} args
 	 * @param {object} types
 	 * @returns {boolean}
 	 */
@@ -20,7 +20,7 @@ export default class CommandArgumentParser {
 			const typeSplit = rules[ruleName].split("|"); // ["string", "number"]
 
 			for (let typeIdx = 0; typeIdx < typeSplit.length; typeIdx++) {
-				const type = typeSplit[typeIdx];
+				let type = typeSplit[typeIdx];
 
 				console.log(`Checking ${ruleName}@${typeSplit[typeIdx]}`);
 
@@ -33,6 +33,8 @@ export default class CommandArgumentParser {
 
 						return false;
 					}
+
+					type = type.substring(1);
 				}
 
 				if (args[ruleName]) {
@@ -51,7 +53,7 @@ export default class CommandArgumentParser {
 							return false;
 						}
 					}
-					else if (typeof args[ruleName] === (type[0] === "!" ? type.substring(1) : type)) {
+					else if (typeof args[ruleName] === type) {
 						break;
 					}
 					else if (typeIdx === typeSplit.length - 1) {

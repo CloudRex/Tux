@@ -36,7 +36,7 @@ export default {
 	meta: {
 		name: "test",
 		description: "Test something",
-		accessLevel: AccessLevelType.Owner,
+		accessLevel: AccessLevelType.Developer,
 		aliases: [],
 		maxArguments: 0,
 		args: {},

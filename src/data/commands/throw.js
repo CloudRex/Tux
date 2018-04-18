@@ -13,7 +13,7 @@ export default {
 	meta: {
 		name: "throw",
 		description: "Intentionally throw an error",
-		accessLevel: AccessLevelType.Owner,
+		accessLevel: AccessLevelType.Developer,
 		aliases: [],
 		maxArguments: 1,
 		args: {},

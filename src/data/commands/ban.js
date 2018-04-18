@@ -1,22 +1,16 @@
 import AccessLevelType from "../../core/access-level-type";
 import CommandCategoryType from "../../commands/command-category-type";
+import Utils from "../../core/utils";
 
 export default {
 	executed(context) {
-		if (context.arguments.length === 2) {
-			const { username } = context.message.guild.member(context.arguments[0]).user;
+		const { user } = context.message.guild.member(Utils.resolveId(context.arguments[0]));
 
-			context.message.guild.ban(context.arguments[0], {
-				reason: context.arguments[1]
-			})
-				.then(() => context.respond(`:zap: And just like that, **${username}** was long gone for \`${context.arguments[1]}\`.`, "", "GREEN"))
-				.catch((error) => {
-					context.respond(`Operation failed to complete. (${error.message})`, "", "RED");
-				});
-		}
-		else {
-			context.respond("Invalid amount of arguments.");
-		}
+		context.message.guild.ban(user.id, {
+			reason: context.arguments[1]
+		}).then(() => context.respond(`:zap: And just like that, **${user.username}** was long gone for \`${context.arguments[1]}\`.`, "", "GREEN")).catch((error) => {
+			context.respond(`Operation failed to complete. (${error.message})`, "", "RED");
+		});
 	},
 
 	canExecute(context) {
@@ -31,7 +25,7 @@ export default {
 		maxArguments: 2,
 
 		args: {
-			user: "!user-mention",
+			user: "!:user",
 			reason: "!string"
 		},
 

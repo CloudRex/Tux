@@ -1,5 +1,6 @@
 import AccessLevelType from "../../core/access-level-type";
 import CommandCategoryType from "../../commands/command-category-type";
+import Utils from "../../core/utils";
 
 export default {
 	async executed(context) {
@@ -8,17 +9,21 @@ export default {
 		if (context.arguments.length === 0) {
 			id = context.message.author.id;
 		}
+		else {
+			id = Utils.resolveId(id);
+		}
 
-		const member = context.message.guild.member(id.replace('<@', '').replace('>', ''));
+		const { user } = context.message.guild.member(Utils.resolveId(id));
 
-		if (member.bot) {
-			context.respond(`Bots can't have points`);
+		if (user.bot) {
+			context.respond(":robot: Bots can't have points!", "", "RED");
+
 			return;
 		}
 
 		const coins = await context.bot.database.getUserPoints(id);
 
-		context.respond(`:small_orange_diamond:**${member.displayName}** has **${coins}** coins`, "", "GREEN");
+		context.respond(`:small_orange_diamond:**${user.username}** has **${coins}** coins`, "", "GREEN");
 	},
 
 	canExecute(context) {

@@ -41,7 +41,7 @@ export default {
 		maxArguments: 1,
 
 		args: {
-			user: ":user-mention"
+			user: ":user"
 		},
 
 		category: CommandCategoryType.Utility,

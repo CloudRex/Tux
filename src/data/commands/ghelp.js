@@ -55,7 +55,7 @@ export default {
 	meta: {
 		name: "ghelp",
 		description: "View all available commands",
-		accessLevel: AccessLevelType.Member,
+		accessLevel: AccessLevelType.Developer,
 		aliases: [],
 		maxArguments: 0,
 		args: {},

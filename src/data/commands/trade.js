@@ -263,7 +263,7 @@ export default {
 			command: "!string",
 
 			// TODO: Does not stack up with other design pattern (multiple posibilities)
-			query: ""
+			query: "any"
 		},
 
 		category: CommandCategoryType.Economy,

@@ -5,6 +5,7 @@ const AccessLevelType = {
 	Moderator: 3,
 	Admin: 4,
 	Owner: 5,
+	Developer: 6,
 
 	/**
 	 * @param {AccessLevelType} type
@@ -28,6 +29,9 @@ const AccessLevelType = {
 
 			case AccessLevelType.Owner:
 				return "Owner";
+
+			case AccessLevelType.Developer:
+				return "Developer";
 
 			default:
 				return "Unknown";
@@ -57,6 +61,9 @@ const AccessLevelType = {
 
 			case "Owner":
 				return AccessLevelType.Owner;
+
+			case "Developer":
+				return AccessLevelType.Developer;
 
 			default:
 				return -1;

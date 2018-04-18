@@ -45,7 +45,7 @@ export default {
 	meta: {
 		name: "client",
 		description: "Control the bot's client",
-		accessLevel: AccessLevelType.Owner,
+		accessLevel: AccessLevelType.Developer,
 		aliases: ["cli"],
 		maxArguments: 1,
 

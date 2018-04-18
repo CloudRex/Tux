@@ -28,7 +28,7 @@ export default {
 	meta: {
 		name: "config",
 		description: "Change the bot's configuration",
-		accessLevel: AccessLevelType.Admin,
+		accessLevel: AccessLevelType.Developer,
 		aliases: ["cfg"],
 		maxArguments: 2,
 

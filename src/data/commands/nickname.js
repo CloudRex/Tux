@@ -24,12 +24,12 @@ export default {
 	meta: {
 		name: "nickname",
 		description: "Change a guild member's nickname",
-		accessLevel: AccessLevelType.Admin,
+		accessLevel: AccessLevelType.Moderator,
 		aliases: ["nick"],
 		maxArguments: 2,
 
 		args: {
-			user: "!:user-mention",
+			user: "!:user",
 			nickname: "!string"
 		},
 

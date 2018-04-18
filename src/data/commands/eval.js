@@ -38,7 +38,7 @@ export default {
 	meta: {
 		name: "eval",
 		description: "Evaluate JavaScript code",
-		accessLevel: AccessLevelType.Owner,
+		accessLevel: AccessLevelType.Developer,
 		aliases: [],
 		maxArguments: 1,
 

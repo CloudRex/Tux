@@ -29,7 +29,7 @@ export default {
 		maxArguments: 2,
 
 		args: {
-			user: "!:snowflake"
+			user: "!:user"
 		},
 
 		category: CommandCategoryType.Moderation,

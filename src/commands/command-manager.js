@@ -1,5 +1,6 @@
 import AccessLevelType from "../core/access-level-type";
 import Log from "../core/log";
+import CommandArgumentParser from "./command-argument-parser";
 
 const Discord = require("discord.js");
 const fs = require("fs");
@@ -166,11 +167,36 @@ export default class CommandManager {
 	}
 
 	/**
+	 * @param {object} rules
+	 * @param {array<string>} args
+	 * @returns {object}
+	 */
+	assembleArguments(rules, args) {
+		const result = {};
+
+		if (rules.length !== args.length) {
+			console.log("AssembleArguments: Not same length");
+		}
+
+		console.log(args);
+
+		for (let i = 0; i < rules.length; i++) {
+			result[rules[i]] = (isNaN(args[i]) ? args[i] : parseInt(args[i]));
+		}
+
+		return result;
+	}
+
+	/**
 	 * @param {CommandExecutionContext} context
 	 * @param {Command} command
 	 * @returns {Promise<boolean>}
 	 */
 	async handle(context, command) {
+		const customTypes = {
+			user: (arg) => (Discord.MessageMentions.USERS_PATTERN.test(arg) || /^[0-9]{18}$/.test(arg))
+		};
+
 		if (!context.message.member) {
 			context.message.channel.send("That command must be used in a text channel. Sorry!");
 
@@ -178,7 +204,7 @@ export default class CommandManager {
 		}
 		// TODO: simplify the deletion of the messages
 		else if (!command.isEnabled) {
-			const response = await context.respond("That command is disabled.", "", "RED");
+			const response = await context.respond("That command is disabled and may not be used.", "", "RED");
 
 			if (response !== null) {
 				response.message.delete(4000);
@@ -207,6 +233,15 @@ export default class CommandManager {
 		}
 		else if (!command.canExecute(context)) {
 			const response = await context.respond("That command cannot be executed right now.", "", "RED");
+
+			if (response !== null) {
+				response.message.delete(4000);
+			}
+
+			return false;
+		}
+		else if (!CommandArgumentParser.validate(command.args, this.assembleArguments(Object.keys(command.args), context.arguments), customTypes)) {
+			const response = await context.respond("Invalid argument usage. Please use the `usage` command.", "", "RED");
 
 			if (response !== null) {
 				response.message.delete(4000);

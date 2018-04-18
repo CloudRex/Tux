@@ -29,7 +29,7 @@ export default {
 	},
 
 	canExecute(context) {
-		return false;
+		return true;
 	},
 
 	meta: {
@@ -44,7 +44,7 @@ export default {
 		},
 
 		category: CommandCategoryType.Utility,
-		enabled: true,
+		enabled: false,
 		price: 300
 	}
 };

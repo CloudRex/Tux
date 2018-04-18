@@ -23,7 +23,7 @@ export default {
 	meta: {
 		name: "exec",
 		description: "Execute a shell command",
-		accessLevel: AccessLevelType.Owner,
+		accessLevel: AccessLevelType.Developer,
 		aliases: ["exe"],
 		maxArguments: 1,
 

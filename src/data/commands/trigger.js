@@ -26,7 +26,7 @@ export default {
 	meta: {
 		name: "trigger",
 		description: "Change the bot's command trigger",
-		accessLevel: AccessLevelType.Owner,
+		accessLevel: AccessLevelType.Admin,
 		aliases: [],
 		maxArguments: 1,
 
@@ -34,7 +34,7 @@ export default {
 			trigger: "!string"
 		},
 
-		category: CommandCategoryType.Developer,
+		category: CommandCategoryType.General,
 		enabled: true,
 		price: 0
 	}
