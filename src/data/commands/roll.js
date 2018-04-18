@@ -29,7 +29,11 @@ export default {
 		accessLevel: AccessLevelType.Member,
 		aliases: ["dice"],
 		maxArguments: 1,
-		args: {},
+
+		args: {
+			max: "number"
+		},
+
 		category: CommandCategoryType.Fun,
 		enabled: true,
 		price: 150
