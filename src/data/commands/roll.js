@@ -4,9 +4,9 @@ import CommandCategoryType from "../../commands/command-category-type";
 
 export default {
 	executed(context) {
-		let max = (context.arguments[0] ? parseInt(context.arguments[0]) : 12);
+		let max = context.arguments[0];
 
-		if (Number.isNaN(max)) {
+		if (!max) {
 			max = 12;
 		}
 		else if (max > 5000) {
