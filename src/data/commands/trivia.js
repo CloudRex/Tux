@@ -32,7 +32,7 @@ export default {
 
 			context.bot.client.setTimeout(() => {
 				if (global.trivAns) {
-					context.respond(`Time expired! The correct answer was **${response.correct_answer}**.`, "", "RED");
+					context.respond(`Time expired! The correct answer was **${response.correct_answer}**.`, "Trivia", "RED");
 					global.trivAns = null;
 				}
 			}, 15000);
@@ -46,7 +46,7 @@ export default {
 	meta: {
 		name: "trivia",
 		description: "Solve trivia questions and earn coins",
-		accessLevel: AccessLevelType.Moderator,
+		accessLevel: AccessLevelType.Member,
 		aliases: ["triv"],
 		maxArguments: 1,
 		args: {},
