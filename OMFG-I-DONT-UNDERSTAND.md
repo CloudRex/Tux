@@ -11,9 +11,11 @@ Here's some basic stuff you should know about Tux:
 ### Why
 Here's some questions you might have asked yourself and their reasons:
 
-* **Why use Discord.js?** Because it's the most popular JavaScript library for writing Discord bots
-* **Why use a database?** Because storing huge data in a JSON file is savage
-* **Why not use rethink?** Because it's way too hard to setup compared to the current system, and required a background process
+* **Why use Discord.js?** Because it's the most popular JavaScript library for writing Discord bots.
+* **Why use a database?** Because storing huge data in a JSON file is savage.
+* **Why not use rethink?** Because it's way too hard to setup compared to the current system, and required a background process.
 
-### How
-...
+## How does it work?
+### Database
+Tux uses the [sqlite](https://en.wikipedia.org/wiki/SQLite) database system and the [knex.js](http://knexjs.org/) JavaScript library to access the database.
+To "manually" edit/view the database structure and records, I recommend you use the free software [sqlitebrowser](http://sqlitebrowser.org/).
