@@ -9,43 +9,43 @@
 		"name": "bird",
 		"key": "bird",
 		"value": 3,
-		"aliases": []
+		"aliases": ["🐦"]
 	},
 	{
 		"name": "shield",
 		"key": "shield",
 		"value": 5,
-		"aliases": []
+		"aliases": ["🛡️"]
 	},
 	{
 		"name": "poop",
 		"key": "poop",
 		"value": 6,
-		"aliases": []
+		"aliases": ["💩"]
 	},
 	{
 		"name": "eggplant",
 		"key": "eggplant",
 		"value": 7,
-		"aliases": []
+		"aliases": ["🍆"]
 	},
 	{
 		"name": "robot",
 		"key": "robot",
 		"value": 8,
-		"aliases": ["bot"]
+		"aliases": ["🤖", "bot"]
 	},
 	{
 		"name": "trophy",
 		"key": "trophy",
 		"value": 9,
-		"aliases": []
+		"aliases": ["🏆"]
 	},
 	{
 		"name": "cd",
 		"key": "cd",
 		"value": 4,
-		"aliases": []
+		"aliases": ["💿"]
 	},
 	{
 		"name": "cat",
@@ -136,5 +136,53 @@
 		"key": "spy",
 		"value": 50,
 		"aliases": ["🕵"]
+	},
+	{
+		"name": "spoon",
+		"key": "spoon",
+		"value": 2,
+		"aliases": ["🥄"]
+	},
+	{
+		"name": "football",
+		"key": "football",
+		"value": 1.5,
+		"aliases": ["🏈"]
+	},
+	{
+		"name": "soccer ball",
+		"key": "soccer",
+		"value": 1.5,
+		"aliases": ["⚽"]
+	},
+	{
+		"name": "baseball",
+		"key": "baseball",
+		"value": 1.5,
+		"aliases": ["⚾"]
+	},
+	{
+		"name": "basketball",
+		"key": "basketball",
+		"value": 1.5,
+		"aliases": ["🏀"]
+	},
+	{
+		"name": "present",
+		"key": "gift",
+		"value": 3,
+		"aliases": ["🎁"]
+	},
+	{
+		"name": "diamond ring",
+		"key": "ring",
+		"value": 15,
+		"aliases": ["💍"]
+	},
+	{
+		"name": "phone",
+		"key": "iphone",
+		"value": 8,
+		"aliases": ["📱"]
 	}
 ]
