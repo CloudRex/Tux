@@ -1,7 +1,7 @@
 import AccessLevelType from "../../core/access-level-type";
 import CommandCategoryType from "../../commands/command-category-type";
 import MessageBuilder from "../../core/message-builder";
-import BadgeType from "../../core/BadgeType";
+import BadgeType from "../../core/badge-type";
 
 export default {
 	async executed(context) {

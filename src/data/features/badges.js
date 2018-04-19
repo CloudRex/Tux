@@ -1,5 +1,5 @@
 import Feature from "./feature";
-import BadgeType from "../../core/BadgeType";
+import BadgeType from "../../core/badge-type";
 import Utils from "../../core/utils";
 
 const fs = require("fs");

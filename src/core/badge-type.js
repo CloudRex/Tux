@@ -7,6 +7,9 @@ const BadgeType = {
 	MasterScripter: 4,
 	TrueFan: 5,
 	TuxX: 6,
+	NotSoSecret: 7,
+	JunkHunter: 8,
+	LooterWannabe: 9,
 
 	/**
 	 * @returns {array<BadgeType>}
@@ -19,7 +22,10 @@ const BadgeType = {
 			BadgeType.ExperiencedScripter,
 			BadgeType.MasterScripter,
 			BadgeType.TrueFan,
-			BadgeType.TuxX
+			BadgeType.TuxX,
+			BadgeType.NotSoSecret,
+			BadgeType.JunkHunter,
+			BadgeType.LooterWannabe
 		];
 	},
 
@@ -55,6 +61,18 @@ const BadgeType = {
 
 			case BadgeType.TuxX: {
 				return "Tux X";
+			}
+
+			case BadgeType.NotSoSecret: {
+				return "Not So Secret Anymore";
+			}
+
+			case BadgeType.JunkHunter: {
+				return "Junk Hunter";
+			}
+
+			case BadgeType.LooterWannabe: {
+				return "Looter Wannabe";
 			}
 
 			default: {
@@ -95,6 +113,18 @@ const BadgeType = {
 
 			case BadgeType.TuxX: {
 				return "Activate Tux's X mode";
+			}
+
+			case BadgeType.NotSoSecret: {
+				return "Use the secret command";
+			}
+
+			case BadgeType.JunkHunter: {
+				return "Open your first crate";
+			}
+
+			case BadgeType.LooterWannabe: {
+				return "Open 10 crates";
 			}
 
 			default: {
