@@ -52,7 +52,7 @@ export default class Bot {
 
 				if (global.trivAns) {
 					if (message.channel.id === global.trivAns.channel.id && message.content.toLowerCase() === global.trivAns.answer) {
-						message.channel.send(`**${message.author.username}** Correct! The answer is **${global.trivAns.answer}**.`);
+						message.channel.send(`**${message.author.username}** answered correctly! The answer is **${global.trivAns.answer}**.`);
 						global.trivAns = null;
 					}
 				}
