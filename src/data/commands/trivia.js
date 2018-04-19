@@ -29,7 +29,7 @@ export default {
 
 			global.trivAns = {
 				channel: context.message.channel,
-				question: result.question,
+				question: response.question,
 				answer: response.correct_answer.toLowerCase()
 			};
 
