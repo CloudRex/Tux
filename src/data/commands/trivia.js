@@ -8,7 +8,8 @@ const snekfetch = require("snekfetch");
 export default {
 	async executed(context) {
 		// const baseUrl = "http://jservice.io/api/";
-		const url = "https://opentdb.com/api.php?amount=1&category=15&difficulty=easy";
+		// const url = "https://opentdb.com/api.php?amount=1&category=15&difficulty=easy";
+		const url = "https://opentdb.com/api.php?amount=1&category=18";
 		const choices = new MessageBuilder();
 
 		snekfetch.get(url).then((result) => {
@@ -28,11 +29,12 @@ export default {
 
 			global.trivAns = {
 				channel: context.message.channel,
+				question: result.question,
 				answer: response.correct_answer.toLowerCase()
 			};
 
 			context.bot.client.setTimeout(() => {
-				if (global.trivAns) {
+				if (global.trivAns && global.trivAns.question === response.question) {
 					context.respond(`Time expired! The correct answer was **${response.correct_answer}**.`, "Trivia", "RED");
 					global.trivAns = null;
 				}
