@@ -1,6 +1,7 @@
 import AccessLevelType from "../../core/access-level-type";
 import CommandCategoryType from "../../commands/command-category-type";
 import MessageBuilder from "../../core/message-builder";
+import Utils from "../../core/utils";
 
 const snekfetch = require("snekfetch");
 
@@ -22,7 +23,7 @@ export default {
 			context.respond({
 				Category: response.category,
 				Question: response.question,
-				Choices: choices.build()
+				Choices: Utils.shuffle(choices.build().split("\n")).join("\n")
 			}, "Trivia", "GREEN");
 
 			global.trivAns = {
