@@ -6,7 +6,7 @@
 
 	"global": {
 		"log": true,
-		"chance-multiplier": 20,
+		"chance-multiplier": 35,
 
 		"guild-log": {
 			"guild": "366785187029188609",
