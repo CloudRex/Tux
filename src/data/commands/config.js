@@ -34,7 +34,7 @@ export default {
 
 		args: {
 			key: "!string",
-			value: "any"
+			value: "string|number"
 		},
 
 		category: CommandCategoryType.Developer,
