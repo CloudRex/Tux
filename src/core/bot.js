@@ -52,7 +52,8 @@ export default class Bot {
 
 				if (global.trivAns) {
 					if (message.channel.id === global.trivAns.channel.id && message.content.toLowerCase() === global.trivAns.answer) {
-						message.channel.send(`**${message.author.username}** answered correctly! The answer is **${global.trivAns.answer}**.`);
+						this.database.addUserPoints(message.author.id, 5);
+						message.channel.send(`**${message.author.username}** answered correctly! The answer is **${global.trivAns.answer}**. You won **+5** coins!`);
 						global.trivAns = null;
 					}
 				}

@@ -35,7 +35,7 @@ export default {
 
 			context.bot.client.setTimeout(() => {
 				if (global.trivAns && global.trivAns.question === response.question) {
-					context.respond(`Time expired! The correct answer was **${response.correct_answer}**.`, "Trivia", "RED");
+					context.respond(`Times up! The correct answer was **${response.correct_answer}**.`, "Trivia", "RED");
 					global.trivAns = null;
 				}
 			}, 15000);
