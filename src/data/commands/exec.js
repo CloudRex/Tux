@@ -9,8 +9,8 @@ export default {
 		if (context.arguments.length === 1) {
 			exec(context.arguments[0], (error, output) => {
 				context.respond({
-					Input: new MessageBuilder().addCodeBlock("javascript", context.arguments[0]).build(),
-					Output: new MessageBuilder().addCodeBlock("javascript", output.toString()).build()
+					Input: new MessageBuilder().codeBlock("javascript", context.arguments[0]).build(),
+					Output: new MessageBuilder().codeBlock("javascript", output.toString()).build()
 				});
 			});
 		}

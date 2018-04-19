@@ -24,9 +24,9 @@ export default {
 			}
 
 			context.respond({
-				Evaluation: new MessageBuilder().addCodeBlock("javascript", context.arguments[0]).build(),
-				Result: new MessageBuilder().addCodeBlock("javascript", result).build(),
-				Type: new MessageBuilder().addCodeBlock("javascript", typeof result).build()
+				Evaluation: new MessageBuilder().codeBlock("javascript", context.arguments[0]).build(),
+				Result: new MessageBuilder().codeBlock("javascript", result).build(),
+				Type: new MessageBuilder().codeBlock("javascript", typeof result).build()
 			}, "", "GREEN");
 		}
 	},

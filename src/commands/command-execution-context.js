@@ -66,6 +66,13 @@ export default class CommandExecutionContext {
 	}
 
 	/**
+	 * @returns {User}
+	 */
+	get sender() {
+		return this.message.author;
+	}
+
+	/**
 	 * @param {string} message
 	 * @returns {(Promise<*>|null)}
 	 */

@@ -22,7 +22,7 @@ export default {
 					emoji = ":small_blue_diamond:";
 				}
 
-				response.add(`${emoji} #${i + 1} : *${userInfo.username}* with ** ${topUsers[i].points}** coins`).addLine();
+				response.add(`${emoji} #${i + 1} : *${userInfo.username}* with ** ${topUsers[i].points}** coins`).line();
 			}
 		}
 

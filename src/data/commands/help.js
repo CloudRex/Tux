@@ -65,16 +65,16 @@ export default {
 			/* for (let i = 0; i < context.bot.commands.commands.length; i++) {
 				const command = context.bot.commands.commands[i];
 
-				messageBuilder.add(`${command.base} -> ${command.description}`).addLine();
+				messageBuilder.add(`${command.base} -> ${command.description}`).line();
 			} */
 
-			// messageBuilder.addCodeBlock().addLine().add(":heavy_plus_sign: other secret stuff!");
+			// messageBuilder.codeBlock().line().add(":heavy_plus_sign: other secret stuff!");
 			context.respond(result);
 		}
 		else if (context.bot.commands.isRegistered(context.arguments[0])) {
 			const command = context.bot.commands.getByBase(context.arguments[0]);
 
-			const message = new MessageBuilder().addCode().add(`${command.base} -> ${command.extendedDescription}`).addCode()
+			const message = new MessageBuilder().code().add(`${command.base} -> ${command.extendedDescription}`).code()
 				.build();
 
 			context.message.channel.send(message);

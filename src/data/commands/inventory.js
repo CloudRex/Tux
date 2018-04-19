@@ -35,13 +35,13 @@ export default {
 				totalWorth += items[i].value * items[i].amount;
 			}
 
-			response.addLine().addLine().add(`Total worth::small_orange_diamond:**${totalWorth}**`);
+			response.line().line().add(`Total worth::small_orange_diamond:**${totalWorth}**`);
 		}
 		else {
 			response.add(":sob: Oh noes! You don't have any items.");
 		}
 
-		context.respond(response.build(), `${member.displayName}'s Inventory`, "WHITE");
+		context.respond(response.build(), `${member.displayName}'s Inventory`, "GREEN");
 	},
 
 	canExecute(context) {

@@ -16,10 +16,10 @@ export default {
 			const response = result.body.results[0];
 
 			for (let i = 0; i < response.incorrect_answers.length; i++) {
-				choices.add(`:small_blue_diamond: ${response.incorrect_answers[i]}`).addLine();
+				choices.add(`:small_blue_diamond: ${response.incorrect_answers[i]}`).line();
 			}
 
-			choices.add(`:small_blue_diamond: ${response.correct_answer}`).addLine();
+			choices.add(`:small_blue_diamond: ${response.correct_answer}`).line();
 
 			context.respond({
 				Category: response.category,

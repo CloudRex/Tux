@@ -21,7 +21,7 @@ export default class MessageBuilder {
 	 * @param {(string|null)} code
 	 * @returns {MessageBuilder}
 	 */
-	addCodeBlock(language = null, code = null) {
+	codeBlock(language = null, code = null) {
 		let result = "```";
 
 		if (language !== null) {
@@ -39,7 +39,7 @@ export default class MessageBuilder {
 	 * @param {(string|null)} code
 	 * @returns {MessageBuilder}
 	 */
-	addCode(code = null) {
+	code(code = null) {
 		if (code === null) {
 			return this.add("`");
 		}
@@ -51,7 +51,7 @@ export default class MessageBuilder {
 	 * @param {string} text
 	 * @returns {MessageBuilder}
 	 */
-	addItalic(text) {
+	italic(text) {
 		return this.add(`*${text}*`);
 	}
 
@@ -59,7 +59,7 @@ export default class MessageBuilder {
 	 * @param {string} text
 	 * @returns {MessageBuilder}
 	 */
-	addBold(text) {
+	bold(text) {
 		return this.add(`**${text}**`);
 	}
 
@@ -67,14 +67,14 @@ export default class MessageBuilder {
 	 * @param {string} text
 	 * @returns {MessageBuilder}
 	 */
-	addUnderlined(text) {
+	underlined(text) {
 		return this.add(`__${text}__`);
 	}
 
 	/**
 	 * @returns {MessageBuilder}
 	 */
-	addLine() {
+	line() {
 		return this.add("\n");
 	}
 
@@ -82,7 +82,7 @@ export default class MessageBuilder {
 	 * @param {string} emoji
 	 * @returns {MessageBuilder}
 	 */
-	addEmoji(emoji) {
+	emoji(emoji) {
 		return this.add(`:${emoji}:`);
 	}
 

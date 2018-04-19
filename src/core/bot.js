@@ -6,6 +6,7 @@ import ConsoleInterface from "../console/console-interface";
 import EmojiMenuManager from "../emoji-ui/emoji-menu-manager";
 
 const DBL = require("dblapi.js");
+const EventEmitter = require("events");
 
 export default class Bot {
 	/**
@@ -17,6 +18,7 @@ export default class Bot {
 	 * @param {CommandLoader} commandLoader
 	 */
 	constructor(settings, userConfig, client, commandManager, featureManager, commandLoader) {
+		this.events = new EventEmitter();
 		this.settings = settings;
 		this.userConfig = userConfig;
 		this.client = client;

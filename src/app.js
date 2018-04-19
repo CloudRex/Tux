@@ -6,6 +6,7 @@ import CommandLoader from "./commands/command-loader";
 import UserConfig from "./core/user-config";
 import AnswerMentions from "./data/features/answer-mentions";
 import TreasureFinder from "./data/features/treasure-finder";
+import Badges from "./data/features/badges";
 
 const Discord = require("discord.js");
 
@@ -25,7 +26,8 @@ bot.features.registerMultiple([
 	new AntiSpam(),
 	new EasterEggs() */
 	new AnswerMentions(),
-	new TreasureFinder()
+	new TreasureFinder(),
+	new Badges()
 ]);
 
 // Init

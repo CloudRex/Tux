@@ -261,6 +261,7 @@ export default class CommandManager {
 
 		try {
 			await command.executed(context); // .catch((error) => context.respond(`There was an error while executing that command. (${error.message})`, "", "RED"));
+			context.bot.events.emit("commandExecuted", command, context);
 		}
 		catch (error) {
 			context.respond(`:thinking: **Oh noes!** There was an error executing that command. (${error.message})`, "", "RED");

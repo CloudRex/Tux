@@ -64,6 +64,24 @@ export default class Database {
 
 	/**
 	 * @param {Snowflake} userId
+	 * @param {BadgeType} badge
+	 * @returns {Promise<void>}
+	 */
+	async addUserBadge(userId, badge) {
+		const { badges } = (await this.getUser(userId));
+
+		// TODO: Make use of this check
+		if (!badges.includes(badge)) {
+			badges.push(badge);
+		}
+
+		this.db("users").where("user_id", userId.toString()).update({
+			badges: JSON.stringify(badges)
+		}).then();
+	}
+
+	/**
+	 * @param {Snowflake} userId
 	 * @param {boolean} isScopeLocked
 	 */
 	setUserScopeLocked(userId, isScopeLocked) {
@@ -92,7 +110,7 @@ export default class Database {
 			points = 0;
 		}
 
-		this.setUserPoints(userId, points);
+		await this.setUserPoints(userId, points);
 
 		return points;
 	}
@@ -107,7 +125,8 @@ export default class Database {
 			thanks: dbUser.thanks,
 			points: dbUser.points,
 			is_scope_locked: dbUser.isScopeLocked,
-			commands: JSON.stringify(dbUser.commands)
+			commands: JSON.stringify(dbUser.commands),
+			badges: JSON.stringify(dbUser.badges)
 		}).then();
 	}
 
