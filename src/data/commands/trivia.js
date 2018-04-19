@@ -20,7 +20,10 @@ export default {
 				answer: response.answer.toLowerCase()
 			};
 
-			console.log(response);
+			context.bot.client.setTimeout(() => {
+				context.respond(`Time expired! The correct answer was **${response.answer}**.`, "", "RED");
+				global.trivAns = null;
+			}, 15000);
 		});
 	},
 
