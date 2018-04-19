@@ -103,4 +103,22 @@ export default class Utils {
 			embed: options
 		});
 	}
+
+	/**
+	 * @param {number} milliseconds
+	 * @param {number} seconds
+	 * @param {number} minutes
+	 * @param {number} hours
+	 * @param {number} days
+	 * @param {number} months
+	 * @param {number} years
+	 * @returns {number}
+	 */
+	static timeFromNow(milliseconds, seconds = 0, minutes = 0, hours = 0, days = 0, months = 0, years = 0) {
+		const now = new Date();
+
+		console.log(now.getDate());
+
+		return new Date(years + now.getFullYear(), months + now.getMonth(), days + now.getDate(), hours + now.getHours(), minutes + now.getMinutes(), seconds + now.getSeconds(), milliseconds + now.getMilliseconds()).getTime();
+	}
 }

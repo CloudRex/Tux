@@ -1,10 +1,11 @@
 import AccessLevelType from "../../core/access-level-type";
 import CommandCategoryType from "../../commands/command-category-type";
 import CommandArgumentParser from "../../commands/command-argument-parser";
+import TimeParser from "../../core/time-parser";
 
 export default {
 	async executed(context) {
-		const tov = {
+		/* const tov = {
 			name: null,
 			age: 5,
 			addr: "test"
@@ -26,7 +27,11 @@ export default {
 			addr: "number|string|:mah_check"
 		}, tov, {
 			mah_check: mahCheck
-		}));
+		})); */
+
+		const tp = new TimeParser(context.arguments[0]);
+
+		context.respond(tp.getTimeFromNow(), "", "GREEN");
 	},
 
 	canExecute(context) {
@@ -38,8 +43,12 @@ export default {
 		description: "Test something",
 		accessLevel: AccessLevelType.Developer,
 		aliases: [],
-		maxArguments: 0,
-		args: {},
+		maxArguments: 1,
+
+		args: {
+			time: "!:time"
+		},
+
 		category: CommandCategoryType.Developer,
 		enabled: true,
 		price: 0

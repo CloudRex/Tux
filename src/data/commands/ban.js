@@ -22,11 +22,12 @@ export default {
 		description: "Bans a member from the server",
 		accessLevel: AccessLevelType.Admin,
 		aliases: [],
-		maxArguments: 2,
+		maxArguments: 3,
 
 		args: {
 			user: "!:user",
-			reason: "!string"
+			reason: "!string",
+			time: ":minuteTime"
 		},
 
 		category: CommandCategoryType.Moderation,

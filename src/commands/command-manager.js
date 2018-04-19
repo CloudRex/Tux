@@ -194,7 +194,10 @@ export default class CommandManager {
 	 */
 	async handle(context, command) {
 		const customTypes = {
-			user: (arg) => (Discord.MessageMentions.USERS_PATTERN.test(arg) || /^[0-9]{18}$/.test(arg))
+			// TODO: Bug with the USERS_PATTERN (interlaps between true and false)
+			user: (arg) => (Discord.MessageMentions.USERS_PATTERN.test(arg) || /^[0-9]{18}$/.test(arg)),
+			time: (arg) => /^[0-9]+(ms|s|m|h|d|mo|y)$/.test(arg),
+			minuteTime: (arg) => /^[0-9]+(m|h|d|mo|y)$/.test(arg)
 		};
 
 		if (!context.message.member) {

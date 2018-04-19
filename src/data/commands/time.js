@@ -3,12 +3,10 @@ import CommandCategoryType from "../../commands/command-category-type";
 
 export default {
 	executed(context) {
-		const date = new Date();
-
 		context.respond({
-			"Local time": `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`,
-			Timestamp: date.getTime()
-		});
+			"Local time": new Date().toUTCString(),
+			Timestamp: Date.now()
+		}, "", "GREEN");
 	},
 
 	canExecute(context) {
