@@ -1,3 +1,5 @@
+const Discord = require("discord.js");
+
 export default class Utils {
 	/**
 	 * @param {string} string
@@ -75,5 +77,30 @@ export default class Utils {
 		}
 
 		return array;
+	}
+
+	/**
+	 * @param {object} options
+	 * @param {User} requester
+	 * @param channel
+	 * @param {string} footerSuffix
+	 * @returns {Promise<Message>}
+	 */
+	static async send(options, requester, channel, footerSuffix = "") {
+		const optionsCpy = options;
+
+		optionsCpy.footer = {
+			icon_url: requester.avatarURL,
+			text: `Requested by ${requester.username} ${footerSuffix}`
+		};
+
+		if (!optionsCpy.color) {
+			// TODO: Color is literal hex, not string (gives error)
+			optionsCpy.color = "GREEN";
+		}
+
+		return await channel.send({
+			embed: options
+		});
 	}
 }

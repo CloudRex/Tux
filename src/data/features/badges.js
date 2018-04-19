@@ -1,5 +1,6 @@
 import Feature from "./feature";
 import BadgeType from "../../core/BadgeType";
+import Utils from "../../core/utils";
 
 const fs = require("fs");
 
@@ -17,6 +18,9 @@ export default class Badges extends Feature {
 
 	// TODO: Unknown message error is probably caused by deleting non-existing messages somewhere in this code
 	enabled(bot) {
+		// TODO: Migrate to database for persistence
+		const counters = [];
+
 		const award = async (user, badge, context) => {
 			await context.bot.database.addUserBadge(user.id, badge);
 			context.respond(`:medal: **${user.username}** has earned the **${BadgeType.getName(badge)}** badge!`, "", "GOLD");
@@ -38,6 +42,58 @@ export default class Badges extends Feature {
 						}
 					}
 				}
+			}
+		});
+
+		bot.events.on("message", async (message) => {
+			const { badges } = (await bot.database.getUser(message.author.id));
+
+			if (!counters[message.author.id]) {
+				counters[message.author.id] = {
+					code: 0
+				};
+			}
+
+			if (message.content.toLowerCase().includes("```javascript")) {
+				counters[message.author.id].code++;
+			}
+
+			// TODO: Fix colors
+			if (counters[message.author.id].code >= 10 && !badges.includes(BadgeType.ApprenticeScripter)) {
+				// award(message.author.id, BadgeType.ApprenticeScripter, context); TODO: Somehow get context here
+				await bot.database.addUserBadge(message.author.id, BadgeType.ApprenticeScripter);
+
+				Utils.send({
+					description: `:medal: **${message.author.username}** has earned the **${BadgeType.getName(BadgeType.ApprenticeScripter)}** badge!`,
+					color: "3447003"
+				}, message.author, message.channel);
+			}
+			else if (counters[message.author.id].code >= 50 && !badges.includes(BadgeType.IntermediateScripter)) {
+				// award(message.author.id, BadgeType.ApprenticeScripter, context); TODO: Somehow get context here
+				await bot.database.addUserBadge(message.author.id, BadgeType.IntermediateScripter);
+
+				Utils.send({
+					description: `:medal: **${message.author.username}** has earned the **${BadgeType.getName(BadgeType.IntermediateScripter)}** badge!`,
+					color: "3447003"
+				}, message.author, message.channel);
+			}
+			else if (counters[message.author.id].code >= 100 && !badges.includes(BadgeType.ExperiencedScripter)) {
+				// award(message.author.id, BadgeType.ApprenticeScripter, context); TODO: Somehow get context here
+				await bot.database.addUserBadge(message.author.id, BadgeType.ExperiencedScripter);
+
+				Utils.send({
+					description: `:medal: **${message.author.username}** has earned the **${BadgeType.getName(BadgeType.ExperiencedScripter)}** badge!`,
+					color: "3447003"
+				}, message.author, message.channel);
+			}
+			else if (counters[message.author.id].code >= 300 && !badges.includes(BadgeType.MasterScripter)) {
+				// award(message.author.id, BadgeType.ApprenticeScripter, context); TODO: Somehow get context here
+				await bot.database.addUserBadge(message.author.id, BadgeType.MasterScripter);
+
+				Utils.send({
+					description: `:medal: **${message.author.username}** has earned the **${BadgeType.getName(BadgeType.MasterScripter)}** badge!`,
+					color: "3447003"
+				}, message.author, message.channel);
 			}
 		});
 	}

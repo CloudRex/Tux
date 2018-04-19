@@ -55,6 +55,7 @@ export default class Bot {
 
 		this.client.on("message", (message) => {
 			if (!message.author.bot) {
+				this.events.emit("message", message);
 				this.database.addUserPoints(message.author.id, 1);
 
 				if (global.trivAns) {
