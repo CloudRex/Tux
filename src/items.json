@@ -6,6 +6,48 @@
 		"aliases": ["🐧", "tux"]
 	},
 	{
+		"name": "bird",
+		"key": "bird",
+		"value": 3,
+		"aliases": []
+	},
+	{
+		"name": "shield",
+		"key": "shield",
+		"value": 5,
+		"aliases": []
+	},
+	{
+		"name": "poop",
+		"key": "poop",
+		"value": 6,
+		"aliases": []
+	},
+	{
+		"name": "eggplant",
+		"key": "eggplant",
+		"value": 7,
+		"aliases": []
+	},
+	{
+		"name": "robot",
+		"key": "robot",
+		"value": 8,
+		"aliases": ["bot"]
+	},
+	{
+		"name": "trophy",
+		"key": "trophy",
+		"value": 9,
+		"aliases": []
+	},
+	{
+		"name": "cd",
+		"key": "cd",
+		"value": 4,
+		"aliases": []
+	},
+	{
 		"name": "cat",
 		"key": "cat",
 		"value": 1.5,
@@ -75,13 +117,13 @@
 		"name": "small diamond",
 		"key": "small_blue_diamond",
 		"value": 5,
-		"aliases": ["🔹"]
+		"aliases": ["🔹", "small_diamond"]
 	},
 	{
 		"name": "Large Diamond",
 		"key": "large_blue_diamond",
 		"value": 12.5,
-		"aliases": ["🔷"]
+		"aliases": ["🔷", "large_diamond"]
 	},
 	{
 		"name": "gem",
