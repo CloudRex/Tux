@@ -49,9 +49,9 @@ Now that we have our model, with a little more setup, whenever we query a row fr
 
 Let's say we have the following data in our `users` table:
 
-| id                 | name     | age |   |   |
-|--------------------|----------|-----|---|---|
-| 285578743324606482 | John Doe | 21  |   |   |
+| id                 | name     | age |
+|--------------------|----------|-----|
+| 285578743324606482 | John Doe | 21  |
 
 We could then do this (somewhat-pseudo-code):
 
