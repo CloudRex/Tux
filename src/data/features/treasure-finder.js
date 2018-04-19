@@ -75,7 +75,7 @@ export default class TreasureFinder extends Feature {
 						// reaction.message.clearReactions();
 
 						// TODO: Probably giving out error, make sure it awaits then saves then delete below using var
-						const sentMsg = await reaction.message.edit(`**${user.username}** has captured a :${treasure.key}: worth **${treasure.value * chanceMultiplier}**! Use \`inv\``);
+						const sentMsg = await reaction.message.edit(`**${user.username}** has captured a :${treasure.key}: worth **${treasure.value/* * chanceMultiplier */}**! Use \`inv\` to view your inventory.`);
 
 						if (sentMsg.deletable) {
 							sentMsg.delete(4000);
