@@ -5,11 +5,17 @@ import BadgeType from "../../core/BadgeType";
 
 export default {
 	async executed(context) {
+		const allBadges = BadgeType.getAll();
 		const { badges } = (await context.bot.database.getUser(context.sender.id));
 		const response = new MessageBuilder();
+		const missingBadges = allBadges.filter((badge) => !badges.includes(badge));
 
 		for (let i = 0; i < badges.length; i++) {
-			response.add(`:medal: ${BadgeType.getName(badges[i])}`).line();
+			response.add(`:medal: **${BadgeType.getName(badges[i])}**: ${BadgeType.getDescription(badges[i])}`).line();
+		}
+
+		for (let i = 0; i < missingBadges.length; i++) {
+			response.add(`:medal::lock: **${BadgeType.getName(missingBadges[i])}**: ${BadgeType.getDescription(missingBadges[i])}`).line();
 		}
 
 		context.respond(response.build(), `${context.sender.username}'s Badges`, "GOLD");

@@ -1,3 +1,4 @@
+// TODO: Migrate badges into JSON and make a class for it
 const BadgeType = {
 	EmptyInventory: 0,
 	ApprenticeScripter: 1,
@@ -6,6 +7,21 @@ const BadgeType = {
 	MasterScripter: 4,
 	TrueFan: 5,
 	TuxX: 6,
+
+	/**
+	 * @returns {array<BadgeType>}
+	 */
+	getAll() {
+		return [
+			BadgeType.EmptyInventory,
+			BadgeType.ApprenticeScripter,
+			BadgeType.IntermediateScripter,
+			BadgeType.ExperiencedScripter,
+			BadgeType.MasterScripter,
+			BadgeType.TrueFan,
+			BadgeType.TuxX
+		];
+	},
 
 	/**
 	 * @param {BadgeType} badge
