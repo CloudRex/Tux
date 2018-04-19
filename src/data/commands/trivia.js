@@ -13,7 +13,7 @@ export default {
 			context.respond({
 				Category: response.category.title,
 				Question: response.question
-			});
+			}, "Trivia", "GREEN");
 
 			global.trivAns = {
 				channel: context.message.channel,
