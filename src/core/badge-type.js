@@ -10,6 +10,13 @@ const BadgeType = {
 	NotSoSecret: 7,
 	JunkHunter: 8,
 	LooterWannabe: 9,
+	ActualLooter: 10,
+	CrateAddict: 11,
+	Human: 12,
+	BeepBoop: 13,
+	Commander: 14,
+	Mastermind: 15,
+	UninvitedDev: 16,
 
 	/**
 	 * @returns {array<BadgeType>}
@@ -25,8 +32,22 @@ const BadgeType = {
 			BadgeType.TuxX,
 			BadgeType.NotSoSecret,
 			BadgeType.JunkHunter,
-			BadgeType.LooterWannabe
+			BadgeType.LooterWannabe,
+			BadgeType.ActualLooter,
+			BadgeType.CrateAddict,
+			BadgeType.Human,
+			BadgeType.BeepBoop,
+			BadgeType.Commander,
+			BadgeType.Mastermind,
+			BadgeType.UninvitedDev
 		];
+	},
+
+	/**
+	 * @param {BadgeType} badge
+	 */
+	getInfo(badge) {
+		// TODO
 	},
 
 	/**
@@ -73,6 +94,34 @@ const BadgeType = {
 
 			case BadgeType.LooterWannabe: {
 				return "Looter Wannabe";
+			}
+
+			case BadgeType.ActualLooter: {
+				return "Actual Looter";
+			}
+
+			case BadgeType.CrateAddict: {
+				return "Crate Addict";
+			}
+
+			case BadgeType.Human: {
+				return "Human?";
+			}
+
+			case BadgeType.BeepBoop: {
+				return "Beep Boop";
+			}
+
+			case BadgeType.Commander: {
+				return "The Commander";
+			}
+
+			case BadgeType.Mastermind: {
+				return "The Mastermind";
+			}
+
+			case BadgeType.UninvitedDev: {
+				return "The Uninvited Developer (Hacker)";
 			}
 
 			default: {
@@ -125,6 +174,34 @@ const BadgeType = {
 
 			case BadgeType.LooterWannabe: {
 				return "Open 10 crates";
+			}
+
+			case BadgeType.ActualLooter: {
+				return "Open 50 crates";
+			}
+
+			case BadgeType.CrateAddict: {
+				return "Open 100 crates";
+			}
+
+			case BadgeType.Human: {
+				return "Issue 1,000 commands";
+			}
+
+			case BadgeType.BeepBoop: {
+				return "Get Tux to somehow say Beep Boop";
+			}
+
+			case BadgeType.Commander: {
+				return "Buy all the commands";
+			}
+
+			case BadgeType.Mastermind: {
+				return "Earn all the badges";
+			}
+
+			case BadgeType.UninvitedDev: {
+				return "Cause Tux to throw an error";
 			}
 
 			default: {

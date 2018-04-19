@@ -3,7 +3,7 @@ import CommandCategoryType from "../../commands/command-category-type";
 
 export default {
 	executed(context) {
-		const authLevel = context.bot.commands.getAuthority(context.message.member.roles, context.message.author.id);
+		const authLevel = context.bot.commands.getAuthority(context.message.member.roles.array(), context.message.author.id);
 
 		context.respond(`:zap: Your authorization level is **${AccessLevelType.toString(authLevel)}**`, "", "GREEN");
 	},

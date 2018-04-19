@@ -1,0 +1,50 @@
+[
+	{
+		"name": "Not a Single Item",
+		"desc": "Use the inventory command and have no items"
+	},
+	{
+		"name": "The Apprentice Scripter",
+		"desc": "Send 10 message including JavaScript code blocks"
+	},
+	{
+		"name": "The Intermediate Scripter",
+		"desc": "Send 50 message including JavaScript code blocks"
+	},
+	{
+		"name": "The Experienced Scripter",
+		"desc": "Send 100 message including JavaScript code blocks"
+	},
+	{
+		"name": "The Master Scripter",
+		"desc": "Send 300 message including JavaScript code blocks"
+	},
+	{
+		"name": "The True Fan",
+		"desc": "Send a message containing the Tux emoji"
+	},
+	{
+		"name": "Tux X",
+		"desc": "Activate Tux's X mode"
+	},
+	{
+		"name": "Not So Secret Anymore",
+		"desc": "Use the secret command"
+	},
+	{
+		"name": "Junk Hunter",
+		"desc": "Open your first crate"
+	},
+	{
+		"name": "Looter Wannabe",
+		"desc": "Open 10 crates"
+	},
+	{
+		"name": "Actual Looter",
+		"desc": "Open 50 crates"
+	},
+	{
+		"name": "Crate Addict",
+		"desc": "Open 100 crates"
+	}
+]

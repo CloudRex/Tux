@@ -49,14 +49,14 @@ export default {
 				let categoryEmpty = true;
 
 				for (let cmd = 0; cmd < commands.length; cmd++) {
-					if (commands[cmd].category === categories[categ].id) {
+					if (commands[cmd].category === categories[categ].id && commands[cmd].accessLevel <= context.bot.commands.getAuthority([], context.sender.id)) {
 						result[categories[categ].name].push(`**${commands[cmd].base}**: ${commands[cmd].description}`);
 						categoryEmpty = false;
 					}
 				}
 
 				if (categoryEmpty) {
-					result[categories[categ].name].push("There are no commands for this category yet.");
+					result[categories[categ].name].push("There are no commands for this category.");
 				}
 
 				result[categories[categ].name] = result[categories[categ].name].join("\n");

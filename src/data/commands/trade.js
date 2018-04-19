@@ -259,12 +259,14 @@ export default {
 		aliases: [],
 		maxArguments: 3,
 
-		args: {
+		/* args: {
 			command: "!string",
 
 			// TODO: Does not stack up with other design pattern (multiple posibilities)
 			query: "any"
-		},
+		}, */
+
+		args: {},
 
 		category: CommandCategoryType.Economy,
 		enabled: false,
