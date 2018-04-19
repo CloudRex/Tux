@@ -50,6 +50,13 @@ export default class Bot {
 			if (!message.author.bot) {
 				this.database.addUserPoints(message.author.id, 1);
 
+				if (global.trivAns) {
+					if (message.channel.id === global.trivAns.channel.id && message.content.toLowerCase() === global.trivAns.answer) {
+						message.channel.send(`**${message.author.username}** Correct! The answer is **${global.trivAns.answer}**.`);
+						global.trivAns = null;
+					}
+				}
+
 				if (CommandParser.isValid(message.content, this.commands, this.settings.general.commandTrigger)) {
 					this.commands.handle(
 						new CommandExecutionContext(
