@@ -26,7 +26,10 @@ export default class Bot {
 		this.database = new Database(this.settings.general.databasePath);
 		this.console = new ConsoleInterface();
 		this.emojis = new EmojiMenuManager(this.client);
-		this.dbl = new DBL(settings.general.dblToken);
+
+		if (settings.general.dblToken) {
+			this.dbl = new DBL(settings.general.dblToken);
+		}
 
 		// Discord client events
 		this.client.on("ready", () => {
@@ -39,9 +42,11 @@ export default class Bot {
 			});
 
 			// Post stats to DBL
-			setInterval(() => {
-				this.dbl.postStats(this.client.guilds.size);
-			}, 1800000);
+			if (this.dbl) {
+				setInterval(() => {
+					this.dbl.postStats(this.client.guilds.size);
+				}, 1800000);
+			}
 
 			this.console.init(this);
 		});

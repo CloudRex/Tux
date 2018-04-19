@@ -106,7 +106,37 @@ export default class Database {
 			user_id: dbUser.userId,
 			thanks: dbUser.thanks,
 			points: dbUser.points,
-			is_scope_locked: dbUser.isScopeLocked
+			is_scope_locked: dbUser.isScopeLocked,
+			commands: JSON.stringify(dbUser.commands)
+		}).then();
+	}
+
+	/**
+	 * @param {Snowflake} userId The user
+	 * @param {string} command The command base name
+	 * @returns {Promise<boolean>}
+	 */
+	async userOwnsCommand(userId, command) {
+		const { commands } = (await this.getUser(userId));
+
+		return commands.includes(command);
+	}
+
+	/**
+	 * @param {Snowflake} userId The user
+	 * @param {string} command The command base name
+	 */
+	async addUserCommand(userId, command) {
+		const user = await this.getUser(userId);
+		const { commands } = user;
+
+		// TODO: Make use of this check.
+		if (!commands.includes(command)) {
+			commands.push(command);
+		}
+
+		this.db("users").where("user_id", userId.toString()).update({
+			commands: JSON.stringify(commands)
 		}).then();
 	}
 

@@ -249,6 +249,15 @@ export default class CommandManager {
 
 			return false;
 		}
+		else if (command.price > 0 && !(await context.bot.database.userOwnsCommand(context.message.author.id, command.base))) {
+			const response = await context.respond("You don't own that command! Use the `buy` command to buy it.", "", "RED");
+
+			if (response !== null) {
+				response.message.delete(4000);
+			}
+
+			return false;
+		}
 
 		try {
 			await command.executed(context); // .catch((error) => context.respond(`There was an error while executing that command. (${error.message})`, "", "RED"));

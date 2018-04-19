@@ -1,7 +1,7 @@
 {
 	"general": {
 		"token": "",
-		"dblToken": "",
+		"dblToken": null,
 		"giphyApiKey": "",
 		"commandTrigger": ".",
 		"version": "1.0.1",

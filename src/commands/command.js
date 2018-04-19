@@ -10,8 +10,10 @@ export default class Command {
 	 * @param {function} canExecute
 	 * @param {CommandCategoryType} category
 	 * @param {object} args
+	 * @param {boolean} isEnabled
+	 * @param {number} price
 	 */
-	constructor(base, description, aliases, extendedDescription, maxArguments, accessLevel, onExecuted, canExecute, category, args, isEnabled) {
+	constructor(base, description, aliases, extendedDescription, maxArguments, accessLevel, onExecuted, canExecute, category, args, isEnabled, price) {
 		this.base = base;
 		this.description = description;
 		this.aliases = aliases;
@@ -23,6 +25,7 @@ export default class Command {
 		this.category = category;
 		this.args = args;
 		this.isEnabled = isEnabled;
+		this.price = price;
 	}
 
 	/**
@@ -41,7 +44,8 @@ export default class Command {
 			module.canExecute,
 			module.meta.category,
 			module.meta.args,
-			module.meta.enabled
+			module.meta.enabled,
+			module.meta.price
 		);
 	}
 }
