@@ -9,7 +9,8 @@ Here's some basic stuff you should know about Tux:
 * Uses the Discord.js library ([click here](https://discord.js.org/#/docs/main/stable/general/welcome) to view the documentation).
 * Uses a database (will get into detail later).
 * Is object oriented (most code is based on classes).
-* Has a setup script (setup your token, prefix, etc.).
+* Trigger = command prefix.
+* Has a setup script (setup your token, trigger, etc.).
 * Is a penguin (yes, it's important to know).
 
 #### Why
@@ -17,7 +18,8 @@ Here's some questions you might have asked yourself and their reasons:
 
 * **Why use Discord.js?** Because it's the most popular JavaScript library for writing Discord bots.
 * **Why use a database?** Because storing huge data in a JSON file is savage.
-* **Why not use RethinkDB?** Because it's way too hard to setup compared to the current system, and required a background process.
+* **Why use [sqlite](https://en.wikipedia.org/wiki/SQLite)?** Because it's portable and convenient (no need for processes, etc.).
+* **Why not use [RethinkDB](https://www.rethinkdb.com/)?** Because it's way too complicated to setup compared to the current system, and requires a background process.
 
 ## Naming
 Yes there is a whole section for naming files and variables.
@@ -70,7 +72,24 @@ export default {
 ````
 
 #### Command Execution Context
-When a command is executed, it will receive the `CommandExecutionContext` object as the first argument.
+When a command is executed, it will receive the `CommandExecutionContext` object as the first and only argument.
+Take a look at the `CommandExecutionContext` class's properties:
+
+```javascript
+class CommandExecutionContext {
+	constructor(message, args, bot, accessLevel) {
+		this.message = message;
+		this.arguments = args;
+		this.bot = bot;
+		this.accessLevel = accessLevel;
+	}
+	
+	...
+}
+```
+
+Passing the `CommandExecutionContext` argument allows every command to access
+every part of Tux.
 
 *... to be continued*
 
@@ -138,13 +157,13 @@ This is how our `dbUser` model would look:
 class dbUser {
 	...
 	
-    static fromResult(queryResult) {
-        return new DbUser(
-            queryResult.id,
-            queryResult.name,
-            queryResult.age
-        );
-    }
+	static fromResult(queryResult) {
+		return new DbUser(
+			queryResult.id,
+			queryResult.name,
+			queryResult.age
+		);
+	}
 }
 ```
 
