@@ -49,7 +49,7 @@ You might be asking yourself: "Why do you use database models?" Database models 
 
 You may think of a database model as a local database row or placeholder row of a certain table.
 
-Now that we have our model, with a little more setup, whenever we query a row from the database we can expect that when we use a database method (for example `getUserById()`) it will return an instance of our `dbUser` model.
+Now that we have our model, with a little more setup, whenever we query a row from the database we can expect that when we use a database method (for example `getUserById()`) it will return an *instance* of our `dbUser` model.
 
 Let's say we have the following data in our `users` table:
 
@@ -68,6 +68,30 @@ theDankUser.name; // John Doe
 theDankUser.age; // 21
 ```
 
-See how database models help now?
+See how database models help now? Now it's time to dive a little deeper.
 
-... to be continued!
+Since we're using the knex.js library to access the database, querying
+returns plain objects. We want to have results to be able to be converted
+to database models. To do this, we manually implement the `fromResult` method
+to all our database models.
+
+This is how our dbUser model would look:
+
+```javascript
+class dbUser {
+	...
+	
+    static fromResult(queryResult) {
+        return new DbUser(
+            queryResult.id,
+            queryResult.name,
+            queryResult.age
+        );
+    }
+}
+```
+
+This method will be then used by our database methods to return
+queries in the form of database models.
+
+*... to be continued!*
