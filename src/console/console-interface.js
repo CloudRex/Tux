@@ -1,17 +1,15 @@
-import ConsoleCommand from "./console-command";
-
 const readline = require("readline");
 
 export default class ConsoleInterface {
 	init(bot) {
-		process.stdout.write("> ");
-
-		const consoleInterface = readline.createInterface({
+		const ci = readline.createInterface({
 			input: process.stdin,
 			output: process.stdout
 		});
 
-		consoleInterface.on("line", (input) => {
+		ci.prompt(true);
+
+		ci.on("line", (input) => {
 			switch (input.trim()) {
 				case "": {
 					break;
@@ -35,7 +33,12 @@ export default class ConsoleInterface {
 				}
 			}
 
-			process.stdout.write("> ");
+			ci.prompt();
+		});
+
+		ci.on("close", () => {
+			bot.disconnect();
+			process.exit(0);
 		});
 	}
 }

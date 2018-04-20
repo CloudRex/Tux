@@ -41,7 +41,7 @@ export default class Database {
 			// TODO: Row id should not be null
 			const newUser = new DbUser(null, userId, 0, 0, false);
 
-			this.addUser(newUser);
+			await this.addUser(newUser);
 
 			return newUser;
 		}

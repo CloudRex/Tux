@@ -6,7 +6,7 @@ const fs = require("fs");
 
 export default class TreasureFinder extends Feature {
 	constructor() {
-		super("Treasure Finder", "treasure-finder", "Find treasures and sell them for points");
+		super("Treasures", "treasures", "Randomly find and catch items");
 
 		// TODO: Better loading system (class) and path musn't be hard coded
 		this.treasures = JSON.parse(fs.readFileSync("src/items.json").toString());
@@ -88,4 +88,6 @@ export default class TreasureFinder extends Feature {
 		bot.client.on("messageReactionAdd", handleReaction);
 		bot.client.on("messageReactionRemove", handleReaction);
 	}
+
+	disabled(bot) {}
 }

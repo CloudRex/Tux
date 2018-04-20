@@ -9,4 +9,6 @@ export default class Feature {
 		this.key = key;
 		this.description = description;
 	}
+
+	// TODO: Throw methods not implemented
 }

@@ -6,7 +6,7 @@ const fs = require("fs");
 
 export default class Badges extends Feature {
 	constructor() {
-		super("Badges", "treasure-finder", "Earn badges by doin stuff");
+		super("Badges", "treasure-finder", "Earn badges by doing stuff");
 
 		// TODO: Better loading system (class) and path musn't be hard coded
 		this.treasures = JSON.parse(fs.readFileSync("src/items.json").toString());
@@ -39,14 +39,16 @@ export default class Badges extends Feature {
 							if (inventory.length === 0 && !badges.includes(BadgeType.EmptyInventory)) {
 								award(context.sender, BadgeType.EmptyInventory, context);
 							}
+
+							break;
 						}
 					}
 				}
 			}
 		});
 
-		bot.events.on("message", async (message) => {
-			const { badges } = (await bot.database.getUser(message.author.id));
+		bot.events.on("userMessage", async (message) => {
+			const { badges } = await bot.database.getUser(message.author.id);
 
 			if (!counters[message.author.id]) {
 				counters[message.author.id] = {
@@ -97,4 +99,6 @@ export default class Badges extends Feature {
 			}
 		});
 	}
+
+	disabled() {}
 }

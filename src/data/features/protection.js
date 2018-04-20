@@ -3,9 +3,9 @@ import Feature from "./feature";
 const fs = require("fs");
 const snekfetch = require("snekfetch");
 
-export default class AntiSpam extends Feature {
+export default class Protection extends Feature {
 	constructor() {
-		super("Anti-Spam", "anti-spam", "Anti-spamming system.");
+		super("Protection", "protection", "Server protection (spam, links, invites and explicit content in non-NSFW channels)");
 	}
 
 	canEnable(bot) {
@@ -149,4 +149,6 @@ export default class AntiSpam extends Feature {
 			}
 		});
 	}
+
+	disabled(bot) {}
 }

@@ -7,7 +7,7 @@ import UserConfig from "./core/user-config";
 import AnswerMentions from "./data/features/answer-mentions";
 import TreasureFinder from "./data/features/treasure-finder";
 import Badges from "./data/features/badges";
-import AntiSpam from "./data/features/anti-spam";
+import Protection from "./data/features/protection";
 
 const Discord = require("discord.js");
 
@@ -26,7 +26,7 @@ bot.features.registerMultiple([
 	/* new PreventUnintendedSpam(),
 	new EasterEggs()
 	new AnswerMentions(), */
-	new AntiSpam(),
+	new Protection(),
 	new TreasureFinder(),
 	new Badges()
 ]);

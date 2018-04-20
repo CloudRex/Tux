@@ -53,4 +53,6 @@ export default class EasterEggs extends Feature {
 			}
 		});
 	}
+
+	disabled() {}
 }

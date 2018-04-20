@@ -6,6 +6,7 @@ export default class FeatureManager {
 	enable(feature, bot) {
 		if (feature.canEnable(bot)) {
 			feature.enabled(bot);
+			feature.isEnabled = true;
 
 			return true;
 		}
@@ -31,6 +32,7 @@ export default class FeatureManager {
 
 	disable(feature) {
 		feature.disabled();
+		feature.isEnabled = false;
 	}
 
 	disableMultiple(features) {
@@ -61,6 +63,10 @@ export default class FeatureManager {
 
 	isRegistered(key) {
 		return this.getByKey(key) != null;
+	}
+
+	isEnabled(key) {
+		return this.getByKey(key).isEnabled;
 	}
 
 	getByKey(key) {

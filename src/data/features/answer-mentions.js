@@ -34,4 +34,7 @@ export default class AnswerMentions extends Feature {
 			}
 		});
 	}
+
+	disabled(bot) {
+	}
 }

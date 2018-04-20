@@ -1,19 +1,21 @@
 {
-    "default": {
-        "spamTrigger": 4,
-        "mute": false,
-        "preventInvites": false,
-        "preventLinks": false,
-        "preventProfanity": false,
-        "preventExplicit": false
-    },
-    "global": {
-        "log": true,
-        "chance-multiplier": 35,
-        "guild-log": {
-            "enabled": true,
-            "guild": "366785187029188609",
-            "channel": "432268684707233802"
-        }
-    }
+	"default": {
+		"spamTrigger": 4,
+		"mute": false,
+		"protection": {
+			"invites": false,
+			"links": false,
+			"profanity": false,
+			"explicit": false
+		}
+	},
+	"global": {
+		"log": true,
+		"chance-multiplier": 35,
+		"guild-log": {
+			"enabled": true,
+			"guild": "366785187029188609",
+			"channel": "432268684707233802"
+		}
+	}
 }

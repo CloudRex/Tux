@@ -133,4 +133,11 @@ export default class Utils {
 
 		return new Date(years + now.getFullYear(), months + now.getMonth(), days + now.getDate(), hours + now.getHours(), minutes + now.getMinutes(), seconds + now.getSeconds(), milliseconds + now.getMilliseconds()).getTime();
 	}
+
+	/**
+	 * @param {string} state
+	 */
+	static translateState(state) {
+		return /^(1|true|on)$/.test(state);
+	}
 }

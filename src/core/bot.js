@@ -53,10 +53,10 @@ export default class Bot {
 			this.console.init(this);
 		});
 
-		this.client.on("message", (message) => {
+		this.client.on("message", async (message) => {
 			if (!message.author.bot) {
-				this.events.emit("message", message);
-				this.database.addUserPoints(message.author.id, 1);
+				await this.database.addUserPoints(message.author.id, 1);
+				this.events.emit("userMessage", message);
 
 				if (global.trivAns) {
 					if (message.channel.id === global.trivAns.channel.id && message.content.toLowerCase() === global.trivAns.answer) {
@@ -113,6 +113,10 @@ export default class Bot {
 		});
 
 		global.b = this;
+
+		// TODO: DEBUG -----------------------
+		this.events.on("commandExecuted", (command, context) => console.log(`${context.sender.username}@${context.message.guild.name}: ${context.message.content}`));
+		// -----------------------------------
 	}
 
 	login() {
