@@ -24,8 +24,8 @@ const bot = new Bot(
 bot.features.registerMultiple([
 	/* new PreventUnintendedSpam(),
 	new AntiSpam(),
-	new EasterEggs() */
-	new AnswerMentions(),
+	new EasterEggs()
+	new AnswerMentions(), */
 	new TreasureFinder(),
 	new Badges()
 ]);

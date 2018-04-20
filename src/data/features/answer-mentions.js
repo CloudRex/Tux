@@ -16,6 +16,7 @@ export default class AnswerMentions extends Feature {
 	enabled(bot) {
 		bot.client.on("message", (message) => {
 			if (message.author.id !== bot.client.user.id) {
+				// TODO: MessageMentions user.id is causing the bot to crash (temporary disabled)
 				const mentionedUsers = message.mentions.users.array();
 
 				for (let i = 0; i < mentionedUsers.length; i++) {

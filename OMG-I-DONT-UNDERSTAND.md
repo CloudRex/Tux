@@ -132,7 +132,7 @@ returns plain objects. We want to have results to be able to be converted
 to database models. To do this, we manually implement the `fromResult` method
 to all our database models.
 
-This is how our dbUser model would look:
+This is how our `dbUser` model would look:
 
 ```javascript
 class dbUser {
