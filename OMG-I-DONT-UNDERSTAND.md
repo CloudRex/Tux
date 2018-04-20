@@ -70,7 +70,9 @@ export default {
 ````
 
 #### Command Execution Context
-When a command is executed, 
+When a command is executed, it will receive the `CommandExecutionContext` object as the first argument.
+
+*... to be continued*
 
 ## Database
 Tux uses the [sqlite](https://en.wikipedia.org/wiki/SQLite) database system and the [knex.js](http://knexjs.org/) JavaScript library to access the database.
