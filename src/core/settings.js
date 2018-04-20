@@ -11,7 +11,9 @@ export default class Settings {
 
 			const jsonObj = JSON.parse(fs.readFileSync(filePath).toString());
 
+			// TODO: should be automatic
 			this.general = jsonObj.general;
+			this.keys = jsonObj.keys;
 			this.log = jsonObj.log;
 		}
 		else {

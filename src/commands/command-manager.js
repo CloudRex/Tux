@@ -270,11 +270,11 @@ export default class CommandManager {
 			context.respond(`:thinking: **Oh noes!** There was an error executing that command. (${error.message})`, "", "RED");
 		}
 
-		Log.channel(new Discord.RichEmbed()
+		/* Log.channel(new Discord.RichEmbed()
 			.setFooter(`Requested by ${context.message.author.username}`, context.message.author.avatarURL)
 			.setColor([50, 255, 0])
 			.setAuthor("Command Executed")
-			.addField("Command", command.base));
+			.addField("Command", command.base)); */
 
 		return true;
 	}

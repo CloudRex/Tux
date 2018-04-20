@@ -7,7 +7,7 @@ export default {
 
 		context.respond({
 			Name: guild.name,
-			Owner: guild.owner ? guild.owner.displayName : "Unknown",
+			Owner: guild.dev ? guild.dev.displayName : "Unknown",
 			Users: guild.members.array().filter((member) => !member.user.bot).length,
 			Bots: guild.members.array().filter((member) => member.user.bot).length,
 			"Total Members": guild.memberCount,

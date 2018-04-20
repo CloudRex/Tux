@@ -8,8 +8,9 @@
 		"version": "1.0.1",
 		"databasePath": "botty.db"
 	},
-	"log": {
-		"guild": "",
-		"channel": ""
+	"keys": {
+		"dbl": "",
+		"giphy": "",
+		"picPurify": ""
 	}
 }

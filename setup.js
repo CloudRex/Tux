@@ -7,6 +7,8 @@ const accessLevelsPath = "./src/access-levels.json";
 const defaultAccessLevelsPath = "./src/access-levels.default.json";
 const dbPath = "botty.db";
 const defaultDbPath = "botty.default.db";
+const cfgPath = "./src/user.config.json";
+const cfgDefaultPath = "./src/user.config.default.json";
 
 const cInterface = readline.createInterface({
 	input: process.stdin,
@@ -30,16 +32,21 @@ function save() {
 
 	newData.general.token = data.token;
 	newData.general.commandTrigger = (data.trigger !== "" ? data.trigger : ".");
-	newData.general.giphyApiKey = (data.giphyApiKey !== "" ? data.giphyApiKey : "");
 
 	fs.writeFileSync(settingsPath, JSON.stringify(newData, null, 4));
+	// --------------------------------------------------------------
+
+	// Save User Config ---------------------------------------------
+	const newConfig = JSON.parse(fs.readFileSync(cfgDefaultPath).toString());
+
+	fs.writeFileSync(cfgPath, JSON.stringify(newConfig, null, 4));
 	// --------------------------------------------------------------
 
 	// Save Owner ---------------------------------------------------
 	const newAccessLevels = JSON.parse(fs.readFileSync(defaultAccessLevelsPath).toString());
 
-	if (data.owner !== "") {
-		newAccessLevels.Owner = [data.owner.toString()];
+	if (data.dev !== "") {
+		newAccessLevels.Developer = [data.dev.toString()];
 	}
 
 	fs.writeFileSync(accessLevelsPath, JSON.stringify(newAccessLevels, null, 4));
@@ -50,7 +57,7 @@ function save() {
 		fs.copyFileSync(defaultDbPath, dbPath);
 	}
 
-	err("You have successfully setup the bot and you may now run it using npm start\nYou may configure any additional settings in src/settings.json and src/access-levels.json");
+	err("You have successfully setup the bot and you may now run it using npm start\nYou may configure any additional settings in src/settings.json, src/user.config.json and src/access-levels.json");
 }
 
 function finish() {
@@ -92,13 +99,9 @@ function init() {
 		cInterface.question("Command trigger (.): ", (trigger) => {
 			data.trigger = trigger;
 
-			cInterface.question("Giphy API Key (none): ", (giphyApiKey) => {
-				data.giphyApiKey = giphyApiKey;
-
-				cInterface.question("Bot owner's Discord id or role (none): ", (owner) => {
-					data.owner = owner;
-					finish(cInterface);
-				});
+			cInterface.question("Bot developer's Discord id (none): ", (dev) => {
+				data.dev = dev;
+				finish(cInterface);
 			});
 		});
 	});
