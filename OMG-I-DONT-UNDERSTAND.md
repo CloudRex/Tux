@@ -1,9 +1,11 @@
 ## Introduction
 #### What
-This file is intended to give you an in-depth guide to coding and working with Tux.
+This file is intended to give you an in-depth guide to understanding and working with Tux.
 
 Here's some basic stuff you should know about Tux:
 
+* Should be used with [Node.js](https://nodejs.org/en/) **v8.11** (Please refrain from using v9.11).
+* Is built using [ECMAScript 6](http://es6-features.org/#Constants) with the [Babel](https://babeljs.io/) transpiler (transpilation required).
 * Uses the Discord.js library ([click here](https://discord.js.org/#/docs/main/stable/general/welcome) to view the documentation).
 * Uses a database (will get into detail later).
 * Is object oriented (most code is based on classes).
@@ -15,7 +17,60 @@ Here's some questions you might have asked yourself and their reasons:
 
 * **Why use Discord.js?** Because it's the most popular JavaScript library for writing Discord bots.
 * **Why use a database?** Because storing huge data in a JSON file is savage.
-* **Why not use rethink?** Because it's way too hard to setup compared to the current system, and required a background process.
+* **Why not use RethinkDB?** Because it's way too hard to setup compared to the current system, and required a background process.
+
+## Naming
+Yes there is a whole section for naming files and variables.
+
+#### Files
+* All files should be lower-case and be separated by dashes (-). Ex. `my-file.js`.
+
+#### Commands
+* Command files should be named with the base name of the command, and
+not any of its aliases.
+
+## Commands
+In Tux, commands are meant to be self-contained. They should be able
+to function without accessing `global` or outside methods other than
+those provided by the `Context` (explained below).
+
+#### Creation
+Every command gets its own file. Every command should contain the following
+methods:
+
+* `exected(context)` : When the command is executed
+* `canExecute(context)` : Determines whether the command can be executed
+
+Apart from that, they should also contain the `meta` property.
+
+Below is a working example for the command `name.js` (Ignore properties that do not have annotations, as they will be explained later):
+
+```javascript
+export default {
+	executed(context) {
+		context.respond("Hello World!");
+	},
+	
+	canExecute(context) {
+		return true;
+	},
+	
+	meta: {
+		name: "hello", // The name of our command
+		description: "Responds with hello world", // A brief description of our command
+		accessLevel: AccessLevelType.Guest,
+		aliases: [], // Aliases of our command (strings)
+		maxArguments: 0, // The total amount of possible arguments that our command can take
+		args: {},
+		category: CommandCategoryType.Fun, // The category of our command
+		enabled: true, // Whether our command is enabled
+		price: 0
+	}
+};
+````
+
+#### Command Execution Context
+When a command is executed, 
 
 ## Database
 Tux uses the [sqlite](https://en.wikipedia.org/wiki/SQLite) database system and the [knex.js](http://knexjs.org/) JavaScript library to access the database.
