@@ -1,6 +1,6 @@
 {
     "mute": false,
-    "log": true,
+    "log": false,
     "spamTrigger": 4,
     "chanceMultiplier": 35
 }

@@ -3,7 +3,7 @@ import CommandCategoryType from "../../commands/command-category-type";
 
 export default {
 	executed(context) {
-		context.respond("https://github.com/CloudRex/Tux");
+		context.respond("https://github.com/CloudRex/Tux", "Take a look into my insides ( ͡° ͜ʖ ͡°)", "GREEN");
 	},
 
 	canExecute(context) {
