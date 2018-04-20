@@ -3,6 +3,7 @@
 		"token": "",
 		"dblToken": null,
 		"giphyApiKey": "",
+		"picPurifyApiKey": "",
 		"commandTrigger": ".",
 		"version": "1.0.1",
 		"databasePath": "botty.db"

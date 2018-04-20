@@ -3,7 +3,8 @@
 	"log": false,
 	"spamTrigger": 4,
 	"chanceMultiplier": 35,
-	"preventInvites": true,
-	"preventLinks": true,
-	"preventProfanity": true
+	"preventInvites": false,
+	"preventLinks": false,
+	"preventProfanity": false,
+	"preventExplicit": true
 }
