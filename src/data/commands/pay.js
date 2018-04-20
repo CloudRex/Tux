@@ -2,8 +2,11 @@ import AccessLevelType from "../../core/access-level-type";
 import CommandCategoryType from "../../commands/command-category-type";
 
 export default {
-	executed(context) {
-		context.respond("Command not yet implemented", "", "RED");
+	treasures: null,
+
+	async executed(context) {
+		// TODO
+		context.respond("Command not yet implemented");
 	},
 
 	canExecute(context) {
@@ -11,13 +14,17 @@ export default {
 	},
 
 	meta: {
-		name: "set",
-		description: "Configure the bot",
-		accessLevel: AccessLevelType.Developer,
+		name: "pay",
+		description: "Pay another player",
+		accessLevel: AccessLevelType.Member,
 		aliases: [],
 		maxArguments: 1,
-		args: {},
-		category: CommandCategoryType.Developer,
+
+		args: {
+			item: "!:user"
+		},
+
+		category: CommandCategoryType.Economy,
 		enabled: true,
 		price: 0
 	}

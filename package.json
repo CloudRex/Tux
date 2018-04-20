@@ -24,6 +24,7 @@
 		"discord.js": "^11.2.1",
 		"javascript-time-ago": "^1.0.30",
 		"knex": "^0.14.2",
+		"lodash": "^4.17.5",
 		"minimist": "^1.2.0",
 		"querystring": "^0.2.0",
 		"request": "^2.83.0",

@@ -37,21 +37,33 @@ export default class Utils {
 	}
 
 	/**
+	 * @deprecated Use lodash library instead
 	 * @param {string} stack
-	 * @param {array} array
+	 * @param {array} obj
 	 * @param {string} delimiter
 	 * @returns {(*|null)}
 	 */
-	static accessArrayByStack(stack, array, delimiter = ".") {
-		const keys = stack.split(delimiter);
+	static accessObjByStack(stack, obj, delimiter = ".") {
+		return stack.split(delimiter).reduce((o, i) => o[i], obj);
+	}
 
-		let resultLoop = null;
+	/**
+	 * @deprecated Use lodash library instead
+	 * @param {string} stack
+	 * @param {*} value
+	 * @param {object} obj
+	 * @param {string} delimiter
+	 * @returns {*}
+	 */
+	static setByStack(stack, value, obj, delimiter = ".") {
+		const keys = stack.split(delimiter);
+		const result = obj;
 
 		for (let i = 0; i < keys.length; i++) {
-			resultLoop = array[keys[i]];
+
 		}
 
-		return resultLoop;
+		return result;
 	}
 
 	/**

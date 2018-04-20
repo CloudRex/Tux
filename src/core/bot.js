@@ -71,7 +71,8 @@ export default class Bot {
 						new CommandExecutionContext(
 							message,
 							CommandParser.getArguments(message.content),
-							this
+							this,
+							this.commands.getAuthority(message.member.roles.array(), message.author.id)
 						),
 
 						CommandParser.parse(
@@ -86,26 +87,30 @@ export default class Bot {
 				}
 			}
 
-			if (this.userConfig.get("log")) {
+			if (this.userConfig.get("global.log")) {
 				this.database.addMessage(message);
 			}
 		});
 
 		this.client.on("guildCreate", (guild) => {
-			const guildLog = this.userConfig.getByStack("global.guild-log");
+			const guildLog = this.userConfig.get("global.guild-log");
 
-			if (guildLog) {
-				this.client.guilds[guildLog.guild].channels[guildLog.channel].send(`Joined guild: ${guild.name} (${guild.memberCount} members)`);
+			this.userConfig.createGuild(guild.id);
+
+			if (guildLog.enabled) {
+				this.client.guilds.find("id", guildLog.guild).channels.find("id", guildLog.channel).send(`Joined guild: ${guild.name} (${guild.memberCount} members)`);
 			}
 		});
 
-		/* this.client.on("guildDelete?", (guild) => {
-			const guildLog = this.userConfig.getByStack("global.guild-log");
+		this.client.on("guildDelete", (guild) => {
+			const guildLog = this.userConfig.get("global.guild-log");
 
-			if (guildLog) {
-				this.client.guilds[guildLog.guild].channels[guildLog.channel].send(`Joined guild: ${guild.name} (${guild.memberCount} members)`);
+			this.userConfig.removeGuild(guild.id);
+
+			if (guildLog.enabled) {
+				this.client.guilds.find("id", guildLog.guild).channels.find("id", guildLog.channel).send(`Left guild: ${guild.name} (${guild.memberCount} members)`);
 			}
-		}); */
+		});
 
 		global.b = this;
 	}

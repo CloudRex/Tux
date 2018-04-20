@@ -1,7 +1,7 @@
 import Log from "./log";
-import Utils from "./utils";
 
 const fs = require("fs");
+const _ = require("lodash");
 
 export default class UserConfig {
 	/**
@@ -18,35 +18,56 @@ export default class UserConfig {
 	}
 
 	/**
-	 * @param {string} key
+	 * @param {string} path
 	 * @param {*} value
 	 */
-	set(key, value) {
-		this.config[key] = value;
+	set(path, value) {
+		_.set(this.config, path, value);
 		this.save();
 	}
 
 	/**
-	 * @param {string} key
-	 * @returns {*}
+	 * @param {Snowflake} guildId
+	 * @param {string} path
+	 * @param {*} value
 	 */
-	get(key) {
-		return this.config[key];
+	setLocal(guildId, path, value) {
+		this.set(`${guildId}.${path}`, value);
 	}
 
 	/**
-	 * @param {string} key
+	 * @param {string} path
+	 * @returns {*}
 	 */
-	contains(key) {
-		return this.config.hasOwnProperty(key);
+	get(path) {
+		return _.get(this.config, path);
 	}
 
 	/**
-	 * @param {string} stack
+	 * @param {Snowflake} guildId
+	 * @param {string} path
 	 * @returns {*}
 	 */
-	getByStack(stack) {
-		return Utils.accessArrayByStack(stack, this.config);
+	getLocal(guildId, path) {
+		return this.get(`${guildId}.${path}`);
+	}
+
+	/**
+	 * @param {string} path
+	 * @returns {boolean}
+	 */
+	contains(path) {
+		return _.has(this.config, path);
+	}
+
+	/**
+	 *
+	 * @param {Snowflake} guildId
+	 * @param {string} path
+	 * @returns {boolean}
+	 */
+	containsLocal(guildId, path) {
+		return this.contains(`${guildId}.${path}`);
 	}
 
 	/**

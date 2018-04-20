@@ -53,6 +53,8 @@ export default class AntiSpam extends Feature {
 				const preventLinks = bot.userConfig.get("preventLinks");
 				const preventProfanity = bot.userConfig.get("preventProfanity");
 				const preventExplicit = bot.userConfig.get("preventExplicit");
+
+				// TODO: Checking for embeds will probably be better
 				const urlRegex = /(https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*))/g;
 
 				if (message.deletable) {
@@ -99,8 +101,7 @@ export default class AntiSpam extends Feature {
 
 						return;
 					}
-
-					if (preventInvites && /https:\/\/discord\.gg\/[a-zA-Z0-9]+/.test(message.content)) {
+					else if (preventInvites && /https?:\/\/discord\.gg\/[a-zA-Z0-9]+/.test(message.content)) {
 						message.delete();
 
 						return;

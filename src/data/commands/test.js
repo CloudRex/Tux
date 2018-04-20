@@ -2,6 +2,7 @@ import AccessLevelType from "../../core/access-level-type";
 import CommandCategoryType from "../../commands/command-category-type";
 import CommandArgumentParser from "../../commands/command-argument-parser";
 import TimeParser from "../../core/time-parser";
+import Utils from "../../core/utils";
 
 export default {
 	async executed(context) {
@@ -29,9 +30,22 @@ export default {
 			mah_check: mahCheck
 		})); */
 
-		const tp = new TimeParser(context.arguments[0]);
+		/* const tp = new TimeParser(context.arguments[0]);
 
-		context.respond(tp.getTimeFromNow(), "", "GREEN");
+		context.respond(tp.getTimeFromNow(), "", "GREEN"); */
+
+		const arr = {
+			people: {
+				john: {
+					name: "john doe",
+					age: 21,
+					email: "johndoe@doejohn.doe"
+				}
+			}
+		};
+
+		context.bot.userConfig.set(context.arguments[0], context.arguments[1]);
+		console.log(context.bot.userConfig.get(context.arguments[0]));
 	},
 
 	canExecute(context) {
@@ -43,10 +57,11 @@ export default {
 		description: "Test something",
 		accessLevel: AccessLevelType.Developer,
 		aliases: [],
-		maxArguments: 1,
+		maxArguments: 2,
 
 		args: {
-			time: "!:time"
+			key: "!string",
+			value: "number|string"
 		},
 
 		category: CommandCategoryType.Developer,

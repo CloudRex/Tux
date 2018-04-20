@@ -16,11 +16,13 @@ export default class CommandExecutionContext {
 	 * @param {Message} message
 	 * @param {array<string>} args
 	 * @param {Bot} bot
+	 * @param {AccessLevelType} accessLevel
 	 */
-	constructor(message, args, bot) {
+	constructor(message, args, bot, accessLevel) {
 		this.message = message;
 		this.arguments = args;
 		this.bot = bot;
+		this.accessLevel = accessLevel;
 	}
 
 	/**
@@ -34,7 +36,7 @@ export default class CommandExecutionContext {
 	 * @returns {(Promise<EditableMessage>|null)}
 	 */
 	async respond(message, title = "", color = "RANDOM", thumbnailUrl = "", footerSuffix = "", image = "", authorImage = "") {
-		if (!this.bot.userConfig.get("mute")) {
+		if (!this.bot.userConfig.getLocal(this.message.guild.id, "mute")) {
 			const embed = new Discord.RichEmbed()
 				.setFooter(`Requested by ${this.message.author.username} ${footerSuffix}`, this.message.author.avatarURL)
 				.setColor(color)
@@ -77,7 +79,7 @@ export default class CommandExecutionContext {
 	 * @returns {(Promise<*>|null)}
 	 */
 	async reply(message) {
-		if (!this.bot.userConfig.get("mute")) {
+		if (!this.bot.userConfig.getLocal(message.guild.id, "mute")) {
 			return await this.message.reply(message);
 		}
 
@@ -88,8 +90,6 @@ export default class CommandExecutionContext {
 	 * @param {string} message
 	 */
 	privateReply(message) {
-		if (!this.bot.userConfig.get("mute")) {
-			this.message.author.send(message);
-		}
+		this.message.author.send(message);
 	}
 }
