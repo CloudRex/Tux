@@ -3,5 +3,5 @@ dist
 .idea
 src/settings.json
 src/access-levels.json
-src/user.config.json
+src/user-config.json
 botty.db
