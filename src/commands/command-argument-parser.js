@@ -48,6 +48,9 @@ export default class CommandArgumentParser {
 							break;
 						}
 						else if (typeIdx === typeSplit.length - 1) {
+							console.log(typeIdx);
+							console.log(typeSplit.length);
+							console.log(typeSplit);
 							console.log("Failed: check on CUSTOM-type first or last item not passed");
 
 							return false;

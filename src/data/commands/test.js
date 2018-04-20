@@ -1,51 +1,36 @@
 import AccessLevelType from "../../core/access-level-type";
 import CommandCategoryType from "../../commands/command-category-type";
 import CommandArgumentParser from "../../commands/command-argument-parser";
-import TimeParser from "../../core/time-parser";
-import Utils from "../../core/utils";
+
+const Discord = require("discord.js");
 
 export default {
 	async executed(context) {
-		/* const tov = {
-			name: null,
-			age: 5,
-			addr: "test"
+		const target = context.message.mentions.users.array()[0];
+
+		const customTypes = {
+			user: (arg) => {
+				const match = /(^[0-9]{18}$|^<@!?[0-9]{18}>$)/.test(arg); // <@285578743324606482>
+
+				console.log(Discord.MessageMentions.USERS_PATTERN);
+
+				console.log("MATCH : " + match);
+				console.log("ARG : " + arg);
+				console.log("LEN : " + arg.length);
+
+				return match;
+			},
 		};
 
-		const mahCheck = (arg) => {
-			console.log(arg);
-
-			if (typeof arg === "string") {
-				return arg.toLowerCase() === "john doe";
-			}
-
-			return false;
+		const tov = {
+			user: context.arguments[0],
+			amount: 5
 		};
 
 		console.log(CommandArgumentParser.validate({
-			name: "string|number",
-			age: "!number",
-			addr: "number|string|:mah_check"
-		}, tov, {
-			mah_check: mahCheck
-		})); */
-
-		/* const tp = new TimeParser(context.arguments[0]);
-
-		context.respond(tp.getTimeFromNow(), "", "GREEN"); */
-
-		const arr = {
-			people: {
-				john: {
-					name: "john doe",
-					age: 21,
-					email: "johndoe@doejohn.doe"
-				}
-			}
-		};
-
-		context.bot.userConfig.set(context.arguments[0], context.arguments[1]);
-		console.log(context.bot.userConfig.get(context.arguments[0]));
+			user: "!:user",
+			amount: "!number"
+		}, tov, customTypes));
 	},
 
 	canExecute(context) {
@@ -57,13 +42,8 @@ export default {
 		description: "Test something",
 		accessLevel: AccessLevelType.Developer,
 		aliases: [],
-		maxArguments: 2,
-
-		args: {
-			key: "!string",
-			value: "number|string"
-		},
-
+		maxArguments: 1,
+		args: {},
 		category: CommandCategoryType.Developer,
 		enabled: true,
 		price: 0
