@@ -14,7 +14,7 @@ const Discord = require("discord.js");
 const bot = new Bot(
 	// TODO: Debug only
 	new Settings("src/settings.json"),
-	new UserConfig("src/user.config.json"),
+	new UserConfig("src/user-config.json"),
 	new Discord.Client(),
 	new CommandManager("src/access-levels.json"),
 	new FeatureManager(),

@@ -7,8 +7,8 @@ const accessLevelsPath = "./src/access-levels.json";
 const defaultAccessLevelsPath = "./src/access-levels.default.json";
 const dbPath = "botty.db";
 const defaultDbPath = "botty.default.db";
-const cfgPath = "./src/user.config.json";
-const cfgDefaultPath = "./src/user.config.default.json";
+const cfgPath = "./src/user-config.json";
+const cfgDefaultPath = "./src/user-config.default.json";
 
 const cInterface = readline.createInterface({
 	input: process.stdin,
@@ -57,7 +57,7 @@ function save() {
 		fs.copyFileSync(defaultDbPath, dbPath);
 	}
 
-	err("You have successfully setup the bot and you may now run it using npm start\nYou may configure any additional settings in src/settings.json, src/user.config.json and src/access-levels.json");
+	err("You have successfully setup the bot and you may now run it using npm start\nYou may configure any additional settings in src/settings.json, src/user-config.json and src/access-levels.json");
 }
 
 function finish() {
