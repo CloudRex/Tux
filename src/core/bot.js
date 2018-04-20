@@ -29,6 +29,7 @@ export default class Bot {
 		this.console = new ConsoleInterface();
 		this.emojis = new EmojiMenuManager(this.client);
 
+		// TODO
 		if (settings.general.dblToken) {
 			this.dbl = new DBL(settings.general.dblToken);
 		}
@@ -43,10 +44,21 @@ export default class Bot {
 				}
 			});
 
+			// Check for missing guilds in user config
+			const guilds = this.client.guilds.array();
+
+			for (let i = 0; i < guilds.length; i++) {
+				if (!this.userConfig.contains(guilds[i].id)) {
+					this.userConfig.createGuild(guilds[i].id);
+				}
+			}
+
+			this.userConfig.save();
+
 			// Post stats to DBL
 			if (this.dbl) {
 				setInterval(() => {
-					this.dbl.postStats(this.client.guilds.size);
+					this.dbl.postStats(guilds.length);
 				}, 1800000);
 			}
 

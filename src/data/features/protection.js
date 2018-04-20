@@ -5,7 +5,7 @@ const snekfetch = require("snekfetch");
 
 export default class Protection extends Feature {
 	constructor() {
-		super("Protection", "protection", "Server protection (spam, links, invites and explicit content in non-NSFW channels)");
+		super("Protection", "protection", "Server protection (profanity, spam, links, invites and explicit content in non-NSFW channels)");
 	}
 
 	canEnable(bot) {
