@@ -6,7 +6,7 @@ const fs = require("fs");
 
 export default class Badges extends Feature {
 	constructor() {
-		super("Badges", "treasure-finder", "Earn badges by doing stuff");
+		super("Badges", "badges", "Earn badges by doing stuff");
 
 		// TODO: Better loading system (class) and path musn't be hard coded
 		this.treasures = JSON.parse(fs.readFileSync("src/items.json").toString());
