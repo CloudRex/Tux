@@ -1,7 +1,10 @@
 {
 	"default": {
 		"spamTrigger": 4,
-		"mute": false
+		"mute": false,
+		"preventInvites": false,
+		"preventLinks": false,
+		"preventProfanity": false
 	},
 
 	"global": {

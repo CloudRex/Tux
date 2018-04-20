@@ -1,6 +1,9 @@
 {
-    "mute": false,
-    "log": false,
-    "spamTrigger": 4,
-    "chanceMultiplier": 35
+	"mute": false,
+	"log": false,
+	"spamTrigger": 4,
+	"chanceMultiplier": 35,
+	"preventInvites": true,
+	"preventLinks": true,
+	"preventProfanity": true
 }

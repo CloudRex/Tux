@@ -1,5 +1,7 @@
 import Feature from "./feature";
 
+const fs = require("fs");
+
 export default class AntiSpam extends Feature {
 	constructor() {
 		super("Anti-Spam", "anti-spam", "Anti-spamming system.");
@@ -9,10 +11,43 @@ export default class AntiSpam extends Feature {
 		return true;
 	}
 
+	getBadWords() {
+		return JSON.parse(fs.readFileSync("src/bad-words.json"));
+	}
+
 	enabled(bot) {
+		const badWords = this.getBadWords();
+
 		bot.client.on("message", (message) => {
-			if (message.author.id !== bot.client.user.id) {
+			// TODO: Hard coded discord bot lists
+			if (message.author.id !== bot.client.user.id && message.guild.id.toString() !== "264445053596991498" && message.guild.id.toString() !== "110373943822540800" && message.guild.id.toString() !== "374071874222686211") {
 				const { spamTrigger } = bot.userConfig;
+				const preventInvites = bot.userConfig.get("preventInvites");
+				const preventLinks = bot.userConfig.get("preventLinks");
+				const preventProfanity = bot.userConfig.get("preventProfanity");
+				const urlRegex = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g;
+
+				if (message.deletable) {
+					if (preventProfanity) {
+						for (let i = 0; i < badWords.length; i++) {
+							if (message.content.includes(badWords[i])) {
+								message.delete();
+
+								return;
+							}
+						}
+					}
+					else if (preventLinks && urlRegex.test(message.content)) {
+						message.delete();
+
+						return;
+					}
+					else if (preventInvites && /https:\/\/discord\.gg\/[a-zA-Z0-9]+/.test(message.content)) {
+						message.delete();
+
+						return;
+					}
+				}
 
 				bot.database.getMessages(message.author.id, (messages) => {
 					let streak = 0;
