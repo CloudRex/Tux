@@ -73,7 +73,7 @@ export default {
 
 #### Command Execution Context
 When a command is executed, it will receive the `CommandExecutionContext` object as the first and only argument.
-Take a look at the `CommandExecutionContext` class's properties:
+Take a look at the `CommandExecutionContext` class's constructor:
 
 ```javascript
 class CommandExecutionContext {
@@ -91,6 +91,9 @@ class CommandExecutionContext {
 Passing the `CommandExecutionContext` argument allows every command to access
 every part of Tux.
 
+*... to be continued*
+
+#### Execution
 *... to be continued*
 
 ## Database
