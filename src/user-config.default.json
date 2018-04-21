@@ -7,6 +7,22 @@
 			"links": false,
 			"profanity": false,
 			"explicit": false
+		},
+		"access-levels": {
+			"guest": [],
+			"member": [
+				"@everyone"
+			],
+			"premium": [],
+			"moderator": [],
+			"admin": [],
+			"owner": []
+		},
+		"features": {
+			"protection": false,
+			"treasures": false,
+			"badges": true,
+			"easter-eggs": false
 		}
 	},
 	"global": {
@@ -16,6 +32,7 @@
 			"enabled": false,
 			"guild": "",
 			"channel": ""
-		}
+		},
+		"developers": []
 	}
 }

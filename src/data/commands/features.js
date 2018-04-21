@@ -20,7 +20,7 @@ export default {
 			response.add(`**${feature.name}**: ${feature.description}`).line();
 		}
 
-		context.respond(response.build(), "Features", "GREEN");
+		context.respond(response.line().italic("Use the `feature` command to toggle features on or off.").build(), "Features", "GREEN");
 	},
 
 	canExecute(context) {

@@ -89,7 +89,7 @@ export default class CommandExecutionContext {
 	/**
 	 * @param {string} message
 	 */
-	privateReply(message) {
-		this.message.author.send(message);
+	async privateReply(message) {
+		return await this.message.author.send(message);
 	}
 }

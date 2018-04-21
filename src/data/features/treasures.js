@@ -4,7 +4,7 @@ import DbItem from "../../database/db-item";
 
 const fs = require("fs");
 
-export default class TreasureFinder extends Feature {
+export default class Treasures extends Feature {
 	constructor() {
 		super("Treasures", "treasures", "Randomly find and catch items");
 

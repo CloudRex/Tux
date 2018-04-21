@@ -5,10 +5,10 @@ export default {
 	async executed(context) {
 		if (context.arguments.length === 1) {
 			if (context.arguments[0].startsWith("global")) {
-				context.respond(`**${context.arguments[0]}** = **${context.bot.userConfig.get(context.arguments[0])}**`, "", "GREEN");
+				context.respond(`**${context.arguments[0]}** = **${JSON.stringify(context.bot.userConfig.get(context.arguments[0]))}**`, "", "GREEN");
 			}
 			else {
-				context.respond(`**${context.arguments[0]}** = **${context.bot.userConfig.getLocal(context.message.guild.id, context.arguments[0])}**`, "", "GREEN");
+				context.respond(`**${context.arguments[0]}** = **${JSON.stringify(context.bot.userConfig.getLocal(context.message.guild.id, context.arguments[0]))}**`, "", "GREEN");
 			}
 		}
 		else if (context.arguments.length === 2) {

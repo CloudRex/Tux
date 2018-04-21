@@ -3,7 +3,7 @@ import AccessLevelType from "../../core/access-level-type";
 import CommandCategoryType from "../../commands/command-category-type";
 
 export default {
-	executed(context) {
+	async executed(context) {
 		if (context.arguments.length === 0) {
 			const result = {};
 			const { commands } = context.bot.commands;
@@ -56,11 +56,13 @@ export default {
 				}
 
 				if (categoryEmpty) {
-					result[categories[categ].name].push("There are no commands for this category.");
+					result[categories[categ].name].push("There are no commands for this category (or you don't have access to them).");
 				}
 
 				result[categories[categ].name] = result[categories[categ].name].join("\n");
 			}
+
+			result["A note from developers"] = "*Hey, thanks for using our bot! Tux is a relatively new bot and if you have already noticed not everything may work as expected. We're currently working on per-server configuration support to enable our moderation commands. If you'd like to talk to the developers (maybe you want to see a special feature in Tux!) issue the `about` command and join our support server. Thanks!* \n\n-Atlas#0042";
 
 			/* for (let i = 0; i < context.bot.commands.commands.length; i++) {
 				const command = context.bot.commands.commands[i];
@@ -69,6 +71,14 @@ export default {
 			} */
 
 			// messageBuilder.codeBlock().line().add(":heavy_plus_sign: other secret stuff!");
+			/* const reply = await context.privateReply(result).catch(async (error) => {
+				const failReply = await context.respond(":thinking: It seems that you're blocking private messages. I was unable to display my help commands.", "", "RED");
+
+				if (failReply) {
+					failReply.message.delete(6000);
+				}
+			}); */
+
 			context.respond(result);
 		}
 		else if (context.bot.commands.isRegistered(context.arguments[0])) {

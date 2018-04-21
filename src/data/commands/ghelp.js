@@ -55,12 +55,12 @@ export default {
 	meta: {
 		name: "ghelp",
 		description: "View all available commands",
-		accessLevel: AccessLevelType.Developer,
+		accessLevel: AccessLevelType.Member,
 		aliases: [],
 		maxArguments: 0,
 		args: {},
 		category: CommandCategoryType.General,
-		enabled: true,
+		enabled: false,
 		price: 0
 	}
 };

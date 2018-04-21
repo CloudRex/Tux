@@ -5,7 +5,7 @@ import FeatureManager from "./features/feature-manager";
 import CommandLoader from "./commands/command-loader";
 import UserConfig from "./core/user-config";
 import AnswerMentions from "./data/features/answer-mentions";
-import TreasureFinder from "./data/features/treasure-finder";
+import Treasures from "./data/features/treasures";
 import Badges from "./data/features/badges";
 import Protection from "./data/features/protection";
 
@@ -27,7 +27,7 @@ bot.features.registerMultiple([
 	new EasterEggs()
 	new AnswerMentions(), */
 	new Protection(),
-	new TreasureFinder(),
+	new Treasures(),
 	new Badges()
 ]);
 
