@@ -13,7 +13,7 @@ export default {
 			msg.edit(`2. Generating a complete report of all **${channels.length}** channels...`, guild.name, "GOLD");
 
 			setTimeout(() => {
-				msg.edit(`3. Collecting images and embeds from all **${channels.length}** channels...`, guild.name, "GOLD");
+				msg.edit(`3. Collecting emojis, images, links and embeds from all **${channels.length}** channels...`, guild.name, "GOLD");
 
 				setTimeout(() => {
 					msg.edit("4. Compressing data...", guild.name, "GOLD");
