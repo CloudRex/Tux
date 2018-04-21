@@ -4,7 +4,31 @@ import CommandCategoryType from "../../commands/command-category-type";
 export default {
 	executed(context) {
 		const { guild } = context.message;
-		const computeScore = (g) => ((g.memberCount / 100) + g.emojis.array().length + g.roles.array().length);
+		const computeScore = (g) => Math.round(((g.memberCount / 100) + g.channels.array().length + g.emojis.array().length + g.roles.array().length));
+
+		const classifyScore = (score) => {
+			let result = "Low";
+
+			if (score >= 30) {
+				result = "Medium";
+			}
+
+			if (score >= 50) {
+				result = "High";
+			}
+
+			if (score >= 100) {
+				result = ":fire: Extreme";
+			}
+
+			if (score >= 150) {
+				result = ":fire: __ULTIMATE__ :fire:";
+			}
+			
+			return result;
+		};
+
+		const score = computeScore(guild);
 
 		context.respond({
 			Name: guild.name,
@@ -16,7 +40,7 @@ export default {
 			"Default Channel": guild.defaultChannel ? guild.defaultChannel : "None",
 			"Custom Emojis": guild.emojis.array().length,
 			"Created At": guild.createdAt,
-			Score: `:star: ${computeScore(guild)}`
+			Score: `:star: ${score} (**${classifyScore(score)}**)`
 		}, "", "GREEN", guild.iconURL);
 	},
 
