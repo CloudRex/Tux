@@ -38,7 +38,6 @@ export default {
 		maxArguments: 1,
 		args: {},
 		category: CommandCategoryType.Economy,
-		enabled: true,
-		price: 0
+		enabled: true
 	}
 };

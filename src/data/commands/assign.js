@@ -27,7 +27,6 @@ export default {
 		},
 
 		category: CommandCategoryType.Moderation,
-		enabled: true,
-		price: 0
+		enabled: true
 	}
 };

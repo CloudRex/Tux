@@ -60,7 +60,6 @@ export default {
 		maxArguments: 0,
 		args: {},
 		category: CommandCategoryType.General,
-		enabled: false,
-		price: 0
+		enabled: false
 	}
 };

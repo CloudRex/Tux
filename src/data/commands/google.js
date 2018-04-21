@@ -44,7 +44,6 @@ export default {
 		},
 
 		category: CommandCategoryType.Utility,
-		enabled: false,
-		price: 300
+		enabled: false
 	}
 };

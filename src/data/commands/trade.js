@@ -269,7 +269,6 @@ export default {
 		args: {},
 
 		category: CommandCategoryType.Economy,
-		enabled: false,
-		price: 250
+		enabled: false
 	}
 };

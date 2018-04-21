@@ -19,7 +19,6 @@ export default {
 		maxArguments: 0,
 		args: {},
 		category: CommandCategoryType.Developer,
-		enabled: true,
-		price: 0
+		enabled: true
 	}
 };

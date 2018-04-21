@@ -29,8 +29,8 @@ export default {
 	},
 
 	meta: {
-		name: "pay",
-		description: "Pay another player",
+		name: "play",
+		description: "Play a song",
 		accessLevel: AccessLevelType.Member,
 		aliases: [],
 		maxArguments: 2,

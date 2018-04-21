@@ -36,7 +36,6 @@ export default {
 		maxArguments: 1,
 		args: {},
 		category: CommandCategoryType.NSFW,
-		enabled: true,
-		price: 700
+		enabled: true
 	}
 };

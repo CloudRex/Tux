@@ -35,7 +35,6 @@ export default {
 		maxArguments: 0,
 		args: {},
 		category: CommandCategoryType.General,
-		enabled: true,
-		price: 0
+		enabled: true
 	}
 };

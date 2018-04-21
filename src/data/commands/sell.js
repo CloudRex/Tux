@@ -76,7 +76,6 @@ export default {
 		},
 
 		category: CommandCategoryType.Economy,
-		enabled: true,
-		price: 0
+		enabled: true
 	}
 };

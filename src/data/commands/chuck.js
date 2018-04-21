@@ -24,7 +24,6 @@ export default {
 		maxArguments: 0,
 		args: {},
 		category: CommandCategoryType.Fun,
-		enabled: true,
-		price: 100
+		enabled: true
 	}
 };

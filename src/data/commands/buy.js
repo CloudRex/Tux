@@ -3,7 +3,7 @@ import CommandCategoryType from "../../commands/command-category-type";
 
 export default {
 	async executed(context) {
-		const command = context.bot.commands.getByBase(context.arguments[0]);
+		/* const command = context.bot.commands.getByBase(context.arguments[0]);
 
 		if (command) {
 			if (command.price > 0) {
@@ -24,7 +24,7 @@ export default {
 		}
 		else {
 			context.respond("That command does not exist.", "", "RED");
-		}
+		} */
 	},
 
 	canExecute(context) {
@@ -43,7 +43,6 @@ export default {
 		},
 
 		category: CommandCategoryType.General,
-		enabled: true,
-		price: 0
+		enabled: false
 	}
 };

@@ -35,7 +35,6 @@ export default {
 		},
 
 		category: CommandCategoryType.Fun,
-		enabled: true,
-		price: 150
+		enabled: true
 	}
 };
