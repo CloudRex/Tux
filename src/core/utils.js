@@ -19,12 +19,11 @@ export default class Utils {
 	}
 
 	/**
-	 * @param {string} string
+	 * @param {string} userMention
 	 * @returns {string}
 	 */
-	static resolveId(string) {
-		return string.replace("<", "").replace(">", "").replace("@", "").replace("!", "")
-			.replace("!", "");
+	static resolveId(userMention) {
+		return userMention.replace("<", "").replace(">", "").replace("@", "").replace("!", "");
 	}
 
 	/**

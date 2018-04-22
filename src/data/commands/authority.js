@@ -3,9 +3,7 @@ import CommandCategoryType from "../../commands/command-category-type";
 
 export default {
 	executed(context) {
-		const authLevel = context.bot.commands.getAuthority(context.message.guild.id, context.message.member.roles.array().map((role) => role.name), context.message.author.id);
-
-		context.ok(`:zap: Your authorization level is **${AccessLevelType.toString(authLevel)}**`);
+		context.ok(`:zap: Your authorization level is **${AccessLevelType.toString(context.auth)}**`);
 	},
 
 	canExecute(context) {

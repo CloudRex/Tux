@@ -35,6 +35,13 @@ export default class UserConfig {
 		this.set(`${guildId}.${path}`, value);
 	}
 
+	pushLocal(guildId, path, item) {
+		const updated = this.getLocal(guildId, path);
+
+		updated.push(item);
+		this.setLocal(guildId, path, updated);
+	}
+
 	/**
 	 * @param {string} path
 	 * @returns {*}

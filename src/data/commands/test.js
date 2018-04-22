@@ -6,7 +6,7 @@ const Discord = require("discord.js");
 
 export default {
 	async executed(context) {
-		const target = context.message.mentions.users.array()[0];
+		/* const target = context.message.mentions.users.array()[0];
 
 		const customTypes = {
 			user: (arg) => {
@@ -30,7 +30,10 @@ export default {
 		console.log(CommandArgumentParser.validate({
 			user: "!:user",
 			amount: "!number"
-		}, tov, customTypes));
+		}, tov, customTypes)); */
+		// Gives null when passing [], which is good (what we want)
+		const auth = context.bot.commands.getAuthority(context.message.guild.id, undefined, context.arguments[0]);
+		context.ok("auth: " + auth);
 	},
 
 	canExecute(context) {

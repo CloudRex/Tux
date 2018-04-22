@@ -73,4 +73,16 @@ export default class CommandArgumentParser {
 
 		return true;
 	}
+
+	static resolve(type, arg, resolvers) {
+		const keys = Object.keys(resolvers);
+
+		for (let i = 0; i < keys.length; i++) {
+			if (keys[i] === type) {
+				return resolvers[keys[i]](arg);
+			}
+		}
+
+		throw new Error(`[CommandArgumentParser] Missing argument resolver: ${type}`);
+	}
 }

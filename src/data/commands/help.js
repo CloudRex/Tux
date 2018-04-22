@@ -44,16 +44,13 @@ export default {
 				}
 			];
 
-			// TODO: Why only the @everyone role? I forgot.. review.
-			const authority = context.bot.commands.getAuthority(context.message.guild.id, ["@everyone"], context.sender.id);
-
 			for (let categ = 0; categ < categories.length; categ++) {
 				result[categories[categ].name] = [];
 
 				let categoryEmpty = true;
 
 				for (let cmd = 0; cmd < commands.length; cmd++) {
-					if (commands[cmd].category === categories[categ].id && commands[cmd].accessLevel <= authority) {
+					if (commands[cmd].category === categories[categ].id && commands[cmd].accessLevel <= context.auth) {
 						result[categories[categ].name].push(`**${commands[cmd].base}**: ${commands[cmd].description}`);
 						categoryEmpty = false;
 					}

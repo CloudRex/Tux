@@ -1,6 +1,7 @@
 import AccessLevelType from "../core/access-level-type";
 import CommandArgumentParser from "./command-argument-parser";
 import CommandExecutedEvent from "../events/command-executed-event";
+import Utils from "../core/utils";
 
 const fs = require("fs");
 
@@ -177,7 +178,7 @@ export default class CommandManager {
 	 * @param {Snowflake} userId
 	 * @returns {AccessLevelType}
 	 */
-	getAuthority(guildId, roles, userId) {
+	getAuthority(guildId, roles = ["@everyone"], userId) {
 		const byRoles = this.getHighestAccessLevelByRoles(guildId, roles);
 		const byId = this.getAccessLevelById(guildId, userId);
 
@@ -215,13 +216,19 @@ export default class CommandManager {
 	 * @returns {Promise<boolean>}
 	 */
 	async handle(context, command) {
-		const customTypes = {
+		const types = {
 			// TODO: Bug with the USERS_PATTERN (interlaps between true and false)
 			user: (arg) => /(^[0-9]{18}$|^<@!?[0-9]{18}>$)/.test(arg),
 			time: (arg) => /^[0-9]+(ms|s|m|h|d|mo|y)$/.test(arg),
 			minuteTime: (arg) => /^[0-9]+(m|h|d|mo|y)$/.test(arg),
 			state: (arg) => /^(1|0|true|false|off|on)$/.test(arg),
-			youtubeLink: (arg) => /^https?:\/\/(www\.)?youtube\.com\/watch\?v=[a-zA-Z0-9-]{11}$/.test(arg)
+			youtubeLink: (arg) => /^https?:\/\/(www\.)?youtube\.com\/watch\?v=[a-zA-Z0-9-]{11}$/.test(arg),
+			accessLevel: (arg) => /^guest|member|premium|moderator|admin|owner$/.test(arg)
+		};
+
+		// TODO: Resolve arguments THEN provide them to the commands in a resolved form
+		const resolvers = {
+			user: (arg) => Utils.resolveId(arg)
 		};
 
 		// TODO: debug only
@@ -246,7 +253,12 @@ export default class CommandManager {
 			return false;
 		}
 		else if (context.arguments.length > command.maxArguments) {
-			await context.fail(`That command only accepts up to **${command.maxArguments}** arguments.`);
+			if (command.maxArguments > 0) {
+				await context.fail(`That command only accepts up to **${command.maxArguments}** arguments.`);
+			}
+			else {
+				await context.fail(`That command does not accept any arguments.`);
+			}
 
 			return false;
 		}
@@ -255,7 +267,7 @@ export default class CommandManager {
 
 			return false;
 		}
-		else if (!CommandArgumentParser.validate(command.args, this.assembleArguments(Object.keys(command.args), context.arguments), customTypes)) {
+		else if (!CommandArgumentParser.validate(command.args, this.assembleArguments(Object.keys(command.args), context.arguments), types)) {
 			await context.fail("Invalid argument usage. Please use the `usage` command.");
 
 			return false;

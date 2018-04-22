@@ -74,6 +74,21 @@ export default class CommandExecutionContext {
 		return null;
 	}
 
+	/**
+	 * @param {Snowflake} userId
+	 * @returns {AccessLevelType}
+	 */
+	getAuth(userId) {
+		return this.bot.commands.getAuthority(this.message.guild.id, this.message.guild.member(userId).roles.array().map((role) => role.name), userId);
+	}
+
+	/**
+	 * @returns {AccessLevelType}
+	 */
+	get auth() {
+		return this.getAuth(this.sender.id);
+	}
+
 	async sections(sections) {
 		return await this.respond(EmbedBuilder.sections(sections));
 	}
