@@ -26,28 +26,11 @@ export default class CommandExecutionContext {
 
 	/**
 	 * @param {(object|EmbedBuilder)} content
+	 * @param {boolean} autoDelete
 	 * @returns {(Promise<EditableMessage>|null)}
 	 */
-	async respond(content) {
+	async respond(content, autoDelete = false) {
 		if (!this.bot.userConfig.getLocal(this.message.guild.id, "mute")) {
-			/* const embed = new Discord.RichEmbed()
-				.setFooter(`Requested by ${this.message.author.username} ${footerSuffix}`, this.message.author.avatarURL)
-				.setColor(color)
-				.setAuthor(title, authorImage)
-				.setThumbnail(thumbnailUrl);
-
-			if (image !== "") {
-				embed.setImage(image);
-			}
-
-			if (typeof message === "object") {
-				for (let i = 0; i < Object.keys(message).length; i++) {
-					embed.addField(Object.keys(message)[i], message[Object.keys(message)[i]]);
-				}
-			}
-			else {
-				embed.setDescription(message);
-			} */
 			let embed = null;
 
 			if (content instanceof EmbedBuilder) {
@@ -73,6 +56,10 @@ export default class CommandExecutionContext {
 				// this.privateReply(`Oh noes! For some reason, I was unable to reply to you in that channel. (${error.message})`);
 			});
 
+			if (autoDelete && messageResult) {
+				messageResult.delete(4000 + (0.09 * messageResult.content.length * 1000));
+			}
+
 			return (messageResult !== undefined ? new EditableMessage(messageResult) : null);
 		}
 
@@ -97,7 +84,7 @@ export default class CommandExecutionContext {
 		return await this.respond({
 			text: text,
 			color: "RED"
-		});
+		}, true);
 	}
 
 	/**
