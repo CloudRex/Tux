@@ -4,6 +4,7 @@ import CommandExecutionContext from "../commands/command-execution-context";
 import Database from "../database/database";
 import ConsoleInterface from "../console/console-interface";
 import EmojiMenuManager from "../emoji-ui/emoji-menu-manager";
+import EmbedBuilder from "./embed-builder";
 
 const DBL = require("dblapi.js");
 const EventEmitter = require("events");
@@ -110,7 +111,7 @@ export default class Bot {
 			this.userConfig.createGuild(guild.id);
 
 			if (guildLog.enabled) {
-				this.client.guilds.find("id", guildLog.guild).channels.find("id", guildLog.channel).send(`Joined guild: ${guild.name} (${guild.memberCount} members)`);
+				this.client.guilds.find("id", guildLog.guild).channels.find("id", guildLog.channel).send(new EmbedBuilder().text(`Joined guild: ${guild.name} (${guild.memberCount} members)`).color("GREEN").build());
 			}
 		});
 
@@ -120,7 +121,7 @@ export default class Bot {
 			this.userConfig.removeGuild(guild.id);
 
 			if (guildLog.enabled) {
-				this.client.guilds.find("id", guildLog.guild).channels.find("id", guildLog.channel).send(`Left guild: ${guild.name} (${guild.memberCount} members)`);
+				this.client.guilds.find("id", guildLog.guild).channels.find("id", guildLog.channel).send(new EmbedBuilder().text(`Left guild: ${guild.name} (${guild.memberCount} members)`).color("RED").build());
 			}
 		});
 
