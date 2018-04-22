@@ -57,7 +57,15 @@ export default class CommandExecutionContext {
 			});
 
 			if (autoDelete && messageResult) {
-				messageResult.delete(4000 + (0.09 * messageResult.content.length * 1000));
+				// TODO: Cannot access .length in embeds
+				// also static time for images, probably need function
+				const timeInSeconds = (4000 + (100 * embed.build() * 1000)) / 1000;
+
+				messageResult.delete(4000 + (100 * messageResult.content.length * 1000));
+
+				console.log(messageResult.content.length);
+
+				console.log(`time : ${timeInSeconds}`);
 			}
 
 			return (messageResult !== undefined ? new EditableMessage(messageResult) : null);

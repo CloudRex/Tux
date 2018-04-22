@@ -197,7 +197,7 @@ export default class CommandManager {
 			time: (arg) => /^[0-9]+(ms|s|m|h|d|mo|y)$/.test(arg),
 			minuteTime: (arg) => /^[0-9]+(m|h|d|mo|y)$/.test(arg),
 			state: (arg) => /^(1|0|true|false|off|on)$/.test(arg),
-			youtubeLink: (arg) => /^https?:\/\/www\.youtube\.com\/watch\?v=[a-zA-Z0-9-]{11}$/.test(arg)
+			youtubeLink: (arg) => /^https?:\/\/(www\.)?youtube\.com\/watch\?v=[a-zA-Z0-9-]{11}$/.test(arg)
 		};
 
 		if (!context.message.member) {

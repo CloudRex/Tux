@@ -43,7 +43,7 @@ export default class Protection extends Feature {
 	// TODO: Report incident
 	enabled(bot) {
 		const badWords = this.getBadWords();
-		const apiKey = bot.settings.general.picPurifyApiKey;
+		const apiKey = bot.settings.keys.picPurify;
 
 		bot.client.on("message", async (message) => {
 			// TODO: Hard coded discord bot lists
