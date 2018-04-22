@@ -55,7 +55,7 @@ export default {
 		name: "inventory",
 		description: "View your inventory",
 		accessLevel: AccessLevelType.Member,
-		aliases: ["inv"],
+		aliases: ["inv", "items"],
 		maxArguments: 1,
 		args: {},
 		category: CommandCategoryType.Economy,
