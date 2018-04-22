@@ -25,7 +25,7 @@ export default {
 				Category: response.category,
 				Question: response.question,
 				Choices: Utils.shuffle(choices.build().split("\n")).join("\n")
-			}, "Trivia", "GREEN");
+			});
 
 			global.trivAns = {
 				channel: context.message.channel,
