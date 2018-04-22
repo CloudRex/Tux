@@ -1,0 +1,23 @@
+import AccessLevelType from "../../core/access-level-type";
+import CommandCategoryType from "../../commands/command-category-type";
+
+export default {
+	executed(context) {
+		// Start coding your command!
+	},
+
+	canExecute(context) {
+		return true;
+	},
+
+	meta: {
+		name: "%name%",
+		description: "%description%",
+		accessLevel: %access_level%,
+		aliases: [],
+		maxArguments: %max_arguments%,
+		args: {},
+		category: %category%,
+		enabled: %enabled%
+	}
+};

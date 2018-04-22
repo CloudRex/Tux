@@ -87,7 +87,6 @@ function finish() {
 	}
 }
 
-
 function init() {
 	cInterface.question("Bot token: ", (token) => {
 		data.token = token;
