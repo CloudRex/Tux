@@ -101,7 +101,7 @@ export default class Protection extends Feature {
 
 						return;
 					}
-					else if (preventInvites && /https?:\/\/discord\.gg\/[a-zA-Z0-9]+/.test(message.content)) {
+					else if (preventInvites && (/https?:\/\/discord\.gg\/[a-zA-Z0-9]+/.test(message.content) || /https?:\/\/discordapp\.com\/invite\/[a-zA-Z0-9]+/.test(message.content))) {
 						message.delete();
 
 						return;
