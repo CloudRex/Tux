@@ -85,7 +85,7 @@ export default class Bot {
 							message,
 							CommandParser.getArguments(message.content),
 							this,
-							this.commands.getAuthority(message.member.roles.array(), message.author.id)
+							this.commands.getAuthority(message.member.roles.array().map((role) => role.name), message.author.id)
 						),
 
 						CommandParser.parse(

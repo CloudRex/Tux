@@ -44,13 +44,17 @@ export default {
 				}
 			];
 
+			const authority = context.bot.commands.getAuthority(["@everyone"], context.sender.id);
+
+			console.log(authority);
+
 			for (let categ = 0; categ < categories.length; categ++) {
 				result[categories[categ].name] = [];
 
 				let categoryEmpty = true;
 
 				for (let cmd = 0; cmd < commands.length; cmd++) {
-					if (commands[cmd].category === categories[categ].id && commands[cmd].accessLevel <= context.bot.commands.getAuthority([], context.sender.id)) {
+					if (commands[cmd].category === categories[categ].id && commands[cmd].accessLevel <= authority) {
 						result[categories[categ].name].push(`**${commands[cmd].base}**: ${commands[cmd].description}`);
 						categoryEmpty = false;
 					}
