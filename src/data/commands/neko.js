@@ -19,7 +19,7 @@ export default {
 			snekfetch.get(nekoUrl).then((result) => {
 				const nekoImage = result.body.neko;
 
-				message.edit("**Look at those kittys!** :heart_eyes_cat:", "", "RANDOM", "", nekoImage);
+				message.edit("**Look at those kitties!** :heart_eyes_cat:", "", "RANDOM", "", nekoImage);
 			}).catch((error) => {
 				message.edit(`No results found. (${error.message})`, "", "RED");
 			});

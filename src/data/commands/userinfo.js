@@ -13,7 +13,7 @@ export default {
 		const points = await context.bot.database.getUserPoints(id.replace('<@', '').replace('>', ''));
 
 		if (member) {
-			// TODO
+			// TODO: avatar
 			context.sections({
 				Id: member.id,
 				Username: member.user.username,

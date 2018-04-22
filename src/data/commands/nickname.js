@@ -4,7 +4,7 @@ import CommandCategoryType from "../../commands/command-category-type";
 export default {
 	executed(context) {
 		if (context.arguments.length === 2) {
-			const member = context.message.guild.member(context.arguments[0]);
+			const member = context.message.guild.member(context.message.mentions.users.array()[0].id);
 
 			member.setNickname(context.arguments[1]).then(() => context.ok(`:zap: **${member.user.username}** is now known as **${context.arguments[1]}**`)).catch((error) => {
 				context.fail(`Operation failed to complete. (${error.message})`);

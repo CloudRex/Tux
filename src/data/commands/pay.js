@@ -7,6 +7,12 @@ export default {
 		const recipient = context.message.mentions.users.array()[0];
 		const amount = parseInt(context.arguments[1]);
 
+		if (recipient.id === context.sender.id) {
+			context.fail("You can't pay yourself.");
+
+			return;
+		}
+
 		if (amount > 0) {
 			if (senderBalance >= amount) {
 				await context.bot.database.addUserPoints(context.sender.id, -amount);
