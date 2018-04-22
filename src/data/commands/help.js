@@ -1,6 +1,7 @@
 import MessageBuilder from "../../core/message-builder";
 import AccessLevelType from "../../core/access-level-type";
 import CommandCategoryType from "../../commands/command-category-type";
+import EmbedBuilder from "../../core/embed-builder";
 
 export default {
 	async executed(context) {
@@ -64,22 +65,23 @@ export default {
 
 			result["A note from developers"] = "*Hey, thanks for using our bot! Tux is a relatively new bot and if you have already noticed not everything may work as expected. We're currently working on per-server configuration support to enable our moderation commands. If you'd like to talk to the developers (maybe you want to see a special feature in Tux!) issue the `about` command and join our support server. Thanks!* \n\n-Atlas#0042";
 
-			/* for (let i = 0; i < context.bot.commands.commands.length; i++) {
-				const command = context.bot.commands.commands[i];
+			let failReply = null;
 
-				messageBuilder.add(`${command.base} -> ${command.description}`).line();
-			} */
-
-			// messageBuilder.codeBlock().line().add(":heavy_plus_sign: other secret stuff!");
-			/* const reply = await context.privateReply(result).catch(async (error) => {
-				const failReply = await context.respond(":thinking: It seems that you're blocking private messages. I was unable to display my help commands.", "", "RED");
+			const reply = await context.privateReply(EmbedBuilder.sections(result).build()).catch(async (error) => {
+				failReply = await context.fail(":thinking: It seems that you're blocking private messages.");
 
 				if (failReply) {
 					failReply.message.delete(6000);
 				}
-			}); */
+			}).then(() => {
+				if (!failReply) {
+					context.ok("<:tuxcheck:436998015652462603> I've sent you a private message with all my commands!");
+				}
+			});
 
-			context.sections(result);
+			if (reply) {
+				reply.delete(4000);
+			}
 		}
 		else if (context.bot.commands.isRegistered(context.arguments[0])) {
 			const command = context.bot.commands.getByBase(context.arguments[0]);

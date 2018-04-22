@@ -134,4 +134,14 @@ export default class EmbedBuilder {
 
 		return result;
 	}
+
+	static sections(sections) {
+		const result = new EmbedBuilder();
+
+		for (let i = 0; i < Object.keys(sections).length; i++) {
+			result.field(Object.keys(sections)[i], sections[Object.keys(sections)[i]]);
+		}
+
+		return result;
+	}
 }
