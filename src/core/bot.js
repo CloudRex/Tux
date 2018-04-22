@@ -134,7 +134,7 @@ export default class Bot {
 		global.b = this;
 
 		// TODO: DEBUG -----------------------
-		this.events.on("commandExecuted", (command, context) => console.log(`${context.sender.username}@${context.message.guild.name}: ${context.message.content}`));
+		this.events.on("commandExecuted", (e) => console.log(`${e.context.sender.username}@${e.context.message.guild.name}: ${e.context.message.content}`));
 		// -----------------------------------
 	}
 

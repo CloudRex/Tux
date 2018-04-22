@@ -1,5 +1,6 @@
 import AccessLevelType from "../core/access-level-type";
 import CommandArgumentParser from "./command-argument-parser";
+import CommandExecutedEvent from "../events/command-executed-event";
 
 const fs = require("fs");
 
@@ -207,55 +208,35 @@ export default class CommandManager {
 		}
 		// TODO: simplify the deletion of the messages
 		else if (!command.isEnabled) {
-			const response = await context.fail("That command is disabled and may not be used.");
-
-			if (response !== null) {
-				response.message.delete(4000);
-			}
+			await context.fail("That command is disabled and may not be used.");
 
 			return false;
 		}
 		else if (!this.hasAuthority(context.message, command.accessLevel)) {
 			const minAuthority = AccessLevelType.toString(command.accessLevel);
-			const response = await context.fail(`You don't have the authority to use that command. You must be at least a(n) **${minAuthority}**.`);
-
-			if (response !== null) {
-				response.message.delete(4000);
-			}
+			await context.fail(`You don't have the authority to use that command. You must be at least a(n) **${minAuthority}**.`);
 
 			return false;
 		}
 		else if (context.arguments.length > command.maxArguments) {
-			const response = await context.fail(`That command only accepts up to **${command.maxArguments}** arguments.`);
-
-			if (response !== null) {
-				response.message.delete(4000);
-			}
+			await context.fail(`That command only accepts up to **${command.maxArguments}** arguments.`);
 
 			return false;
 		}
 		else if (!command.canExecute(context)) {
-			const response = await context.fail("That command cannot be executed right now.");
-
-			if (response !== null) {
-				response.message.delete(4000);
-			}
+			await context.fail("That command cannot be executed right now.");
 
 			return false;
 		}
 		else if (!CommandArgumentParser.validate(command.args, this.assembleArguments(Object.keys(command.args), context.arguments), customTypes)) {
-			const response = await context.fail("Invalid argument usage. Please use the `usage` command.");
-
-			if (response !== null) {
-				response.message.delete(4000);
-			}
+			await context.fail("Invalid argument usage. Please use the `usage` command.");
 
 			return false;
 		}
 
 		try {
 			await command.executed(context); // .catch((error) => context.respond(`There was an error while executing that command. (${error.message})`, "", "RED"));
-			context.bot.events.emit("commandExecuted", command, context);
+			context.bot.events.emit("commandExecuted", new CommandExecutedEvent(command, context));
 		}
 		catch (error) {
 			context.fail(`:thinking: **Oh noes!** There was an error executing that command. (${error.message})`);

@@ -30,18 +30,18 @@ export default class Badges extends Feature {
 			});
 		};
 
-		bot.events.on("commandExecuted", async (command, context) => {
+		bot.events.on("commandExecuted", async (e) => {
 			// TODO: Hard coded discord bot lists guilds
-			if (!context.message.author.bot && context.message.guild.id.toString() !== "264445053596991498" && context.message.guild.id.toString() !== "110373943822540800" && context.message.guild.id.toString() !== "374071874222686211") {
-				if (context.message.author.id !== bot.client.user.id) {
-					const { badges } = (await bot.database.getUser(context.sender.id));
+			if (!e.context.message.author.bot && e.context.message.guild.id.toString() !== "264445053596991498" && e.context.message.guild.id.toString() !== "110373943822540800" && e.context.message.guild.id.toString() !== "374071874222686211") {
+				if (e.context.message.author.id !== bot.client.user.id) {
+					const { badges } = (await bot.database.getUser(e.context.sender.id));
 
-					switch (command.base) {
+					switch (e.command.base) {
 						case "inventory": {
-							const inventory = await bot.database.getItems(context.sender.id);
+							const inventory = await bot.database.getItems(e.context.sender.id);
 
 							if (inventory.length === 0 && !badges.includes(BadgeType.EmptyInventory)) {
-								award(context.sender, BadgeType.EmptyInventory, context);
+								award(e.context.sender, BadgeType.EmptyInventory, e.context);
 							}
 
 							break;

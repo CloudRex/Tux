@@ -16,7 +16,7 @@ Here's some basic stuff you should know about Tux:
 #### Why
 Here's some questions you might have asked yourself and their reasons:
 
-* **Why use Discord.js?** Because it's the most popular JavaScript library for writing Discord bots.
+* **Why use Discord.js?** Because it's the most popular JavaScript library for writing Discord bots and JavaScript is *bae*.
 * **Why use a database?** Because storing huge data in a JSON file is savage.
 * **Why use [sqlite](https://en.wikipedia.org/wiki/SQLite)?** Because it's portable and convenient (no need for processes, etc.).
 * **Why not use [RethinkDB](https://www.rethinkdb.com/)?** Because it's way too complicated to setup compared to the current system, and requires a background process.
