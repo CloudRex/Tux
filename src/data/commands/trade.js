@@ -16,7 +16,7 @@ export default {
 					const activeTrade = await context.bot.database.getActiveTradeBySender(context.message.author.id);
 
 					if (activeTrade === null) {
-						context.respond("You don't currently have an active trade.", "", "RED");
+						context.fail("You don't currently have an active trade.");
 					}
 					else {
 						const items = new MessageBuilder();
@@ -31,7 +31,10 @@ export default {
 							}
 						}
 
-						context.respond(items.build(), `Trade with ${recipient.username}`);
+						context.respond({
+							text: items.build(),
+							title: `Trade with ${recipient.username}`
+						});
 					}
 
 					break;
@@ -42,11 +45,11 @@ export default {
 					const recipient = context.bot.client.users.find("id", activeTrade.recipientId);
 
 					if (activeTrade === null) {
-						context.respond("You don't currently have an active trade to cancel.", "", "RED");
+						context.fail("You don't currently have an active trade to cancel.");
 					}
 					else {
 						context.bot.database.setTradeState(activeTrade.id, TradeState.Canceled);
-						context.respond(`Canceled active trade with **${recipient.username}**.`);
+						context.ok(`Canceled active trade with **${recipient.username}**.`);
 					}
 
 					break;
@@ -56,27 +59,27 @@ export default {
 					const target = context.message.mentions.members.array()[0].user;
 
 					if (target.bot) {
-						context.respond(":thinking: You cannot trade with a bot.", "", "RED");
+						context.fail(":thinking: You cannot trade with a bot.");
 					}
 					else if (target.id !== context.message.author.id) {
 						const pendingTrade = await context.bot.database.getPendingTradeByRecipient(target.id);
 						const activeTrade = await context.bot.database.getActiveTradeBySender(context.message.author.id);
 
 						if (pendingTrade) {
-							context.respond(`You already have a pending trade with **${target.username}**.`, "", "RED");
+							context.fail(`You already have a pending trade with **${target.username}**.`);
 						}
 						else if (activeTrade === null) {
 							await context.bot.database.addTrade(new DbTrade(null, context.message.id, context.message.author.id, target.id, [], [], TradeState.Preparing));
-							context.respond(`You've created a trade with **${target.username}**`, "", "GREEN");
+							context.ok(`You've created a trade with **${target.username}**`);
 						}
 						else {
 							const { username } = context.bot.client.users.find("id", activeTrade.recipientId);
 
-							context.respond(`You must cancel your active trade with **${username}** in order to create a new one.`, "", "RED");
+							context.fail(`You must cancel your active trade with **${username}** in order to create a new one.`);
 						}
 					}
 					else {
-						context.respond(":thinking: You can't trade with yourself!", "", "RED");
+						context.fail(":thinking: You can't trade with yourself!");
 					}
 
 					break;
@@ -94,14 +97,17 @@ export default {
 							await context.bot.database.addTradeProposition(context.message.author.id, item, amount);
 
 							// TODO: User username instead of id
-							context.respond(`Added :${item.key}:x${amount} to the active trade with **${username}**`, "", "BLUE");
+							context.respond({
+								text: `Added :${item.key}:x${amount} to the active trade with **${username}**`,
+								color: "BLUE"
+							});
 						}
 						else {
-							context.respond("Operation failed: You either don't own that item or don't have that amount.", "", "RED");
+							context.fail("Operation failed: You either don't own that item or don't have that amount.");
 						}
 					}
 					else {
-						context.respond(":thinking: You don't currently have any active trade.", "", "RED");
+						context.fail(":thinking: You don't currently have any active trade.");
 					}
 
 					break;
@@ -119,14 +125,17 @@ export default {
 							await context.bot.database.addTradeDemand(context.message.author.id, item, amount);
 
 							// TODO: User username instead of id
-							context.respond(`Demanded :${item.key}:x${amount} from the active trade with **${username}**`, "", "GOLD");
+							context.respond({
+								text: `Demanded :${item.key}:x${amount} from the active trade with **${username}**`,
+								color: "GOLD"
+							});
 						}
 						else {
-							context.respond(`Operation failed: **${username}** either doesn't own that item or doesn't have that amount.`, "", "RED");
+							context.fail(`Operation failed: **${username}** either doesn't own that item or doesn't have that amount.`);
 						}
 					}
 					else {
-						context.respond(":thinking: You don't currently have any active trade.", "", "RED");
+						context.fail(":thinking: You don't currently have any active trade.");
 					}
 
 					break;
@@ -228,18 +237,18 @@ export default {
 							})
 						], embed));
 
-						context.respond(`Successfully send trade offer to **${recipient.username}**. (Trade#${activeTrade.id})`, "", "GREEN");
+						context.ok(`Successfully send trade offer to **${recipient.username}**. (Trade#${activeTrade.id})`);
 						context.bot.database.setTradeState(activeTrade.id, TradeState.Pending);
 					}
 					else {
-						context.respond("You don't have any active trades.", "", "RED");
+						context.fail("You don't have any active trades.");
 					}
 
 					break;
 				}
 
 				default: {
-					context.respond("Invalid trade action. (create/status/cancel/send/add/demand)", "", "RED");
+					context.fail("Invalid trade action. (create/status/cancel/send/add/demand)");
 				}
 			}
 		/* }

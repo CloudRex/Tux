@@ -6,15 +6,17 @@ const snekfetch = require("snekfetch");
 export default {
 	async executed(context) {
 		if (!context.message.channel.nsfw) {
-			return context.respond(":underage: Please use the nsfw channel for this command.", "", "RED");
+			context.fail(":underage: Please use the nsfw channel for this command.");
+
+			return;
 		}
 
-		const message = await context.respond('Searching for **kittys**...');
+		const message = await context.ok("Searching for **kitties**...");
 
 		if (message !== null) {
 			const nekoUrl = 'https://nekos.life/api/lewd/neko';
 
-			return snekfetch.get(nekoUrl).then((result) => {
+			snekfetch.get(nekoUrl).then((result) => {
 				const nekoImage = result.body.neko;
 
 				message.edit("**Look at those kittys!** :heart_eyes_cat:", "", "RANDOM", "", nekoImage);

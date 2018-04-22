@@ -14,7 +14,7 @@ export default {
 		const member = context.message.guild.member(id.replace('<@', '').replace('>', ''));
 
 		if (member.bot) {
-			context.respond(`Bots can't have items.`, "", "RED");
+			context.fail("Bots can't have items.");
 
 			return;
 		}
@@ -41,7 +41,10 @@ export default {
 			response.add(":sob: Oh noes! You don't have any items.");
 		}
 
-		context.respond(response.build(), `${member.displayName}'s Inventory`, "GREEN");
+		context.respond({
+			text: response.build(),
+			title: `${member.displayName}'s Inventory (${items.length} items)`
+		});
 	},
 
 	canExecute(context) {

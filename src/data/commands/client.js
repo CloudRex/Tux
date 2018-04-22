@@ -8,33 +8,33 @@ export default {
 		if (context.arguments.length === 1) {
 			switch (context.arguments[0]) {
 				case "stop": {
-					await context.respond("Stopping the bot.", "", "GREEN");
+					await context.ok("Stopping the bot.");
 					context.bot.disconnect();
 
 					break;
 				}
 
 				case "restart": {
-					await context.respond("Restarting the bot.", "", "GREEN");
+					await context.ok("Restarting the bot.");
 					context.bot.restart();
 
 					break;
 				}
 
 				case "srestart": {
-					await context.respond("Restarting the bot and pulling latest changes.", "", "GREEN");
+					await context.ok("Restarting the bot and pulling latest changes.");
 					exec("sudo systemctl restart tux");
 
 					break;
 				}
 
 				default: {
-					context.respond("Invalid command issued. First argument should be: stop, restart, srestart");
+					context.fail("Invalid command issued. First argument should be: stop, restart, srestart");
 				}
 			}
 		}
 		else {
-			context.respond("Invalid amount of arguments: Expecting 1 (one) argument");
+			context.fail("Invalid amount of arguments: Expecting 1 (one) argument.");
 		}
 	},
 

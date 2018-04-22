@@ -8,9 +8,9 @@ export default {
 
 		context.message.guild.ban(user.id, {
 			reason: context.arguments[1]
-		}).then(() => context.respond(`:zap: And just like that, **${user.username}** was long gone for \`${context.arguments[1]}\`.`, "", "GREEN")).catch((error) => {
-			context.respond(`Operation failed to complete. (${error.message})`, "", "RED");
-		});
+		}).then(() => context.ok(`:zap: And just like that, **${user.username}** was long gone for \`${context.arguments[1]}\``).catch((error) => {
+			context.fail(`Operation failed to complete. (${error.message})`);
+		}));
 	},
 
 	canExecute(context) {

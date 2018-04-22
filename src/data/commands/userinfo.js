@@ -13,7 +13,8 @@ export default {
 		const points = await context.bot.database.getUserPoints(id.replace('<@', '').replace('>', ''));
 
 		if (member) {
-			context.respond({
+			// TODO
+			context.sections({
 				Id: member.id,
 				Username: member.user.username,
 				"Created At": member.user.createdAt,
@@ -25,7 +26,7 @@ export default {
 			}, "", "GREEN", member.user.avatarURL);
 		}
 		else {
-			context.respond("User not found.");
+			context.fail("User not found.");
 		}
 	},
 

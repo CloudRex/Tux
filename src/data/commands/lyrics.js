@@ -24,11 +24,12 @@ export default {
 				}
 
 				context.respond({
-					Lyrics: result
+					text: result,
+					title: "Lyrics"
 				});
 			}
 			else {
-				context.respond("Sorry, I couldn't find that song", "", "RED");
+				context.fail("Sorry, I couldn't find that song.");
 			}
 		});
 	},

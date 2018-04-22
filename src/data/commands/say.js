@@ -4,12 +4,12 @@ import CommandCategoryType from "../../commands/command-category-type";
 export default {
 	async executed(context) {
 		if (context.arguments[0].toLowerCase() === "beep boop") {
-			context.respond("No.", "", "RED");
+			context.fail("No.");
 
 			return;
 		}
 
-		context.respond(context.arguments[0], "", "GREEN");
+		context.ok(context.arguments[0]);
 	},
 
 	canExecute(context) {

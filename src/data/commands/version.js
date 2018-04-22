@@ -3,7 +3,7 @@ import CommandCategoryType from "../../commands/command-category-type";
 
 export default {
 	executed(context) {
-		context.respond(`Version: \`${context.bot.settings.general.version}\``);
+		context.ok(`Version: \`${context.bot.settings.general.version}\``);
 
 		// TODO
 		/* context.bot.emojis.show(context.message.channel, new EmojiMenu([

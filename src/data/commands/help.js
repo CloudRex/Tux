@@ -79,7 +79,7 @@ export default {
 				}
 			}); */
 
-			context.respond(result);
+			context.sections(result);
 		}
 		else if (context.bot.commands.isRegistered(context.arguments[0])) {
 			const command = context.bot.commands.getByBase(context.arguments[0]);

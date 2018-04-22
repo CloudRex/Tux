@@ -4,7 +4,10 @@ import Utils from "../../core/utils";
 
 export default {
 	async executed(context) {
-		const message = await context.respond(":sparkles: Stay back! Dabbing in progress..", "", "BLUE");
+		const message = await context.respond({
+			text: ":sparkles: Stay back! Dabbing in progress..",
+			color: "BLUE"
+		});
 
 		const dabs = [
 			"https://78.media.tumblr.com/1680bb2708eab6929139c4e775b45d49/tumblr_odkckeMiw31smq206o1_500.jpg",

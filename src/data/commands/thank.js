@@ -10,22 +10,22 @@ export default {
 				const user = Utils.stripMention(context.arguments[0]);
 
 				if (context.message.author.id.toString() === user) {
-					context.respond("You can't thank yourself, silly!");
+					context.fail("You can't thank yourself, silly!");
 				}
 				else if (context.message.guild.members.has(user)) {
 					context.bot.database.addThank(user, () => {
 						context.bot.database.getThanks(user, (thanks) => {
-							context.respond(`:thumbsup: Thanked ${context.arguments[0]} (${thanks} Thanks)`);
+							context.ok(`:thumbsup: Thanked ${context.arguments[0]} (${thanks} Thanks)`);
 						});
 					});
 				}
 				else {
-					context.respond("Are you sure that person exists?");
+					context.fail("Are you sure that person exists?");
 				}
 			}
 		}
 		else {
-			context.respond("You can't do that here!");
+			context.fail("You can't do that here!");
 		}
 	},
 

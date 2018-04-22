@@ -3,7 +3,7 @@ import CommandCategoryType from "../../commands/command-category-type";
 
 export default {
 	executed(context) {
-		context.respond("Command not yet implemented.", "", "RED");
+		context.fail("Command not yet implemented.");
 	},
 
 	canExecute(context) {

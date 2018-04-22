@@ -16,7 +16,8 @@ export default {
 			users += guilds[i].memberCount;
 		}
 
-		context.respond({
+		// TODO
+		context.sections({
 			Vote: "If you'd like to help out tux, please consider **__[voting](https://discordbots.org/bot/381949722157514752/vote)__** for him",
 			Website: "**__[Visit Tux's website](https://cloudrex.github.io/tux-website/)__**",
 			"Adopt me": "To add Tux to your server, click **__[here](https://discordapp.com/oauth2/authorize?client_id=381949722157514752&scope=bot)__**",
@@ -27,7 +28,7 @@ export default {
 			Guilds: context.bot.client.guilds.size,
 			Users: users,
 			Uptime: timeAgo.format(Date.now() - context.bot.client.uptime, "time")
-		}, "", "BLUE");
+		});
 	},
 
 	canExecute(context) {

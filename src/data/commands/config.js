@@ -5,15 +5,15 @@ export default {
 	async executed(context) {
 		if (context.arguments.length === 1) {
 			if (context.arguments[0].startsWith("global")) {
-				context.respond(`**${context.arguments[0]}** = **${JSON.stringify(context.bot.userConfig.get(context.arguments[0]))}**`, "", "GREEN");
+				context.ok(`**${context.arguments[0]}** = **${JSON.stringify(context.bot.userConfig.get(context.arguments[0]))}**`);
 			}
 			else {
-				context.respond(`**${context.arguments[0]}** = **${JSON.stringify(context.bot.userConfig.getLocal(context.message.guild.id, context.arguments[0]))}**`, "", "GREEN");
+				context.ok(`**${context.arguments[0]}** = **${JSON.stringify(context.bot.userConfig.getLocal(context.message.guild.id, context.arguments[0]))}**`);
 			}
 		}
 		else if (context.arguments.length === 2) {
 			if (context.arguments[0].startsWith("global") && context.accessLevel !== AccessLevelType.Developer) {
-				const response = await context.respond("Only **Developers** can change global settings.", "", "RED");
+				const response = await context.fail("Only **Developers** can change global settings.");
 
 				if (response) {
 					response.message.delete(4000);
@@ -28,10 +28,10 @@ export default {
 				value = (value === "true" ? true : (value === "false" ? false : (Number.isNaN(value) ? value : parseInt(value))));
 
 				context.arguments[0].startsWith("global") ? context.bot.userConfig.set(context.arguments[0], value) : context.bot.userConfig.setLocal(context.message.guild.id, context.arguments[0], value);
-				context.respond(`Set **${context.arguments[0]}** to **${context.arguments[1]}**`, "", "GREEN");
+				context.ok(`Set **${context.arguments[0]}** to **${context.arguments[1]}**`);
 			}
 			else {
-				context.respond("Property is not pre-defined and therefore not configurable", "", "RED");
+				context.fail("Property is not pre-defined and therefore not configurable.");
 			}
 		}
 	},

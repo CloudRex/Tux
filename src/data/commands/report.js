@@ -7,7 +7,11 @@ export default {
 		const users = guild.members.array();
 		const channels = guild.channels.array();
 
-		let msg = await context.respond(`1. Generating a complete report of all **${users.length}** members...`, guild.name, "GOLD");
+		let msg = await context.respond({
+			text: `1. Generating a complete report of all **${users.length}** members...`,
+			title: guild.name,
+			color: "GOLD"
+		});
 
 		setTimeout(() => {
 			msg.edit(`2. Generating a complete report of all **${channels.length}** channels...`, guild.name, "GOLD");

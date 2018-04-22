@@ -16,7 +16,7 @@ export default {
 			max = 2;
 		}
 
-		context.respond(`:game_die: **${context.message.author.username}** rolled a **${Utils.getRandomInt(1, max)}**`, "", "AQUA");
+		context.ok(`:game_die: **${context.message.author.username}** rolled a **${Utils.getRandomInt(1, max)}**`);
 	},
 
 	canExecute(context) {

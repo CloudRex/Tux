@@ -2,8 +2,6 @@ import AccessLevelType from "../../core/access-level-type";
 import CommandCategoryType from "../../commands/command-category-type";
 
 export default {
-	treasures: null,
-
 	async executed(context) {
 		const senderBalance = await context.bot.database.getUserPoints(context.sender.id);
 		const recipient = context.message.mentions.users.array()[0];
@@ -13,14 +11,15 @@ export default {
 			if (senderBalance >= amount) {
 				await context.bot.database.addUserPoints(context.sender.id, -amount);
 				await context.bot.database.addUserPoints(recipient.id, amount);
-				context.respond(`Successfully payed **${amount}** coins to **${recipient.username}**.`, "", "GREEN");
+
+				context.ok(`Successfully payed **${amount}** coins to **${recipient.username}**.`);
 			}
 			else {
-				context.respond("You don't have enough coins.", "", "RED");
+				context.fail("You don't have enough coins.");
 			}
 		}
 		else {
-			context.respond("You can't pay that amount.", "", "RED");
+			context.fail("You can't pay that amount.");
 		}
 	},
 

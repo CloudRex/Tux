@@ -4,7 +4,7 @@ import CommandCategoryType from "../../commands/command-category-type";
 export default {
 	executed(context) {
 		// TODO: Might consider not adding since: inefficient checking every message for scope locked
-		context.respond("Command not yet implemented");
+		context.fail("Command not yet implemented");
 	},
 
 	canExecute(context) {

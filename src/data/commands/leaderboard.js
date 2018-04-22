@@ -26,7 +26,11 @@ export default {
 			}
 		}
 
-		context.respond(response.build(), "Coins leaderboard", "BLUE");
+		context.respond({
+			text: response.build(),
+			title: "Coins Leaderboard",
+			color: "BLUE"
+		});
 	},
 
 	canExecute(context) {

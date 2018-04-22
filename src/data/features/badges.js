@@ -23,7 +23,11 @@ export default class Badges extends Feature {
 
 		const award = async (user, badge, context) => {
 			await context.bot.database.addUserBadge(user.id, badge);
-			context.respond(`:medal: **${user.username}** has earned the **${BadgeType.getName(badge)}** badge!`, "", "GOLD");
+
+			context.respond({
+				text: `:medal: **${user.username}** has earned the **${BadgeType.getName(badge)}** badge!`,
+				color: "GOLD"
+			});
 		};
 
 		bot.events.on("commandExecuted", async (command, context) => {

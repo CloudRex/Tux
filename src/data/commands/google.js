@@ -9,7 +9,12 @@ const googleThumbnailUrl = "https://images-ext-2.discordapp.net/external/EX2z2YZ
 
 export default {
 	async executed(context) {
-		const searchMessage = await context.respond("Searching...", "Google", "GRAY", googleThumbnailUrl);
+		const searchMessage = await context.respond({
+			text: "Searching...",
+			title: "Google",
+			thumbnail: googleThumbnailUrl,
+			color: "GRAY"
+		});
 
 		if (searchMessage !== null) {
 			const searchUrl = `https://www.google.com/search?q=${encodeURIComponent(context.message.content)}`;

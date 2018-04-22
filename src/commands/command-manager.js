@@ -1,8 +1,6 @@
 import AccessLevelType from "../core/access-level-type";
-import Log from "../core/log";
 import CommandArgumentParser from "./command-argument-parser";
 
-const Discord = require("discord.js");
 const fs = require("fs");
 
 export default class CommandManager {
@@ -198,7 +196,8 @@ export default class CommandManager {
 			user: (arg) => /(^[0-9]{18}$|^<@!?[0-9]{18}>$)/.test(arg),
 			time: (arg) => /^[0-9]+(ms|s|m|h|d|mo|y)$/.test(arg),
 			minuteTime: (arg) => /^[0-9]+(m|h|d|mo|y)$/.test(arg),
-			state: (arg) => /^(1|0|true|false|off|on)$/.test(arg)
+			state: (arg) => /^(1|0|true|false|off|on)$/.test(arg),
+			youtubeLink: (arg) => /^https?:\/\/www\.youtube\.com\/watch\?v=[a-zA-Z0-9-]{11}$/.test(arg)
 		};
 
 		if (!context.message.member) {
@@ -208,7 +207,7 @@ export default class CommandManager {
 		}
 		// TODO: simplify the deletion of the messages
 		else if (!command.isEnabled) {
-			const response = await context.respond("That command is disabled and may not be used.", "", "RED");
+			const response = await context.fail("That command is disabled and may not be used.");
 
 			if (response !== null) {
 				response.message.delete(4000);
@@ -218,7 +217,7 @@ export default class CommandManager {
 		}
 		else if (!this.hasAuthority(context.message, command.accessLevel)) {
 			const minAuthority = AccessLevelType.toString(command.accessLevel);
-			const response = await context.respond(`You don't have the authority to use that command. You must be at least a(n) **${minAuthority}**.`, "", "RED");
+			const response = await context.fail(`You don't have the authority to use that command. You must be at least a(n) **${minAuthority}**.`);
 
 			if (response !== null) {
 				response.message.delete(4000);
@@ -227,7 +226,7 @@ export default class CommandManager {
 			return false;
 		}
 		else if (context.arguments.length > command.maxArguments) {
-			const response = await context.respond(`That command only accepts up to **${command.maxArguments}** arguments.`, "", "RED");
+			const response = await context.fail(`That command only accepts up to **${command.maxArguments}** arguments.`);
 
 			if (response !== null) {
 				response.message.delete(4000);
@@ -236,7 +235,7 @@ export default class CommandManager {
 			return false;
 		}
 		else if (!command.canExecute(context)) {
-			const response = await context.respond("That command cannot be executed right now.", "", "RED");
+			const response = await context.fail("That command cannot be executed right now.");
 
 			if (response !== null) {
 				response.message.delete(4000);
@@ -245,7 +244,7 @@ export default class CommandManager {
 			return false;
 		}
 		else if (!CommandArgumentParser.validate(command.args, this.assembleArguments(Object.keys(command.args), context.arguments), customTypes)) {
-			const response = await context.respond("Invalid argument usage. Please use the `usage` command.", "", "RED");
+			const response = await context.fail("Invalid argument usage. Please use the `usage` command.");
 
 			if (response !== null) {
 				response.message.delete(4000);
@@ -259,7 +258,9 @@ export default class CommandManager {
 			context.bot.events.emit("commandExecuted", command, context);
 		}
 		catch (error) {
-			context.respond(`:thinking: **Oh noes!** There was an error executing that command. (${error.message})`, "", "RED");
+			context.fail(`:thinking: **Oh noes!** There was an error executing that command. (${error.message})`);
+
+			// TODO: Award badge
 		}
 
 		/* Log.channel(new Discord.RichEmbed()

@@ -3,7 +3,8 @@ import CommandCategoryType from "../../commands/command-category-type";
 
 export default {
 	executed(context) {
-		context.respond({
+		// TODO
+		context.sections({
 			"Local time": new Date().toUTCString(),
 			Timestamp: Date.now()
 		}, "", "GREEN");

@@ -5,7 +5,7 @@ const snekfetch = require("snekfetch");
 
 export default {
 	async executed(context) {
-		const message = await context.respond(`Searching for *${context.arguments[0]}*...`, "", "RANDOM");
+		const message = await context.ok(`Searching for *${context.arguments[0]}*...`);
 
 		if (message !== null) {
             const gifUrl = `https://api.giphy.com/v1/gifs/random?api_key=${context.bot.settings.general.giphyApiKey}&tag=${encodeURIComponent(context.arguments[0])}&rating=PG-13`;

@@ -4,11 +4,11 @@ import CommandCategoryType from "../../commands/command-category-type";
 export default {
 	executed(context) {
 		if (context.arguments.length >= 2 && context.message.author.id.toString() === "285578743324606482") {
-			let time = parseInt(context.arguments[0]);
+			const time = parseInt(context.arguments[0]);
 			const isInterval = context.arguments.length === 3 && context.arguments[2] === "true";
 
 			if (time < 3) {
-				context.respond("Minimum permitted time is **3** seconds");
+				context.fail("Minimum permitted time is **3** seconds");
 
 				return;
 			}
@@ -19,7 +19,8 @@ export default {
 			} */
 
 			const action = () => {
-				context.respond({
+				// TODO
+				context.sections({
 					"Scheduled Message": context.arguments[1]
 				}, "", "RANDOM", "", isInterval ? `every ${time} seconds` : `${time} seconds ago`);
 			};
@@ -31,7 +32,7 @@ export default {
 				setTimeout(action, time * 1000);
 			}
 
-			context.respond(`Successfully scheduled ${isInterval ? "every" : "for"} **${time}** second(s)`);
+			context.ok(`Successfully scheduled ${isInterval ? "every" : "for"} **${time}** second(s)`);
 		}
 	},
 

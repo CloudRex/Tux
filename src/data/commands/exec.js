@@ -8,7 +8,8 @@ export default {
 	executed(context) {
 		if (context.arguments.length === 1) {
 			exec(context.arguments[0], (error, output) => {
-				context.respond({
+				// TODO
+				context.sections({
 					Input: new MessageBuilder().codeBlock("javascript", context.arguments[0]).build(),
 					Output: new MessageBuilder().codeBlock("javascript", output.toString()).build()
 				});

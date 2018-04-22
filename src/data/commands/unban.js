@@ -7,13 +7,13 @@ export default {
 			// const { username } = context.message.guild.member(context.arguments[0]).user;
 
 			context.message.guild.ban(context.arguments[0], context.arguments[1])
-				.then(() => context.respond(`:zap: After many days in the lonely desert, **todo** was finally back home for \`${context.arguments[1]}\`.`, "", "GREEN"))
+				.then(() => context.ok(`:zap: After many days in the lonely desert, **todo** was finally back home for \`${context.arguments[1]}\`.`))
 				.catch((error) => {
-					context.respond(`Operation failed to complete. (${error.message})`, "", "RED");
+					context.fail(`Operation failed to complete. (${error.message})`);
 				});
 		}
 		else {
-			context.respond("Invalid amount of arguments.");
+			context.fail("Invalid amount of arguments.");
 		}
 	},
 

@@ -30,7 +30,7 @@ export default {
 
 		const score = computeScore(guild);
 
-		context.respond({
+		context.sections({
 			Name: guild.name,
 			Owner: guild.dev ? guild.dev.displayName : "Unknown",
 			Users: guild.members.array().filter((member) => !member.user.bot).length,
@@ -41,6 +41,7 @@ export default {
 			"Custom Emojis": guild.emojis.array().length,
 			"Created At": guild.createdAt,
 			Score: `:star: ${score} (**${classifyScore(score)}**)`
+			// TODO: colors, thumbnail
 		}, "", "GREEN", guild.iconURL);
 	},
 

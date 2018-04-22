@@ -48,11 +48,11 @@ export default class Protection extends Feature {
 		bot.client.on("message", async (message) => {
 			// TODO: Hard coded discord bot lists
 			if (message.author.id !== bot.client.user.id && message.guild.id.toString() !== "264445053596991498" && message.guild.id.toString() !== "110373943822540800" && message.guild.id.toString() !== "374071874222686211") {
-				const { spamTrigger } = bot.userConfig;
-				const preventInvites = bot.userConfig.get("protection.invites");
-				const preventLinks = bot.userConfig.get("protection.links");
-				const preventProfanity = bot.userConfig.get("protection.profanity");
-				const preventExplicit = bot.userConfig.get("protection.explicit");
+				const spamTrigger = bot.userConfig.getLocal(message.guild.id, "spamTrigger");
+				const preventInvites = bot.userConfig.getLocal(message.guild.id, "protection.invites");
+				const preventLinks = bot.userConfig.getLocal(message.guild.id, "protection.links");
+				const preventProfanity = bot.userConfig.getLocal(message.guild.id, "protection.profanity");
+				const preventExplicit = bot.userConfig.getLocal(message.guild.id, "protection.explicit");
 
 				// TODO: Checking for embeds will probably be better
 				const urlRegex = /(https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*))/g;
@@ -108,7 +108,8 @@ export default class Protection extends Feature {
 					}
 				}
 
-				bot.database.getMessages(message.author.id, (messages) => {
+				// TODO: Temporarly disabled
+				/* bot.database.getMessages(message.author.id, (messages) => {
 					let streak = 0;
 
 					for (let i = 0; i < messages.length; i++) {
@@ -120,7 +121,7 @@ export default class Protection extends Feature {
 					if (streak === spamTrigger) {
 						this.warn(message, bot);
 					}
-				}, spamTrigger);
+				}, spamTrigger); */
 			}
 		});
 	}

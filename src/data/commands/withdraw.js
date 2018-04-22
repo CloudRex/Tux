@@ -3,7 +3,7 @@ import CommandCategoryType from "../../commands/command-category-type";
 
 export default {
 	async executed(context) {
-		await context.respond(":ok_hand:");
+		await context.ok(":ok_hand:");
 		context.message.guild.leave();
 	},
 

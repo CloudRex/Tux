@@ -4,17 +4,21 @@ import CommandCategoryType from "../../commands/command-category-type";
 export default {
 	executed(context) {
 		if (context.bot.settings.general.commandTrigger === context.arguments[0]) {
-			context.respond(`Cannot set the bot's trigger: Already set to **${context.arguments[0]}**`);
+			context.fail(`Cannot set the bot's trigger: Already set to **${context.arguments[0]}**`);
 
 			return;
 		}
 		else if (context.arguments[0].length > 64) {
-			context.respond(`Cannot set the bot's trigger: Trigger exceeds maximum length of **64** characters`);
+			context.fail(`Cannot set the bot's trigger: Trigger exceeds maximum length of **64** characters`);
 
 			return;
 		}
 
-		context.respond(`Successfully set the bot's trigger to **${context.arguments[0]}**`, "Change trigger", "GREEN");
+		context.respond({
+			text: `Successfully set the bot's trigger to **${context.arguments[0]}**`,
+			title: "Change trigger"
+		});
+
 		context.bot.settings.general.commandTrigger = context.arguments[0];
 		context.bot.settings.save();
 	},

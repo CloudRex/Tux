@@ -21,7 +21,7 @@ export default {
 
 			choices.add(`:small_blue_diamond: ${response.correct_answer}`).line();
 
-			context.respond({
+			context.sections({
 				Category: response.category,
 				Question: response.question,
 				Choices: Utils.shuffle(choices.build().split("\n")).join("\n")
@@ -35,7 +35,12 @@ export default {
 
 			context.bot.client.setTimeout(() => {
 				if (global.trivAns && global.trivAns.question === response.question) {
-					context.respond(`Times up! The correct answer was **${response.correct_answer}**.`, "Trivia", "RED");
+					context.respond({
+						text: `Times up! The correct answer was **${response.correct_answer}**.`,
+						title: "Trivia",
+						color: "RED"
+					});
+
 					global.trivAns = null;
 				}
 			}, 15000);

@@ -1,6 +1,5 @@
 import EditableMessage from "../core/editable-message";
-
-const Discord = require("discord.js");
+import EmbedBuilder from "../core/embed-builder";
 
 export default class CommandExecutionContext {
 	// TODO
@@ -26,18 +25,12 @@ export default class CommandExecutionContext {
 	}
 
 	/**
-	 * @param {*} message
-	 * @param {string} title
-	 * @param {string} color
-	 * @param {string} thumbnailUrl
-	 * @param {string} footerSuffix
-	 * @param {(string|null)} image
-	 * @param {(string|null)} authorImage
+	 * @param {(object|EmbedBuilder)} content
 	 * @returns {(Promise<EditableMessage>|null)}
 	 */
-	async respond(message, title = "", color = "GREEN", thumbnailUrl = "", footerSuffix = "", image = "", authorImage = "") {
+	async respond(content) {
 		if (!this.bot.userConfig.getLocal(this.message.guild.id, "mute")) {
-			const embed = new Discord.RichEmbed()
+			/* const embed = new Discord.RichEmbed()
 				.setFooter(`Requested by ${this.message.author.username} ${footerSuffix}`, this.message.author.avatarURL)
 				.setColor(color)
 				.setAuthor(title, authorImage)
@@ -54,9 +47,28 @@ export default class CommandExecutionContext {
 			}
 			else {
 				embed.setDescription(message);
+			} */
+			let embed = null;
+
+			if (content instanceof EmbedBuilder) {
+				embed = content;
+			}
+			else {
+				if (!content.color) {
+					content.color = "GREEN";
+				}
+
+				if (!content.footer) {
+					content.footer = {
+						text: `Requested by ${this.sender.username}`,
+						icon: this.sender.avatarURL
+					};
+				}
+
+				embed = EmbedBuilder.fromObject(content);
 			}
 
-			const messageResult = await this.message.channel.send(embed).catch((error) => {
+			const messageResult = await this.message.channel.send(embed.build()).catch((error) => {
 				// TODO: Temporarily disabled due to spamming on unwanted servers.
 				// this.privateReply(`Oh noes! For some reason, I was unable to reply to you in that channel. (${error.message})`);
 			});
@@ -65,6 +77,33 @@ export default class CommandExecutionContext {
 		}
 
 		return null;
+	}
+
+	async sections(sections) {
+		const result = new EmbedBuilder();
+
+		for (let i = 0; i < Object.keys(sections).length; i++) {
+			result.field(Object.keys(sections)[i], sections[Object.keys(sections)[i]]);
+		}
+
+		return await this.respond(result);
+	}
+
+	/**
+	 * @param {string} text
+	 * @returns {Promise<EditableMessage>}
+	 */
+	async ok(text) {
+		return await this.respond({
+			text: text
+		});
+	}
+
+	async fail(text) {
+		return await this.respond({
+			text: text,
+			color: "RED"
+		});
 	}
 
 	/**

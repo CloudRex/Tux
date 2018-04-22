@@ -6,14 +6,12 @@ export default {
 		if (context.arguments.length === 2) {
 			const member = context.message.guild.member(context.arguments[0]);
 
-			member.setNickname(context.arguments[1])
-				.then(() => context.respond(`:zap: **${member.user.username}** is now known as **${context.arguments[1]}**`, "", "GREEN"))
-				.catch((error) => {
-				context.respond(`Operation failed to complete. (${error.message})`, "", "RED");
+			member.setNickname(context.arguments[1]).then(() => context.ok(`:zap: **${member.user.username}** is now known as **${context.arguments[1]}**`)).catch((error) => {
+				context.fail(`Operation failed to complete. (${error.message})`);
 			});
 		}
 		else {
-			context.respond("Invalid amount of arguments.");
+			context.fail("Invalid amount of arguments.");
 		}
 	},
 

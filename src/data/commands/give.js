@@ -7,10 +7,10 @@ export default {
 		if (context.arguments.length === 2) {
 			const points = await context.bot.database.addUserPoints(Utils.stripMention(context.arguments[0]), parseInt(context.arguments[1]));
 
-			context.respond(`:small_orange_diamond:He/she now has **${points}** points`, "", "GREEN");
+			context.ok(`:small_orange_diamond:He/she now has **${points}** points`);
 		}
 		else {
-			context.respond("Invalid argument count", "", "RED");
+			context.fail("Invalid amount of arguments.");
 		}
 	},
 

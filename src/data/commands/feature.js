@@ -23,14 +23,14 @@ export default {
 					features.disable(feature);
 				}
 
-				context.respond(response.build());
+				context.ok(response.add(".").build());
 			}
 			else {
-				context.respond(`The **${feature.name}** feature is already in that state.`, "", "RED");
+				context.fail(`The **${feature.name}** feature is already in that state.`);
 			}
 		}
 		else {
-			context.respond("Operation failed: Invalid feature.", "", "RED");
+			context.fail("Operation failed: Invalid feature.");
 		}
 	},
 

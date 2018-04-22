@@ -7,7 +7,7 @@ export default {
 			// TODO
 		}
 		else {
-			context.respond("Invalid amount of arguments, expecting 2.", "", "RED");
+			context.fail("Invalid amount of arguments, expecting 2.");
 		}
 	},
 

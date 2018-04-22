@@ -8,7 +8,12 @@ export default {
 		request("https://api.chucknorris.io/jokes/random", (error, response, body) => {
 			const data = JSON.parse(body);
 
-			context.respond(data.value, "Chuck Norris Fact", "BLUE", "", "", "", data.icon_url);
+			context.respond({
+				text: data.value,
+				title: "Chuck Norris Fact",
+				titleIcon: data.icon_url,
+				color: "BLUE"
+			});
 		});
 	},
 

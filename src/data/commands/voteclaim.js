@@ -6,7 +6,7 @@ export default {
 		const voted = await context.bot.dbl.hasVoted(context.message.author.id);
 
 		// TODO: Save that the user voted in the database and reset in 24 hours. (UK midnight time)
-		context.respond("Voted ->: " + voted, "", "GREEN");
+		context.ok("Voted ->: " + voted);
 	},
 
 	canExecute(context) {

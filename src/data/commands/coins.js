@@ -16,14 +16,14 @@ export default {
 		const { user } = context.message.guild.member(Utils.resolveId(id));
 
 		if (user.bot) {
-			context.respond(":robot: Bots can't have points!", "", "RED");
+			context.fail(":robot: Bots can't have points!");
 
 			return;
 		}
 
 		const coins = await context.bot.database.getUserPoints(id);
 
-		context.respond(`:small_orange_diamond:**${user.username}** has **${coins}** coins`, "", "GREEN");
+		context.ok(`:small_orange_diamond:**${user.username}** has **${coins}** coins`);
 	},
 
 	canExecute(context) {

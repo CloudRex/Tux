@@ -18,7 +18,11 @@ export default {
 			response.add(`:medal::lock: **${BadgeType.getName(missingBadges[i])}**: ${BadgeType.getDescription(missingBadges[i])}`).line();
 		}
 
-		context.respond(response.build(), `${context.sender.username}'s Badges`, "GOLD");
+		context.respond({
+			text: response.build(),
+			title: `${context.sender.username}'s Badges`,
+			color: "GOLD"
+		});
 	},
 
 	canExecute(context) {
