@@ -22,14 +22,21 @@ export default {
 				}
 
 				case "srestart": {
-					await context.ok("Restarting the bot and pulling latest changes.");
+					await context.ok("Soft restart: Restarting the bot and pulling latest changes.");
 					exec("sudo systemctl restart tux");
 
 					break;
 				}
 
+				case "hrestart": {
+					await context.ok("Hard restart: Restarting bot, pulling latest changes, and installing packages.");
+					exec("sudo systemctl stop tux && sudo npm install && sudo systemctl start tux");
+
+					break;
+				}
+
 				default: {
-					context.fail("Invalid command issued. First argument should be: stop, restart, srestart");
+					context.fail("Invalid command issued. First argument should be: stop, restart, srestart, hrestart");
 				}
 			}
 		}
