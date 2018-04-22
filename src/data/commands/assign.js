@@ -15,7 +15,8 @@ export default {
 			context.fail("He/she already has that or a higher access level.");
 		}
 		else if (accessLevel === AccessLevelType.Developer) {
-			context.fail("The Developer access level cannot be assigned.");
+			context.bot.userConfig.push("global.developers", context.arguments[0]);
+			context.ok("Done!");
 		}
 		else {
 			context.bot.userConfig.pushLocal(context.message.guild.id, `access-levels.${context.arguments[1].toLowerCase()}`, target);

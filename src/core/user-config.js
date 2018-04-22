@@ -35,6 +35,22 @@ export default class UserConfig {
 		this.set(`${guildId}.${path}`, value);
 	}
 
+	/**
+	 * @param {string} path
+	 * @param {*} item
+	 */
+	push(path, item) {
+		const updated = this.get(path);
+
+		updated.push(item);
+		this.set(updated, path);
+	}
+
+	/**
+	 * @param {Snowflake} guildId
+	 * @param {string} path
+	 * @param {*} item
+	 */
 	pushLocal(guildId, path, item) {
 		const updated = this.getLocal(guildId, path);
 

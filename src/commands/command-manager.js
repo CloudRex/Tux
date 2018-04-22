@@ -223,7 +223,7 @@ export default class CommandManager {
 			minuteTime: (arg) => /^[0-9]+(m|h|d|mo|y)$/.test(arg),
 			state: (arg) => /^(1|0|true|false|off|on)$/.test(arg),
 			youtubeLink: (arg) => /^https?:\/\/(www\.)?youtube\.com\/watch\?v=[a-zA-Z0-9-]{11}$/.test(arg),
-			accessLevel: (arg) => /^guest|member|premium|moderator|admin|owner$/.test(arg)
+			accessLevel: (arg) => /^guest|member|premium|moderator|admin|owner|developer$/.test(arg)
 		};
 
 		// TODO: Resolve arguments THEN provide them to the commands in a resolved form
