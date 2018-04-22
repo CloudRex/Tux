@@ -29,10 +29,10 @@ export default {
 	},
 
 	meta: {
-		name: "assign",
-		description: "Assign an access level to an user",
+		name: "revoke",
+		description: "Revoke an access level from an user",
 		accessLevel: AccessLevelType.Owner,
-		aliases: ["grant"],
+		aliases: ["take"],
 		maxArguments: 2,
 
 		args: {

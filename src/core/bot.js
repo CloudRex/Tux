@@ -111,10 +111,10 @@ export default class Bot {
 
 			Log.channel(new EmbedBuilder()
 				.color("GREEN")
-				.title('Joined guild')
-				.field('Name', guild.name)
-				.field('Members', guild.memberCount)
-				.field('Owner', guild.owner.user.toString())
+				.title("Joined Guild")
+				.field("Name", guild.name)
+				.field("Members", guild.memberCount)
+				.field("Owner", guild.owner.user.toString())
 				.thumbnail(guild.iconURL)
 				.build());
 		});

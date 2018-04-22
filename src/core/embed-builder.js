@@ -78,7 +78,7 @@ export default class EmbedBuilder {
 
 	/**
 	 * @param {string} title
-	 * @param {string} value
+	 * @param {*} value
 	 * @returns {EmbedBuilder}
 	 */
 	field(title, value) {
