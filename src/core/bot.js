@@ -111,7 +111,7 @@ export default class Bot {
 			this.userConfig.createGuild(guild.id);
 
 			if (guildLog.enabled) {
-				this.client.guilds.find("id", guildLog.guild).channels.find("id", guildLog.channel).send(new EmbedBuilder().text(`Joined guild: ${guild.name} (${guild.memberCount} members)`).color("GREEN").build());
+				this.client.guilds.get(guildLog.guild).channels.get(guildLog.channel).send(new EmbedBuilder().text(`Joined guild: ${guild.name} (${guild.memberCount} members)`).color("GREEN").build());
 			}
 		});
 
@@ -121,7 +121,7 @@ export default class Bot {
 			this.userConfig.removeGuild(guild.id);
 
 			if (guildLog.enabled) {
-				this.client.guilds.find("id", guildLog.guild).channels.find("id", guildLog.channel).send(new EmbedBuilder().text(`Left guild: ${guild.name} (${guild.memberCount} members)`).color("RED").build());
+				this.client.guilds.get(guildLog.guild).channels.get(guildLog.channel).send(new EmbedBuilder().text(`Left guild: ${guild.name} (${guild.memberCount} members)`).color("RED").build());
 			}
 		});
 

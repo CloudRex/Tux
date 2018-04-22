@@ -20,7 +20,7 @@ export default {
 					}
 					else {
 						const items = new MessageBuilder();
-						const recipient = context.bot.client.users.find("id", activeTrade.recipientId);
+						const recipient = context.bot.client.users.get(activeTrade.recipientId);
 						const dbItems = await context.bot.database.getTradePropositions(activeTrade.id);
 
 						for (let i = 0; i < dbItems.length; i++) {
@@ -42,7 +42,7 @@ export default {
 
 				case "cancel": {
 					const activeTrade = await context.bot.database.getActiveTradeBySender(context.message.author.id);
-					const recipient = context.bot.client.users.find("id", activeTrade.recipientId);
+					const recipient = context.bot.client.users.get(activeTrade.recipientId);
 
 					if (activeTrade === null) {
 						context.fail("You don't currently have an active trade to cancel.");
@@ -73,7 +73,7 @@ export default {
 							context.ok(`You've created a trade with **${target.username}**`);
 						}
 						else {
-							const { username } = context.bot.client.users.find("id", activeTrade.recipientId);
+							const { username } = context.bot.client.users.get(activeTrade.recipientId);
 
 							context.fail(`You must cancel your active trade with **${username}** in order to create a new one.`);
 						}
@@ -91,7 +91,7 @@ export default {
 					const activeTrade = await context.bot.database.getActiveTradeBySender(context.message.author.id);
 
 					if (activeTrade) {
-						const { username } = context.bot.client.users.find("id", activeTrade.recipientId);
+						const { username } = context.bot.client.users.get(activeTrade.recipientId);
 
 						if (item && item.amount >= amount) {
 							await context.bot.database.addTradeProposition(context.message.author.id, item, amount);
@@ -119,7 +119,7 @@ export default {
 					const item = await context.bot.database.getItem(activeTrade.recipientId, context.arguments[1]);
 
 					if (activeTrade) {
-						const { username } = context.bot.client.users.find("id", activeTrade.recipientId);
+						const { username } = context.bot.client.users.get(activeTrade.recipientId);
 
 						if (item && item.amount >= amount) {
 							await context.bot.database.addTradeDemand(context.message.author.id, item, amount);
@@ -147,8 +147,8 @@ export default {
 					const activeTrade = await context.bot.database.getActiveTradeBySender(context.message.author.id);
 
 					if (activeTrade) {
-						const sender = context.bot.client.users.find("id", activeTrade.senderId);
-						const recipient = context.bot.client.users.find("id", activeTrade.recipientId);
+						const sender = context.bot.client.users.get(activeTrade.senderId);
+						const recipient = context.bot.client.users.get(activeTrade.recipientId);
 						const recipientChannel = (recipient.dmChannel ? recipient.dmChannel : await recipient.createDM());
 						const senderChannel = (sender.dmChannel ? sender.dmChannel : await sender.createDM());
 

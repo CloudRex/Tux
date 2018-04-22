@@ -11,7 +11,7 @@ export default {
 			.then());
 
 		for (let i = 0; i < topUsers.length; i++) {
-			const userInfo = context.bot.client.users.find("id", topUsers[i].userId.toString());
+			const userInfo = context.bot.client.users.get(topUsers[i].userId.toString());
 
 			console.log(userInfo);
 
