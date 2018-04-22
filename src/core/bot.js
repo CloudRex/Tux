@@ -106,23 +106,29 @@ export default class Bot {
 		});
 
 		this.client.on("guildCreate", (guild) => {
-			const guildLog = this.userConfig.get("global.guild-log");
-
 			this.userConfig.createGuild(guild.id);
 
-			if (guildLog.enabled) {
-				this.client.guilds.get(guildLog.guild).channels.get(guildLog.channel).send(new EmbedBuilder().text(`Joined guild: ${guild.name} (${guild.memberCount} members)`).color("GREEN").build());
-			}
+			Log.channel(new EmbedBuilder()
+				.color("GREEN")
+				.title('Joined guild')
+				.field('Name', guild.name)
+				.field('Members', guild.memberCount)
+				.field('Owner', guild.owner.user.toString())
+				.thumbnail(guild.iconURL)
+				.build());
 		});
 
 		this.client.on("guildDelete", (guild) => {
-			const guildLog = this.userConfig.get("global.guild-log");
-
 			this.userConfig.removeGuild(guild.id);
 
-			if (guildLog.enabled) {
-				this.client.guilds.get(guildLog.guild).channels.get(guildLog.channel).send(new EmbedBuilder().text(`Left guild: ${guild.name} (${guild.memberCount} members)`).color("RED").build());
-			}
+			Log.channel(new EmbedBuilder()
+				.color("RED")
+				.title('Left guild')
+				.field('Name', guild.name)
+				.field('Members', guild.memberCount)
+				.field('Owner', guild.owner.user.toString())
+				.thumbnail(guild.iconURL)
+				.build());
 		});
 
 		global.b = this;
