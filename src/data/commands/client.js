@@ -22,14 +22,15 @@ export default {
 				}
 
 				case "srestart": {
-					await context.ok("Soft restart: Restarting the bot and pulling latest changes.");
+					await context.ok("**Soft restart**: Restarting the bot and pulling latest changes.");
+					context.bot.disconnect();
 					exec("sudo systemctl restart tux");
 
 					break;
 				}
 
 				case "hrestart": {
-					await context.ok("Hard restart: Restarting bot, pulling latest changes, and installing packages.");
+					await context.ok("**Hard restart**: Restarting bot, pulling latest changes, and installing packages.");
 					exec("sudo systemctl stop tux && sudo npm install && sudo systemctl start tux");
 
 					break;
