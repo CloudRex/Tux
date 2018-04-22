@@ -23,12 +23,11 @@ export default {
 				result = result.substr(0, 1000);
 			}
 
-			// TODO
-			context.respond({
+			context.sections({
 				Evaluation: new MessageBuilder().codeBlock("javascript", context.arguments[0]).build(),
 				Result: new MessageBuilder().codeBlock("javascript", result).build(),
 				Type: new MessageBuilder().codeBlock("javascript", typeof result).build()
-			}, "", "GREEN");
+			});
 		}
 	},
 
