@@ -6,9 +6,11 @@ const fs = require("fs");
 
 export default class CommandManager {
 	/**
+	 * @param {Bot} bot
 	 * @param {string} accessLevelsPath
 	 */
-	constructor(accessLevelsPath) {
+	constructor(bot, accessLevelsPath) {
+		this.bot = bot;
 		this.commands = [];
 		this.accessLevels = [];
 
@@ -56,15 +58,17 @@ export default class CommandManager {
 	}
 
 	/**
+	 * @param {Snowflake} guildId
 	 * @param {string} role
 	 * @returns {AccessLevelType}
 	 */
-	getAccessLevelByRole(role) {
-		const keys = Object.keys(this.accessLevels);
+	getAccessLevelByRole(guildId, role) {
+		const accessLevels = this.bot.userConfig.getLocal(guildId, "access-levels");
+		const keys = Object.keys(accessLevels);
 
 		for (let keyIndex = 0; keyIndex < keys.length; keyIndex++) {
-			for (let roleIndex = 0; roleIndex < this.accessLevels[keys[keyIndex]].length; roleIndex++) {
-				if (this.accessLevels[keys[keyIndex]][roleIndex] === role) {
+			for (let roleIndex = 0; roleIndex < accessLevels[keys[keyIndex]].length; roleIndex++) {
+				if (accessLevels[keys[keyIndex]][roleIndex] === role) {
 					return AccessLevelType.fromString(keys[keyIndex]);
 				}
 			}
@@ -75,17 +79,31 @@ export default class CommandManager {
 
 	/**
 	 * @param {Snowflake} userId
+	 * @returns {boolean}
+	 */
+	isDeveloper(userId) {
+		return this.bot.userConfig.get("global.developers").includes(userId);
+	}
+
+	/**
+	 * @param {Snowflake} guildId
+	 * @param {Snowflake} userId
 	 * @returns {AccessLevelType}
 	 */
-	getAccessLevelById(userId) {
-		const keys = Object.keys(this.accessLevels);
+	getAccessLevelById(guildId, userId) {
+		if (this.isDeveloper(userId)) {
+			return AccessLevelType.Developer;
+		}
+
+		const accessLevels = this.bot.userConfig.getLocal(guildId, "access-levels");
+		const keys = Object.keys(accessLevels);
 
 		for (let keyIndex = 0; keyIndex < keys.length; keyIndex++) {
 			// TODO: Use index of instead of looping
-			for (let roleIndex = 0; roleIndex < this.accessLevels[keys[keyIndex]].length; roleIndex++) {
-				const value = this.accessLevels[keys[keyIndex]][roleIndex];
+			for (let roleIndex = 0; roleIndex < accessLevels[keys[keyIndex]].length; roleIndex++) {
+				const value = accessLevels[keys[keyIndex]][roleIndex];
 
-				if (!Number.isNaN(value) && value === userId.toString()) {
+				if (!isNaN(value) && value === userId.toString()) {
 					return AccessLevelType.fromString(keys[keyIndex]);
 				}
 			}
@@ -122,14 +140,15 @@ export default class CommandManager {
 	}
 
 	/**
+	 * @param {Snowflake} guildId
 	 * @param {array<string>} roles
 	 * @returns {AccessLevelType}
 	 */
-	getHighestAccessLevelByRoles(roles) {
+	getHighestAccessLevelByRoles(guildId, roles) {
 		let highest = AccessLevelType.Guest;
 
 		for (let i = 0; i < roles.length; i++) {
-			const accessLevel = this.getAccessLevelByRole(roles[i]);
+			const accessLevel = this.getAccessLevelByRole(guildId, roles[i]);
 
 			if (accessLevel > highest) {
 				highest = accessLevel;
@@ -140,23 +159,27 @@ export default class CommandManager {
 	}
 
 	/**
+	 * @param {Snowflake} guildId
 	 * @param {Message} message
 	 * @param {AccessLevelType} accessLevel
 	 * @returns {boolean}
 	 */
-	hasAuthority(message, accessLevel) {
-		return this.getAuthority(message.member.roles.array().map((role) => role.name), message.author.id) >= accessLevel;
+	hasAuthority(guildId, message, accessLevel) {
+		return this.getAuthority(guildId, message.member.roles.array().map((role) => role.name), message.author.id) >= accessLevel;
 
 		// TODO: Replaced by getAuthority() method
 		// return (this.getHighestAccessLevelByRoles(message.member.roles.array().map((role) => role.name)) >= accessLevel) || (this.getAccessLevelById(message.author.id) >= accessLevel);
 	}
 
 	/**
+	 * @param {Snowflake} guildId
+	 * @param {array<string>} roles
+	 * @param {Snowflake} userId
 	 * @returns {AccessLevelType}
 	 */
-	getAuthority(roles, userId) {
-		const byRoles = this.getHighestAccessLevelByRoles(roles);
-		const byId = this.getAccessLevelById(userId);
+	getAuthority(guildId, roles, userId) {
+		const byRoles = this.getHighestAccessLevelByRoles(guildId, roles);
+		const byId = this.getAccessLevelById(guildId, userId);
 
 		if (byRoles > byId) {
 			return byRoles;
@@ -201,6 +224,10 @@ export default class CommandManager {
 			youtubeLink: (arg) => /^https?:\/\/(www\.)?youtube\.com\/watch\?v=[a-zA-Z0-9-]{11}$/.test(arg)
 		};
 
+		// TODO: debug only
+		// console.log(`AL : ${this._getAccessLevelByRole(context.message.guild.id, "Artex")}`);
+		console.log(`AL---> : ${this.getAccessLevelById(context.message.guild.id, context.sender.id)}`);
+
 		if (!context.message.member) {
 			context.message.channel.send("That command must be used in a text channel. Sorry!");
 
@@ -212,7 +239,7 @@ export default class CommandManager {
 
 			return false;
 		}
-		else if (!this.hasAuthority(context.message, command.accessLevel)) {
+		else if (!this.hasAuthority(context.message.guild.id, context.message, command.accessLevel)) {
 			const minAuthority = AccessLevelType.toString(command.accessLevel);
 			await context.fail(`You don't have the authority to use that command. You must be at least a(n) **${minAuthority}**.`);
 

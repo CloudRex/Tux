@@ -16,7 +16,7 @@ const bot = new Bot(
 	new Settings("src/settings.json"),
 	new UserConfig("src/user-config.json"),
 	new Discord.Client(),
-	new CommandManager("src/access-levels.json"),
+	"src/access-levels.json",
 	new FeatureManager(),
 	new CommandLoader("src/data/commands")
 );

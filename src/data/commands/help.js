@@ -44,9 +44,8 @@ export default {
 				}
 			];
 
-			const authority = context.bot.commands.getAuthority(["@everyone"], context.sender.id);
-
-			console.log(authority);
+			// TODO: Why only the @everyone role? I forgot.. review.
+			const authority = context.bot.commands.getAuthority(context.message.guild.id, ["@everyone"], context.sender.id);
 
 			for (let categ = 0; categ < categories.length; categ++) {
 				result[categories[categ].name] = [];

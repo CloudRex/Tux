@@ -5,6 +5,7 @@ import Database from "../database/database";
 import ConsoleInterface from "../console/console-interface";
 import EmojiMenuManager from "../emoji-ui/emoji-menu-manager";
 import EmbedBuilder from "./embed-builder";
+import CommandManager from "../commands/command-manager";
 
 const DBL = require("dblapi.js");
 const EventEmitter = require("events");
@@ -14,16 +15,16 @@ export default class Bot {
 	 * @param {Settings} settings
 	 * @param {UserConfig} userConfig
 	 * @param {*} client
-	 * @param {CommandManager} commandManager
+	 * @param {string} accessLevelsPath
 	 * @param {FeatureManager} featureManager
 	 * @param {CommandLoader} commandLoader
 	 */
-	constructor(settings, userConfig, client, commandManager, featureManager, commandLoader) {
+	constructor(settings, userConfig, client, accessLevelsPath, featureManager, commandLoader) {
 		this.events = new EventEmitter();
 		this.settings = settings;
 		this.userConfig = userConfig;
 		this.client = client;
-		this.commands = commandManager;
+		this.commands = new CommandManager(this, accessLevelsPath);
 		this.features = featureManager;
 		this.commandLoader = commandLoader;
 		this.database = new Database(this.settings.general.databasePath);
@@ -85,7 +86,7 @@ export default class Bot {
 							message,
 							CommandParser.getArguments(message.content),
 							this,
-							this.commands.getAuthority(message.member.roles.array().map((role) => role.name), message.author.id)
+							this.commands.getAuthority(message.guild.id, message.member.roles.array().map((role) => role.name), message.author.id)
 						),
 
 						CommandParser.parse(

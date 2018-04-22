@@ -43,26 +43,26 @@ const AccessLevelType = {
 	 * @returns {AccessLevelType}
 	 */
 	fromString(string) {
-		switch (string) {
-			case "Guest":
+		switch (string.toLowerCase()) {
+			case "guest":
 				return AccessLevelType.Guest;
 
-			case "Member":
+			case "member":
 				return AccessLevelType.Member;
 
-			case "Premium":
+			case "premium":
 				return AccessLevelType.Premium;
 
-			case "Moderator":
+			case "moderator":
 				return AccessLevelType.Moderator;
 
-			case "Admin":
+			case "admin":
 				return AccessLevelType.Admin;
 
-			case "Owner":
+			case "owner":
 				return AccessLevelType.Owner;
 
-			case "Developer":
+			case "developer":
 				return AccessLevelType.Developer;
 
 			default:
