@@ -11,10 +11,10 @@ export default {
 			const feature = features[i];
 
 			if (feature.isEnabled) {
-				response.add("<:tuxcheck:436998015652462603>");
+				response.add("<:checkyes:437380298238591016> ");
 			}
 			else {
-				response.add("<:tuxx:436998168253825024>");
+				response.add("<:checkno:437380288008552449> ");
 			}
 
 			response.add(`**${feature.name}**: ${feature.description}`).line();
