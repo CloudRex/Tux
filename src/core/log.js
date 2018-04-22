@@ -27,15 +27,11 @@ export default class Log {
     }
 
     static channel(content, options) {
-        const settings = global.b.settings.log;
-        const guild = global.b.client.guilds.get(settings.guild);
-
-        if (guild !== null && guild !== undefined) {
-            const channel = guild.channels.get(settings.channel);
-
-            if (channel !== null && channel !== undefined) {
-                channel.send(content, options);
-            }
+        const guildLog = global.b.userConfig.get("global.guild-log");
+        if (!guildLog.enabled) {
+            return;
         }
+
+        global.b.client.guilds.get(guildLog.guild).channels.get(guildLog.channel).send(content, options);
     }
 }
