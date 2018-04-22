@@ -37,8 +37,9 @@ export default class ConsoleInterface {
 		});
 
 		ci.on("close", () => {
-			bot.disconnect();
-			process.exit(0);
+			// TODO: Temp. disabled due to interferring and going straight disconnection on vps/linux
+			/* bot.disconnect();
+			process.exit(0); */
 		});
 	}
 }
