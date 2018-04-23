@@ -30,14 +30,17 @@ export default class UserConfig {
 	 * @param {Snowflake} guildId
 	 * @param {string} path
 	 * @param {*} value
+	 * @param {string} template
 	 */
-	setLocal(guildId, path, value, template = 'default') {
+	setLocal(guildId, path, value, template = "default") {
 		if (this.get(`${template}.${path}`) === value) {
 			_.unset(this.config, `${guildId}.${path}`);
-			this.save();
-		} else {
+		}
+		else {
 			this.set(`${guildId}.${path}`, value);
 		}
+
+		this.save();
 	}
 
 	/**

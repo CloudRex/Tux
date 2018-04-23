@@ -66,6 +66,7 @@ export default class EmbedBuilder {
 		return this;
 	}
 
+	// TODO: Limit text to Discord's embed char limit
 	/**
 	 * @param {string} text
 	 * @returns {EmbedBuilder}

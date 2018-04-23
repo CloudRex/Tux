@@ -157,6 +157,8 @@ export default class Bot {
 	disconnect() {
 		// TODO: Actually logout the bot
 		// this.client.disconnect();
+		this.settings.save();
+		this.userConfig.save();
 		this.client.destroy();
 		Log.info("Disconnected");
 	}
