@@ -15,7 +15,7 @@ export default {
 			context.fail("He/she already has that or a higher access level.");
 		}
 		else if (accessLevel === AccessLevelType.Developer) {
-			context.bot.userConfig.push("global.developers", context.arguments[0]);
+			context.bot.userConfig.push("global.developers", target);
 			context.ok("Done!");
 		}
 		else {
