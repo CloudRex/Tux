@@ -2,6 +2,7 @@ import AccessLevelType from "../core/access-level-type";
 import CommandArgumentParser from "./command-argument-parser";
 import CommandExecutedEvent from "../events/command-executed-event";
 import Utils from "../core/utils";
+import CommandCategoryType from "./command-category-type";
 
 const fs = require("fs");
 
@@ -241,6 +242,11 @@ export default class CommandManager {
 			return false;
 		}
 		// TODO: simplify the deletion of the messages
+		else if (command.category === CommandCategoryType.NSFW) {
+			context.fail(":underage: Please use the nsfw channel for this command.");
+
+			return false;
+		}
 		else if (!command.isEnabled) {
 			await context.fail("That command is disabled and may not be used.");
 

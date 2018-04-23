@@ -5,12 +5,6 @@ const snekfetch = require("snekfetch");
 
 export default {
 	async executed(context) {
-		if (!context.message.channel.nsfw) {
-			context.fail(":underage: Please use the nsfw channel for this command.");
-
-			return;
-		}
-
 		const message = await context.ok("Searching for **kitties**...");
 
 		if (message !== null) {
