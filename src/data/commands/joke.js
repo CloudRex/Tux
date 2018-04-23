@@ -5,11 +5,13 @@ const snekfetch = require("snekfetch");
 
 export default {
 	async executed(context) {
-		const url = "https://icanhazdadjoke.com/";
-
-		snekfetch.get(url, { headers: { Accept: 'text/plain' } }).then((result) => {
-			const response = result.body;
-			context.ok(response);
+		snekfetch.get("https://icanhazdadjoke.com/", { headers: { Accept: 'text/plain' } }).then((result) => {
+			context.respond({
+				text: result.body,
+				title: "Dad Joke",
+				titleIcon: "https://icanhazdadjoke.com/static/smile.png",
+				color: "GOLD"
+			});
 		});
 	},
 
