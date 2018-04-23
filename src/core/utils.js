@@ -19,11 +19,17 @@ export default class Utils {
 	}
 
 	/**
-	 * @param {string} userMention
+	 * @param {string} mention
 	 * @returns {string}
 	 */
-	static resolveId(userMention) {
-		return userMention.replace("<", "").replace(">", "").replace("@", "").replace("!", "");
+	static resolveId(mention) {
+		return mention
+			.replace("<", "")
+			.replace(">", "")
+			.replace("@", "")
+			.replace("!", "")
+			.replace("&", "")
+			.replace("#", "");
 	}
 
 	/**
@@ -137,6 +143,6 @@ export default class Utils {
 	 * @param {string} state
 	 */
 	static translateState(state) {
-		return /^(1|true|on)$/.test(state);
+		return /^(1|true|on|y|yes)$/i.test(state);
 	}
 }
