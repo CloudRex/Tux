@@ -69,6 +69,7 @@ export default class Bot {
 
 		this.client.on("message", async (message) => {
 			if (!message.author.bot) {
+				// TODO: Position so only given to command uses, and position it after command executed to avoid blocking
 				await this.database.addUserPoints(message.author.id, 1);
 				this.events.emit("userMessage", message);
 

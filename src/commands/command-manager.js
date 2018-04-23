@@ -254,22 +254,22 @@ export default class CommandManager {
 		}
 		else if (!this.hasAuthority(context.message.guild.id, context.message, command.accessLevel)) {
 			const minAuthority = AccessLevelType.toString(command.accessLevel);
-			await context.fail(`You don't have the authority to use that command. You must be at least a(n) **${minAuthority}**.`);
+			context.fail(`You don't have the authority to use that command. You must be at least a(n) **${minAuthority}**.`);
 
 			return false;
 		}
 		else if (context.arguments.length > command.maxArguments) {
 			if (command.maxArguments > 0) {
-				await context.fail(`That command only accepts up to **${command.maxArguments}** arguments.`);
+				context.fail(`That command only accepts up to **${command.maxArguments}** arguments.`);
 			}
 			else {
-				await context.fail(`That command does not accept any arguments.`);
+				context.fail(`That command does not accept any arguments.`);
 			}
 
 			return false;
 		}
 		else if (!command.canExecute(context)) {
-			await context.fail("That command cannot be executed right now.");
+			context.fail("That command cannot be executed right now.");
 
 			return false;
 		}
