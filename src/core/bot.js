@@ -42,7 +42,7 @@ export default class Bot {
 
 			this.client.user.setPresence({
 				game: {
-					name: "?trigger"
+					name: "Use ?trigger"
 				}
 			});
 
