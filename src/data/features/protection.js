@@ -150,7 +150,7 @@ export default class Protection extends Feature {
 	}
 
 	disabled(bot) {
-		bot.events.removeListener("message", this.handleMessage);
+		bot.client.removeListener("message", this.handleMessage);
 		console.log("turned off");
 	}
 }

@@ -16,7 +16,7 @@ export default {
 
 				if (state) {
 					response.bold("on");
-					features.enable(feature);
+					features.enable(feature, context.bot);
 				}
 				else {
 					response.bold("off");
