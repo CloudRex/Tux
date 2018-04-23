@@ -217,6 +217,7 @@ export default class CommandManager {
 	 * @returns {Promise<boolean>}
 	 */
 	async handle(context, command) {
+		// TODO: Reposition types, they shouldn't be here
 		const types = {
 			// TODO: Bug with the USERS_PATTERN (interlaps between true and false)
 			user: (arg) => /(^[0-9]{18}$|^<@!?[0-9]{18}>$)/.test(arg),
@@ -228,7 +229,8 @@ export default class CommandManager {
 			youtubeLink: (arg) => /^https?:\/\/(www\.)?youtube\.com\/watch\?v=[a-zA-Z0-9-]{11}$/i.test(arg),
 			accessLevel: (arg) => /^guest|member|premium|moderator|admin|owner|developer$/.test(arg),
 			dataStorage: (arg) => /^config|database$/.test(arg),
-			guild: (arg) => /^[0-9]{18}$/.test(arg)
+			guild: (arg) => /^[0-9]{18}$/.test(arg),
+			positiveNumber: => /^[1-9]+$/.test(arg)
 		};
 
 		// TODO: Resolve arguments THEN provide them to the commands in a resolved form
