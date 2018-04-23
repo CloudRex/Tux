@@ -54,7 +54,7 @@ export default class CommandParser {
 		let match = expression.exec(commandString);
 
 		while (match != null) {
-			result.push(match[1].replace(/"/g, ""));
+			result.push(match[1].substr(1).substr(0, match[1].length - 2));
 			match = expression.exec(commandString);
 		}
 
