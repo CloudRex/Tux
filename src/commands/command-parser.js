@@ -48,17 +48,14 @@ export default class CommandParser {
 	 * @returns {array<string>}
 	 */
 	static getArguments(commandString) {
-		const expression = / ("[^"]+"|'[^']+'|`[^`]+`|[^ ]+)/g;
+		const expression = / (```((?!```).)*```|"[^"]+"|'[^']+'|`[^`]+`|[^ ]+)/g;
+		const argCleanExpression = /(```|`|'|"|)(.+)\1/;
 		const result = [];
 
 		let match = expression.exec(commandString);
 
 		while (match != null) {
-			if (['`', "'", '"'].indexOf(match[1].charAt(0)) !== -1) {
-				result.push(match[1].substr(1).substr(0, match[1].length - 2));
-			} else {
-				result.push(match[1]);
-			}
+			result.push(argCleanExpression.exec(match[1])[2]);
 			match = expression.exec(commandString);
 		}
 
