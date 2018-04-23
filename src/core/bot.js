@@ -8,6 +8,7 @@ import EmbedBuilder from "./embed-builder";
 import CommandManager from "../commands/command-manager";
 
 const DBL = require("dblapi.js");
+const Discord = require("discord.js");
 const EventEmitter = require("events");
 
 export default class Bot {
@@ -118,6 +119,42 @@ export default class Bot {
 				.field("Owner", guild.owner.user.toString())
 				.thumbnail(guild.iconURL)
 				.build());
+
+			// TODO: This should only happen when the bot is given
+			// ADMIN permissions right from the invitation. Make a way
+			// to activate and deactivate this every time the bot gets
+			// or loses ADMIN permissions.
+			if (guild.owner) {
+				this.userConfig.pushLocal(guild.id, "access-levels.owner", guild.owner.id);
+
+				const send = (channel) => {
+					channel.send(`<@${guild.owner.id}>`);
+
+					channel.send(new EmbedBuilder()
+						.color("GREEN")
+						.text(`Hey, I'm Tux! Thanks for inviting me to your server! The \`Owner\` access level has been automatically granted to the owner of this guild (**${guild.owner.user.tag}**). You may assign administrators and/or moderators using the \`assign\` command. If you need any help with Tux, refer to the \`support\` command.`)
+						.title("Thanks for inviting Tux!")
+						.build());
+				};
+
+				if (guild.defaultChannel) {
+					send(guild.defaultChannel);
+				}
+				else {
+					const channels = guild.channels.array().filter((channel) => channel.type === "text");
+
+					for (let i = 0; i < channels.length; i++) {
+						if (channels[i].permissionsFor(guild.member(this.client.user.id)).has(Discord.Permissions.FLAGS.SEND_MESSAGES)) {
+							send(channels[i]);
+
+							break;
+						}
+					}
+				}
+			}
+			else {
+				// TODO: Default to admins
+			}
 		});
 
 		this.client.on("guildDelete", (guild) => {
@@ -140,7 +177,7 @@ export default class Bot {
 		// -----------------------------------
 	}
 
-	login() {
+	connect() {
 		this.client.login(this.settings.general.token);
 	}
 
@@ -151,7 +188,7 @@ export default class Bot {
 		// this.features.reloadAll(this);
 
 		this.disconnect();
-		this.login();
+		this.connect();
 	}
 
 	disconnect() {

@@ -4,7 +4,7 @@ import CommandCategoryType from "../../commands/command-category-type";
 export default {
 	async executed(context) {
 		if (context.arguments[0].toLowerCase() === "beep boop") {
-			context.fail("No.");
+			context.fail("Nope.");
 
 			return;
 		}

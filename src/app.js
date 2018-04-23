@@ -35,4 +35,4 @@ bot.features.registerMultiple([
 bot.settings.validate();
 bot.commandLoader.loadAll(bot.commands);
 bot.features.enableAll(bot);
-bot.login();
+bot.connect();
