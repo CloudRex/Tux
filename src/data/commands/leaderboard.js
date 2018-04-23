@@ -7,7 +7,7 @@ export default {
 	async executed(context) {
 		const response = new MessageBuilder();
 
-		const topUsers = DbUser.fromResults(await context.bot.database.db("users").select().limit(10).orderBy("points", "desc")
+		const topUsers = DbUser.fromResults(await context.bot.database.db("users").select().orderBy("points", "desc")
 			.then());
 
 		for (let i = 0; i < topUsers.length; i++) {
@@ -15,14 +15,19 @@ export default {
 
 			console.log(userInfo);
 
-			if (userInfo) {
+			if (userInfo && (i < 10 || topUsers[i].userId === context.sender.id)) {
 				let emoji = ":small_orange_diamond:";
+				let you = "";
 
 				if (i < 3) {
 					emoji = ":small_blue_diamond:";
 				}
 
-				response.add(`${emoji} #${i + 1} : *${userInfo.username}* with ** ${topUsers[i].points}** coins`).line();
+				if (userInfo.id === context.sender.id) {
+					you = "(you)";
+				}
+
+				response.add(`${emoji} #${i + 1} : *${userInfo.username}* with ** ${topUsers[i].points}** coins ${you}`).line();
 			}
 		}
 
