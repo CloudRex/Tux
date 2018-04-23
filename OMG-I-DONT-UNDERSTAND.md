@@ -174,3 +174,13 @@ This method will be then used by our database methods to return
 queries in the form of database models.
 
 *... to be continued!*
+
+## Events
+Tux implements a custom events hub.
+
+#### Event List
+* `commandWillExecute` - Before a command will execute.
+* `commandExecuted` - Once a command has been successfully executed.
+* `userConfigModified` - Once the `user-config.json` file has been modified. **(Not yet implemented)**
+* `botConnecting` - Before the bot connects to Discord. **(Not yet implemented)**
+* `botDisconnecting` - Before the bot disconnects from Discord. **(Not yet implemented)**
