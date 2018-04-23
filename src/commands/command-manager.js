@@ -234,6 +234,8 @@ export default class CommandManager {
 		// TODO: Resolve arguments THEN provide them to the commands in a resolved form
 		const resolvers = {
 			user: (arg) => Utils.resolveId(arg),
+			channel: (arg) => Utils.resolveId(arg),
+			role: (arg) => Utils.resolveId(arg),
 			state: (arg) => Utils.translateState(arg)
 		};
 
