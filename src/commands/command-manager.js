@@ -224,7 +224,7 @@ export default class CommandManager {
 			channel: (arg) => /(^[0-9]{18}$|^<#[0-9]{18}>$)/.test(arg),
 			time: (arg) => /^[0-9]+(ms|s|m|h|d|mo|y)$/.test(arg),
 			minuteTime: (arg) => /^[0-9]+(m|h|d|mo|y)$/.test(arg),
-			state: (arg) => /^(1|0|true|false|off|on)$/.test(arg),
+			state: (arg) => /^(1|0|true|false|off|on|yes|no)$/.test(arg),
 			youtubeLink: (arg) => /^https?:\/\/(www\.)?youtube\.com\/watch\?v=[a-zA-Z0-9-]{11}$/.test(arg),
 			accessLevel: (arg) => /^guest|member|premium|moderator|admin|owner|developer$/.test(arg),
 			dataStorage: (arg) => /^config|database$/.test(arg),
@@ -233,7 +233,8 @@ export default class CommandManager {
 
 		// TODO: Resolve arguments THEN provide them to the commands in a resolved form
 		const resolvers = {
-			user: (arg) => Utils.resolveId(arg)
+			user: (arg) => Utils.resolveId(arg),
+			state: (arg) => Utils.translateState(arg)
 		};
 
 		if (!context.message.member) {
