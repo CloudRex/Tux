@@ -8,16 +8,19 @@ export default {
 		const guild = context.bot.client.guilds.get(guildLog.guild);
 
 		if (guildLog.enabled) {
+			const ping = await guild.channels.get(guildLog.channel).send("<@&437767005123379200>");
+
 			const message = await guild.channels.get(guildLog.channel).send(new EmbedBuilder()
 				.title(`Support Message from ${guild.name}`)
 				.field("Guild", `${guild.name} (\`${guild.id})\``)
 				.field("Sender", `${context.sender.tag} (\`${context.sender.id}\`)`)
 				.field("Message", context.arguments[0])
+				.field("Responsible", "<@&437767005123379200>")
 				.thumbnail(context.message.guild.iconURL)
 				.footer(`Requested by ${context.sender.username}`, context.sender.avatarURL)
 				.build());
 
-			if (message) {
+			if (message && ping) {
 				context.ok("**Great success!** Your message was delivered and will be reviewed shortly.");
 			}
 			else {
