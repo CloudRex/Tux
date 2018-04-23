@@ -30,23 +30,23 @@ export default class FeatureManager {
 		return this.enableMultiple(this.features, bot);
 	}
 
-	disable(feature) {
-		feature.disabled();
+	disable(feature, bot) {
+		feature.disabled(bot);
 		feature.isEnabled = false;
 	}
 
-	disableMultiple(features) {
+	disableMultiple(features, bot) {
 		for (let i = 0; i < features.length; i++) {
-			this.disable(features[i]);
+			this.disable(features[i], bot);
 		}
 	}
 
-	disableAll() {
-		this.disableMultiple(this.features);
+	disableAll(bot) {
+		this.disableMultiple(this.features, bot);
 	}
 
 	reloadAll(bot) {
-		this.disableAll();
+		this.disableAll(bot);
 
 		return this.enableAll(bot);
 	}

@@ -20,7 +20,7 @@ export default {
 				}
 				else {
 					response.bold("off");
-					features.disable(feature);
+					features.disable(feature, context.bot);
 				}
 
 				context.ok(response.add(".").build());
