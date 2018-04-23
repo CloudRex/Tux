@@ -143,6 +143,6 @@ export default class Utils {
 	 * @param {string} state
 	 */
 	static translateState(state) {
-		return /^(1|true|on|y|yes)$/.test(state);
+		return /^(1|true|on|y|yes)$/i.test(state);
 	}
 }
