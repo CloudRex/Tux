@@ -232,16 +232,11 @@ export default class CommandManager {
 			user: (arg) => Utils.resolveId(arg)
 		};
 
-		// TODO: debug only
-		// console.log(`AL : ${this._getAccessLevelByRole(context.message.guild.id, "Artex")}`);
-		console.log(`AL---> : ${this.getAccessLevelById(context.message.guild.id, context.sender.id)}`);
-
 		if (!context.message.member) {
 			context.message.channel.send("That command must be used in a text channel. Sorry!");
 
 			return false;
 		}
-		// TODO: simplify the deletion of the messages
 		else if (command.category === CommandCategoryType.NSFW) {
 			context.fail(":underage: Please use the nsfw channel for this command.");
 
