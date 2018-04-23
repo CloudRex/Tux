@@ -48,7 +48,7 @@ export default class CommandParser {
 	 * @returns {array<string>}
 	 */
 	static getArguments(commandString) {
-		const expression = / ("[^"]+"|[^ ]+)/g;
+		const expression = / ("[^"]+"|'[^']+'|`[^`]+`|[^ ]+)/g;
 		const result = [];
 
 		let match = expression.exec(commandString);
