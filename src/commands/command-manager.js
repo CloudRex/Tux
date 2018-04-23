@@ -220,6 +220,8 @@ export default class CommandManager {
 		const types = {
 			// TODO: Bug with the USERS_PATTERN (interlaps between true and false)
 			user: (arg) => /(^[0-9]{18}$|^<@!?[0-9]{18}>$)/.test(arg),
+			role: (arg) => /(^[0-9]{18}$|^<&[0-9]{18}>$)/.test(arg),
+			channel: (arg) => /(^[0-9]{18}$|^<#[0-9]{18}>$)/.test(arg),
 			time: (arg) => /^[0-9]+(ms|s|m|h|d|mo|y)$/.test(arg),
 			minuteTime: (arg) => /^[0-9]+(m|h|d|mo|y)$/.test(arg),
 			state: (arg) => /^(1|0|true|false|off|on)$/.test(arg),
