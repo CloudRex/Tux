@@ -5,7 +5,7 @@ const snekfetch = require("snekfetch");
 
 export default {
 	async executed(context) {
-		const message = await context.ok(`Searching for comic...`);
+		const message = await context.ok(`<a:loading:395048045038927885> Searching for comic...`);
 
 		snekfetch.get("https://api.al1l.com/v1/funny?ref=Tux").then((result) => {
 			const data = result.body.response;
