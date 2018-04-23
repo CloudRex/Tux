@@ -232,17 +232,12 @@ export default class CommandManager {
 			user: (arg) => Utils.resolveId(arg)
 		};
 
-		// TODO: debug only
-		// console.log(`AL : ${this._getAccessLevelByRole(context.message.guild.id, "Artex")}`);
-		console.log(`AL---> : ${this.getAccessLevelById(context.message.guild.id, context.sender.id)}`);
-
 		if (!context.message.member) {
 			context.message.channel.send("That command must be used in a text channel. Sorry!");
 
 			return false;
 		}
-		// TODO: simplify the deletion of the messages
-		else if (command.category === CommandCategoryType.NSFW) {
+		else if (command.category === CommandCategoryType.NSFW && !context.message.channel.nsfw) {
 			context.fail(":underage: Please use the nsfw channel for this command.");
 
 			return false;
@@ -254,22 +249,22 @@ export default class CommandManager {
 		}
 		else if (!this.hasAuthority(context.message.guild.id, context.message, command.accessLevel)) {
 			const minAuthority = AccessLevelType.toString(command.accessLevel);
-			await context.fail(`You don't have the authority to use that command. You must be at least a(n) **${minAuthority}**.`);
+			context.fail(`You don't have the authority to use that command. You must be at least a(n) **${minAuthority}**.`);
 
 			return false;
 		}
 		else if (context.arguments.length > command.maxArguments) {
 			if (command.maxArguments > 0) {
-				await context.fail(`That command only accepts up to **${command.maxArguments}** arguments.`);
+				context.fail(`That command only accepts up to **${command.maxArguments}** arguments.`);
 			}
 			else {
-				await context.fail(`That command does not accept any arguments.`);
+				context.fail(`That command does not accept any arguments.`);
 			}
 
 			return false;
 		}
 		else if (!command.canExecute(context)) {
-			await context.fail("That command cannot be executed right now.");
+			context.fail("That command cannot be executed right now.");
 
 			return false;
 		}
