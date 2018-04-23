@@ -31,8 +31,13 @@ export default class UserConfig {
 	 * @param {string} path
 	 * @param {*} value
 	 */
-	setLocal(guildId, path, value) {
-		this.set(`${guildId}.${path}`, value);
+	setLocal(guildId, path, value, template = 'default') {
+		if (this.get(`${template}.${path}`) === value) {
+			_.unset(this.config, `${guildId}.${path}`);
+			this.save();
+		} else {
+			this.set(`${guildId}.${path}`, value);
+		}
 	}
 
 	/**
@@ -71,7 +76,10 @@ export default class UserConfig {
 	 * @param {string} path
 	 * @returns {*}
 	 */
-	getLocal(guildId, path) {
+	getLocal(guildId, path, template = "default") {
+		if (!this.contains(`${guildId}.${path}`)) {
+			return this.get(`${template}.${path}`);
+		}
 		return this.get(`${guildId}.${path}`);
 	}
 
@@ -89,16 +97,16 @@ export default class UserConfig {
 	 * @param {string} path
 	 * @returns {boolean}
 	 */
-	containsLocal(guildId, path) {
-		return this.contains(`${guildId}.${path}`);
+	containsLocal(guildId, path, template = 'default') {
+		return this.contains(`${template}.${path}`);
 	}
 
 	/**
 	 * @param {Snowflake} id
 	 * @param {string} template
 	 */
-	createGuild(id, template = "default") {
-		this.set(id, this.get(template));
+	createGuild(id) {
+		this.set(id, {});
 		this.save();
 	}
 
