@@ -228,13 +228,17 @@ export default class CommandManager {
 			youtubeLink: (arg) => /^https?:\/\/(www\.)?youtube\.com\/watch\?v=[a-zA-Z0-9-]{11}$/i.test(arg),
 			accessLevel: (arg) => /^guest|member|premium|moderator|admin|owner|developer$/.test(arg),
 			dataStorage: (arg) => /^config|database$/.test(arg),
-			guild: (arg) => /^[0-9]{18}$/.test(arg)
+			guild: (arg) => /^[0-9]{18}$/.test(arg),
+			int: (arg) => !isNaN(arg),
+			float: (arg) => !isNaN(arg)
 		};
 
 		// TODO: Resolve arguments THEN provide them to the commands in a resolved form
 		const resolvers = {
 			user: (arg) => Utils.resolveId(arg),
-			state: (arg) => Utils.translateState(arg)
+			state: (arg) => Utils.translateState(arg),
+			int: (arg) => parseInt(arg),
+			float: (arg) => parseFloat(arg)
 		};
 
 		if (!context.message.member) {
