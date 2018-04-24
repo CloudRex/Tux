@@ -36,7 +36,7 @@ export default class Treasures extends Feature {
 			if (!message.author.bot && !botListGuilds.includes(message.guild.id.toString())) {
 				if (message.author.id !== bot.client.user.id) {
 					const treasure = this.treasures[Utils.getRandomInt(0, this.treasures.length - 1)];
-					const chanceMultiplier = bot.userConfig.get("chanceMultiplier");
+					const chanceMultiplier = bot.userConfig.get("global.chance-multiplier");
 
 					if (Utils.getRandomInt(0, treasure.value * chanceMultiplier) === 0) {
 						const msg = await message.channel.send(`**${message.author.username}** found a :${treasure.key}: (**${treasure.value * chanceMultiplier}** coins, 1 in ${treasure.value * chanceMultiplier} chances)\nHurry and catch it before it's gone!`).catch(() => {
