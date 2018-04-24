@@ -77,8 +77,9 @@ export default class Bot {
 						.set("Content-Type", "application/json")
 						.send({
 							count: this.client.guilds.size
-						}).catch((error) => console.log("The error was: " + error.message));
-				}, 30000);
+						})
+						.catch((error) => console.log(`The error was posting stats to BFD: ${error.message}`));
+				}, 3600000);
 			}
 
 			this.console.init(this);
