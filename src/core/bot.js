@@ -37,6 +37,9 @@ export default class Bot {
 			this.dbl = new DBL(settings.general.dblToken);
 		}
 
+		// TODO: Move from here on to the connect function
+		// and make sure there aren't any errors on restart
+
 		// Discord client events
 		this.client.on("ready", () => {
 			Log.info("Ready");
