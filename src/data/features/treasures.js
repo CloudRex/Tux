@@ -39,7 +39,7 @@ export default class Treasures extends Feature {
 					const chanceMultiplier = bot.userConfig.get("global.chance-multiplier");
 
 					if (Utils.getRandomInt(0, treasure.value * chanceMultiplier) === 0) {
-						const msg = await message.channel.send(`**${message.author.username}** found a :${treasure.key}: (**${treasure.value * chanceMultiplier}** coins, 1 in ${treasure.value * chanceMultiplier} chances)\nHurry and catch it before it's gone!`).catch(() => {
+						const msg = await message.channel.send(`**${message.author.username}** found a :${treasure.key}: (**${treasure.value}** coins, 1 in ${treasure.value * chanceMultiplier} chances)\nHurry and catch it before it's gone!`).catch(() => {
 						});
 
 						if (msg) {
@@ -67,7 +67,6 @@ export default class Treasures extends Feature {
 			if (!user.bot) {
 				if (reaction.emoji.name === "🖐") {
 					const index = this.getWaitingIndex(user.id);
-					const chanceMultiplier = bot.userConfig.get("chanceMultiplier");
 
 					if (index !== null && index !== undefined && this.waiting[index].messageId === reaction.message.id) {
 						const { treasure } = this.waiting[index];
@@ -78,7 +77,7 @@ export default class Treasures extends Feature {
 						// reaction.message.clearReactions();
 
 						// TODO: Probably giving out error, make sure it awaits then saves then delete below using var
-						const sentMsg = await reaction.message.edit(`**${user.username}** has captured a :${treasure.key}: worth **${treasure.value/* * chanceMultiplier */}**! Use \`inv\` to view your inventory.`);
+						const sentMsg = await reaction.message.edit(`**${user.username}** has captured a :${treasure.key}: worth **${treasure.value}**! Use \`inv\` to view your inventory.`);
 
 						if (sentMsg.deletable) {
 							sentMsg.delete(4000);
