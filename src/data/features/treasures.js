@@ -30,7 +30,7 @@ export default class Treasures extends Feature {
 	enabled(bot) {
 		this.waiting = [];
 
-		bot.client.on("message", async (message) => {
+		this.handleMessage = async (message) => {
 			// TODO: Hard coded discord bot lists guilds
 			const botListGuilds = bot.userConfig.get("global.bot-list-guilds");
 			if (!message.author.bot && !botListGuilds.includes(message.guild.id.toString())) {
@@ -59,7 +59,9 @@ export default class Treasures extends Feature {
 					}
 				}
 			}
-		});
+		};
+
+		bot.client.on("message", this.handleMessage);
 
 		const handleReaction = async (reaction, user) => {
 			if (!user.bot) {
@@ -90,5 +92,7 @@ export default class Treasures extends Feature {
 		bot.client.on("messageReactionRemove", handleReaction);
 	}
 
-	disabled(bot) {}
+	disabled(bot) {
+		bot.client.removeListener("message", this.handleMessage);
+	}
 }
