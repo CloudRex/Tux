@@ -1,6 +1,7 @@
 node_modules
 dist
 .idea
+.vscode/
 src/settings.json
 src/access-levels.json
 src/user-config.json
