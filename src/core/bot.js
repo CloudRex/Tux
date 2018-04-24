@@ -8,6 +8,7 @@ import EmbedBuilder from "./embed-builder";
 import CommandManager from "../commands/command-manager";
 
 const DBL = require("dblapi.js");
+const snekfetch = require("snekfetch");
 const Discord = require("discord.js");
 const EventEmitter = require("events");
 
@@ -66,6 +67,18 @@ export default class Bot {
 				setInterval(() => {
 					this.dbl.postStats(guilds.length);
 				}, 1800000);
+			}
+
+			// Post stats to BFD
+			if (this.settings.keys.bfd) {
+				setInterval(() => {
+					snekfetch.post(`https://botsfordiscord.com/api/v1/bots/${this.client.user.id}`)
+						.set("Authorization", this.settings.keys.bfd)
+						.set("Content-Type", "application/json")
+						.send({
+							count: this.client.guilds.size
+						});
+				}, 30000);
 			}
 
 			this.console.init(this);
