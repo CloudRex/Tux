@@ -278,6 +278,6 @@ export default {
 		args: {},
 
 		category: CommandCategoryType.Economy,
-		enabled: false
+		enabled: true
 	}
 };
