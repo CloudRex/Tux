@@ -73,11 +73,11 @@ export default class Protection extends Feature {
 		this.handleMessage = async (message) => {
 			// TODO: Hard coded discord bot lists
 			if (message.author.id !== bot.client.user.id && message.guild.id.toString() !== "264445053596991498" && message.guild.id.toString() !== "110373943822540800" && message.guild.id.toString() !== "374071874222686211") {
-				const spamTrigger = bot.userConfig.getLocal(message.guild.id, "spamTrigger");
-				const preventInvites = bot.userConfig.getLocal(message.guild.id, "protection.invites");
-				const preventLinks = bot.userConfig.getLocal(message.guild.id, "protection.links");
-				const preventProfanity = bot.userConfig.getLocal(message.guild.id, "protection.profanity");
-				const preventExplicit = bot.userConfig.getLocal(message.guild.id, "protection.explicit");
+				const spamTrigger = bot.userConfig.get("spamTrigger", message.guild.id);
+				const preventInvites = bot.userConfig.get("protection.invites", message.guild.id);
+				const preventLinks = bot.userConfig.get("protection.links", message.guild.id);
+				const preventProfanity = bot.userConfig.get("protection.profanity", message.guild.id);
+				const preventExplicit = bot.userConfig.get("protection.explicit", message.guild.id);
 
 				// TODO: Checking for embeds will probably be better
 				const urlRegex = /(https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*))/g;

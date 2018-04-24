@@ -19,7 +19,7 @@ export default {
 			context.ok("Done!");
 		}
 		else {
-			context.bot.userConfig.pushLocal(context.message.guild.id, `access-levels.${context.arguments[1].toLowerCase()}`, target);
+			context.bot.userConfig.push(`access-levels.${context.arguments[1].toLowerCase()}`, target, context.message.guild.id);
 			context.ok("Done!");
 		}
 	},

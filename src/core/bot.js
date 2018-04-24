@@ -125,7 +125,7 @@ export default class Bot {
 			// to activate and deactivate this every time the bot gets
 			// or loses ADMIN permissions.
 			if (guild.owner) {
-				this.userConfig.pushLocal(guild.id, "access-levels.owner", guild.owner.id);
+				this.userConfig.push("access-levels.owner", guild.owner.id, guild.id);
 
 				const send = (channel) => {
 					channel.send(`<@${guild.owner.id}>`);

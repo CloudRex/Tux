@@ -65,7 +65,7 @@ export default class CommandManager {
 	 * @returns {AccessLevelType}
 	 */
 	getAccessLevelByRole(guildId, role) {
-		const accessLevels = this.bot.userConfig.getLocal(guildId, "access-levels");
+		const accessLevels = this.bot.userConfig.get("access-levels", guildId);
 		const keys = Object.keys(accessLevels);
 
 		for (let keyIndex = 0; keyIndex < keys.length; keyIndex++) {
@@ -97,7 +97,7 @@ export default class CommandManager {
 			return AccessLevelType.Developer;
 		}
 
-		const accessLevels = this.bot.userConfig.getLocal(guildId, "access-levels");
+		const accessLevels = this.bot.userConfig.get("access-levels", guildId);
 		const keys = Object.keys(accessLevels);
 
 		for (let keyIndex = 0; keyIndex < keys.length; keyIndex++) {
