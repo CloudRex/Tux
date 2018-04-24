@@ -32,7 +32,8 @@ export default class Treasures extends Feature {
 
 		bot.client.on("message", async (message) => {
 			// TODO: Hard coded discord bot lists guilds
-			if (!message.author.bot && message.guild.id.toString() !== "264445053596991498" && message.guild.id.toString() !== "110373943822540800" && message.guild.id.toString() !== "374071874222686211") {
+			const botListGuilds = bot.userConfig.get("bot-list-guilds");
+			if (!message.author.bot && !botListGuilds.includes(message.guild.id.toString())) {
 				if (message.author.id !== bot.client.user.id) {
 					const treasure = this.treasures[Utils.getRandomInt(0, this.treasures.length - 1)];
 					const chanceMultiplier = bot.userConfig.get("chanceMultiplier");
