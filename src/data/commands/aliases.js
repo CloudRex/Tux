@@ -26,7 +26,7 @@ export default {
 		}
 
 		context.sections({
-			Aliases: response.build()
+			"Command Aliases": response.build()
 		});
 	},
 
