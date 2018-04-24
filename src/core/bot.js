@@ -127,36 +127,42 @@ export default class Bot {
 			// ADMIN permissions right from the invitation. Make a way
 			// to activate and deactivate this every time the bot gets
 			// or loses ADMIN permissions.
-			if (guild.owner) {
-				this.userConfig.push("access-levels.owner", guild.owner.id, guild.id);
+			if (guild.me.hasPermission(Discord.Permissions.FLAGS.ADMINISTRATOR)) {
+				if (guild.owner) {
+					this.userConfig.push("access-levels.owner", guild.owner.id, guild.id);
 
-				const send = (channel) => {
-					channel.send(`<@${guild.owner.id}>`);
+					// TODO: Temporally disabled due to maybe being "annoying", only shot
+					// on those servers who actually invite Tux as admin.
+					const send = (channel) => {
+						return;
 
-					channel.send(new EmbedBuilder()
-						.color("GREEN")
-						.text(`Hey, I'm Tux! Thanks for inviting me to your server! The \`Owner\` access level has been automatically granted to the owner of this guild (**${guild.owner.user.tag}**). You may assign administrators and/or moderators using the \`assign\` command. If you need any help with Tux, refer to the \`support\` command.`)
-						.title("Thanks for inviting Tux!")
-						.build());
-				};
+						channel.send(`<@${guild.owner.id}>`);
 
-				if (guild.defaultChannel) {
-					send(guild.defaultChannel);
-				}
-				else {
-					const channels = guild.channels.array().filter((channel) => channel.type === "text");
+						channel.send(new EmbedBuilder()
+							.color("GREEN")
+							.text(`Hey, I'm Tux! Thanks for inviting me to your server! The \`Owner\` access level has been automatically granted to the owner of this guild (**${guild.owner.user.tag}**). You may assign administrators and/or moderators using the \`assign\` command. If you need any help with Tux, refer to the \`support\` command.`)
+							.title("Thanks for inviting Tux!")
+							.build());
+					};
 
-					for (let i = 0; i < channels.length; i++) {
-						if (channels[i].permissionsFor(guild.member(this.client.user.id)).has(Discord.Permissions.FLAGS.SEND_MESSAGES)) {
-							send(channels[i]);
+					if (guild.defaultChannel) {
+						send(guild.defaultChannel);
+					}
+					else {
+						const channels = guild.channels.array().filter((channel) => channel.type === "text");
 
-							break;
+						for (let i = 0; i < channels.length; i++) {
+							if (channels[i].permissionsFor(guild.member(this.client.user.id)).has(Discord.Permissions.FLAGS.SEND_MESSAGES)) {
+								send(channels[i]);
+
+								break;
+							}
 						}
 					}
 				}
-			}
-			else {
-				// TODO: Default to admins
+				else {
+					// TODO: Default to admins
+				}
 			}
 		});
 
