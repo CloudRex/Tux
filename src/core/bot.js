@@ -77,7 +77,7 @@ export default class Bot {
 						.set("Content-Type", "application/json")
 						.send({
 							count: this.client.guilds.size
-						});
+						}).catch((error) => console.log("The error was: " + error.message));
 				}, 30000);
 			}
 
