@@ -16,12 +16,10 @@ export default {
 
 		if (command.aliases.length > 0) {
 			for (let i = 0; i < command.aliases.length; i++) {
-				response.add(command.aliases[i]);
-
-				if (i !== command.aliases.length - 1) {
-					response.add(", ");
-				}
+				response.add(command.aliases[i]).add(", ");
 			}
+
+			response.bold(command.base);
 		}
 		else {
 			response.add("This command has no aliases.");
