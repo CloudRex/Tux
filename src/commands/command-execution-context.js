@@ -1,6 +1,8 @@
 import EditableMessage from "../core/editable-message";
 import EmbedBuilder from "../core/embed-builder";
 
+const Discord = require("discord.js");
+
 export default class CommandExecutionContext {
 	// TODO
 	/* public Sender: string;
@@ -23,6 +25,24 @@ export default class CommandExecutionContext {
 		this.bot = bot;
 		this.accessLevel = accessLevel;
 	}
+	
+	/**
+	 * @returns {boolean}
+	 */
+	get muted() {
+		return this.bot.userConfig.get("mute", this.message.guild.id);
+	}
+	
+	/**
+	 * @param {*} stream
+	 * @param {string} name
+	 * @returns {(Promise<EditableMessage>|null)}
+	 */
+	async fileStream(stream, name) {
+		if (!this.muted) {
+			this.message.channel.send(new Discord.Attachment(stream, name));
+		}
+	}
 
 	/**
 	 * @param {(object|EmbedBuilder)} content
@@ -30,7 +50,7 @@ export default class CommandExecutionContext {
 	 * @returns {(Promise<EditableMessage>|null)}
 	 */
 	async respond(content, autoDelete = false) {
-		if (!this.bot.userConfig.get("mute", this.message.guild.id)) {
+		if (!this.muted) {
 			let embed = null;
 
 			if (content instanceof EmbedBuilder) {
