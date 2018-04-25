@@ -17,12 +17,14 @@ export default class CommandLoader {
 	loadAll(commandManager) {
 		fs.readdir(this.path, (error, files) => {
 			files.forEach((file) => {
-				// TODO: Path is hard coded
-				// const module = require(path.join(this.path, path.basename(file, ".js")));
-				const module = require(`../data/commands/${file}`).default;
+				if (!file.startsWith("@")) {
+					// TODO: Path is hard coded
+					// const module = require(path.join(this.path, path.basename(file, ".js")));
+					const module = require(`../data/commands/${file}`).default;
 
-				if (CommandLoader.validate(module)) {
-					commandManager.register(Command.fromModule(module));
+					if (CommandLoader.validate(module)) {
+						commandManager.register(Command.fromModule(module));
+					}
 				}
 			});
 		});

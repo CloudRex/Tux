@@ -11,6 +11,7 @@ const DBL = require("dblapi.js");
 const snekfetch = require("snekfetch");
 const Discord = require("discord.js");
 const EventEmitter = require("events");
+const fs = require("fs");
 
 export default class Bot {
 	/**
@@ -221,5 +222,15 @@ export default class Bot {
 		this.userConfig.save();
 		this.client.destroy();
 		Log.info("Disconnected");
+	}
+
+	static async clearTemp() {
+		if (fs.existsSync("./temp")) {
+			fs.readdir("./temp", (error, files) => {
+				for (let i = 0; i < files.length; i++) {
+					fs.unlink(`./temp/${files[i]}`);
+				}
+			});
+		}
 	}
 }

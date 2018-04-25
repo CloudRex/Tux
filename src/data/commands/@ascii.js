@@ -2,7 +2,7 @@ import AccessLevelType from "../../core/access-level-type";
 import CommandCategoryType from "../../commands/command-category-type";
 import MessageBuilder from "../../core/message-builder";
 
-const ascii = require("ascii-art");
+const ascii = require("src/data/commands/@ascii");
 
 export default {
 	executed(context) {

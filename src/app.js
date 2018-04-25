@@ -32,6 +32,7 @@ bot.features.registerMultiple([
 ]);
 
 // Init
+Bot.clearTemp();
 bot.settings.validate();
 bot.commandLoader.loadAll(bot.commands);
 bot.features.enableAll(bot);

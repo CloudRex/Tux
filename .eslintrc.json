@@ -21,6 +21,7 @@
 		"object-shorthand": "off",
 		"no-await-in-loop": "off",
 		"no-eval": "off",
-		"no-restricted-globals": "off"
+		"no-restricted-globals": "off",
+		"no-mixed-operators": "off"
 	}
 }
