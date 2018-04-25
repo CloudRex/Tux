@@ -1,3 +1,5 @@
+import TimeAgo from "javascript-time-ago";
+import en from "javascript-time-ago/locale/en";
 import AccessLevelType from "../../core/access-level-type";
 import CommandCategoryType from "../../commands/command-category-type";
 
@@ -27,9 +29,13 @@ export default {
 			
 			return result;
 		};
+		
+		TimeAgo.locale(en);
 
 		const score = computeScore(guild);
-
+		const timeAgo = new TimeAgo("en-US");
+		
+		// TODO: Joined At
 		context.sections({
 			Name: guild.name,
 			Owner: guild.dev ? guild.dev.displayName : "Unknown",
@@ -39,7 +45,7 @@ export default {
 			Region: guild.region,
 			"Default Channel": guild.defaultChannel ? guild.defaultChannel : "None",
 			"Custom Emojis": guild.emojis.array().length,
-			"Created At": guild.createdAt,
+			"Created At": timeAgo.format(Date.now() - guild.createdAt, "time"),
 			Score: `:star: ${score} (**${classifyScore(score)}**)`
 			// TODO: colors, thumbnail
 		}, "", "GREEN", guild.iconURL);
