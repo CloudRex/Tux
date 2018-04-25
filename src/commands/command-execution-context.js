@@ -30,7 +30,7 @@ export default class CommandExecutionContext {
 	 * @returns {(Promise<EditableMessage>|null)}
 	 */
 	async respond(content, autoDelete = false) {
-		if (!this.bot.userConfig.getLocal(this.message.guild.id, "mute")) {
+		if (!this.bot.userConfig.get("mute", this.message.guild.id)) {
 			let embed = null;
 
 			if (content instanceof EmbedBuilder) {
@@ -122,7 +122,7 @@ export default class CommandExecutionContext {
 	 * @returns {(Promise<*>|null)}
 	 */
 	async reply(message) {
-		if (!this.bot.userConfig.getLocal(message.guild.id, "mute")) {
+		if (!this.bot.userConfig.get("mute", this.message.guild.id)) {
 			return await this.message.reply(message);
 		}
 

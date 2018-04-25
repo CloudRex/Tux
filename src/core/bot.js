@@ -8,6 +8,8 @@ import EmbedBuilder from "./embed-builder";
 import CommandManager from "../commands/command-manager";
 
 const DBL = require("dblapi.js");
+const snekfetch = require("snekfetch");
+const Discord = require("discord.js");
 const EventEmitter = require("events");
 
 export default class Bot {
@@ -36,6 +38,9 @@ export default class Bot {
 			this.dbl = new DBL(settings.general.dblToken);
 		}
 
+		// TODO: Move from here on to the connect function
+		// and make sure there aren't any errors on restart
+
 		// Discord client events
 		this.client.on("ready", () => {
 			Log.info("Ready");
@@ -62,6 +67,19 @@ export default class Bot {
 				setInterval(() => {
 					this.dbl.postStats(guilds.length);
 				}, 1800000);
+			}
+
+			// Post stats to BFD
+			if (this.settings.keys.bfd) {
+				setInterval(() => {
+					snekfetch.post(`https://botsfordiscord.com/api/v1/bots/${this.client.user.id}`)
+						.set("Authorization", this.settings.keys.bfd)
+						.set("Content-Type", "application/json")
+						.send({
+							count: this.client.guilds.size
+						})
+						.catch((error) => console.log(`The error was posting stats to BFD: ${error.message}`));
+				}, 3600000);
 			}
 
 			this.console.init(this);
@@ -118,6 +136,48 @@ export default class Bot {
 				.field("Owner", guild.owner.user.toString())
 				.thumbnail(guild.iconURL)
 				.build());
+
+			// TODO: This should only happen when the bot is given
+			// ADMIN permissions right from the invitation. Make a way
+			// to activate and deactivate this every time the bot gets
+			// or loses ADMIN permissions.
+			if (guild.me.hasPermission(Discord.Permissions.FLAGS.ADMINISTRATOR)) {
+				if (guild.owner) {
+					this.userConfig.push("access-levels.owner", guild.owner.id, guild.id);
+
+					// TODO: Temporally disabled due to maybe being "annoying", only shot
+					// on those servers who actually invite Tux as admin.
+					const send = (channel) => {
+						return;
+
+						channel.send(`<@${guild.owner.id}>`);
+
+						channel.send(new EmbedBuilder()
+							.color("GREEN")
+							.text(`Hey, I'm Tux! Thanks for inviting me to your server! The \`Owner\` access level has been automatically granted to the owner of this guild (**${guild.owner.user.tag}**). You may assign administrators and/or moderators using the \`assign\` command. If you need any help with Tux, refer to the \`support\` command.`)
+							.title("Thanks for inviting Tux!")
+							.build());
+					};
+
+					if (guild.defaultChannel) {
+						send(guild.defaultChannel);
+					}
+					else {
+						const channels = guild.channels.array().filter((channel) => channel.type === "text");
+
+						for (let i = 0; i < channels.length; i++) {
+							if (channels[i].permissionsFor(guild.member(this.client.user.id)).has(Discord.Permissions.FLAGS.SEND_MESSAGES)) {
+								send(channels[i]);
+
+								break;
+							}
+						}
+					}
+				}
+				else {
+					// TODO: Default to admins
+				}
+			}
 		});
 
 		this.client.on("guildDelete", (guild) => {
@@ -140,7 +200,7 @@ export default class Bot {
 		// -----------------------------------
 	}
 
-	login() {
+	connect() {
 		this.client.login(this.settings.general.token);
 	}
 
@@ -151,7 +211,7 @@ export default class Bot {
 		// this.features.reloadAll(this);
 
 		this.disconnect();
-		this.login();
+		this.connect();
 	}
 
 	disconnect() {

@@ -7,7 +7,10 @@ export default {
 	async executed(context) {
 		if (context.arguments.length === 1) {
 			const guild = context.bot.client.guilds.get(context.arguments[0]);
-			const invites = await guild.fetchInvites();
+
+			const invites = await guild.fetchInvites().catch((error) => {
+				context.fail(`Failed fetching invites. (${error.message})`);
+			});
 
 			context.message.channel.send(new EmbedBuilder()
 				.title(`Information of ${guild.name}`)

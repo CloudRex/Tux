@@ -1,5 +1,3 @@
-// NOTE: No json library that I know of for TS (worth using) + no time to make one
-
 import Log from "./log";
 
 const fs = require("fs");

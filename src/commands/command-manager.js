@@ -65,7 +65,7 @@ export default class CommandManager {
 	 * @returns {AccessLevelType}
 	 */
 	getAccessLevelByRole(guildId, role) {
-		const accessLevels = this.bot.userConfig.getLocal(guildId, "access-levels");
+		const accessLevels = this.bot.userConfig.get("access-levels", guildId);
 		const keys = Object.keys(accessLevels);
 
 		for (let keyIndex = 0; keyIndex < keys.length; keyIndex++) {
@@ -97,7 +97,7 @@ export default class CommandManager {
 			return AccessLevelType.Developer;
 		}
 
-		const accessLevels = this.bot.userConfig.getLocal(guildId, "access-levels");
+		const accessLevels = this.bot.userConfig.get("access-levels", guildId);
 		const keys = Object.keys(accessLevels);
 
 		for (let keyIndex = 0; keyIndex < keys.length; keyIndex++) {
@@ -230,7 +230,7 @@ export default class CommandManager {
 			accessLevel: (arg) => /^guest|member|premium|moderator|admin|owner|developer$/.test(arg),
 			dataStorage: (arg) => /^config|database$/.test(arg),
 			guild: (arg) => /^[0-9]{18}$/.test(arg),
-			positiveNumber: => /^[1-9]+$/.test(arg)
+			positiveNumber: (arg) => /^[1-9]+$/.test(arg)
 		};
 
 		// TODO: Resolve arguments THEN provide them to the commands in a resolved form

@@ -20,24 +20,20 @@ export default class UserConfig {
 	/**
 	 * @param {string} path
 	 * @param {*} value
-	 */
-	set(path, value) {
-		_.set(this.config, path, value);
-		this.save();
-	}
-
-	/**
-	 * @param {Snowflake} guildId
-	 * @param {string} path
-	 * @param {*} value
+	 * @param {(Snowflake|null)} guildId
 	 * @param {string} template
 	 */
-	setLocal(guildId, path, value, template = "default") {
-		if (this.get(`${template}.${path}`) === value) {
-			_.unset(this.config, `${guildId}.${path}`);
+	set(path, value, guildId = null, template = "default") {
+		const finalPath = guildId ? `${guildId}.${path}` : path;
+
+		console.log(finalPath);
+
+		if (this.get(`${template}.${path}`, guildId) === value) {
+			_.unset(this.config, finalPath);
 		}
 		else {
-			this.set(`${guildId}.${path}`, value);
+			_.set(this.config, finalPath, value);
+			console.log(`set ${finalPath} to ${value}`);
 		}
 
 		this.save();
@@ -45,68 +41,45 @@ export default class UserConfig {
 
 	/**
 	 * @param {string} path
-	 * @param {*} item
-	 */
-	push(path, item) {
-		const updated = this.get(path);
-
-		updated.push(item);
-		this.set(updated, path);
-	}
-
-	/**
-	 * @param {Snowflake} guildId
-	 * @param {string} path
-	 * @param {*} item
-	 */
-	pushLocal(guildId, path, item) {
-		const updated = this.getLocal(guildId, path);
-
-		updated.push(item);
-		this.setLocal(guildId, path, updated);
-	}
-
-	/**
-	 * @param {string} path
+	 * @param {(Snowflake|null)} guildId
+	 * @param {string} template
 	 * @returns {*}
 	 */
-	get(path) {
-		return _.get(this.config, path);
-	}
+	get(path, guildId = null, template = "default") {
+		const finalPath = guildId ? `${guildId}.${path}` : path;
 
-	/**
-	 * @param {Snowflake} guildId
-	 * @param {string} path
-	 * @returns {*}
-	 */
-	getLocal(guildId, path, template = "default") {
-		if (!this.contains(`${guildId}.${path}`)) {
-			return this.get(`${template}.${path}`);
+		if (!this.contains(path, guildId)) {
+			return _.get(this.config, `${template}.${path}`);
 		}
-		return this.get(`${guildId}.${path}`);
+
+		return _.get(this.config, finalPath);
 	}
 
 	/**
 	 * @param {string} path
-	 * @returns {boolean}
+	 * @param {*} item
+	 * @param {(Snowflake|null)} guildId
 	 */
-	contains(path) {
-		return _.has(this.config, path);
+	push(path, item, guildId = null) {
+		const items = this.get(path, guildId).slice(0);
+
+		items.push(item);
+		this.set(path, items, guildId);
 	}
 
 	/**
-	 *
-	 * @param {Snowflake} guildId
 	 * @param {string} path
+	 * @param {(Snowflake|null)} guildId
 	 * @returns {boolean}
 	 */
-	containsLocal(guildId, path, template = 'default') {
-		return this.contains(`${template}.${path}`);
+	contains(path, guildId = null) {
+		const finalPath = guildId ? `${guildId}.${path}` : path;
+
+		return _.has(this.config, finalPath);
 	}
 
 	/**
 	 * @param {Snowflake} id
-	 * @param {string} template
 	 */
 	createGuild(id) {
 		this.set(id, {});

@@ -1,5 +1,7 @@
 [![Discord Bots](https://discordbots.org/api/widget/status/381949722157514752.svg)](https://discordbots.org/bot/381949722157514752)
 
+![Bots for Discord](https://botsfordiscord.com/api/v1/bots/381949722157514752/embed)
+
 # Tux
 Tux is a tiny Discord bot designed with flexibility in mind.
 

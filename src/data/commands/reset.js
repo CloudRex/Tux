@@ -5,7 +5,16 @@ export default {
 	executed(context) {
 		switch (context.arguments[0]) {
 			case "config": {
-				// TODO
+				const { config } = context.bot.userConfig;
+				const keys = Object.keys(config);
+
+				for (let i = 0; i < keys.length; i++) {
+					if (keys[i] !== "global" && keys[i] !== "default") {
+						delete config[keys[i]];
+					}
+				}
+
+				context.bot.userConfig.save();
 
 				break;
 			}
