@@ -40,7 +40,7 @@ export default class RGBA extends RGB {
 	static fromHex(hex) {
 		const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
 
-		// TODO: Also get the Alpha value (instead of generating it).
-		return result ? new RGBA(parseInt(result[1], 16), parseInt(result[2], 16), parseInt(result[3], 16), Utils.getRandomInt(50, 255)) : null;
+		// TODO: Also get the Alpha value (instead of being hardcoded).
+		return result ? new RGBA(parseInt(result[1], 16), parseInt(result[2], 16), parseInt(result[3], 16), 255) : null;
 	}
 }
