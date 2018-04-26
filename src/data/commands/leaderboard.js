@@ -16,11 +16,11 @@ export default {
 			console.log(userInfo);
 
 			if (userInfo && (i < 10 || topUsers[i].userId === context.sender.id)) {
-				let emoji = ":small_orange_diamond:";
+				let emoji = "<a:tuxgold:438010719783616512>";
 				let you = "";
 
 				if (i < 3) {
-					emoji = ":small_blue_diamond:";
+					emoji = "<a:tuxsilver:438011439140306944>";
 				}
 
 				if (userInfo.id === context.sender.id) {
