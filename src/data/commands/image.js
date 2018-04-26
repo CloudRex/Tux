@@ -6,7 +6,7 @@ const jimp = require("jimp");
 const store = [];
 
 export default {
-	executed(context) {
+	async executed(context) {
 		const isSet = () => Object.keys(store).includes(context.sender.id);
 		const getStore = () => store[context.sender.id];
 
@@ -124,7 +124,7 @@ export default {
 					text: context.arguments[2]
 				});
 
-				context.ok("Printed text on the image.");
+				context.ok(`Printed **${context.arguments[2].length}** characters on the image.`);
 
 				break;
 			}
@@ -185,6 +185,8 @@ export default {
 			}
 
 			case "render": {
+				const renderingResponse = await context.ok("<a:loading:395048045038927885> Rendering");
+
 				jimp.read(getStore().target).then(async (image) => {
 					const { actions } = getStore();
 
@@ -236,7 +238,6 @@ export default {
 						}
 					}
 
-					const renderingResponse = await context.ok("<a:loading:395048045038927885> Rendering");
 					const path = `temp/rendered.jpg`;
 
 					image.write(path);
