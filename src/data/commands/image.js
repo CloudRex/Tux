@@ -117,6 +117,18 @@ export default {
 				break;
 			}
 
+			case "reset": {
+				if (getStore().actions.length > 0) {
+					getStore().actions = [];
+					context.ok("You've reset your image.");
+				}
+				else {
+					context.fail("Your image is already in its default state.");
+				}
+
+				break;
+			}
+
 			case "render": {
 				jimp.read(getStore().target).then(async (image) => {
 					const { actions } = getStore();
