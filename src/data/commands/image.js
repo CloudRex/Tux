@@ -102,6 +102,33 @@ export default {
 				break;
 			}
 
+			case "print": {
+				const position = {
+					x: parseInt(context.arguments[1].split(":")[0]),
+					y: parseInt(context.arguments[1].split(":")[1])
+				};
+
+				if (context.arguments.length !== 3) {
+					context.fail("Invalid argument count.");
+
+					return;
+				}
+				else if (isNaN(position.x) || isNaN(position.y)) {
+					context.fail("Invalid position.");
+
+					return;
+				}
+
+				addAction("print", {
+					position: position,
+					text: context.arguments[2]
+				});
+
+				context.ok("Printed text on the image.");
+
+				break;
+			}
+
 			case "quality": {
 				const value = parseInt(context.arguments[1]);
 
@@ -142,6 +169,21 @@ export default {
 				break;
 			}
 
+			case "blur": {
+				const amount = parseInt(context.arguments[1]);
+
+				if (amount <= 0 || amount > 100) {
+					context.fail("Invalid amount.");
+
+					return;
+				}
+
+				addAction("blur", amount);
+				context.ok(`Set blur to **${amount}**.`);
+
+				break;
+			}
+
 			case "render": {
 				jimp.read(getStore().target).then(async (image) => {
 					const { actions } = getStore();
@@ -164,6 +206,14 @@ export default {
 
 							case "resize": {
 								image.resize(actions[i].value.width, actions[i].value.height);
+
+								break;
+							}
+
+							case "print": {
+								jimp.loadFont(jimp.FONT_SANS_64_BLACK).then((font) => {
+									image.print(font, actions[i].value.position.x, actions[i].value.position.y, actions[i].value.text);
+								});
 
 								break;
 							}
@@ -215,11 +265,12 @@ export default {
 		description: "Manipulate an image",
 		accessLevel: AccessLevelType.Member,
 		aliases: ["img"],
-		maxArguments: 2,
+		maxArguments: 3,
 
 		args: {
 			subCommand: "!string",
-			target: "string|number"
+			target: "string|number",
+			arg: "string|number"
 		},
 
 		category: CommandCategoryType.Utility,
