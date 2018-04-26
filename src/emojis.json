@@ -18,5 +18,13 @@
 	{
 		"name": "clean-x",
 		"id": "<:no:437374178622963714>"
+	},
+	{
+		"name": "gold-coin",
+		"id": "<a:tuxgold:438010719783616512>"
+	},
+	{
+		"name": "silver-coin",
+		"id": "<a:tuxsilver:438011439140306944>"
 	}
 ]
