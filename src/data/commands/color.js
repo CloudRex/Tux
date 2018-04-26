@@ -12,10 +12,17 @@ export default {
 	executed(context) {
 		const image = pngjs.createImage(450, 450);
 		const path = `./temp/color-${Math.random()}.png`;
-		const hex = generateHex();
+		const hex = context.arguments.length === 0 ? generateHex() : context.arguments[0];
 		const color = RGBA.fromHex(hex);
 
-		image.fillRect(0, 0, 450, 450, color.toObject());
+		try {
+			image.fillRect(0, 0, 450, 450, color.toObject());
+		}
+		catch (error) {
+			context.fail(`There was an error generating a color, or the specified color is invalid. (${error.message})`);
+
+			return;
+		}
 
 		image.writeImage(path, async (error) => {
 			if (error) {
@@ -47,8 +54,12 @@ export default {
 		description: "Generate a random color",
 		accessLevel: AccessLevelType.Member,
 		aliases: [],
-		maxArguments: 0,
-		args: {},
+		maxArguments: 1,
+
+		args: {
+			color: ":hexColor"
+		},
+
 		category: CommandCategoryType.Utility,
 		enabled: true
 	}

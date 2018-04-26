@@ -230,7 +230,8 @@ export default class CommandManager {
 			accessLevel: (arg) => /^guest|member|premium|moderator|admin|owner|developer$/.test(arg),
 			dataStorage: (arg) => /^config|database$/.test(arg),
 			guild: (arg) => /^[0-9]{18}$/.test(arg),
-			positiveNumber: (arg) => /^[1-9]+$/.test(arg)
+			positiveNumber: (arg) => /^[1-9]+$/.test(arg),
+			hexColor: (arg) => /(^[a-z0-9]{6}$|^[a-z0-9]{3}$)/i.test(arg)
 		};
 
 		// TODO: Resolve arguments THEN provide them to the commands in a resolved form
