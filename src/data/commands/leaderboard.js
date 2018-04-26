@@ -16,11 +16,11 @@ export default {
 			console.log(userInfo);
 
 			if (userInfo && (i < 10 || topUsers[i].userId === context.sender.id)) {
-				let emoji = "<a:tuxgold:438010719783616512>";
+				let emoji = "<a:tuxsilver:438011439140306944>";
 				let you = "";
 
 				if (i < 3) {
-					emoji = "<a:tuxsilver:438011439140306944>";
+					emoji = "<a:tuxgold:438010719783616512>";
 				}
 
 				if (userInfo.id === context.sender.id) {
