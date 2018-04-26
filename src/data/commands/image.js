@@ -275,6 +275,6 @@ export default {
 		},
 
 		category: CommandCategoryType.Utility,
-		enabled: true
+		enabled: false
 	}
 };
