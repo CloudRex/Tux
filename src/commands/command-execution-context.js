@@ -25,14 +25,14 @@ export default class CommandExecutionContext {
 		this.bot = bot;
 		this.accessLevel = accessLevel;
 	}
-	
+
 	/**
 	 * @returns {boolean}
 	 */
 	get muted() {
 		return this.bot.userConfig.get("mute", this.message.guild.id);
 	}
-	
+
 	/**
 	 * @param {*} stream
 	 * @param {string} name
@@ -40,7 +40,7 @@ export default class CommandExecutionContext {
 	 */
 	async fileStream(stream, name) {
 		if (!this.muted) {
-			this.message.channel.send(new Discord.Attachment(stream, name));
+			return await this.message.channel.send(new Discord.Attachment(stream, name));
 		}
 	}
 
