@@ -10,15 +10,26 @@ export default {
 		const isSet = () => Object.keys(store).includes(context.sender.id);
 		const getStore = () => store[context.sender.id];
 
+		const getAction = (name) => {
+			for (let i = 0; i < getStore().actions.length; i++) {
+				if (name === getStore().actions[i].name) {
+					return getStore().actions[i];
+				}
+			}
+
+			return null;
+		};
+
+		const hasAction = (name) => getAction(name) !== null;
+		const clearActions = () => getStore().actions = [];
+
 		const addAction = (name, value) => {
 			const { actions } = getStore();
 
-			for (let i = 0; i < actions.length; i++) {
-				if (actions[i].name === name) {
-					actions[i].value = value;
+			if (hasAction(name)) {
+				getAction(name).value = value;
 
-					return;
-				}
+				return;
 			}
 
 			getStore().actions.push({
@@ -111,15 +122,17 @@ export default {
 
 			// TODO: Toggle greyscale if repeated
 			case "greyscale": {
-				addAction("greyscale", null);
-				context.ok("Added **greyscale**.");
+				const state = hasAction("greyscale") ? !getAction("greyscale").value : true;
+
+				addAction("greyscale", state);
+				context.ok(`Toggled **greyscale** ${state ? "on" : "off"}.`);
 
 				break;
 			}
 
 			case "reset": {
 				if (getStore().actions.length > 0) {
-					getStore().actions = [];
+					clearActions();
 					context.ok("You've reset your image.");
 				}
 				else {
@@ -142,7 +155,9 @@ export default {
 							}
 
 							case "greyscale": {
-								image.greyscale();
+								if (actions[i].value) {
+									image.greyscale();
+								}
 
 								break;
 							}
@@ -172,7 +187,7 @@ export default {
 					}
 
 					const renderingResponse = await context.ok("<a:loading:395048045038927885> Rendering");
-					const path = `temp/rendered-${Math.random()}.jpg`;
+					const path = `temp/rendered.jpg`;
 
 					image.write(path);
 					await context.fileStream(path, "rendered.jpg");
