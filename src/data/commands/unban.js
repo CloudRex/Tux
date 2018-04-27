@@ -25,7 +25,7 @@ export default {
 		name: "unban",
 		description: "Unbans a member from the server",
 		accessLevel: AccessLevelType.Admin,
-		aliases: ["uban"],
+		aliases: ["uban", "pardon"],
 		maxArguments: 2,
 
 		args: {
