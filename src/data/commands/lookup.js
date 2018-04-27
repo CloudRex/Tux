@@ -25,7 +25,7 @@ export default {
 					const lastPing = DbMessage.fromResult(result);
 
 					if (searchingResponse) {
-						await searchingResponse.delete();
+						await searchingResponse.message.delete();
 					}
 
 					context.sections({
@@ -38,9 +38,9 @@ export default {
 				}
 				else {
 					if (searchingResponse) {
-						await searchingResponse.delete();
+						await searchingResponse.message.delete();
 					}
-					
+
 					context.fail("No results found.");
 				}
 
