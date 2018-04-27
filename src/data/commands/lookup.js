@@ -1,6 +1,7 @@
 import AccessLevelType from "../../core/access-level-type";
 import CommandCategoryType from "../../commands/command-category-type";
 import DbMessage from "../../database/db-message";
+import Utils from "../../core/utils";
 
 export default {
 	async executed(context) {
@@ -24,7 +25,9 @@ export default {
 					context.sections({
 						Sender: `${lastPing.senderName} (<@${lastPing.sender}>)`,
 						Message: lastPing.text,
-						Time: lastPing.time
+
+						// TODO: Shouldn't be parseInt, required, it for some reason returns XXXXX.0, probably saving bad to database
+						Time: Utils.timeAgo(parseInt(lastPing.time))
 					});
 				}
 				else {
