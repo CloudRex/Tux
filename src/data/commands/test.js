@@ -1,8 +1,5 @@
 import AccessLevelType from "../../core/access-level-type";
 import CommandCategoryType from "../../commands/command-category-type";
-import CommandArgumentParser from "../../commands/command-argument-parser";
-
-const Discord = require("discord.js");
 
 export default {
 	async executed(context) {
@@ -34,8 +31,9 @@ export default {
 		// Gives null when passing [], which is good (what we want)
 		/* const auth = context.bot.commands.getAuthority(context.message.guild.id, undefined, context.arguments[0]);
 		context.ok("auth: " + auth); */
-		context.bot.userConfig.push("access-levels.owner", context.sender.id, context.message.guild.id);
-		context.ok(":ok_hand:");
+		/* context.bot.userConfig.push("access-levels.owner", context.sender.id, context.message.guild.id);
+		context.ok(":ok_hand:"); */
+		context.ok(context.arguments[0] + ":resolved");
 	},
 
 	canExecute(context) {

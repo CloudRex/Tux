@@ -7,7 +7,7 @@ export default {
 	async executed(context) {
 		switch (context.arguments[0].toLowerCase()) {
 			case "ping": {
-				const channel = (context.arguments.length === 2 ? Utils.resolveId(context.arguments[1]) : context.message.channel.id);
+				const channel = (context.arguments.length === 2 ? context.arguments[1] : context.message.channel.id);
 
 				const result = (await context.bot.database.db
 					.select()

@@ -1,10 +1,9 @@
 import AccessLevelType from "../../core/access-level-type";
 import CommandCategoryType from "../../commands/command-category-type";
-import Utils from "../../core/utils";
 
 export default {
 	executed(context) {
-		const { user } = context.message.guild.member(Utils.resolveId(context.arguments[0]));
+		const { user } = context.message.guild.member(context.arguments[0]);
 
 		// TODO: Catch not well positioned, not executing as expected (position before then)
 		context.message.guild.ban(user.id, {

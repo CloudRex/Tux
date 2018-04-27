@@ -1,6 +1,5 @@
 import AccessLevelType from "../../core/access-level-type";
 import CommandCategoryType from "../../commands/command-category-type";
-import Utils from "../../core/utils";
 
 export default {
 	async executed(context) {
@@ -9,14 +8,11 @@ export default {
 		if (context.arguments.length === 0) {
 			id = context.message.author.id;
 		}
-		else {
-			id = Utils.resolveId(id);
-		}
 
-		const { user } = context.message.guild.member(Utils.resolveId(id));
+		const { user } = context.message.guild.member(id);
 
 		if (user.bot) {
-			context.fail(":robot: Bots can't have points!");
+			context.fail(":robot: Bots can't have coins!");
 
 			return;
 		}

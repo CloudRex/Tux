@@ -1,10 +1,9 @@
 import AccessLevelType from "../../core/access-level-type";
 import CommandCategoryType from "../../commands/command-category-type";
-import Utils from "../../core/utils";
 
 export default {
 	executed(context) {
-		const target = Utils.resolveId(context.arguments[0]);
+		const target = context.arguments[0];
 		const targetAuth = context.getAuth(target);
 		const accessLevel = AccessLevelType.fromString(context.arguments[1]);
 

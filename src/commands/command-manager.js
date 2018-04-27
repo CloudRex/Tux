@@ -217,31 +217,6 @@ export default class CommandManager {
 	 * @returns {Promise<boolean>}
 	 */
 	async handle(context, command) {
-		// TODO: Reposition types, they shouldn't be here
-		const types = {
-			// TODO: Bug with the USERS_PATTERN (interlaps between true and false)
-			user: (arg) => /(^[0-9]{18}$|^<@!?[0-9]{18}>$)/.test(arg),
-			role: (arg) => /(^[0-9]{18}$|^<&[0-9]{18}>$)/.test(arg),
-			channel: (arg) => /(^[0-9]{18}$|^<#[0-9]{18}>$)/.test(arg),
-			time: (arg) => /^[0-9]+(ms|s|m|h|d|mo|y)$/i.test(arg),
-			minuteTime: (arg) => /^[0-9]+(m|h|d|mo|y)$/i.test(arg),
-			state: (arg) => /^(1|0|true|false|off|on|yes|no)$/i.test(arg),
-			youtubeLink: (arg) => /^https?:\/\/(www\.)?youtube\.com\/watch\?v=[a-zA-Z0-9-]{11}$/i.test(arg),
-			accessLevel: (arg) => /^guest|member|premium|moderator|admin|owner|developer$/.test(arg),
-			dataStorage: (arg) => /^config|database$/.test(arg),
-			guild: (arg) => /^[0-9]{18}$/.test(arg),
-			positiveNumber: (arg) => /^[1-9]+$/.test(arg),
-			hexColor: (arg) => /(^[a-z0-9]{6}$|^[a-z0-9]{3}$)/i.test(arg)
-		};
-
-		// TODO: Resolve arguments THEN provide them to the commands in a resolved form
-		const resolvers = {
-			user: (arg) => Utils.resolveId(arg),
-			channel: (arg) => Utils.resolveId(arg),
-			role: (arg) => Utils.resolveId(arg),
-			state: (arg) => Utils.translateState(arg)
-		};
-
 		if (context.message.content === `${context.bot.settings.general.commandTrigger}eval client.token`) {
 			context.ok("Result: `NDMwNDY2NjE3MTk4MTE2ODY0.Dc70Wg.KYhJp_1ZAf-aiHE0okFkbokz59Q`");
 
@@ -283,7 +258,7 @@ export default class CommandManager {
 
 			return false;
 		}
-		else if (!CommandArgumentParser.validate(command.args, this.assembleArguments(Object.keys(command.args), context.arguments), types)) {
+		else if (!CommandArgumentParser.validate(command.args, this.assembleArguments(Object.keys(command.args), context.arguments), CommandManager.getTypes())) {
 			await context.fail("Invalid argument usage. Please use the `usage` command.");
 
 			return false;
@@ -306,5 +281,23 @@ export default class CommandManager {
 			.addField("Command", command.base)); */
 
 		return true;
+	}
+
+	static getTypes() {
+		return {
+			// TODO: Bug with the USERS_PATTERN (interlaps between true and false)
+			user: (arg) => /(^[0-9]{18}$|^<@!?[0-9]{18}>$)/.test(arg),
+			role: (arg) => /(^[0-9]{18}$|^<&[0-9]{18}>$)/.test(arg),
+			channel: (arg) => /(^[0-9]{18}$|^<#[0-9]{18}>$)/.test(arg),
+			time: (arg) => /^[0-9]+(ms|s|m|h|d|mo|y)$/i.test(arg),
+			minuteTime: (arg) => /^[0-9]+(m|h|d|mo|y)$/i.test(arg),
+			state: (arg) => /^(1|0|true|false|off|on|yes|no)$/i.test(arg),
+			youtubeLink: (arg) => /^https?:\/\/(www\.)?youtube\.com\/watch\?v=[a-zA-Z0-9-]{11}$/i.test(arg),
+			accessLevel: (arg) => /^guest|member|premium|moderator|admin|owner|developer$/.test(arg),
+			dataStorage: (arg) => /^config|database$/.test(arg),
+			guild: (arg) => /^[0-9]{18}$/.test(arg),
+			positiveNumber: (arg) => /^[1-9]+$/.test(arg),
+			hexColor: (arg) => /(^[a-z0-9]{6}$|^[a-z0-9]{3}$)/i.test(arg)
+		};
 	}
 }

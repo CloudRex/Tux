@@ -61,4 +61,28 @@ export default class CommandParser {
 
 		return result;
 	}
+
+	// TODO: Also take in arg schema to avoid matching accidental args.
+	/**
+	 * @param {array<string>} args
+	 * @param {object} types
+	 * @param {object} resolvers
+	 * @returns {array<string>} The resolved arguments
+	 */
+	static resolveArguments(args, types, resolvers) {
+		const result = args;
+		const typeKeys = Object.keys(types);
+
+		for (let argIdx = 0; argIdx < result.length; argIdx++) {
+			for (let typeIdx = 0; typeIdx < typeKeys.length; typeIdx++) {
+				if (types[typeKeys[typeIdx]](args[argIdx])) {
+					if (typeof resolvers[typeKeys[typeIdx]] === "function") {
+						result[argIdx] = resolvers[typeKeys[typeIdx]](result[argIdx]);
+					}
+				}
+			}
+		}
+
+		return result;
+	}
 }

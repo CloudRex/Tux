@@ -6,6 +6,7 @@ import ConsoleInterface from "../console/console-interface";
 import EmojiMenuManager from "../emoji-ui/emoji-menu-manager";
 import EmbedBuilder from "./embed-builder";
 import CommandManager from "../commands/command-manager";
+import Utils from "./utils";
 
 const DBL = require("dblapi.js");
 const snekfetch = require("snekfetch");
@@ -67,6 +68,14 @@ export default class Bot {
 			this.console.init(this);
 		});
 
+		// TODO: Find better position
+		const resolvers = {
+			user: (arg) => Utils.resolveId(arg),
+			channel: (arg) => Utils.resolveId(arg),
+			role: (arg) => Utils.resolveId(arg),
+			state: (arg) => Utils.translateState(arg)
+		};
+
 		this.client.on("message", async (message) => {
 			if (!message.author.bot) {
 				// TODO: Position so only given to command uses, and position it after command executed to avoid blocking
@@ -85,7 +94,7 @@ export default class Bot {
 					this.commands.handle(
 						new CommandExecutionContext(
 							message,
-							CommandParser.getArguments(message.content),
+							CommandParser.resolveArguments(CommandParser.getArguments(message.content), CommandManager.getTypes(), resolvers),
 							this,
 							this.commands.getAuthority(message.guild.id, message.member.roles.array().map((role) => role.name), message.author.id)
 						),
