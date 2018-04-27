@@ -5,7 +5,7 @@ export default {
 	executed(context) {
 		switch (context.arguments[0]) {
 			case "clear": {
-				context.bot.clearTemp();
+				Bot.clearTemp();
 				context.ok("Successfully cleared all files in the temp folder.");
 
 				break;
