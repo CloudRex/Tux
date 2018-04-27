@@ -118,7 +118,7 @@ export default class Utils {
 	 * @param {number} timestamp
 	 */
 	static timeAgo(timestamp) {
-		return `${timeAgo.format(Date.now() - timestamp, "time")} ago`;
+		return timeAgo.format(timestamp);
 	}
 
 	/**
