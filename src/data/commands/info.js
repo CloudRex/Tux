@@ -2,6 +2,11 @@ import TimeAgo from "javascript-time-ago";
 import en from "javascript-time-ago/locale/en";
 import AccessLevelType from "../../core/access-level-type";
 import CommandCategoryType from "../../commands/command-category-type";
+import Utils from "../../core/utils";
+
+TimeAgo.locale(en);
+
+const timeAgo = new TimeAgo("en-US");
 
 export default {
 	executed(context) {
@@ -30,10 +35,7 @@ export default {
 			return result;
 		};
 
-		TimeAgo.locale(en);
-
 		const score = computeScore(guild);
-		const timeAgo = new TimeAgo("en-US");
 
 		// TODO: Joined At and thumbnail
 		context.sections({
@@ -45,7 +47,7 @@ export default {
 			Region: guild.region,
 			"Default Channel": guild.defaultChannel ? guild.defaultChannel : "None",
 			"Custom Emojis": guild.emojis.array().length,
-			Created: `${timeAgo.format(Date.now() - guild.createdAt, "time")} ago`,
+			Created: Utils.timeAgo(guild.createdTimestamp),
 			Score: `:star: ${score} (**${classifyScore(score)}**)`
 			// TODO: colors, thumbnail
 		});

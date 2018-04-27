@@ -1,4 +1,9 @@
-const Discord = require("discord.js");
+import TimeAgo from "javascript-time-ago";
+import en from "javascript-time-ago/locale/en";
+
+TimeAgo.locale(en);
+
+const timeAgo = new TimeAgo("en-US");
 
 export default class Utils {
 	/**
@@ -39,36 +44,6 @@ export default class Utils {
 	 */
 	static getRandomInt(min, max) {
 		return Math.floor(Math.random() * max) + min;
-	}
-
-	/**
-	 * @deprecated Use lodash library instead
-	 * @param {string} stack
-	 * @param {array} obj
-	 * @param {string} delimiter
-	 * @returns {(*|null)}
-	 */
-	static accessObjByStack(stack, obj, delimiter = ".") {
-		return stack.split(delimiter).reduce((o, i) => o[i], obj);
-	}
-
-	/**
-	 * @deprecated Use lodash library instead
-	 * @param {string} stack
-	 * @param {*} value
-	 * @param {object} obj
-	 * @param {string} delimiter
-	 * @returns {*}
-	 */
-	static setByStack(stack, value, obj, delimiter = ".") {
-		const keys = stack.split(delimiter);
-		const result = obj;
-
-		for (let i = 0; i < keys.length; i++) {
-
-		}
-
-		return result;
 	}
 
 	/**
@@ -137,6 +112,13 @@ export default class Utils {
 		console.log(now.getDate());
 
 		return new Date(years + now.getFullYear(), months + now.getMonth(), days + now.getDate(), hours + now.getHours(), minutes + now.getMinutes(), seconds + now.getSeconds(), milliseconds + now.getMilliseconds()).getTime();
+	}
+
+	/**
+	 * @param {number} timestamp
+	 */
+	static timeAgo(timestamp) {
+		return `${timeAgo.format(Date.now() - timestamp, "time")} ago`;
 	}
 
 	/**
