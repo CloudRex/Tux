@@ -28,7 +28,7 @@ export default class CommandArgumentParser {
 					if (typeSplit.length > 1 && typeIdx > 0) {
 						throw new Error(`CommandArgumentParser.Validator: Having a required argument along with an OR operator is not allowed`);
 					}
-					else if (!args[ruleName]) {
+					else if (args[ruleName] == null || args[ruleName] === undefined) {
 						console.log("Failed: Important not present.");
 
 						return false;

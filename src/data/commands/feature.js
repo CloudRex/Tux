@@ -49,7 +49,7 @@ export default {
 
 		args: {
 			feature: "!string",
-			state: "!:state"
+			state: "!boolean"
 		},
 
 		category: CommandCategoryType.General,

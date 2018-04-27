@@ -228,7 +228,7 @@ export default class CommandManager {
 			return false;
 		}
 		else if (command.category === CommandCategoryType.NSFW && !context.message.channel.nsfw) {
-			context.fail(":underage: Please use the nsfw channel for this command.");
+			context.fail(":underage: Please use an NSFW channel for this command.");
 
 			return false;
 		}
