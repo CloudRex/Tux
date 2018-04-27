@@ -26,15 +26,15 @@ export default {
 			if (score >= 150) {
 				result = ":fire: __ULTIMATE__ :fire:";
 			}
-			
+
 			return result;
 		};
-		
+
 		TimeAgo.locale(en);
 
 		const score = computeScore(guild);
 		const timeAgo = new TimeAgo("en-US");
-		
+
 		// TODO: Joined At
 		context.sections({
 			Name: guild.name,
@@ -45,7 +45,7 @@ export default {
 			Region: guild.region,
 			"Default Channel": guild.defaultChannel ? guild.defaultChannel : "None",
 			"Custom Emojis": guild.emojis.array().length,
-			"Created At": timeAgo.format(Date.now() - guild.createdAt, "time"),
+			"Created At": `${timeAgo.format(Date.now() - guild.createdAt, "time")} ago`,
 			Score: `:star: ${score} (**${classifyScore(score)}**)`
 			// TODO: colors, thumbnail
 		}, "", "GREEN", guild.iconURL);

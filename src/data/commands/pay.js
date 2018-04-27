@@ -18,7 +18,7 @@ export default {
 				await context.bot.database.addUserPoints(context.sender.id, -amount);
 				await context.bot.database.addUserPoints(recipient.id, amount);
 
-				context.ok(`Successfully payed **${amount}** coins to **${recipient.username}**.`);
+				context.ok(`Successfully transferred **${amount}** coins to **${recipient.username}**.`);
 			}
 			else {
 				context.fail("You don't have enough coins.");
