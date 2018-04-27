@@ -38,7 +38,7 @@ export default {
 		name: "userinfo",
 		description: "Displays information about a specific user",
 		accessLevel: AccessLevelType.Member,
-		aliases: ["uinfo"],
+		aliases: ["uinfo", "inspect"],
 		maxArguments: 1,
 
 		args: {
