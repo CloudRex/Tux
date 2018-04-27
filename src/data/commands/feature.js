@@ -1,7 +1,6 @@
 import AccessLevelType from "../../core/access-level-type";
 import CommandCategoryType from "../../commands/command-category-type";
 import MessageBuilder from "../../core/message-builder";
-import Utils from "../../core/utils";
 
 export default {
 	executed(context) {
@@ -9,7 +8,7 @@ export default {
 		const feature = features.getByKey(context.arguments[0]);
 
 		if (feature) {
-			const state = Utils.translateState(context.arguments[1]);
+			const state = context.arguments[1];
 
 			if (feature.isEnabled === !state) {
 				const response = new MessageBuilder(`You've successfully turned the **${feature.name}** feature `);

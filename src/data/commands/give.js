@@ -1,11 +1,10 @@
 import AccessLevelType from "../../core/access-level-type";
-import Utils from "../../core/utils";
 import CommandCategoryType from "../../commands/command-category-type";
 
 export default {
 	async executed(context) {
 		if (context.arguments.length === 2) {
-			const points = await context.bot.database.addUserPoints(Utils.stripMention(context.arguments[0]), parseInt(context.arguments[1]));
+			const points = await context.bot.database.addUserPoints(context.arguments[0], parseInt(context.arguments[1]));
 
 			context.ok(`:small_orange_diamond:He/she now has **${points}** points`);
 		}

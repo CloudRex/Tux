@@ -1,13 +1,12 @@
-import Utils from "../../core/utils";
 import AccessLevelType from "../../core/access-level-type";
 import CommandCategoryType from "../../commands/command-category-type";
 
 export default {
 	executed(context) {
-		if (context.message.channel.type === "text" && Utils.isMention(context.arguments[0])) {
+		if (context.message.channel.type === "text" && context.arguments[0]) {
 			// TODO: Is argument length checking required?
 			if (context.arguments.length === 1) {
-				const user = Utils.stripMention(context.arguments[0]);
+				const user = context.arguments[0];
 
 				if (context.message.author.id.toString() === user) {
 					context.fail("You can't thank yourself, silly!");

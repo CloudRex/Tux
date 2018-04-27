@@ -12,8 +12,8 @@ export default {
 				context.ok(`You have been thanked **${thanks}** times`);
 			}
 			else if (context.arguments.length === 1) {
-				if (Utils.isMention(context.arguments[0])) {
-					const user = Utils.stripMention(context.arguments[0]);
+				if (context.arguments[0]) {
+					const user = context.arguments[0];
 
 					if (context.message.author.id.toString() === user) {
 						const thanks = await context.bot.database.getThanksAsync(user);

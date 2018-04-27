@@ -7,23 +7,6 @@ const timeAgo = new TimeAgo("en-US");
 
 export default class Utils {
 	/**
-	 * @param {string} string
-	 * @returns {boolean}
-	 */
-	static isMention(string) {
-		return string.startsWith("<@") && string.endsWith(">");
-	}
-
-	/**
-	 * @deprecated Use resolveId() instead
-	 * @param {string} string
-	 * @returns {string}
-	 */
-	static stripMention(string) {
-		return string.substr(2).slice(0, -1).replace("!", "");
-	}
-
-	/**
 	 * @param {string} mention
 	 * @returns {string}
 	 */
