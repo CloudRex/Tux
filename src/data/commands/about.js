@@ -27,7 +27,7 @@ export default {
 			Version: context.bot.settings.general.version,
 			Guilds: context.bot.client.guilds.size,
 			Users: users,
-			Uptime: timeAgo.format(Date.now() - context.bot.client.uptime, "time")
+			Uptime: timeAgo.format(context.bot.client.uptime, "time")
 		});
 	},
 
