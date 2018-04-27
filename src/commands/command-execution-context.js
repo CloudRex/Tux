@@ -109,8 +109,8 @@ export default class CommandExecutionContext {
 		return this.getAuth(this.sender.id);
 	}
 
-	async sections(sections) {
-		return await this.respond(EmbedBuilder.sections(sections));
+	async sections(sections, color = "GREEN") {
+		return await this.respond(EmbedBuilder.sections(sections, color));
 	}
 
 	/**

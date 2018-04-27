@@ -136,11 +136,15 @@ export default class EmbedBuilder {
 		return result;
 	}
 
-	static sections(sections) {
+	static sections(sections, color = null) {
 		const result = new EmbedBuilder();
 
 		for (let i = 0; i < Object.keys(sections).length; i++) {
 			result.field(Object.keys(sections)[i], sections[Object.keys(sections)[i]]);
+		}
+
+		if (color) {
+			result.color(color);
 		}
 
 		return result;

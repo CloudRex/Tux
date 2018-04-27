@@ -40,6 +40,16 @@ export default class Protection extends Feature {
 		});
 	}
 
+	// TODO: Continue working on this
+	// REFER TO: https://developers.google.com/safe-browsing/v4/lookup-api
+	scanUrl(url, key) {
+		snekfetch.post(`https://safebrowsing.googleapis.com/v4/threatMatches:find?key=${key}`).then((result) => {
+			const response = JSON.parse(result.body.toString());
+
+			console.log(response);
+		});
+	}
+
 	warn(message, bot) {
 		bot.database.getWarningCount(message.author.id, (warnings) => {
 			console.log(`warnings -> ${warnings}`);
