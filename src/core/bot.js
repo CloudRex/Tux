@@ -35,8 +35,8 @@ export default class Bot {
 		this.emojis = new EmojiMenuManager(this.client);
 
 		// TODO
-		if (settings.general.dblToken) {
-			this.dbl = new DBL(settings.general.dblToken);
+		if (settings.keys.dbl) {
+			this.dbl = new DBL(settings.keys.dbl);
 		}
 
 		// TODO: Move from here on to the connect function
@@ -63,26 +63,7 @@ export default class Bot {
 
 			this.userConfig.save();
 
-			// Post stats to DBL
-			if (this.dbl) {
-				setInterval(() => {
-					this.dbl.postStats(guilds.length);
-				}, 1800000);
-			}
-
-			// Post stats to BFD
-			if (this.settings.keys.bfd) {
-				setInterval(() => {
-					snekfetch.post(`https://botsfordiscord.com/api/v1/bots/${this.client.user.id}`)
-						.set("Authorization", this.settings.keys.bfd)
-						.set("Content-Type", "application/json")
-						.send({
-							count: this.client.guilds.size
-						})
-						.catch((error) => console.log(`The error was posting stats to BFD: ${error.message}`));
-				}, 3600000);
-			}
-
+			this.postStats();
 			this.console.init(this);
 		});
 
@@ -127,6 +108,7 @@ export default class Bot {
 		});
 
 		this.client.on("guildCreate", (guild) => {
+			this.postStats();
 			this.userConfig.createGuild(guild.id);
 
 			Log.channel(new EmbedBuilder()
@@ -182,6 +164,7 @@ export default class Bot {
 		});
 
 		this.client.on("guildDelete", (guild) => {
+			this.postStats();
 			this.userConfig.removeGuild(guild.id);
 
 			Log.channel(new EmbedBuilder()
@@ -199,6 +182,30 @@ export default class Bot {
 		// TODO: DEBUG -----------------------
 		this.events.on("commandExecuted", (e) => console.log(`${e.context.sender.username}@${e.context.message.guild.name}: ${e.context.message.content}`));
 		// -----------------------------------
+	}
+
+	postStats() {
+		const amount = this.client.guilds.size;
+
+		// Discord Bot List (DBL)
+		if (this.dbl) {
+			setInterval(() => {
+				this.dbl.postStats(amount);
+			}, 1800000);
+		}
+
+		// Bots for Discord (BFD)
+		if (this.settings.keys.bfd) {
+			setInterval(() => {
+				snekfetch.post(`https://botsfordiscord.com/api/v1/bots/${this.client.user.id}`)
+					.set("Authorization", this.settings.keys.bfd)
+					.set("Content-Type", "application/json")
+					.send({
+						count: amount
+					})
+					.catch((error) => console.log(`The error was posting stats to BFD: ${error.message}`));
+			}, 3600000);
+		}
 	}
 
 	connect() {
