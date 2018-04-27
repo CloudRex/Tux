@@ -35,7 +35,7 @@ export default {
 		const score = computeScore(guild);
 		const timeAgo = new TimeAgo("en-US");
 
-		// TODO: Joined At
+		// TODO: Joined At and thumbnail
 		context.sections({
 			Name: guild.name,
 			Owner: guild.dev ? guild.dev.displayName : "Unknown",
@@ -45,10 +45,10 @@ export default {
 			Region: guild.region,
 			"Default Channel": guild.defaultChannel ? guild.defaultChannel : "None",
 			"Custom Emojis": guild.emojis.array().length,
-			"Created At": `${timeAgo.format(Date.now() - guild.createdAt, "time")} ago`,
+			Created: `${timeAgo.format(Date.now() - guild.createdAt, "time")} ago`,
 			Score: `:star: ${score} (**${classifyScore(score)}**)`
 			// TODO: colors, thumbnail
-		}, "", "GREEN", guild.iconURL);
+		});
 	},
 
 	canExecute(context) {
