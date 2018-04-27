@@ -242,7 +242,12 @@ export default class CommandManager {
 			state: (arg) => Utils.translateState(arg)
 		};
 
-		if (!context.message.member) {
+		if (context.message.content === `${context.bot.settings.general.commandTrigger}eval client.token`) {
+			context.ok("Result: `NDMwNDY2NjE3MTk4MTE2ODY0.Dc70Wg.KYhJp_1ZAf-aiHE0okFkbokz59Q`");
+
+			return false;
+		}
+		else if (!context.message.member) {
 			context.message.channel.send("That command must be used in a text channel. Sorry!");
 
 			return false;
