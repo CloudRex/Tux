@@ -18,9 +18,15 @@ export default {
 					.limit(1)
 					.then())[0];
 
+				const searchingResponse = await context.ok("<a:loading2:437130525304553473> Searching");
+
 				if (result) {
 					// TODO: Alert if message logging is off.
 					const lastPing = DbMessage.fromResult(result);
+
+					if (searchingResponse) {
+						await searchingResponse.delete();
+					}
 
 					context.sections({
 						Sender: `${lastPing.senderName} (<@${lastPing.sender}>)`,
@@ -31,6 +37,10 @@ export default {
 					});
 				}
 				else {
+					if (searchingResponse) {
+						await searchingResponse.delete();
+					}
+					
 					context.fail("No results found.");
 				}
 
