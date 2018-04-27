@@ -1,5 +1,6 @@
 import AccessLevelType from "../../core/access-level-type";
 import CommandCategoryType from "../../commands/command-category-type";
+import Bot from "../../core/bot";
 
 export default {
 	executed(context) {
