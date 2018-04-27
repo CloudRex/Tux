@@ -30,7 +30,7 @@ export default {
 
 					context.sections({
 						Sender: `${lastPing.senderName} (<@${lastPing.sender}>)`,
-						Message: lastPing.text,
+						Message: lastPing.text ? lastPing.text : "*Empty message*",
 
 						// TODO: Shouldn't be parseInt, required, it for some reason returns XXXXX.0, probably saving bad to database
 						Time: Utils.timeAgo(parseInt(lastPing.time))
