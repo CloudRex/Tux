@@ -11,7 +11,8 @@ export default class AntiSpam extends Feature {
 
 	enabled(bot) {
 		this.handleMessage = async (message) => {
-			const dbUser = await bot.database.getUser(message.author.id);
+			// TODO: Disabled bue to double-add user bug
+			// const dbUser = await bot.database.getUser(message.author.id);
 
 			let score = 0;
 
@@ -80,7 +81,8 @@ export default class AntiSpam extends Feature {
 			}
 
 			// Previous threshold strikes
-			score *= (dbUser.spamThresholdTrikes ? dbUser.spamThresholdTrikes + 1 : 1);
+			// TODO: Disabled bue to double-add user bug
+			// score *= (dbUser.spamThresholdTrikes ? dbUser.spamThresholdTrikes + 1 : 1);
 
 			// --- FINAL REVIEW ---
 			if (score >= 100) {
