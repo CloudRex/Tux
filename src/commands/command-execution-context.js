@@ -53,8 +53,10 @@ export default class CommandExecutionContext {
 		if (!this.muted) {
 			let embed = null;
 
-			if (content.text.trim() === "" || content.text === undefined || content.text === null) {
-				content.text = ":thinking: *Empty response.*";
+			if (content.text) {
+				if (content.text.toString().trim() === "" || content.text === undefined || content.text === null) {
+					content.text = ":thinking: *Empty response.*";
+				}
 			}
 
 			if (content instanceof EmbedBuilder) {
