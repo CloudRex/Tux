@@ -1,0 +1,24 @@
+Threshold = 100
+Reset     = 2 minutes
+
+---------------
+[+100] Identical message (within reset)
+[+065] No spaces and message length >=(7 characters)
+[+045] Join date <(1 day)
+[+045] Created date <(1 day)
+[+040} Last two messages sent <(1 second) difference
+[+040] Mentions users >((1 repeated mention) * each)
+[+035] Previous message sent <=(1 seconds)
+[+030] Message length <(13 characters)
+[+025] Created date <(7 day)
+[+025] Join date <(1 week)
+[+025] Message length >(40 characters)
+[+025] Mentions roles (>=(4 mention) * each)
+[+025] Mentions include @everyone
+[+025] Non-alphanumeric characters >(alphanumeric characters)
+[+025] Repeated word (* each)
+[+020] Previous threshold strikes (* each)
+[+020] Message length <=(3 characters)
+[+020] Mentions users (>=(4 mention) * each)
+[+020] Mentions include @here
+[-020] Last threshold strike time >=(1 week)
