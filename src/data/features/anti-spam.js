@@ -1,8 +1,5 @@
 import Feature from "./feature";
 
-const fs = require("fs");
-const snekfetch = require("snekfetch");
-
 export default class AntiSpam extends Feature {
 	constructor() {
 		super("Anti-Spam", "anti-spam", "Advanced spam protection");
@@ -14,79 +11,85 @@ export default class AntiSpam extends Feature {
 
 	enabled(bot) {
 		this.handleMessage = async (message) => {
-			// TODO: Hard coded discord bot lists
-			if (message.author.id !== bot.client.user.id && message.guild.id.toString() !== "264445053596991498" && message.guild.id.toString() !== "110373943822540800" && message.guild.id.toString() !== "374071874222686211") {
-				const spamTrigger = bot.userConfig.get("spamTrigger", message.guild.id);
-				const preventInvites = bot.userConfig.get("protection.invites", message.guild.id);
-				const preventLinks = bot.userConfig.get("protection.links", message.guild.id);
-				const preventProfanity = bot.userConfig.get("protection.profanity", message.guild.id);
-				const preventExplicit = bot.userConfig.get("protection.explicit", message.guild.id);
+			const dbUser = await bot.database.getUser(message.author.id);
 
-				// TODO: Checking for embeds will probably be better
-				const urlRegex = /(https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*))/g;
+			let score = 0;
 
-				if (message.deletable) {
-					if (preventExplicit && !message.channel.nsfw) {
-						const attachments = message.attachments.array();
+			let x = {
+				daysJoined: Math.round((new Date() - new Date(message.member.joinedAt)) / 1000 / 60 / 60 / 24),
+				accountCreated: Math.round((new Date() - new Date(message.author.createdTimestamp)) / 1000 / 60 / 60 / 24)
+			};
 
-						if (attachments.length > 0) {
-							let filtered = false;
-
-							for (let i = 0; i < attachments.length; i++) {
-								if (attachments[i].width) {
-									filtered = await this.scan(attachments[i].url, message, apiKey);
-								}
-
-								if (filtered) {
-									return;
-								}
-							}
-						}
-
-						for (let i = 0; i < message.embeds.length; i++) {
-							if (message.embeds[i].type === "image") {
-								const bad = await this.scan(message.embeds[i].url, message, apiKey);
-
-								if (bad) {
-									return;
-								}
-							}
-						}
-					}
-
-					if (preventProfanity) {
-						for (let i = 0; i < badWords.length; i++) {
-							if (message.content.includes(badWords[i])) {
-								message.delete();
-
-								return;
-							}
-						}
-					}
-
-					if (preventLinks && urlRegex.test(message.content)) {
-						message.delete();
-					}
-					else if (preventInvites && (/https?:\/\/discord\.gg\/[a-zA-Z0-9]+/.test(message.content) || /https?:\/\/discordapp\.com\/invite\/[a-zA-Z0-9]+/.test(message.content))) {
-						message.delete();
-					}
+			// Join date
+			if (message.member) {
+				if (x.daysJoined <= 1) {
+					score += 45;
 				}
-
-				// TODO: Temporarly disabled
-				/* bot.database.getMessages(message.author.id, (messages) => {
-					let streak = 0;
-
-					for (let i = 0; i < messages.length; i++) {
-						if (messages[i].text === message.content.toString()) {
-							streak++;
-						}
-					}
-
-					if (streak === spamTrigger) {
-						this.warn(message, bot);
-					}
-				}, spamTrigger); */
+				else if (x.daysJoined <= 7) {
+					score += 25;
+				}
 			}
+
+			// Created date
+			if (x.accountCreated <= 1) {
+				score += 45;
+			}
+			else if (x.accountCreated <= 7) {
+				score += 25;
+			}
+
+			// Message length
+			if (message.content.length > 40) {
+				score += 25;
+			}
+			else if (message.content.length < 13) {
+				score += 30;
+			}
+
+			if (message.content.length <= 3) {
+				score += 20;
+			}
+
+			// No spaces
+			if (!message.content.includes(" ") && message.content.length >= 7) {
+				score += 65;
+			}
+
+			// Repeated words
+			const words = message.content.split(" ");
+			const memory = [];
+
+			for (let i = 0; i < words.length; i++) {
+				if (!memory.includes(words[i])) {
+					memory.push(words[i]);
+				}
+				else {
+					score += 25;
+				}
+			}
+
+			// Mentions
+			const { mentions } = message;
+
+			if (mentions.users.size >= 4 || mentions.roles.array() >= 4) {
+				score += (mentions.users.size * 20) + (mentions.roles.size * 25);
+			}
+
+			if (mentions.everyone) {
+				score += 25;
+			}
+
+			// Previous threshold strikes
+			score *= (dbUser.spamThresholdTrikes ? dbUser.spamThresholdTrikes + 1 : 1);
+
+			// --- FINAL REVIEW ---
+			if (score >= 100) {
+				if (message.deletable) {
+					message.delete();
+				}
+			}
+
+			console.log(`score:${score}`);
 		};
 
 		bot.client.on("message", this.handleMessage);

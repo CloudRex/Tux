@@ -39,7 +39,7 @@ export default class Database {
 
 		if (!result) {
 			// TODO: Row id should not be null
-			const newUser = new DbUser(null, userId, 0, 0, false);
+			const newUser = new DbUser(null, userId, 0, 0, false, [], "", 0);
 
 			await this.addUser(newUser);
 
@@ -125,8 +125,9 @@ export default class Database {
 			thanks: dbUser.thanks,
 			points: dbUser.points,
 			is_scope_locked: dbUser.isScopeLocked,
-			commands: JSON.stringify(dbUser.commands),
-			badges: JSON.stringify(dbUser.badges)
+			badges: JSON.stringify(dbUser.badges),
+			afk_message: dbUser.afkMessage,
+			spam_threshold_strikes: dbUser.spamThresholdTrikes
 		}).then();
 	}
 

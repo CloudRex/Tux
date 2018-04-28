@@ -6,6 +6,7 @@ import UserConfig from "./core/user-config";
 import Treasures from "./data/features/treasures";
 import Badges from "./data/features/badges";
 import Protection from "./data/features/protection";
+import AntiSpam from "./data/features/anti-spam";
 
 const Discord = require("discord.js");
 
@@ -26,7 +27,8 @@ bot.features.registerMultiple([
 	new AnswerMentions(), */
 	new Protection(),
 	new Treasures(),
-	new Badges()
+	new Badges(),
+	new AntiSpam()
 ]);
 
 // Init
