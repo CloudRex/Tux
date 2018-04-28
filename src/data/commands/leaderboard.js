@@ -11,9 +11,7 @@ export default {
 			.then());
 
 		for (let i = 0; i < topUsers.length; i++) {
-			const userInfo = context.bot.client.users.get(topUsers[i].userId.toString());
-
-			console.log(userInfo);
+			const userInfo = context.bot.client.users.get(topUsers[i].userId);
 
 			if (userInfo && (i < 10 || topUsers[i].userId === context.sender.id)) {
 				let emoji = "<a:tuxsilver:438011439140306944>";

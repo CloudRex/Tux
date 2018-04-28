@@ -120,7 +120,6 @@ export default class Database {
 	 */
 	addUser(dbUser) {
 		this.db("users").insert({
-			id: null,
 			user_id: dbUser.userId,
 			thanks: dbUser.thanks,
 			points: dbUser.points,
