@@ -11,7 +11,7 @@ export default {
 	},
 
 	meta: {
-		name: "afk",
+		name: "prune",
 		description: "Prune messages from the bot or someone",
 		accessLevel: AccessLevelType.Owner,
 		aliases: [],
