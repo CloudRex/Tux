@@ -16,7 +16,7 @@ export default class AntiSpam extends Feature {
 
 			let score = 0;
 
-			let x = {
+			const x = {
 				daysJoined: message.member ? Math.round((new Date() - new Date(message.member.joinedAt)) / 1000 / 60 / 60 / 24) : null,
 				accountCreated: Math.round((new Date() - new Date(message.author.createdTimestamp)) / 1000 / 60 / 60 / 24)
 			};

@@ -1,6 +1,5 @@
 export default class DbUser {
 	/**
-	 * @param {number} id
 	 * @param {Snowflake} userId
 	 * @param {number} thanks
 	 * @param {number} points
@@ -9,8 +8,7 @@ export default class DbUser {
 	 * @param {string} afkMessage
 	 * @param {number} spamThresholdStrikes
 	 */
-	constructor(id, userId, thanks, points, isScopeLocked, badges, afkMessage, spamThresholdStrikes) {
-		this.id = id;
+	constructor(userId, thanks, points, isScopeLocked, badges, afkMessage, spamThresholdStrikes) {
 		this.userId = userId;
 		this.thanks = thanks;
 		this.points = points;
@@ -26,7 +24,6 @@ export default class DbUser {
 	 */
 	static fromResult(queryResult) {
 		return new DbUser(
-			queryResult.id,
 			queryResult.user_id,
 			queryResult.thanks,
 			queryResult.points,
