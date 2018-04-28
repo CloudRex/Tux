@@ -5,7 +5,7 @@ const snekfetch = require("snekfetch");
 
 export default class Protection extends Feature {
 	constructor() {
-		super("Protection", "protection", "Server protection (profanity, spam, links, invites and explicit content in non-NSFW channels)");
+		super("Protection", "protection", "Server protection (profanity, links, invites and explicit content in non-NSFW channels)");
 	}
 
 	canEnable(bot) {
@@ -139,7 +139,7 @@ export default class Protection extends Feature {
 					}
 				}
 
-				// TODO: Temporarly disabled
+				// TODO: Temporarily disabled
 				/* bot.database.getMessages(message.author.id, (messages) => {
 					let streak = 0;
 
