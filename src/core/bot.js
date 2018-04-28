@@ -82,6 +82,20 @@ export default class Bot {
 				await this.database.addUserPoints(message.author.id, 1);
 				this.events.emit("userMessage", message);
 
+				if (message.mentions.users.size > 0) {
+					for (let i = 0; i < message.mentions.users.size && i <= 5; i++) {
+						const user = message.mentions.users.array()[i];
+						const dbUser = await this.database.getUser(user.id);
+						const member = message.guild.member(user.id);
+
+						if (member && member.presence.status === "idle") {
+							if (dbUser.afkMessage !== "" && dbUser.afkMessage !== null && dbUser.afkMessage !== undefined) {
+								message.channel.send(`He/she is afk: ${dbUser.afkMessage}`);
+							}
+						}
+					}
+				}
+
 				if (global.trivAns) {
 					if (message.channel.id === global.trivAns.channel.id && message.content.toLowerCase() === global.trivAns.answer) {
 						this.database.addUserPoints(message.author.id, 5);

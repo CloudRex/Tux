@@ -2,8 +2,9 @@ import AccessLevelType from "../../core/access-level-type";
 import CommandCategoryType from "../../commands/command-category-type";
 
 export default {
-	executed(context) {
-		context.fail("Not yet implemented.");
+	async executed(context) {
+		context.bot.database.setAfkMessage(context.sender.id, context.arguments[0]);
+		context.ok("You've successfully set your AFK message.");
 	},
 
 	canExecute(context) {
@@ -15,8 +16,12 @@ export default {
 		description: "Set your afk message",
 		accessLevel: AccessLevelType.Member,
 		aliases: [],
-		maxArguments: 0,
-		args: {},
+		maxArguments: 1,
+
+		args: {
+			message: "!string"
+		},
+
 		category: CommandCategoryType.Utility,
 		enabled: true
 	}

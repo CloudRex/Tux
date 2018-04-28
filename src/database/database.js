@@ -359,6 +359,16 @@ export default class Database {
 	}
 
 	/**
+	 * @param {Snowflake} userId
+	 * @param {string} message
+	 */
+	setAfkMessage(userId, message) {
+		this.db("users").where("user_id", userId).update({
+			afk_message: message.trim()
+		}).then();
+	}
+
+	/**
 	 * @param {number} itemId
 	 * @returns {Promise<DbItem>}
 	 */
