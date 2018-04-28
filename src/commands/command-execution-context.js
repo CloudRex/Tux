@@ -53,6 +53,10 @@ export default class CommandExecutionContext {
 		if (!this.muted) {
 			let embed = null;
 
+			if (content.text.trim() === "" || content.text === undefined || content.text === null) {
+				content.text = ":thinking: *Empty response.*";
+			}
+
 			if (content instanceof EmbedBuilder) {
 				embed = content;
 			}
@@ -83,6 +87,7 @@ export default class CommandExecutionContext {
 
 				messageResult.delete(4000 + (100 * messageResult.content.length * 1000));
 
+				// TODO
 				console.log(messageResult.content.length);
 
 				console.log(`time : ${timeInSeconds}`);

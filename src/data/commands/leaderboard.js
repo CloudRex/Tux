@@ -13,6 +13,9 @@ export default {
 		for (let i = 0; i < topUsers.length; i++) {
 			const userInfo = context.bot.client.users.get(topUsers[i].userId);
 
+			console.log(topUsers[i].userId);
+			console.log(userInfo);
+
 			if (userInfo && (i < 10 || topUsers[i].userId === context.sender.id)) {
 				let emoji = "<a:tuxsilver:438011439140306944>";
 				let you = "";
@@ -25,13 +28,13 @@ export default {
 					you = "(you)";
 				}
 
-				response.add(`${emoji} #${i + 1} : *${userInfo.username}* with ** ${topUsers[i].points}** coins ${you}`).line();
+				response.add(`${emoji} #${i + 1} : *${userInfo.username}* with **${topUsers[i].points}** coins ${you}`).line();
 			}
 		}
 
 		context.respond({
 			text: response.build(),
-			title: "Coins Leaderboard",
+			title: "Tux Coins Leaderboard",
 			color: "BLUE"
 		});
 	},
