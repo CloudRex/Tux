@@ -24,7 +24,7 @@ export default {
 		maxArguments: 1,
 
 		args: {
-			user: "!string"
+			user: "!:user"
 		},
 
 		category: CommandCategoryType.Utility,
