@@ -20,12 +20,16 @@ export default {
 
 			// TODO
 			if (result.length > 1000) {
-				result = result.substr(0, 1000);
+				result = result.substr(0, 900);
+			}
+
+			if (result instanceof "object") {
+				result = JSON.stringify(result);
 			}
 
 			context.sections({
 				Evaluation: new MessageBuilder().codeBlock("javascript", context.arguments[0]).build(),
-				Result: new MessageBuilder().codeBlock("javascript", result).build(),
+				Result: new MessageBuilder().codeBlock("json", result).build(),
 				Type: new MessageBuilder().codeBlock("javascript", typeof result).build()
 			});
 		}
