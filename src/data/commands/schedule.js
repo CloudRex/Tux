@@ -2,9 +2,10 @@ import AccessLevelType from "../../core/access-level-type";
 import CommandCategoryType from "../../commands/command-category-type";
 
 export default {
+	// TODO: Fix
 	executed(context) {
 		if (context.arguments.length >= 2 && context.message.author.id.toString() === "285578743324606482") {
-			const time = parseInt(context.arguments[0]);
+			const time = context.arguments[0];
 			const isInterval = context.arguments.length === 3 && context.arguments[2] === "true";
 
 			if (time < 3) {
@@ -48,7 +49,9 @@ export default {
 		maxArguments: 3,
 
 		args: {
-			time: "!:minuteTime",
+			// TODO
+			// time: "!:minuteTime",
+			time: "!:positiveNumber",
 			message: "!string",
 			repeat: "boolean"
 		},
