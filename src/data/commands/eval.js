@@ -23,7 +23,7 @@ export default {
 				result = result.substr(0, 900);
 			}
 
-			if (result instanceof "object") {
+			if (typeof result === "object") {
 				result = JSON.stringify(result);
 			}
 
