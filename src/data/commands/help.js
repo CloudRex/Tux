@@ -92,7 +92,7 @@ export default {
 			context.message.channel.send(message);
 		}
 		else {
-			context.message.channel.send(":thinking: Hey! Something smells :fish:! You sure that command exists?", "", "RED");
+			context.fail("Something smells :fish:y! You sure that command exists?");
 		}
 	},
 
