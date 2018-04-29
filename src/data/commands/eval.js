@@ -28,7 +28,12 @@ export default {
 			}
 
 			if (typeof result === "object") {
-				result = JSON.stringify(result);
+				try {
+					result = JSON.stringify(result);
+				}
+				catch (error) {
+					// TODO
+				}
 			}
 
 			context.sections({
