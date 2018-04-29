@@ -8,7 +8,7 @@ export default {
 			const isInterval = context.arguments.length === 3 && context.arguments[2] === "true";
 
 			if (time < 3) {
-				context.fail("Minimum permitted time is **3** seconds");
+				context.fail("Minimum permitted time is **3** seconds.");
 
 				return;
 			}
@@ -48,7 +48,7 @@ export default {
 		maxArguments: 3,
 
 		args: {
-			time: "!number",
+			time: "!:minuteTime",
 			message: "!string",
 			repeat: "boolean"
 		},
