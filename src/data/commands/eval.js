@@ -3,7 +3,7 @@ import MessageBuilder from "../../core/message-builder";
 import CommandCategoryType from "../../commands/command-category-type";
 
 export default {
-	executed(context) {
+	async executed(context) {
 		if (context.arguments.length === 1) {
 			const action = () => {
 				try {
@@ -23,13 +23,17 @@ export default {
 				result = result.substr(0, 900);
 			}
 
+			if (result instanceof Promise) {
+				result = await result;
+			}
+
 			if (typeof result === "object") {
 				result = JSON.stringify(result);
 			}
 
 			context.sections({
 				Evaluation: new MessageBuilder().codeBlock("javascript", context.arguments[0]).build(),
-				Result: new MessageBuilder().codeBlock("json", result).build(),
+				Result: new MessageBuilder().codeBlock("javascript", result).build(),
 				Type: new MessageBuilder().codeBlock("javascript", typeof result).build()
 			});
 		}
