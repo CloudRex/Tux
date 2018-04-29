@@ -6,7 +6,10 @@ export default {
 	async executed(context) {
 		const user = context.bot.client.users.get(context.arguments[0]);
 
-		context.respond(new EmbedBuilder().image(user.avatarURL).color("GREEN").title(`${user.username}'s Avatar`));
+		context.respond(new EmbedBuilder()
+			.image(user.avatarURL)
+			.color("GREEN")
+			.title(`${user.username}'s Avatar`));
 	},
 
 	canExecute(context) {

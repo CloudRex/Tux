@@ -23,10 +23,6 @@ export default {
 					id: CommandCategoryType.Moderation
 				},
 				{
-					name: "Developer",
-					id: CommandCategoryType.Developer
-				},
-				{
 					name: "Economy",
 					id: CommandCategoryType.Economy
 				},
@@ -41,6 +37,10 @@ export default {
 				{
 					name: "NSFW",
 					id: CommandCategoryType.NSFW
+				},
+				{
+					name: "Developer",
+					id: CommandCategoryType.Developer
 				}
 			];
 
@@ -63,7 +63,7 @@ export default {
 				result[categories[categ].name] = result[categories[categ].name].join("\n");
 			}
 
-			result["A note from developers"] = "*Hey, thanks for using our bot! Tux is a relatively new bot and if you have already noticed not everything may work as expected. We're currently working on per-server configuration support to enable our moderation commands. If you'd like to talk to the developers (maybe you want to see a special feature in Tux!) issue the `about` command and join our support server. Thanks!* \n\n-Atlas#0042";
+			result["A Note From Developers"] = "*Hey, thanks for using our bot! Tux is a relatively new bot and if you have already noticed not everything may work as expected. If you'd like to talk to the developers (maybe you want to see a special feature in Tux!) issue the `about` command and join our support server. Thanks!* \n\n-Atlas#0042";
 
 			let failReply = null;
 
