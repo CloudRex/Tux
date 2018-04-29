@@ -7,6 +7,7 @@ import EmojiMenuManager from "../emoji-ui/emoji-menu-manager";
 import EmbedBuilder from "./embed-builder";
 import CommandManager from "../commands/command-manager";
 import Utils from "./utils";
+import EmojiCollection from "./emoji-collection";
 
 const DBL = require("dblapi.js");
 const snekfetch = require("snekfetch");
@@ -17,26 +18,75 @@ const fs = require("fs");
 export default class Bot {
 	/**
 	 * @param {Settings} settings
+	 * @param {String} emojisPath
 	 * @param {UserConfig} userConfig
-	 * @param {*} client
+	 * @param {Discord.Client} client
 	 * @param {string} accessLevelsPath
 	 * @param {FeatureManager} featureManager
 	 * @param {CommandLoader} commandLoader
 	 */
-	constructor(settings, userConfig, client, accessLevelsPath, featureManager, commandLoader) {
+	constructor(settings, emojisPath, userConfig, client, accessLevelsPath, featureManager, commandLoader) {
+		/**
+		 * @type {module:events.internal}
+		 * @private
+		 */
 		this.events = new EventEmitter();
+
+		/**
+		 * @type {Settings}
+		 */
 		this.settings = settings;
+
+		/**
+		 * @type {EmojiCollection}
+		 */
+		this.ec = EmojiCollection.fromFile(emojisPath);
+
+		/**
+		 * @type {UserConfig}
+		 */
 		this.userConfig = userConfig;
+
+		/**
+		 * @type {Discord.Client}
+		 */
 		this.client = client;
+
+		/**
+		 * @type {CommandManager}
+		 */
 		this.commands = new CommandManager(this, accessLevelsPath);
+
+		/**
+		 * @type {FeatureManager}
+		 */
 		this.features = featureManager;
+
+		/**
+		 * @type {CommandLoader}
+		 */
 		this.commandLoader = commandLoader;
+
+		/**
+		 * @type {Database}
+		 */
 		this.database = new Database(this.settings.general.databasePath);
+
+		/**
+		 * @type {ConsoleInterface}
+		 */
 		this.console = new ConsoleInterface();
+
+		/**
+		 * @type {EmojiMenuManager}
+		 */
 		this.emojis = new EmojiMenuManager(this.client);
 
 		// TODO
 		if (settings.keys.dbl) {
+			/**
+			 * @type {DBLAPI}
+			 */
 			this.dbl = new DBL(settings.keys.dbl);
 		}
 

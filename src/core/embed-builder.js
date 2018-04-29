@@ -2,11 +2,15 @@ const Discord = require("discord.js");
 
 export default class EmbedBuilder {
 	constructor() {
+		/**
+		 * @type {*}
+		 * @private
+		 */
 		this.embed = new Discord.RichEmbed();
 	}
 
 	/**
-	 * @param {string} color
+	 * @param {String} color
 	 * @returns {EmbedBuilder}
 	 */
 	color(color) {
@@ -16,7 +20,7 @@ export default class EmbedBuilder {
 	}
 
 	/**
-	 * @param title
+	 * @param {String} title
 	 * @returns {EmbedBuilder}
 	 */
 	title(title) {
@@ -26,7 +30,7 @@ export default class EmbedBuilder {
 	}
 
 	/**
-	 * @param {string} url
+	 * @param {String} url
 	 * @returns {EmbedBuilder}
 	 */
 	titleIcon(url) {
@@ -36,7 +40,7 @@ export default class EmbedBuilder {
 	}
 
 	/**
-	 * @param {string} url
+	 * @param {String} url
 	 * @returns {EmbedBuilder}
 	 */
 	thumbnail(url) {
@@ -46,8 +50,8 @@ export default class EmbedBuilder {
 	}
 
 	/**
-	 * @param {string} text
-	 * @param {string} icon
+	 * @param {String} text
+	 * @param {String} icon
 	 * @returns {EmbedBuilder}
 	 */
 	footer(text, icon) {
@@ -57,7 +61,7 @@ export default class EmbedBuilder {
 	}
 
 	/**
-	 * @param {string} url
+	 * @param {String} url
 	 * @returns {EmbedBuilder}
 	 */
 	image(url) {
@@ -78,7 +82,7 @@ export default class EmbedBuilder {
 	}
 
 	/**
-	 * @param {string} title
+	 * @param {String} title
 	 * @param {*} value
 	 * @returns {EmbedBuilder}
 	 */
