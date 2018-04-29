@@ -75,7 +75,7 @@ export default {
 				}
 			}).then(() => {
 				if (!failReply) {
-					context.ok("<:tuxcheck:436998015652462603> I've sent you a private message with all my commands!");
+					context.ok("I've sent you a private message with all my commands!");
 				}
 			});
 

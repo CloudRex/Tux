@@ -116,20 +116,40 @@ export default class CommandExecutionContext {
 		return this.getAuth(this.sender.id);
 	}
 
+	/**
+	 * @param {Object} sections
+	 * @param {String} color
+	 * @returns {Promise<EditableMessage>}
+	 */
 	async sections(sections, color = "GREEN") {
 		return await this.respond(EmbedBuilder.sections(sections, color));
 	}
 
 	/**
-	 * @param {string} text
+	 * @param {String} text
 	 * @returns {Promise<EditableMessage>}
 	 */
 	async ok(text) {
 		return await this.respond({
-			text: text
+			text: `${this.bot.ec.get("check")} ${text}`
 		});
 	}
 
+	/**
+	 * @param {String} text
+	 * @returns {Promise<EditableMessage>}
+	 */
+	async loading(text) {
+		return await this.respond({
+			text: `${this.bot.ec.get("loading")} ${text}`,
+			color: "BLUE"
+		});
+	}
+
+	/**
+	 * @param {String} text
+	 * @returns {Promise<EditableMessage>}
+	 */
 	async fail(text) {
 		return await this.respond({
 			text: text,

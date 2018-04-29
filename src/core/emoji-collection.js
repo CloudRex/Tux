@@ -22,19 +22,11 @@ export default class EmojiCollection extends Collection {
 	 * @param {String} path
 	 * @returns {EmojiCollection}
 	 */
-	static async fromFile(path) {
+	static fromFile(path) {
 		if (!fs.existsSync(path)) {
 			throw new Error(`[EmojiCollection.fromFile] Path does not exist: ${path}`);
 		}
 
-		return new Promise((resolve) => {
-			fs.readFile(path, (error, data) => {
-				if (error) {
-					throw error;
-				}
-
-				resolve(new EmojiCollection(JSON.parse(data.toString())));
-			});
-		});
+		return new EmojiCollection(JSON.parse(fs.readFileSync(path).toString()));
 	}
 }

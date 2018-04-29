@@ -18,7 +18,7 @@ export default {
 					.limit(1)
 					.then())[0];
 
-				const searchingResponse = await context.ok("<a:loading:395048045038927885> Searching");
+				const searchingResponse = await context.loading("Searching database");
 
 				if (result) {
 					// TODO: Alert if message logging is off.
