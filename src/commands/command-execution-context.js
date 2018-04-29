@@ -4,26 +4,38 @@ import EmbedBuilder from "../core/embed-builder";
 const Discord = require("discord.js");
 
 export default class CommandExecutionContext {
-	// TODO
-	/* public Sender: string;
-	public Arguments: CommandArgument[];
-
-	constructor(sender: string, args: CommandArgument[]) {
-		this.Sender = sender;
-		this.Arguments = args;
-	} */
-
 	/**
 	 * @param {Message} message
-	 * @param {array<string>} args
+	 * @param {Array<String>} args
 	 * @param {Bot} bot
 	 * @param {AccessLevelType} accessLevel
+	 * @param {EmojiCollection} emojis
 	 */
-	constructor(message, args, bot, accessLevel) {
+	constructor(message, args, bot, accessLevel, emojis) {
+		/**
+		 * @type {Message}
+		 */
 		this.message = message;
+
+		/**
+		 * @type {Array<String>}
+		 */
 		this.arguments = args;
+
+		/**
+		 * @type {Bot}
+		 */
 		this.bot = bot;
+
+		/**
+		 * @type {AccessLevelType}
+		 */
 		this.accessLevel = accessLevel;
+
+		/**
+		 * @type {EmojiCollection}
+		 */
+		this.emojis = emojis;
 	}
 
 	/**
@@ -35,18 +47,20 @@ export default class CommandExecutionContext {
 
 	/**
 	 * @param {*} stream
-	 * @param {string} name
+	 * @param {String} name
 	 * @returns {(Promise<EditableMessage>|null)}
 	 */
 	async fileStream(stream, name) {
 		if (!this.muted) {
 			return await this.message.channel.send(new Discord.Attachment(stream, name));
 		}
+
+		return null;
 	}
 
 	/**
-	 * @param {(object|EmbedBuilder)} content
-	 * @param {boolean} autoDelete
+	 * @param {(Object|EmbedBuilder)} content
+	 * @param {Boolean} autoDelete
 	 * @returns {(Promise<EditableMessage>|null)}
 	 */
 	async respond(content, autoDelete = false) {
@@ -90,9 +104,8 @@ export default class CommandExecutionContext {
 				messageResult.delete(4000 + (100 * messageResult.content.length * 1000));
 
 				// TODO
-				console.log(messageResult.content.length);
-
-				console.log(`time : ${timeInSeconds}`);
+				// console.log(messageResult.content.length);
+				// console.log(`time : ${timeInSeconds}`);
 			}
 
 			return (messageResult !== undefined ? new EditableMessage(messageResult) : null);
@@ -131,7 +144,7 @@ export default class CommandExecutionContext {
 	 */
 	async ok(text) {
 		return await this.respond({
-			text: `${this.bot.ec.get("check")} ${text}`
+			text: `${this.emojis.get("check")} ${text}`
 		});
 	}
 
@@ -141,7 +154,7 @@ export default class CommandExecutionContext {
 	 */
 	async loading(text) {
 		return await this.respond({
-			text: `${this.bot.ec.get("loading")} ${text}`,
+			text: `${this.emojis.get("loading")} ${text}`,
 			color: "BLUE"
 		});
 	}
@@ -152,7 +165,7 @@ export default class CommandExecutionContext {
 	 */
 	async fail(text) {
 		return await this.respond({
-			text: text,
+			text: `:thinking: ${text}`,
 			color: "RED"
 		}, true);
 	}
@@ -165,8 +178,8 @@ export default class CommandExecutionContext {
 	}
 
 	/**
-	 * @param {string} message
-	 * @returns {(Promise<*>|null)}
+	 * @param {String} message
+	 * @returns {(Promise<Message>|null)}
 	 */
 	async reply(message) {
 		if (!this.bot.userConfig.get("mute", this.message.guild.id)) {
@@ -177,7 +190,7 @@ export default class CommandExecutionContext {
 	}
 
 	/**
-	 * @param {string} message
+	 * @param {String} message
 	 */
 	async privateReply(message) {
 		return await this.message.author.send(message);

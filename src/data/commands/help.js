@@ -68,7 +68,7 @@ export default {
 			let failReply = null;
 
 			const reply = await context.privateReply(EmbedBuilder.sections(result).build()).catch(async (error) => {
-				failReply = await context.fail(":thinking: It seems that you're blocking private messages.");
+				failReply = await context.fail("It seems that you're blocking private messages.");
 
 				if (failReply) {
 					failReply.message.delete(6000);
