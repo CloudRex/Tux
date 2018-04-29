@@ -8,6 +8,7 @@ export default {
 		switch (context.arguments[0].toLowerCase()) {
 			case "ping": {
 				const channel = (context.arguments.length === 2 ? context.arguments[1] : context.message.channel.id);
+				const searchingResponse = await context.loading("Searching database");
 
 				const result = (await context.bot.database.db
 					.select()
@@ -17,8 +18,6 @@ export default {
 					.orderBy("time", "desc")
 					.limit(1)
 					.then())[0];
-
-				const searchingResponse = await context.loading("Searching database");
 
 				if (result) {
 					// TODO: Alert if message logging is off.

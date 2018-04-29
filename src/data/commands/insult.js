@@ -4,7 +4,7 @@ import Utils from "../../core/utils";
 
 const insults = [
 	"{subject} has magically turned a pile of poo.",
-	"{subject} is now known as no-one.",
+	"{subject} is now officially known as no-one.",
 	"{subject} now works cleaning toilets.",
 	"{subject} needs to be reborn.",
 	"{subject}'s father was Hitler.",
