@@ -49,7 +49,7 @@ export default {
 
 		args: {
 			time: "!number",
-			message: "!message",
+			message: "!string",
 			repeat: "boolean"
 		},
 
