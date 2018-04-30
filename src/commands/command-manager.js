@@ -286,7 +286,7 @@ export default class CommandManager {
 	static getTypes() {
 		return {
 			// TODO: Bug with the USERS_PATTERN (interlaps between true and false)
-			user: (arg) => /(^[0-9]{18}$|^<@!?[0-9]{18}>$)/.test(arg),
+			user: (arg) => /(^[0-9]{17,18}$|^<@!?[0-9]{17,18}>$)/.test(arg),
 			role: (arg) => /(^[0-9]{18}$|^<&[0-9]{18}>$)/.test(arg),
 			channel: (arg) => /(^[0-9]{18}$|^<#[0-9]{18}>$)/.test(arg),
 			time: (arg) => /^[0-9]+(ms|s|m|h|d|mo|y)$/i.test(arg),
