@@ -8,7 +8,7 @@ export default class Log {
         if (prefix !== null) {
             message = `${prefix} ${message}`;
         }
-        process.stdout.write(`\x1B[2D${message}\n> `);
+        process.stdout.write(`${message}\n`);
     }
 
     static info(message) {
