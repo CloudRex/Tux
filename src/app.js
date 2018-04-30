@@ -12,11 +12,13 @@ const argparse = require("argparse");
 const Discord = require("discord.js");
 
 const settings = new Settings("src/settings.json");
+
 const parser = new argparse.ArgumentParser({
 	version: settings.general.version,
 	addHelp: true,
 	description: 'Tux the discord bot'
 });
+
 parser.addArgument(
 	["-e", "--emojis"],
 	{
@@ -25,6 +27,7 @@ parser.addArgument(
 		type: "string"
 	}
 );
+
 parser.addArgument(
 	["-u", "--user-config"],
 	{
@@ -33,6 +36,7 @@ parser.addArgument(
 		type: "string"
 	}
 );
+
 parser.addArgument(
 	["-a", "--access-levels"],
 	{
@@ -41,6 +45,7 @@ parser.addArgument(
 		type: "string"
 	}
 );
+
 parser.addArgument(
 	["-c", "--commands"],
 	{
@@ -49,6 +54,7 @@ parser.addArgument(
 		type: "string"
 	}
 );
+
 parser.addArgument(
 	["-b", "--debug-mode"],
 	{
@@ -56,6 +62,7 @@ parser.addArgument(
 		nargs: 0
 	}
 );
+
 parser.addArgument(
 	["-s", "--verbose"],
 	{
@@ -63,6 +70,7 @@ parser.addArgument(
 		nargs: 0
 	}
 );
+
 const args = parser.parseArgs();
 
 const bot = new Bot(
