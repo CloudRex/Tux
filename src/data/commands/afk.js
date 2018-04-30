@@ -3,8 +3,13 @@ import CommandCategoryType from "../../commands/command-category-type";
 
 export default {
 	async executed(context) {
-		context.bot.database.setAfkMessage(context.sender.id, context.arguments[0]);
-		context.ok("You've successfully set your AFK message.");
+		if (context.arguments[0] === 'off') {
+			context.bot.database.setAfkMessage(context.sender.id, '');
+			context.ok("You've successfully unset your AFK message.");
+		} else {
+			context.bot.database.setAfkMessage(context.sender.id, context.arguments[0]);
+			context.ok("You've successfully set your AFK message.");
+		}
 	},
 
 	canExecute(context) {
