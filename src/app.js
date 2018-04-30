@@ -16,7 +16,7 @@ const settings = new Settings("src/settings.json");
 const parser = new argparse.ArgumentParser({
 	version: settings.general.version,
 	addHelp: true,
-	description: 'Tux the discord bot'
+	description: "Tux the discord bot"
 });
 
 parser.addArgument(
