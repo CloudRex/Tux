@@ -3,6 +3,10 @@ import CommandCategoryType from "../../commands/command-category-type";
 
 export default {
 	executed(context) {
+		/* if (context.bot.commands.removeByBase(context.arguments[0])) {
+			context.ok("")
+		} */
+
 		context.fail("Not yet implemented.");
 	},
 

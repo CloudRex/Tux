@@ -85,7 +85,6 @@ export default class Collection extends EventEmitter {
 	 * @param {*} value
 	 */
 	find(path, value) {
-		// TODO: Use lodash's _.get method instead
 		for (let i = 0; i < this.items.length; i++) {
 			if (_.get(this.items[i], path) === value) {
 				return this.items[i];

@@ -28,6 +28,28 @@ export default class CommandManager {
 		this.commands.push(command);
 	}
 
+	removeByBase(commandBase) {
+		return this.remove(this.getByBase(commandBase));
+	}
+
+	remove(command) {
+		return this.removeAt(this.commands.indexOf(command));
+	}
+
+	removeAt(index) {
+		if (this.commands[index]) {
+			this.commands.splice(index, 1);
+
+			return true;
+		}
+
+		return false;
+	}
+
+	contains(commandBase) {
+		return this.getByBase !== null;
+	}
+
 	/**
 	 * @param {array<Command>} commands
 	 */
