@@ -8,8 +8,7 @@
 	],
 	"scripts": {
 		"build": "babel src --out-dir dist",
-		"start": "npm run build && node dist/app.js",
-		"restart": "node dist/app.js",
+		"start": "babel-node src/app.js",
 		"pm2": "npm run build && pm2 dist/app.js",
 		"setup": "node setup.js",
 		"test": "npm run build && mocha dist/test/tests.js"
