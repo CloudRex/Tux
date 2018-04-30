@@ -6,7 +6,9 @@ export default class Log {
     static async log(message, color = "white", prefix = null) {
         const date = new Date().toISOString().replace(/T/, " ").replace(/\..+/, "");
 
-        process.stdout.write(`\x1B[2D[${date}] ${colors[color](message)}\n> `);
+        // TODO: Make this next line work on the vps
+        // process.stdout.write(`\x1B[2D[${date}] ${colors[color](message)}\n> `);
+        console.log(`[${date}] ${colors[color](message)}`);
 
         if (prefix !== null) {
             message = `<${prefix.toUpperCase()}> ${message}`;
