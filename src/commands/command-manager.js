@@ -2,6 +2,7 @@ import AccessLevelType from "../core/access-level-type";
 import CommandArgumentParser from "./command-argument-parser";
 import CommandExecutedEvent from "../events/command-executed-event";
 import CommandCategoryType from "./command-category-type";
+import Log from "../core/log";
 // import Collection from "../core/collection";
 
 const fs = require("fs");

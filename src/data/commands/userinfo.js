@@ -3,12 +3,7 @@ import CommandCategoryType from "../../commands/command-category-type";
 
 export default {
 	async executed(context) {
-		let id = context.arguments[0];
-
-		if (context.arguments.length === 0) {
-			id = context.message.author.id;
-		}
-
+		const id = context.arguments.length === 1 ? context.arguments[0] : context.message.author.id;
 		const member = context.message.guild.member(id);
 		const points = await context.bot.database.getUserPoints(id.replace('<@', '').replace('>', ''));
 
