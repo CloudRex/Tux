@@ -13,8 +13,22 @@ export default class CommandManager /* extends Collection */ {
 	 * @param {string} accessLevelsPath
 	 */
 	constructor(bot, accessLevelsPath) {
+		/**
+		 * @type {Bot}
+		 * @private
+		 */
 		this.bot = bot;
+
+		/**
+		 * @type {Array<Command>}
+		 * @private
+		 */
 		this.commands = [];
+
+		/**
+		 * @type {Array}
+		 * @private
+		 */
 		this.accessLevels = [];
 
 		fs.readFile(accessLevelsPath, (error, data) => {
@@ -29,14 +43,26 @@ export default class CommandManager /* extends Collection */ {
 		this.commands.push(command);
 	}
 
+	/**
+	 * @param {String} commandBase
+	 * @returns {boolean}
+	 */
 	removeByBase(commandBase) {
 		return this.remove(this.getByBase(commandBase));
 	}
 
+	/**
+	 * @param {Command} command
+	 * @returns {boolean}
+	 */
 	remove(command) {
 		return this.removeAt(this.commands.indexOf(command));
 	}
 
+	/**
+	 * @param {Number} index
+	 * @returns {boolean}
+	 */
 	removeAt(index) {
 		if (this.commands[index]) {
 			this.commands.splice(index, 1);
@@ -47,6 +73,10 @@ export default class CommandManager /* extends Collection */ {
 		return false;
 	}
 
+	/**
+	 * @param {String} commandBase
+	 * @returns {boolean}
+	 */
 	contains(commandBase) {
 		return this.getByBase !== null;
 	}
@@ -307,6 +337,9 @@ export default class CommandManager /* extends Collection */ {
 		return true;
 	}
 
+	/**
+	 * @returns {Object}
+	 */
 	static getTypes() {
 		return {
 			// TODO: Bug with the USERS_PATTERN (interlaps between true and false)
