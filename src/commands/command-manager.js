@@ -121,7 +121,7 @@ export default class CommandManager {
 	 * @returns {*}
 	 */
 	hasRole(message, role) {
-		console.log(message.member.roles.array());
+		this.bot.log.info(message.member.roles.array());
 
 		return message.member.roles.find("name", role);
 	}
@@ -199,10 +199,10 @@ export default class CommandManager {
 		const result = {};
 
 		if (rules.length !== args.length) {
-			console.log("AssembleArguments: Not same length");
+			this.bot.log.info("AssembleArguments: Not same length");
 		}
 
-		console.log(args);
+		this.bot.log.info(args);
 
 		for (let i = 0; i < rules.length; i++) {
 			result[rules[i]] = (isNaN(args[i]) ? args[i] : parseInt(args[i]));

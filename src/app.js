@@ -7,6 +7,7 @@ import Treasures from "./data/features/treasures";
 import Badges from "./data/features/badges";
 import Protection from "./data/features/protection";
 import AntiSpam from "./data/features/anti-spam";
+import Log from "./core/log";
 
 const Discord = require("discord.js");
 

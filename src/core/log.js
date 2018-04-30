@@ -1,37 +1,85 @@
 const colors = require("colors");
 
 export default class Log {
-    // Static Methods
+    // Static methods
+    static log(message, color = 'white', prefix = null) {
+        const date = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');
+        message = `[${date}] ${colors[color](message)}\n`;
+        if (prefix !== null) {
+            message = `${prefix} ${message}`;
+        }
+        process.stdout.write(message);
+    }
+
     static info(message) {
-        console.log(colors.cyan(message));
+        Log.log(message, 'cyan');
     }
 
     static success(message) {
-        console.log(colors.green(message));
+        Log.log(message, 'green');
     }
 
     static warn(message) {
-        console.log(colors.yellow(message));
+        Log.log(message, 'yellow');
     }
 
     static error(message) {
-        throw colors.red(message);
+        Log.log(message, 'red');
     }
 
     static verbose(message) {
-        console.log(colors.grey(message));
+        Log.log(message, 'grey');
     }
 
     static debug(message) {
-        console.log(colors.magenta(message));
+        Log.log(message, 'magenta');
     }
 
-    static channel(content, options) {
-        const guildLog = global.b.userConfig.get("global.guild-log");
+    constructor(bot, debug = false, verbose = false) {
+        this.bot = bot;
+        this.debug = debug;
+        this.verbose = verbose;
+        Log.instance = this;
+    }
+
+    log(message, color = 'white', prefix = null, throwMsg = false) {
+        Log.log(message, color, prefix, throwMsg);
+    }
+
+    info(message) {
+        this.log(message, 'cyan');
+    }
+
+    success(message) {
+        this.log(message, 'green');
+    }
+
+    warn(message) {
+        this.log(message, 'yellow');
+    }
+
+    error(message) {
+        this.log(message, 'red');
+    }
+
+    verbose(message) {
+        if (this.verbose) {
+            this.log(message, 'gray');
+        }
+    }
+
+    debug(message) {
+        if (this.debug) {
+            this.log(message, 'magenta');
+        }
+    }
+
+    channel(content, options) {
+        const guildLog = this.bot.userConfig.get("global.guild-log");
         if (!guildLog.enabled) {
             return;
         }
 
-        global.b.client.guilds.get(guildLog.guild).channels.get(guildLog.channel).send(content, options);
+        this.bot.client.guilds.get(guildLog.guild).channels.get(guildLog.channel).send(content, options);
     }
 }

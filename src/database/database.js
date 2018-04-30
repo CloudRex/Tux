@@ -258,7 +258,7 @@ export default class Database {
 		this.hasBeenWarned(userId, (hasBeenWarned) => {
 			if (hasBeenWarned) {
 				this.getWarningCount(userId, (warnings) => {
-					console.log(warnings);
+					Log.info(warnings);
 
 					this.db("warnings").where("user", userId.toString()).update({
 						count: warnings + 1
@@ -301,7 +301,7 @@ export default class Database {
 	async addItem(dbItem, amount = 1) {
 		const item = await this.getItem(dbItem.userId, dbItem.key);
 
-		console.log("added", item);
+		Log.info("added", item);
 
 		if (!item) {
 			this.db("items").insert({
@@ -388,7 +388,7 @@ export default class Database {
 
 		const result = [];
 
-		console.log(itemsObj);
+		Log.info(itemsObj);
 
 		for (let i = 0; i < itemsObj.length; i++) {
 			const item = await this.getItemById(itemsObj[i].id);

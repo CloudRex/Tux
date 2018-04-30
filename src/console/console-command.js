@@ -1,3 +1,5 @@
+import Log from '../core/log';
+
 const parseArgs = require("minimist");
 
 export default class ConsoleCommand {
@@ -18,7 +20,7 @@ export default class ConsoleCommand {
 	static parse(consoleCommandString) {
 		const split = consoleCommandString.split(" ");
 
-		console.log(split.join(" "));
+		Log.info(split.join(" "));
 
 		return new ConsoleCommand(split[0], parseArgs(split.splice(1, 0).join(" ")));
 	}

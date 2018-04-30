@@ -82,6 +82,11 @@ export default class Bot {
 		 */
 		this.emojis = new EmojiMenuManager(this.client);
 
+		/**
+		 * @type {Log}
+		 */
+		this.log = new Log(this);
+
 		// TODO
 		if (settings.keys.dbl) {
 			/**
@@ -95,7 +100,7 @@ export default class Bot {
 
 		// Discord client events
 		this.client.on("ready", () => {
-			Log.info("Ready");
+			this.log.info("Ready");
 
 			this.client.user.setPresence({
 				game: {
@@ -185,7 +190,7 @@ export default class Bot {
 			this.postStats();
 			this.userConfig.createGuild(guild.id);
 
-			Log.channel(new EmbedBuilder()
+			this.log.channel(new EmbedBuilder()
 				.color("GREEN")
 				.title("Joined Guild")
 				.field("Name", guild.name)
@@ -241,7 +246,7 @@ export default class Bot {
 			this.postStats();
 			this.userConfig.removeGuild(guild.id);
 
-			Log.channel(new EmbedBuilder()
+			this.log.channel(new EmbedBuilder()
 				.color("RED")
 				.title('Left guild')
 				.field('Name', guild.name)
@@ -254,7 +259,7 @@ export default class Bot {
 		global.b = this;
 
 		// TODO: DEBUG -----------------------
-		this.events.on("commandExecuted", (e) => console.log(`${e.context.sender.username}@${e.context.message.guild.name}: ${e.context.message.content}`));
+		this.events.on("commandExecuted", (e) => this.log.info(`${e.context.sender.username}@${e.context.message.guild.name}: ${e.context.message.content}`));
 		// -----------------------------------
 	}
 
@@ -277,18 +282,18 @@ export default class Bot {
 					.send({
 						count: amount
 					})
-					.catch((error) => console.log(`The error was posting stats to BFD: ${error.message}`));
+					.catch((error) => this.log.error(`The error was posting stats to BFD: ${error.message}`));
 			}, 3600000);
 		}
 	}
 
 	connect() {
-		Log.info('Starting');
+		this.log.info('Starting');
 		this.client.login(this.settings.general.token);
 	}
 
 	restart() {
-		Log.info("Restarting");
+		this.log.info("Restarting");
 
 		// TODO
 		// this.features.reloadAll(this);
@@ -303,7 +308,7 @@ export default class Bot {
 		this.settings.save();
 		this.userConfig.save();
 		this.client.destroy();
-		Log.info("Disconnected");
+		this.log.info("Disconnected");
 	}
 
 	static async clearTemp() {
