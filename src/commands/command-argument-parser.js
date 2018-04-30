@@ -43,14 +43,11 @@ export default class CommandArgumentParser {
 					if (type[0] === ":") {
 						const actualType = type.substring(1);
 
-						console.log("type : " + typeof types[actualType]);
-
 						if (!Object.keys(types).includes(actualType)) {
 							throw new Error(`CommandArgumentParser.Validator: Custom argument type not registered: ${actualType}`);
 						}
 						// TODO: Check if it's a Regex instead of just checking method
 						else if (types[actualType] instanceof RegExp) {
-							Log.debug("gotem");
 							break;
 						}
 						else if (typeof types[actualType] === "function" && types[actualType](args[ruleName])) {
