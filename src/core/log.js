@@ -2,103 +2,134 @@ const colors = require("colors");
 const fs = require("fs");
 
 export default class Log {
-    // Static methods
-    static async log(message, color = "white", prefix = null) {
-        const date = new Date().toISOString().replace(/T/, " ").replace(/\..+/, "");
+  /**
+   * @param {Bot} bot
+   * @param {Boolean} debug
+   * @param {Boolean} verbose
+   */
+  constructor(bot, debug = false, verbose = false) {
+    /**
+     * @type {Bot}
+     * @private
+     */
+    this.bot = bot;
+    this.debug_mode = debug;
+    this.verbose_mode = verbose;
+    Log.instance = this;
+  }
 
-        // TODO: Make this next line work on the vps
-        // process.stdout.write(`\x1B[2D[${date}] ${colors[color](message)}\n> `);
-        console.log(`[${date}] ${colors[color](message)}`);
+  log(message, color = "white", prefix = null, throwMsg = false) {
+      Log.log(message, color, prefix, throwMsg);
+  }
 
-        if (prefix !== null) {
-            message = `<${prefix.toUpperCase()}> ${message}`;
-        }
-        fs.writeFile("bot.log", `[${date}] ${message}\n`, { flag: "a" }, (err) => {
-            if (err) throw err;
-        });
-    }
+  info(message) {
+      this.log(message, "cyan", "info");
+  }
 
-    static info(message) {
-        Log.log(message, "cyan", "info");
-    }
+  success(message) {
+      this.log(message, "green", "sucs");
+  }
 
-    static success(message) {
-        Log.log(message, "green", "sucs");
-    }
+  warn(message) {
+      this.log(message, "yellow", "warn");
+  }
 
-    static warn(message) {
-        Log.log(message, "yellow", "warn");
-    }
+  error(message) {
+      this.log(message, "red", "dang");
+  }
 
-    static error(message) {
-        Log.log(message, "red", "dang");
-    }
+  verbose(message) {
+      if (this.verbose_mode) {
+          this.log(message, "gray");
+      }
+  }
 
-    static verbose(message) {
-        if (Log.instance !== null) {
-            if (Log.instance.verbose_mode) {
-                Log.log(message, "grey");
-            }
-        } else {
-            Log.log(message, "grey");
-        }
-    }
+  debug(message) {
+      if (this.debug_mode) {
+          this.log(message, "magenta", "dbug");
+      }
+  }
 
-    static debug(message) {
-        if (Log.instance !== null) {
-            if (Log.instance.debug_mode) {
-                Log.log(message, "magenta", "dbug");
-            }
-        } else {
-            Log.log(message, "magenta", "dbug");
-        }
-    }
+  channel(content, options) {
+      const guildLog = this.bot.userConfig.get("global.guild-log");
+      if (!guildLog.enabled) {
+          return;
+      }
 
-    constructor(bot, debug = false, verbose = false) {
-        this.bot = bot;
-        this.debug_mode = debug;
-        this.verbose_mode = verbose;
-        Log.instance = this;
-    }
+      this.bot.client.guilds.get(guildLog.guild).channels.get(guildLog.channel).send(content, options);
+  }
 
-    log(message, color = "white", prefix = null, throwMsg = false) {
-        Log.log(message, color, prefix, throwMsg);
-    }
+  /**
+   * @param {String} message
+   * @param {String} color
+   * @param {String} prefix
+   */
+  static async log(message, color = "white", prefix = null) {
+      const date = new Date().toISOString().replace(/T/, " ").replace(/\..+/, "");
 
-    info(message) {
-        this.log(message, "cyan", "info");
-    }
+      // TODO: Make this next line work on the vps
+      // process.stdout.write(`\x1B[2D[${date}] ${colors[color](message)}\n> `);
+      console.log(`[${date}] ${colors[color](message)}`);
 
-    success(message) {
-        this.log(message, "green", "sucs");
-    }
+      if (prefix !== null) {
+          message = `<${prefix.toUpperCase()}> ${message}`;
+      }
+      fs.writeFile("bot.log", `[${date}] ${message}\n`, { flag: "a" }, (err) => {
+          if (err) throw err;
+      });
+  }
 
-    warn(message) {
-        this.log(message, "yellow", "warn");
-    }
+  /**
+   * @param {String} message
+   */
+  static info(message) {
+      Log.log(message, "cyan", "info");
+  }
 
-    error(message) {
-        this.log(message, "red", "dang");
-    }
+  /**
+   * @param {String} message
+   */
+  static success(message) {
+      Log.log(message, "green", "sucs");
+  }
 
-    verbose(message) {
-        if (this.verbose_mode) {
-            this.log(message, "gray");
-        }
-    }
+  /**
+   * @param {String} message
+   */
+  static warn(message) {
+      Log.log(message, "yellow", "warn");
+  }
 
-    debug(message) {
-        if (this.debug_mode) {
-            this.log(message, "magenta", "dbug");
-        }
-    }
+  /**
+   * @param {String} message
+   */
+  static error(message) {
+      Log.log(message, "red", "dang");
+  }
 
-    channel(content, options) {
-        const guildLog = this.bot.userConfig.get("global.guild-log");
-        if (!guildLog.enabled) {
-            return;
-        }
+  /**
+   * @param {String} message
+   */
+  static verbose(message) {
+      if (Log.instance !== null) {
+          if (Log.instance.verbose_mode) {
+              Log.log(message, "grey");
+          }
+      } else {
+          Log.log(message, "grey");
+      }
+  }
 
-        this.bot.client.guilds.get(guildLog.guild).channels.get(guildLog.channel).send(content, options);
-    }
+  /**
+   * @param {String} message
+   */
+  static debug(message) {
+      if (Log.instance !== null) {
+          if (Log.instance.debug_mode) {
+              Log.log(message, "magenta", "dbug");
+          }
+      } else {
+          Log.log(message, "magenta", "dbug");
+      }
+  }
 }
