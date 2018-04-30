@@ -1,8 +1,8 @@
 export default class CommandParser {
 	/**
-	 * @param {string} commandString
+	 * @param {String} commandString
 	 * @param {CommandManager} manager
-	 * @param {string} trigger
+	 * @param {String} trigger
 	 * @returns {*}
 	 */
 	static parse(commandString, manager, trigger) {
@@ -14,10 +14,10 @@ export default class CommandParser {
 	}
 
 	/**
-	 * @param {string} commandString
+	 * @param {String} commandString
 	 * @param {CommandManager} manager
-	 * @param {string} trigger
-	 * @returns {boolean}
+	 * @param {String} trigger
+	 * @returns {Boolean}
 	 */
 	static isValid(commandString, manager, trigger) {
 		if (commandString.startsWith(trigger)) {
@@ -28,8 +28,8 @@ export default class CommandParser {
 	}
 
 	/**
-	 * @param {string} commandString
-	 * @param {string} trigger
+	 * @param {String} commandString
+	 * @param {String} trigger
 	 * @returns {*}
 	 */
 	static getCommandBase(commandString, trigger) {
@@ -44,8 +44,8 @@ export default class CommandParser {
 
 	/**
 	 *
-	 * @param {string} commandString
-	 * @returns {array<string>}
+	 * @param {String} commandString
+	 * @returns {Array<String>}
 	 */
 	static getArguments(commandString) {
 		const expression = / (```((?!```).)*```|"[^"]+"|'[^']+'|`[^`]+`|[^ ]+)/g;
@@ -64,10 +64,10 @@ export default class CommandParser {
 
 	// TODO: Also take in arg schema to avoid matching accidental args.
 	/**
-	 * @param {array<string>} args
-	 * @param {object} types
-	 * @param {object} resolvers
-	 * @returns {array<string>} The resolved arguments
+	 * @param {Array<String>} args
+	 * @param {Object} types
+	 * @param {Object} resolvers
+	 * @returns {Array<String>} The resolved arguments
 	 */
 	static resolveArguments(args, types, resolvers) {
 		const result = args;
@@ -75,10 +75,23 @@ export default class CommandParser {
 
 		for (let argIdx = 0; argIdx < result.length; argIdx++) {
 			for (let typeIdx = 0; typeIdx < typeKeys.length; typeIdx++) {
-				if (types[typeKeys[typeIdx]](args[argIdx])) {
+				let match = false;
+
+				if (typeof types[typeKeys[typeIdx]] === "function") {
+					match = types[typeKeys[typeIdx]](args[argIdx]);
+				}
+				else if (types[typeKeys[typeIdx]] instanceof RegExp) {
+					match = types[typeKeys[typeIdx]].test(args[argIdx]);
+				}
+
+				if (match) {
 					if (typeof resolvers[typeKeys[typeIdx]] === "function") {
 						result[argIdx] = resolvers[typeKeys[typeIdx]](result[argIdx]);
 					}
+					// TODO: Issue further testing, there's a chance this is a bug.
+					/* else {
+						Log.error(`[CommandParser.resolveArguments] Expecting function but got '${typeof resolvers[typeKeys[typeIdx]]}'.`);
+					} */
 				}
 			}
 		}
