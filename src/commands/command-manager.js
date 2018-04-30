@@ -1,8 +1,8 @@
 import AccessLevelType from "../core/access-level-type";
 import CommandArgumentParser from "./command-argument-parser";
 import CommandExecutedEvent from "../events/command-executed-event";
-import Utils from "../core/utils";
 import CommandCategoryType from "./command-category-type";
+import Log from "../core/log";
 // import Collection from "../core/collection";
 
 const fs = require("fs");
@@ -78,7 +78,7 @@ export default class CommandManager /* extends Collection */ {
 	 * @returns {boolean}
 	 */
 	contains(commandBase) {
-		return this.getByBase !== null;
+		return this.getByBase(commandBase) !== null;
 	}
 
 	/**

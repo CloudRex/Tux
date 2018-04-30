@@ -5,7 +5,7 @@ export default class SchemaValidator {
     const keys = Object.keys(schema);
 
     for (let i = 0; i < keys.length; i++) {
-      if (typeof _.get(struct, keys[i] !== schema[keys[i]]) {
+      if (typeof _.get(struct, keys[i]) !== schema[keys[i]]) {
         return false;
       }
     }

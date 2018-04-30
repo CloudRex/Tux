@@ -1,4 +1,5 @@
 import Command from "./command";
+import Log from "../core/log";
 
 const fs = require("fs");
 const Typer = require("@raxor1234/typer");
@@ -26,7 +27,12 @@ export default class CommandLoader {
 						commandManager.register(Command.fromModule(module));
 					}
 				}
+				else {
+					Log.verbose(`Skipping 1 command: ${file}`);
+				}
 			});
+
+			Log.verbose(`Loaded a total of ${files.length} commands`);
 		});
 	}
 

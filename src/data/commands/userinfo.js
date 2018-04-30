@@ -3,12 +3,7 @@ import CommandCategoryType from "../../commands/command-category-type";
 
 export default {
 	async executed(context) {
-		let id = context.arguments[0];
-
-		if (context.arguments.length === 0) {
-			id = context.message.author.id;
-		}
-
+		const id = context.arguments.length === 1 ? context.arguments[0] : context.message.author.id;
 		const member = context.message.guild.member(id);
 		const points = await context.bot.database.getUserPoints(id.replace('<@', '').replace('>', ''));
 
@@ -21,7 +16,7 @@ export default {
 				"Joined At": member.joinedAt,
 				"Last message": member.user.lastMessage,
 				Verified: member.user.verified,
-				Bot: member.user.bot,
+				Type: member.user.bot ? ":robot: Robot" : ":smiley: Human",
 				Coins: `:small_orange_diamond:${points}`
 			}, "", "GREEN", member.user.avatarURL);
 		}
