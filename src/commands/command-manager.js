@@ -269,6 +269,7 @@ export default class CommandManager {
 			context.bot.events.emit("commandExecuted", new CommandExecutedEvent(command, context));
 		}
 		catch (error) {
+			console.error(error);
 			context.fail(`**Oh noes!** There was an error executing that command. (${error.message})`);
 
 			// TODO: Award badge
