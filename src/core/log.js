@@ -28,11 +28,23 @@ export default class Log {
     }
 
     static verbose(message) {
-        Log.log(message, 'grey');
+        if (Log.instance !== null) {
+            if (Log.instance.verbose_mode) {
+                Log.log(message, 'grey');
+            }
+        } else {
+            Log.log(message, 'grey');
+        }
     }
 
     static debug(message) {
-        Log.log(message, 'magenta');
+        if (Log.instance !== null) {
+            if (Log.instance.debug_mode) {
+                Log.log(message, 'magenta');
+            }
+        } else {
+            Log.log(message, 'magenta');
+        }
     }
 
     constructor(bot, debug = false, verbose = false) {
