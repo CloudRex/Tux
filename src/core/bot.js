@@ -104,7 +104,7 @@ export default class Bot {
 
 			this.client.user.setPresence({
 				game: {
-					name: "Use ?trigger"
+					name: `Use ?trigger | ${this.client.guilds.size} guilds!`
 				}
 			});
 
