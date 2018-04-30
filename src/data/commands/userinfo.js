@@ -16,7 +16,7 @@ export default {
 				"Joined At": member.joinedAt,
 				"Last message": member.user.lastMessage,
 				Verified: member.user.verified,
-				Bot: member.user.bot,
+				Type: member.user.bot ? "Bot" : "Human",
 				Coins: `:small_orange_diamond:${points}`
 			}, "", "GREEN", member.user.avatarURL);
 		}
