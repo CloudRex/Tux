@@ -3,17 +3,32 @@ import CommandArgumentParser from "./command-argument-parser";
 import CommandExecutedEvent from "../events/command-executed-event";
 import Utils from "../core/utils";
 import CommandCategoryType from "./command-category-type";
+// import Collection from "../core/collection";
 
 const fs = require("fs");
 
-export default class CommandManager {
+export default class CommandManager /* extends Collection */ {
 	/**
 	 * @param {Bot} bot
 	 * @param {string} accessLevelsPath
 	 */
 	constructor(bot, accessLevelsPath) {
+		/**
+		 * @type {Bot}
+		 * @private
+		 */
 		this.bot = bot;
+
+		/**
+		 * @type {Array<Command>}
+		 * @private
+		 */
 		this.commands = [];
+
+		/**
+		 * @type {Array}
+		 * @private
+		 */
 		this.accessLevels = [];
 
 		fs.readFile(accessLevelsPath, (error, data) => {
@@ -26,6 +41,44 @@ export default class CommandManager {
 	 */
 	register(command) {
 		this.commands.push(command);
+	}
+
+	/**
+	 * @param {String} commandBase
+	 * @returns {boolean}
+	 */
+	removeByBase(commandBase) {
+		return this.remove(this.getByBase(commandBase));
+	}
+
+	/**
+	 * @param {Command} command
+	 * @returns {boolean}
+	 */
+	remove(command) {
+		return this.removeAt(this.commands.indexOf(command));
+	}
+
+	/**
+	 * @param {Number} index
+	 * @returns {boolean}
+	 */
+	removeAt(index) {
+		if (this.commands[index]) {
+			this.commands.splice(index, 1);
+
+			return true;
+		}
+
+		return false;
+	}
+
+	/**
+	 * @param {String} commandBase
+	 * @returns {boolean}
+	 */
+	contains(commandBase) {
+		return this.getByBase !== null;
 	}
 
 	/**
@@ -121,7 +174,7 @@ export default class CommandManager {
 	 * @returns {*}
 	 */
 	hasRole(message, role) {
-		console.log(message.member.roles.array());
+		this.bot.log.info(message.member.roles.array());
 
 		return message.member.roles.find("name", role);
 	}
@@ -199,10 +252,10 @@ export default class CommandManager {
 		const result = {};
 
 		if (rules.length !== args.length) {
-			console.log("AssembleArguments: Not same length");
+			this.bot.log.info("AssembleArguments: Not same length");
 		}
 
-		console.log(args);
+		this.bot.log.info(args);
 
 		for (let i = 0; i < rules.length; i++) {
 			result[rules[i]] = (isNaN(args[i]) ? args[i] : parseInt(args[i]));
@@ -269,6 +322,7 @@ export default class CommandManager {
 			context.bot.events.emit("commandExecuted", new CommandExecutedEvent(command, context));
 		}
 		catch (error) {
+			console.error(error);
 			context.fail(`**Oh noes!** There was an error executing that command. (${error.message})`);
 
 			// TODO: Award badge
@@ -283,21 +337,24 @@ export default class CommandManager {
 		return true;
 	}
 
+	/**
+	 * @returns {Object}
+	 */
 	static getTypes() {
 		return {
 			// TODO: Bug with the USERS_PATTERN (interlaps between true and false)
-			user: (arg) => /(^[0-9]{18}$|^<@!?[0-9]{18}>$)/.test(arg),
-			role: (arg) => /(^[0-9]{18}$|^<&[0-9]{18}>$)/.test(arg),
-			channel: (arg) => /(^[0-9]{18}$|^<#[0-9]{18}>$)/.test(arg),
-			time: (arg) => /^[0-9]+(ms|s|m|h|d|mo|y)$/i.test(arg),
-			minuteTime: (arg) => /^[0-9]+(m|h|d|mo|y)$/i.test(arg),
-			state: (arg) => /^(1|0|true|false|off|on|yes|no)$/i.test(arg),
-			youtubeLink: (arg) => /^https?:\/\/(www\.)?youtube\.com\/watch\?v=[a-zA-Z0-9-]{11}$/i.test(arg),
-			accessLevel: (arg) => /^guest|member|premium|moderator|admin|owner|developer$/.test(arg),
-			dataStorage: (arg) => /^config|database$/.test(arg),
-			guild: (arg) => /^[0-9]{18}$/.test(arg),
-			positiveNumber: (arg) => /^[1-9]+$/.test(arg),
-			hexColor: (arg) => /(^[a-z0-9]{6}$|^[a-z0-9]{3}$)/i.test(arg)
+			user: /(^[0-9]{17,18}$|^<@!?[0-9]{17,18}>$)/,
+			role: /(^[0-9]{18}$|^<&[0-9]{18}>$)/,
+			channel: /(^[0-9]{18}$|^<#[0-9]{18}>$)/,
+			time: /^[0-9]+(ms|s|m|h|d|mo|y)$/i,
+			minuteTime: /^[0-9]+(m|h|d|mo|y)$/i,
+			state: /^(1|0|true|false|off|on|yes|no)$/i,
+			youtubeLink: /^https?:\/\/(www\.)?youtube\.com\/watch\?v=[a-zA-Z0-9-]{11}$/i,
+			accessLevel: /^guest|member|premium|moderator|admin|owner|developer$/,
+			dataStorage: /^config|database$/,
+			guild: /^[0-9]{18}$/,
+			positiveNumber: /^[1-9]+$/,
+			hexColor: /(^[a-z0-9]{6}$|^[a-z0-9]{3}$)/i
 		};
 	}
 }

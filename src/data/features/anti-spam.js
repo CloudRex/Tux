@@ -91,7 +91,7 @@ export default class AntiSpam extends Feature {
 				}
 			}
 
-			console.log(`score:${score}`);
+			bot.log.debug(`Message score: ${score}`);
 		};
 
 		bot.client.on("message", this.handleMessage);

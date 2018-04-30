@@ -104,8 +104,8 @@ export default class CommandExecutionContext {
 				messageResult.delete(4000 + (100 * messageResult.content.length * 1000));
 
 				// TODO
-				// console.log(messageResult.content.length);
-				// console.log(`time : ${timeInSeconds}`);
+				// this.bot.log.info(messageResult.content.length);
+				// this.bot.log.info(`time : ${timeInSeconds}`);
 			}
 
 			return (messageResult !== undefined ? new EditableMessage(messageResult) : null);

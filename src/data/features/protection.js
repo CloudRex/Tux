@@ -1,4 +1,5 @@
 import Feature from "./feature";
+import Log from "../../core/log";
 
 const fs = require("fs");
 const snekfetch = require("snekfetch");
@@ -46,13 +47,13 @@ export default class Protection extends Feature {
 		snekfetch.post(`https://safebrowsing.googleapis.com/v4/threatMatches:find?key=${key}`).then((result) => {
 			const response = JSON.parse(result.body.toString());
 
-			console.log(response);
+			Log.info(response);
 		});
 	}
 
 	warn(message, bot) {
 		bot.database.getWarningCount(message.author.id, (warnings) => {
-			console.log(`warnings -> ${warnings}`);
+			bot.log.warn(`warnings -> ${warnings}`);
 
 			if (warnings !== 3 || warnings < 3) {
 				if (warnings === 1) {

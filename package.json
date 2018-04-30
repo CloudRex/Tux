@@ -8,8 +8,7 @@
 	],
 	"scripts": {
 		"build": "babel src --out-dir dist",
-		"start": "npm run build && node dist/app.js",
-		"restart": "node dist/app.js",
+		"start": "babel-node --presets es2015 src/app.js",
 		"pm2": "npm run build && pm2 dist/app.js",
 		"setup": "node setup.js",
 		"test": "npm run build && mocha dist/test/tests.js"
@@ -18,6 +17,7 @@
 	"license": "ISC",
 	"dependencies": {
 		"@raxor1234/typer": "^1.0.0",
+		"argparse": "^1.0.10",
 		"cheerio": "^1.0.0-rc.2",
 		"colors": "latest",
 		"dblapi.js": "^2.0.0",

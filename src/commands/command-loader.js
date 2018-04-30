@@ -30,6 +30,10 @@ export default class CommandLoader {
 		});
 	}
 
+	load(path) {
+		// TODO
+	}
+
 	/**
 	 * @param {object} module
 	 * @returns {boolean}

@@ -26,14 +26,14 @@ export default class UserConfig {
 	set(path, value, guildId = null, template = "default") {
 		const finalPath = guildId ? `${guildId}.${path}` : path;
 
-		console.log(finalPath);
+		Log.info(finalPath);
 
 		if (this.get(`${template}.${path}`, guildId) === value) {
 			_.unset(this.config, finalPath);
 		}
 		else {
 			_.set(this.config, finalPath, value);
-			console.log(`set ${finalPath} to ${value}`);
+			Log.info(`set ${finalPath} to ${value}`);
 		}
 
 		this.save();

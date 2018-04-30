@@ -1,3 +1,5 @@
+import Log from '../core/log';
+
 export default class CommandArgumentParser {
 	// TODO: Fully review, might contain bugs or be incomplete.
 	/**
@@ -22,14 +24,14 @@ export default class CommandArgumentParser {
 			for (let typeIdx = 0; typeIdx < typeSplit.length; typeIdx++) {
 				let type = typeSplit[typeIdx];
 
-				console.log(`Checking ${ruleName}@${typeSplit[typeIdx]}`);
+				Log.info(`Checking ${ruleName}@${typeSplit[typeIdx]}`);
 
 				if (type.startsWith("!")) {
 					if (typeSplit.length > 1 && typeIdx > 0) {
 						throw new Error(`CommandArgumentParser.Validator: Having a required argument along with an OR operator is not allowed`);
 					}
 					else if (args[ruleName] == null || args[ruleName] === undefined) {
-						console.log("Failed: Important not present.");
+						Log.info("Failed: Important not present.");
 
 						return false;
 					}
@@ -44,14 +46,18 @@ export default class CommandArgumentParser {
 						if (!Object.keys(types).includes(actualType)) {
 							throw new Error(`CommandArgumentParser.Validator: Custom argument type not registered: ${actualType}`);
 						}
-						else if (types[actualType](args[ruleName])) {
+						// TODO: Check if it's a Regex instead of just checking method
+						else if (typeof types[actualType].test === "function" && types[actualType].test(args[ruleName])) {
+							break;
+						}
+						else if (typeof types[actualType] === "function" && types[actualType](args[ruleName])) {
 							break;
 						}
 						else if (typeIdx === typeSplit.length - 1) {
-							console.log(typeIdx);
-							console.log(typeSplit.length);
-							console.log(typeSplit);
-							console.log("Failed: check on CUSTOM-type first or last item not passed");
+							Log.info(typeIdx);
+							Log.info(typeSplit.length);
+							Log.info(typeSplit);
+							Log.info("Failed: check on CUSTOM-type first or last item not passed");
 
 							return false;
 						}
@@ -60,7 +66,7 @@ export default class CommandArgumentParser {
 						break;
 					}
 					else if (typeIdx === typeSplit.length - 1) {
-						console.log("Failed: check on PRIMAL-type first or last item not passed");
+						Log.info("Failed: check on PRIMAL-type first or last item not passed");
 
 						return false;
 					}
