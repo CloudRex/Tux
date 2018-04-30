@@ -4,11 +4,11 @@ export default class Log {
     // Static methods
     static log(message, color = 'white', prefix = null) {
         const date = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');
-        message = `[${date}] ${colors[color](message)}\n`;
+        message = `[${date}] ${colors[color](message)}`;
         if (prefix !== null) {
             message = `${prefix} ${message}`;
         }
-        process.stdout.write(message);
+        process.stdout.write(`\x1B[2D${message}\n> `);
     }
 
     static info(message) {
