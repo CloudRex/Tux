@@ -59,7 +59,7 @@ export default {
 					const target = context.message.mentions.members.array()[0].user;
 
 					if (target.bot) {
-						context.fail(":thinking: You cannot trade with a bot.");
+						context.fail("You cannot trade with a bot.");
 					}
 					else if (target.id !== context.message.author.id) {
 						const pendingTrade = await context.bot.database.getPendingTradeByRecipient(target.id);
@@ -79,7 +79,7 @@ export default {
 						}
 					}
 					else {
-						context.fail(":thinking: You can't trade with yourself!");
+						context.fail("You can't trade with yourself!");
 					}
 
 					break;
@@ -107,7 +107,7 @@ export default {
 						}
 					}
 					else {
-						context.fail(":thinking: You don't currently have any active trade.");
+						context.fail("You don't currently have any active trade.");
 					}
 
 					break;
@@ -135,7 +135,7 @@ export default {
 						}
 					}
 					else {
-						context.fail(":thinking: You don't currently have any active trade.");
+						context.fail("You don't currently have any active trade.");
 					}
 
 					break;

@@ -2,6 +2,9 @@ import AccessLevelType from "../../core/access-level-type";
 import CommandCategoryType from "../../commands/command-category-type";
 
 export default {
+	/**
+	 * @param {CommandExecutionContext} context
+	 */
 	async executed(context) {
 		/* const target = context.message.mentions.users.array()[0];
 
@@ -33,7 +36,8 @@ export default {
 		context.ok("auth: " + auth); */
 		/* context.bot.userConfig.push("access-levels.owner", context.sender.id, context.message.guild.id);
 		context.ok(":ok_hand:"); */
-		context.ok(context.arguments[0] + ":resolved");
+		console.log(context.bot.ec);
+		context.ok(`Emoji: ${context.bot.ec.get("check")}`);
 	},
 
 	canExecute(context) {

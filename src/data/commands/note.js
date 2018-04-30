@@ -3,6 +3,7 @@ import CommandCategoryType from "../../commands/command-category-type";
 
 export default {
 	executed(context) {
+		// TODO
 		context.fail("Not yet implemented.");
 	},
 
@@ -11,18 +12,17 @@ export default {
 	},
 
 	meta: {
-		name: "prune",
-		description: "Prune messages from the bot or someone",
-		accessLevel: AccessLevelType.Owner,
-		aliases: [],
-		maxArguments: 2,
+		name: "note",
+		description: "Take notes",
+		accessLevel: AccessLevelType.Member,
+		aliases: ["store"],
+		maxArguments: 1,
 
 		args: {
-			target: ":user|number",
-			count: "number"
+			question: "!string"
 		},
 
-		category: CommandCategoryType.Moderation,
+		category: CommandCategoryType.Utility,
 		enabled: true
 	}
 };

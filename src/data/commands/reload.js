@@ -11,18 +11,17 @@ export default {
 	},
 
 	meta: {
-		name: "prune",
-		description: "Prune messages from the bot or someone",
-		accessLevel: AccessLevelType.Owner,
+		name: "reload",
+		description: "Reload commands",
+		accessLevel: AccessLevelType.Developer,
 		aliases: [],
-		maxArguments: 2,
+		maxArguments: 0,
 
 		args: {
-			target: ":user|number",
-			count: "number"
+			command: "!string"
 		},
 
-		category: CommandCategoryType.Moderation,
+		category: CommandCategoryType.Developer,
 		enabled: true
 	}
 };

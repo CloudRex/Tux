@@ -24,7 +24,7 @@ export default {
 				context.ok("**Great success!** Your message was delivered and will be reviewed shortly.");
 			}
 			else {
-				context.fail(":thinking: There was a problem delivering your message, please try again later.");
+				context.fail("There was a problem delivering your message, please try again later.");
 			}
 		}
 		else {

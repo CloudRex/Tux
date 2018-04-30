@@ -5,7 +5,7 @@ const snekfetch = require("snekfetch");
 
 export default {
 	async executed(context) {
-		const message = await context.ok(`<a:loading:395048045038927885> Searching for bouncing boobs...`);
+		const message = await context.loading(`Searching for bouncing boobs`);
 
 		if (message !== null) {
             const gifUrl = `https://api.giphy.com/v1/gifs/random?api_key=${context.bot.settings.keys.giphy}&tag=bouncing%20boobs`;

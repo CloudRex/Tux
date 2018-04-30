@@ -185,7 +185,7 @@ export default {
 			}
 
 			case "render": {
-				const renderingResponse = await context.ok("<a:loading:395048045038927885> Rendering");
+				const renderingResponse = await context.loading("Rendering image");
 
 				jimp.read(getStore().target).then(async (image) => {
 					const { actions } = getStore();

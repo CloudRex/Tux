@@ -23,10 +23,6 @@ export default {
 					id: CommandCategoryType.Moderation
 				},
 				{
-					name: "Developer",
-					id: CommandCategoryType.Developer
-				},
-				{
 					name: "Economy",
 					id: CommandCategoryType.Economy
 				},
@@ -41,6 +37,10 @@ export default {
 				{
 					name: "NSFW",
 					id: CommandCategoryType.NSFW
+				},
+				{
+					name: "Developer",
+					id: CommandCategoryType.Developer
 				}
 			];
 
@@ -63,19 +63,19 @@ export default {
 				result[categories[categ].name] = result[categories[categ].name].join("\n");
 			}
 
-			result["A note from developers"] = "*Hey, thanks for using our bot! Tux is a relatively new bot and if you have already noticed not everything may work as expected. We're currently working on per-server configuration support to enable our moderation commands. If you'd like to talk to the developers (maybe you want to see a special feature in Tux!) issue the `about` command and join our support server. Thanks!* \n\n-Atlas#0042";
+			result["A Note From Developers"] = "*Hey, thanks for using our bot! Tux is a relatively new bot and if you have already noticed not everything may work as expected. If you'd like to talk to the developers (maybe you want to see a special feature in Tux!) issue the `about` command and join our support server. Thanks!* \n\n-Atlas#0042";
 
 			let failReply = null;
 
 			const reply = await context.privateReply(EmbedBuilder.sections(result).build()).catch(async (error) => {
-				failReply = await context.fail(":thinking: It seems that you're blocking private messages.");
+				failReply = await context.fail("It seems that you're blocking private messages.");
 
 				if (failReply) {
 					failReply.message.delete(6000);
 				}
 			}).then(() => {
 				if (!failReply) {
-					context.ok("<:tuxcheck:436998015652462603> I've sent you a private message with all my commands!");
+					context.ok("I've sent you a private message with all my commands!");
 				}
 			});
 
@@ -92,7 +92,7 @@ export default {
 			context.message.channel.send(message);
 		}
 		else {
-			context.message.channel.send(":thinking: Hey! Something smells :fish:! You sure that command exists?", "", "RED");
+			context.fail("Something smells :fish:y! You sure that command exists?");
 		}
 	},
 

@@ -3,7 +3,7 @@ import MessageBuilder from "../../core/message-builder";
 import CommandCategoryType from "../../commands/command-category-type";
 
 export default {
-	executed(context) {
+	async executed(context) {
 		if (context.arguments.length === 1) {
 			const action = () => {
 				try {
@@ -20,7 +20,20 @@ export default {
 
 			// TODO
 			if (result.length > 1000) {
-				result = result.substr(0, 1000);
+				result = result.substr(0, 900);
+			}
+
+			if (result instanceof Promise) {
+				result = await result;
+			}
+
+			if (typeof result === "object") {
+				try {
+					result = JSON.stringify(result);
+				}
+				catch (error) {
+					// TODO
+				}
 			}
 
 			context.sections({
