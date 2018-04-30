@@ -37,8 +37,8 @@ export default class Log {
 
     constructor(bot, debug = false, verbose = false) {
         this.bot = bot;
-        this.debug = debug;
-        this.verbose = verbose;
+        this.debug_mode = debug;
+        this.verbose_mode = verbose;
         Log.instance = this;
     }
 
@@ -63,13 +63,13 @@ export default class Log {
     }
 
     verbose(message) {
-        if (this.verbose) {
+        if (this.verbose_mode) {
             this.log(message, 'gray');
         }
     }
 
     debug(message) {
-        if (this.debug) {
+        if (this.debug_mode) {
             this.log(message, 'magenta');
         }
     }

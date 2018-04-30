@@ -25,7 +25,7 @@ export default class Bot {
 	 * @param {FeatureManager} featureManager
 	 * @param {CommandLoader} commandLoader
 	 */
-	constructor(settings, emojisPath, userConfig, client, accessLevelsPath, featureManager, commandLoader) {
+	constructor(settings, emojisPath, userConfig, client, accessLevelsPath, featureManager, commandLoader, debug, verbose) {
 		/**
 		 * @type {module:events.internal}
 		 * @private
@@ -85,7 +85,7 @@ export default class Bot {
 		/**
 		 * @type {Log}
 		 */
-		this.log = new Log(this);
+		this.log = new Log(this, debug, verbose);
 
 		// TODO
 		if (settings.keys.dbl) {

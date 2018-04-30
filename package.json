@@ -8,7 +8,7 @@
 	],
 	"scripts": {
 		"build": "babel src --out-dir dist",
-		"start": "babel-node src/app.js",
+		"start": "babel-node --presets es2015 src/app.js",
 		"pm2": "npm run build && pm2 dist/app.js",
 		"setup": "node setup.js",
 		"test": "npm run build && mocha dist/test/tests.js"
