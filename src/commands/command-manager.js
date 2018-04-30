@@ -3,10 +3,11 @@ import CommandArgumentParser from "./command-argument-parser";
 import CommandExecutedEvent from "../events/command-executed-event";
 import Utils from "../core/utils";
 import CommandCategoryType from "./command-category-type";
+// import Collection from "../core/collection";
 
 const fs = require("fs");
 
-export default class CommandManager {
+export default class CommandManager /* extends Collection */ {
 	/**
 	 * @param {Bot} bot
 	 * @param {string} accessLevelsPath
