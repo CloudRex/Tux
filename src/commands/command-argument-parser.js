@@ -46,7 +46,11 @@ export default class CommandArgumentParser {
 						if (!Object.keys(types).includes(actualType)) {
 							throw new Error(`CommandArgumentParser.Validator: Custom argument type not registered: ${actualType}`);
 						}
-						else if (types[actualType](args[ruleName])) {
+						// TODO: Check if it's a Regex instead of just checking method
+						else if (typeof types[actualType].test === "function" && types[actualType].test(args[ruleName])) {
+							break;
+						}
+						else if (typeof types[actualType] === "function" && types[actualType](args[ruleName])) {
 							break;
 						}
 						else if (typeIdx === typeSplit.length - 1) {
