@@ -140,7 +140,7 @@ export default class Bot {
 
 						if (member && member.presence.status === "idle") {
 							if (dbUser.afkMessage !== "" && dbUser.afkMessage !== null && dbUser.afkMessage !== undefined) {
-								message.channel.send(`He/she is afk: ${dbUser.afkMessage}`);
+								message.channel.send(`**${user.username}** is afk; ${dbUser.afkMessage}`);
 							}
 						}
 					}
@@ -283,6 +283,7 @@ export default class Bot {
 	}
 
 	connect() {
+		Log.info('Starting');
 		this.client.login(this.settings.general.token);
 	}
 
