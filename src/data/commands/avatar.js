@@ -4,7 +4,7 @@ import EmbedBuilder from "../../core/embed-builder";
 
 export default {
 	async executed(context) {
-		const user = context.bot.client.users.get(context.arguments[0]);
+		const user = context.arguments.length === 1 ? context.bot.client.users.get(context.arguments[0]) : context.sender;
 
 		context.respond(new EmbedBuilder()
 			.image(user.avatarURL)
