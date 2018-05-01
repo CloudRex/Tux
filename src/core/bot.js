@@ -137,6 +137,7 @@ export default class Bot {
 		}, 60000);
 		this.client.on("message", async (message) => {
 			if (!message.author.bot) {
+				this.log.verbose(`MSG ${message.channel.id}-${message.id} FROM ${message.author.id}`);
 				// TODO: Position so only given to command uses, and position it after command executed to avoid blocking
 				if (this.userMessagePoints[message.author.id] === undefined) {
 					this.userMessagePoints[message.author.id] = 0;
