@@ -142,7 +142,7 @@ export default class Bot {
 				if (this.userMessagePoints[message.author.id] === undefined) {
 					this.userMessagePoints[message.author.id] = 0;
 				}
-				if (this.userMessagePoints[message.author.id] < 50) {
+				if (this.userMessagePoints[message.author.id] < 18) {
 					await this.database.addUserPoints(message.author.id, 1);
 					this.log.debug(`Gave point`);
 				}
