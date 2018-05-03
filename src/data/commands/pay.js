@@ -37,7 +37,7 @@ export default {
 		name: "pay",
 		description: "Pay another player",
 		accessLevel: AccessLevelType.Member,
-		aliases: [],
+		aliases: ["transfer"],
 		maxArguments: 2,
 
 		args: {
