@@ -8,3 +8,4 @@ src/user-config.json
 botty.db
 src/data/commands/test.js
 temp/*
+bot.log

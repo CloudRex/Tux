@@ -5,7 +5,9 @@
 # Tux
 Tux is a tiny Discord bot designed with flexibility in mind.
 
-[Visit my website](https://cloudrex.github.io/tux-website/)
+**Powered by the [Anvil framework](https://github.com/CloudRex/Anvil)**
+
+=> [Click here to visit Tux's website](https://cloudrex.github.io/tux-website/)
 
 ## Beginner?
 Welcome! You can help this project many ways, always remember no contribution is too small!
