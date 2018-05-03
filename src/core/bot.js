@@ -158,7 +158,7 @@ export default class Bot {
 
 						if (member && member.presence.status === "idle") {
 							if (dbUser.afkMessage !== "" && dbUser.afkMessage !== null && dbUser.afkMessage !== undefined) {
-								message.channel.send(`**${user.username}** is afk; ${dbUser.afkMessage}`);
+								message.channel.send(new EmbedBuilder().text(`**${user.username}** is afk; ${dbUser.afkMessage}`).build());
 							}
 						}
 					}
