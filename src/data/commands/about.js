@@ -18,6 +18,7 @@ export default {
 
 		// TODO
 		context.sections({
+			Framework: ":hammer: Tux was build using the **__[Anvil framework](https://github.com/CloudRex/Anvil)__**, a powerful Discord bot-making framework.",
 			Vote: ":star: If you'd like to help out Tux, please consider **__[voting](https://discordbots.org/bot/381949722157514752/vote)__** for him.",
 			Website: "**__[Visit Tux's website](https://cloudrex.github.io/tux-website/)__**",
 			"Adopt me": `To add Tux to your server, click **__[here](https://discordapp.com/oauth2/authorize?client_id=${context.bot.client.user.id}&scope=bot)__**`,
