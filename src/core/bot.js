@@ -131,10 +131,23 @@ export default class Bot {
 			state: (arg) => Utils.translateState(arg)
 		};
 
+		this.userMessagePoints = {};
+		setInterval(() => {
+			this.userMessagePoints = {};
+		}, 60000);
 		this.client.on("message", async (message) => {
 			if (!message.author.bot) {
+				this.log.verbose(`MSG ${message.channel.id}-${message.id} FROM ${message.author.id}`);
 				// TODO: Position so only given to command uses, and position it after command executed to avoid blocking
-				await this.database.addUserPoints(message.author.id, 1);
+				if (this.userMessagePoints[message.author.id] === undefined) {
+					this.userMessagePoints[message.author.id] = 0;
+				}
+				if (this.userMessagePoints[message.author.id] < 18) {
+					await this.database.addUserPoints(message.author.id, 1);
+					this.log.debug(`Gave point`);
+				}
+				this.userMessagePoints[message.author.id] += 1;
+				this.log.debug(`User messages: ${this.userMessagePoints[message.author.id]}`);
 				this.events.emit("userMessage", message);
 
 				if (message.mentions.users.size > 0) {
