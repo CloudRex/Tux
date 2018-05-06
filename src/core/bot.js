@@ -156,9 +156,9 @@ export default class Bot {
 						const dbUser = await this.database.getUser(user.id);
 						const member = message.guild.member(user.id);
 
-						if (member && member.presence.status === "idle") {
+						if (member && (member.presence.status === "idle" || member.presence.status === "dnd")) {
 							if (dbUser.afkMessage !== "" && dbUser.afkMessage !== null && dbUser.afkMessage !== undefined) {
-								message.channel.send(`**${user.username}** is afk; ${dbUser.afkMessage}`);
+								message.channel.send(new EmbedBuilder().text(`**${user.username}** is currently AFK; ${dbUser.afkMessage}`).color("GOLD").build());
 							}
 						}
 					}

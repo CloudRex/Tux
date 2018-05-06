@@ -94,10 +94,10 @@ bot.features.registerMultiple([
 	/* new PreventUnintendedSpam(),
 	new EasterEggs()
 	new AnswerMentions(), */
-	new Protection(),
+	// new Protection(),
 	new Treasures(),
 	new Badges(),
-	new AntiSpam()
+	// new AntiSpam()
 ]);
 
 // Init
